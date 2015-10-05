@@ -3,6 +3,7 @@ package com.helloworld.client.view;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
@@ -24,6 +25,7 @@ public class LoginView extends Composite implements Display  {
 	@UiField PasswordTextBox txtPassword;
 	@UiField Button btnSubmit;
 	@UiField Label lblError;
+	@UiField Anchor registerAccount;
 	
 	public LoginView() {
 		initWidget(uiBinder.createAndBindUi(this));
@@ -54,6 +56,10 @@ public class LoginView extends Composite implements Display  {
 
 	public void setBtnSubmit(Button btnSubmit) {
 		this.btnSubmit = btnSubmit;
+	}
+
+	public Anchor getRegisterAccount() {
+		return registerAccount;
 	}
 
 

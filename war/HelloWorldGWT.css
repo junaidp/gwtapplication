@@ -117,7 +117,7 @@ h1 {
    
 }
 
-.errorFields {
+.error {
 color:red;
 }
 
@@ -224,7 +224,6 @@ margin-top:0px;
 }
 .inLine{
 	display: inline-block;
-	color:blue;
 	margin-left:2px;
 }
 
@@ -242,8 +241,15 @@ margin-top:0px;
 	border-radius:4px;
 	border: 1px solid gray;
 }
-.textbox{
+.textBoxStyle{
+	width: 300px;
+	height: 25px;
 	
+}
+
+TextBox{
+	width: 300px;
+	height: 25px;
 }
 .information{
 	width:400px;

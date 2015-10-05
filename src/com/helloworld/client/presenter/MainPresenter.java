@@ -38,10 +38,16 @@ public class MainPresenter implements Presenter
 		container.clear();
 		container.add(display.asWidget());
 		bind();
+		setHandlers();
 	}
 
 	private void bind() {
 		
+		
+	}
+
+	@Override
+	public void setHandlers() {
 		eventBus.fireEvent(new DashboardEvent(display.getCenter()));
 
 		display.getControlPanelContainer().getDashboardPanel().getHeading().addClickHandler(new ClickHandler(){

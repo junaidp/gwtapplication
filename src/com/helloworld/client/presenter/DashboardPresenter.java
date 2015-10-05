@@ -32,5 +32,11 @@ public class DashboardPresenter implements Presenter
 
 
 	}
+
+	@Override
+	public void setHandlers() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

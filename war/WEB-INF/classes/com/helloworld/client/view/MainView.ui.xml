@@ -1,0 +1,14 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:v="urn:import:com.helloworld.client.view" xmlns:C="urn:import:com.helloworld.client.view.ControlPanels">
+	<ui:style>
+	
+	</ui:style>
+	 <g:HTMLPanel>
+	<g:HorizontalPanel>
+	<C:ControlPanelsContainer ui:field="controlPanelContainer"></C:ControlPanelsContainer>
+	<g:VerticalPanel ui:field="center">
+		</g:VerticalPanel>
+	</g:HorizontalPanel>
+	</g:HTMLPanel>
+</ui:UiBinder> 

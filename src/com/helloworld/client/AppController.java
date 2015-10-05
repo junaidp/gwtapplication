@@ -11,17 +11,21 @@ import com.helloworld.client.event.DashboardEvent;
 import com.helloworld.client.event.DashboardEventHandler;
 import com.helloworld.client.event.MainEvent;
 import com.helloworld.client.event.MainEventHandler;
+import com.helloworld.client.event.RegistrationEvent;
+import com.helloworld.client.event.RegistrationEventHandler;
 import com.helloworld.client.event.SearchDataEvent;
 import com.helloworld.client.event.SearchDataEventHandler;
 import com.helloworld.client.presenter.DashboardPresenter;
 import com.helloworld.client.presenter.LoginPresenter;
 import com.helloworld.client.presenter.MainPresenter;
 import com.helloworld.client.presenter.Presenter;
+import com.helloworld.client.presenter.RegistrationPresenter;
 import com.helloworld.client.presenter.SearchDataPresenter;
 import com.helloworld.client.view.ApplicationConstants;
 import com.helloworld.client.view.DashboardView;
 import com.helloworld.client.view.LoginView;
 import com.helloworld.client.view.MainView;
+import com.helloworld.client.view.RegistrationView;
 import com.helloworld.client.view.CenterPanels.SearchDataView;
 
 
@@ -66,6 +70,13 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 			public void onSearchData(SearchDataEvent event) {
 				center = event.getCenter();
 				History.newItem(ApplicationConstants.TOKEN_SEARCHDATA);
+			}
+		}); 
+		
+		eventBus.addHandler(RegistrationEvent.TYPE,
+				new RegistrationEventHandler() {
+			public void onRegistration(RegistrationEvent event) {
+				History.newItem(ApplicationConstants.TOKEN_REGISTRATION);
 			}
 		}); 
 	}
@@ -116,12 +127,27 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 					presenter.go(container);
 				}
 			}
+			
+			if (token.equals(ApplicationConstants.TOKEN_REGISTRATION)) {
+				presenter = new RegistrationPresenter(rpcService, eventBus, new RegistrationView());
+				if (presenter != null) {
+					setContainer(container);
+					presenter.go(container);
+				}
+			}
 		}
 	} 
 	
 	private void setContainer(HasWidgets container) {
 		this.container = container;
 		this.container.clear();
+	}
+
+
+	@Override
+	public void setHandlers() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

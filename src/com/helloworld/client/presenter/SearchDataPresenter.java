@@ -26,11 +26,18 @@ public class SearchDataPresenter implements Presenter
 		container.clear();
 		container.add(display.asWidget());
 		bind();
+		setHandlers();
 	}
 
 	private void bind() {
 
 
+	}
+
+	@Override
+	public void setHandlers() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
