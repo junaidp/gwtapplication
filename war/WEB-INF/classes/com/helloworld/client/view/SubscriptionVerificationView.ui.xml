@@ -1,0 +1,20 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	
+	</ui:style>
+	<g:HTMLPanel>
+	<div style ="padding-left:500px; padding-top:200px">
+	<div style="padding:5px">
+	<g:Label styleName="inLine">Email</g:Label>
+	</div>
+	<div style="padding:5px; padding-top:5px">
+	<g:TextBox styleName="textBoxStyle inLine" ui:field="email" text="test@test.com"> </g:TextBox>
+	</div>
+	<div style="padding-left:200px">
+	<g:Button styleName="btnStyle" ui:field="submit">Submit</g:Button>
+	</div>
+	</div>
+	</g:HTMLPanel>
+</ui:UiBinder> 

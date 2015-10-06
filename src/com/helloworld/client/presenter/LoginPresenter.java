@@ -4,13 +4,19 @@ package com.helloworld.client.presenter;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerManager;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.HasWidgets;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.helloworld.client.HelloServiceAsync;
 import com.helloworld.client.event.MainEvent;
 import com.helloworld.client.event.RegistrationEvent;
+import com.helloworld.client.view.ApplicationConstants;
+import com.helloworld.shared.entity.User;
 
 public class LoginPresenter implements Presenter 
 
@@ -24,7 +30,9 @@ public class LoginPresenter implements Presenter
 		Widget asWidget();
 		com.google.gwt.user.client.ui.Button getBtnSubmit();
 		Anchor getRegisterAccount();
-		
+		TextBox getTxtUserName();
+		PasswordTextBox getTxtPassword();
+		Label getLblError();
 	}  
 
 	public LoginPresenter(HelloServiceAsync rpcService, HandlerManager eventBus, Display view) 
@@ -48,7 +56,24 @@ public class LoginPresenter implements Presenter
 
 	public void signIn()
 	{
-		eventBus.fireEvent(new MainEvent());
+		display.getLblError().setText("");
+		
+		rpcService.signIn(display.getTxtUserName().getText(), display.getTxtPassword().getText(), new AsyncCallback<User>() {
+			
+			@Override
+			public void onSuccess(User user) {
+				if(user==null){
+					display.getLblError().setText(ApplicationConstants.USERNAME_PASSWORD_NOT_MATCH);
+				}else{
+				eventBus.fireEvent(new MainEvent(user));
+				}
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+			}
+		});
+		
 	}
 
 	@Override

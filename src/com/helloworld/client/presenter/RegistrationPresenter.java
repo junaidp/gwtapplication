@@ -1,5 +1,6 @@
 package com.helloworld.client.presenter;
 
+import com.claudiushauptmann.gwt.recaptcha.client.RecaptchaWidget;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerManager;
@@ -39,7 +40,10 @@ public class RegistrationPresenter implements Presenter
 		Label getPasswordError();
 		Label getConfirmPasswordError();
 		void clearFields();
-	
+		RecaptchaWidget getRw();
+		Label getCaptchaError();
+		User getLoggedInUser();
+
 	}  
 
 	public RegistrationPresenter(HelloServiceAsync rpcService, HandlerManager eventBus, Display view) 
@@ -58,7 +62,6 @@ public class RegistrationPresenter implements Presenter
 
 	private void bind() {
 
-		showCaptcha("6LcEKg4TAAAAAFADmX5mrhcKkaeNMcxh7k5CiQ2K");
 	}
 
 	@Override
@@ -74,47 +77,59 @@ public class RegistrationPresenter implements Presenter
 
 			@Override
 			public void onClick(ClickEvent event) {
-
-//				Window.alert(display.getCaptchaImage().getChallenge());
-//				Window.alert(display.getCaptchaImage().getResponse());
-
-				String s = getCaptchaChallenge();
-				addUser();
+				if(display.getBtnSubmit().getText().equals("update")){
+					display.getRw().setVisible(false);
+					editUser();
+				}else{
+					verifyCaptcha(display.getRw().getChallenge(), display.getRw().getResponse());
+				}
 			}
 		});
 	}
 
-	private native void showCaptcha(String publicKey)
-	/*-{
-	    $wnd.Recaptcha.create(publicKey, "", {
-	        "theme" : "custom"
-	    });
-	}-*/;
+	public void verifyCaptcha(String challenge, String response){
+		rpcService.verifyCaptcha(challenge, response, new AsyncCallback<Boolean>() {
 
-	private native String getCaptchaChallenge()
-	/*-{
-	    return $wnd.Recaptcha.get_challenge();
-	}-*/;
+			@Override
+			public void onSuccess(Boolean result) {
+				display.getRw().reload();
+				if(result){
+					display.getCaptchaError().setText("");
+					addUser();
 
-	private native void destroyCaptcha()
-	/*-{
-	    $wnd.Recaptcha.destroy();
-	}-*/;
+				}
+				else{
+					display.getCaptchaError().setText(ApplicationConstants.CAPTCHANOTVERIFIED);
+				}
+
+			}
+
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert(caught.getLocalizedMessage());
+			}
+		});
+	}
 
 	private void addUser(){
 		User user = new User();
 		user.setEmail(display.getEmail().getText());
 		user.setPassword(display.getPassword().getText());
-		user.setUserName(display.getName().getText());
+		user.setUserName(display.getUserName().getText());
+		user.setName(display.getName().getText());
 		new RegistratonFieldVerifier(display);
 
 		rpcService.addUser(user, new AsyncCallback<String>() {
 
 			@Override
 			public void onSuccess(String result) {
-				if(result.equals(ApplicationConstants.INVALID_EMAIL)){
+				if(result.equals(ApplicationConstants.INVALID_EMAIL) || result.equals(ApplicationConstants.EMAIL_NOT_AVAILABLE)) {
 					display.getEmailError().setText(result);
-				}else{
+				}
+				else if(result.equals(ApplicationConstants.USERNAME_NOT_AVAILABLE)){
+					display.getUserNameError().setText(result);
+				}
+				else{
 					display.clearFields();
 					Window.alert(result);
 				}
@@ -123,6 +138,38 @@ public class RegistrationPresenter implements Presenter
 			@Override
 			public void onFailure(Throwable caught) {
 				Window.alert("Fail: addUser "+ caught.getMessage());
+
+			}
+		});
+	}
+	
+	private void editUser(){
+		User user = display.getLoggedInUser();
+		user.setEmail(display.getEmail().getText());
+		user.setPassword(display.getPassword().getText());
+		user.setUserName(display.getUserName().getText());
+		user.setName(display.getName().getText());
+		new RegistratonFieldVerifier(display);
+
+		rpcService.addUser(user, new AsyncCallback<String>() {
+
+			@Override
+			public void onSuccess(String result) {
+				if(result.equals(ApplicationConstants.INVALID_EMAIL) || result.equals(ApplicationConstants.EMAIL_NOT_AVAILABLE)) {
+					display.getEmailError().setText(result);
+				}
+				else if(result.equals(ApplicationConstants.USERNAME_NOT_AVAILABLE)){
+					display.getUserNameError().setText(result);
+				}
+				else{
+					display.clearFields();
+					Window.alert("User edited");
+				}
+			}
+
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert("Fail: editUser "+ caught.getMessage());
 
 			}
 		});

@@ -1,5 +1,6 @@
 package com.helloworld.client.view;
 
+import com.claudiushauptmann.gwt.recaptcha.client.RecaptchaWidget;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -8,8 +9,10 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.helloworld.client.presenter.RegistrationPresenter.Display;
+import com.helloworld.shared.entity.User;
 
 public class RegistrationView extends Composite implements Display, ViewFields {
 
@@ -32,35 +35,28 @@ public class RegistrationView extends Composite implements Display, ViewFields {
 	@UiField Label passwordError;
 	@UiField Label confirmPasswordError;
 	@UiField Label emailError;
-	@UiField TextBox captchaTextBox;
+	@UiField VerticalPanel container;
+	@UiField Label captchaError;
+	private User loggedInUser;
+	
+	private RecaptchaWidget rw;
 	
 	public RegistrationView() {
 		initWidget(uiBinder.createAndBindUi(this));
-		
-		captchaTextBox.getElement().setId("recaptcha_response_field");
-		captchaTextBox.setName("recaptcha_response_field");
-		
-//		showCaptcha("6LcEKg4TAAAAAFADmX5mrhcKkaeNMcxh7k5CiQ2K");
-		
-//		destroyCaptcha();
+		rw = new RecaptchaWidget("6LcEKg4TAAAAAFADmX5mrhcKkaeNMcxh7k5CiQ2K");
+		container.add(rw);
+
 	}
-	
-//	private native void showCaptcha(String publicKey)
-//	/*-{
-//	    $wnd.Recaptcha.create(publicKey, "", {
-//	        "theme" : "custom"
-//	    });
-//	}-*/;
-//	
-//	private native String getCaptchaChallenge()
-//	/*-{
-//	    return $wnd.Recaptcha.get_challenge();
-//	}-*/;
-//	
-//	private native void destroyCaptcha()
-//	/*-{
-//	    $wnd.Recaptcha.destroy();
-//	}-*/;
+
+
+	public RegistrationView(User loggedInUser) {
+		name.setText(loggedInUser.getName());
+		userName.setText(loggedInUser.getUserName());
+		password.setText(loggedInUser.getPassword());
+		email.setText(loggedInUser.getEmail());
+		btnSubmit.setText("update");
+	}
+
 
 	public Button getBtnCancel() {
 		return btnCancel;
@@ -117,7 +113,26 @@ public class RegistrationView extends Composite implements Display, ViewFields {
 		email.setText("");
 		password.setText("");
 		confirmPassword.setText("");
-		
+		nameError.setText("");
+		emailError.setText("");
+		passwordError.setText("");
+		confirmPasswordError.setText("");
+		userNameError.setText("");
+		captchaError.setText("");
+	}
+
+	public RecaptchaWidget getRw() {
+		return rw;
+	}
+
+
+	public Label getCaptchaError() {
+		return captchaError;
+	}
+
+
+	public User getLoggedInUser() {
+		return loggedInUser;
 	}
 
 }

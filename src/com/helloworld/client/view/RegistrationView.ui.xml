@@ -22,30 +22,34 @@
 				<g:Label styleName="inLine error" width="200px" ui:field="userNameError"></g:Label>
 			</div>
 			<div style="padding:5px">
-				<g:Label styleName="inLine"  width="200px">Password</g:Label>
-				<g:PasswordTextBox styleName="inLine textBoxStyle" ui:field="password"></g:PasswordTextBox>
+				<g:Label styleName="inLine" width="200px">Password</g:Label>
+				<g:PasswordTextBox styleName="inLine textBoxStyle"
+					ui:field="password"></g:PasswordTextBox>
 				<g:Label styleName="inLine error" width="200px" ui:field="passwordError"></g:Label>
 			</div>
 			<div style="padding:5px">
-				<g:Label styleName="inLine"  width="200px">Confirm Password</g:Label>
-				<g:PasswordTextBox styleName="inLine textBoxStyle" ui:field="confirmPassword"></g:PasswordTextBox>
-				<g:Label styleName="inLine error" width="200px" ui:field="confirmPasswordError"></g:Label>
+				<g:Label styleName="inLine" width="200px">Confirm Password</g:Label>
+				<g:PasswordTextBox styleName="inLine textBoxStyle"
+					ui:field="confirmPassword"></g:PasswordTextBox>
+				<g:Label styleName="inLine error" width="200px"
+					ui:field="confirmPasswordError"></g:Label>
 			</div>
-			
-			<div id="recaptcha_image" ui:field="captchaImage"></div>
+
 			<div>
-			<g:TextBox ui:field="captchaTextBox"/>
+				<g:VerticalPanel ui:field="container"></g:VerticalPanel>
 			</div>
 			<div>
-			<g:VerticalPanel ui:field="container"></g:VerticalPanel>
+				<g:Label styleName="inLine error" width="200px"
+					ui:field="captchaError"></g:Label>
+
 			</div>
-			
+
 			<div style="padding-left:350px; padding-top:5px">
-				
+
 				<g:Button styleName="inLine  btnStyle" ui:field="btnCancel"> Cancel </g:Button>
 				<g:Button styleName="inLine  btnStyle" ui:field="btnSubmit"> Submit </g:Button>
 			</div>
-			
+
 		</div>
 	</g:HTMLPanel>
 </ui:UiBinder> 

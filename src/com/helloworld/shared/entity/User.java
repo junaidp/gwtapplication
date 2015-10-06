@@ -28,6 +28,9 @@ import javax.persistence.Table;
 		@Column(name="password")
 		private String password;
 		
+		@Column(name="name")
+		private String name;
+		
 		@Column(name="email")
 		private String email;
 
@@ -65,6 +68,14 @@ import javax.persistence.Table;
 
 		public static long getSerialversionuid() {
 			return serialVersionUID;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
 		}
 		
 	

@@ -11,4 +11,7 @@ import com.helloworld.shared.entity.User;
 public interface HelloService extends RemoteService {
 	String greetServer(String name) throws IllegalArgumentException;
 	String addUser(User user) throws Exception;
+	boolean verifyCaptcha(String challenge, String response)throws Exception;
+	boolean verifySubscription(String email) throws Exception;
+	User signIn(String userName, String password) throws Exception;
 }

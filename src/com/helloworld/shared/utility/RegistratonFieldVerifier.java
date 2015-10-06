@@ -23,7 +23,7 @@ public class RegistratonFieldVerifier {
 		if(input.trim().length()<2 ){
 			return ApplicationConstants.INVALID_NAME;
 		}
-		return input;
+		return "";
 
 
 	} 
@@ -33,7 +33,7 @@ public class RegistratonFieldVerifier {
 		if(input.trim().length()<2 ){
 			return ApplicationConstants.INVALID_USERNAME;
 		}
-		return input;
+		return "";
 
 
 	} 
@@ -43,7 +43,7 @@ public class RegistratonFieldVerifier {
 		if(input.trim().length()<3 ){
 			return ApplicationConstants.INVALID_PASSWORD;
 		}
-		return input;
+		return "";
 
 
 	} 

@@ -62,6 +62,10 @@ public class LoginView extends Composite implements Display  {
 		return registerAccount;
 	}
 
+	public Label getLblError() {
+		return lblError;
+	}
+
 
 
 }

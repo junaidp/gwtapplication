@@ -9,6 +9,9 @@ import com.helloworld.database.MyRdbHelper;
 import com.helloworld.shared.entity.User;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
+import net.tanesha.recaptcha.ReCaptcha;
+import net.tanesha.recaptcha.ReCaptchaFactory;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 /**
@@ -21,12 +24,14 @@ HelloService {
 	public String greetServer(String input) throws IllegalArgumentException {
 		return "";
 	}
+	
+	ApplicationContext ctx = new ClassPathXmlApplicationContext(
+			"applicationContext.xml");
+	MyRdbHelper rdbHelper = (MyRdbHelper) ctx.getBean("ManagerApp");
 
 	@Override
 	public String addUser(User user) throws Exception {
-		ApplicationContext ctx = new ClassPathXmlApplicationContext(
-				"applicationContext.xml");
-		MyRdbHelper rdbHelper = (MyRdbHelper) ctx.getBean("ManagerApp");
+		
 		if(isValidEmailAddress(user.getEmail())){
 			return rdbHelper.addUser(user);
 		}else{
@@ -44,4 +49,29 @@ HelloService {
 		}
 		return result;
 	}
+
+	@Override
+	public boolean verifyCaptcha(String challenge, String response)
+			throws Exception {
+		ReCaptcha r = ReCaptchaFactory.newReCaptcha("6LcEKg4TAAAAAFADmX5mrhcKkaeNMcxh7k5CiQ2K",
+				"6LcEKg4TAAAAAPXmd7B6Oskr8N2ywB-4ufp4Hnx5", true);
+		boolean result =  r.checkAnswer(
+				getThreadLocalRequest().getRemoteAddr().toString(), challenge,
+				response).isValid();
+		return result;
+	}
+
+	@Override
+	public boolean verifySubscription(String email) throws Exception {
+		
+		return rdbHelper.verifySubscription(email);
+	}
+
+	@Override
+	public User signIn(String userName, String password)
+			throws Exception {
+		return rdbHelper.signIn(userName, password);
+	}
+	
+
 }

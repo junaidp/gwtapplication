@@ -19,7 +19,7 @@
 
 					<g:VerticalPanel styleName="fieldsStyle">
 						<g:HorizontalPanel width="290px">
-							<g:Label ui:field="lblError" styleName="errorFields"
+							<g:Label ui:field="lblError" styleName="error"
 								height="16px" width="279px" />
 						</g:HorizontalPanel>
 						<g:Label ui:field=" lblUserName " width="50px" styleName="h1"
@@ -27,19 +27,19 @@
 							username
 						</g:Label>
 						<g:HorizontalPanel>
-							<g:TextBox ui:field="txtUserName" width="250px" height="20px" />
+							<g:TextBox ui:field="txtUserName" width="250px" height="20px" text="test"/>
 							<g:Hyperlink styleName="register">
 							</g:Hyperlink>
 						</g:HorizontalPanel>
 					</g:VerticalPanel>
 
 					<g:VerticalPanel styleName="fieldsStyle">
-						<g:Label ui:field=" lblPassword " width="50px" text="Password">
+						<g:Label ui:field=" lblPassword " width="50px" text="Password" >
 							password
 						</g:Label>
 						<g:HorizontalPanel>
 							<g:PasswordTextBox ui:field="txtPassword"
-								width="250px" height="20px" />
+								width="250px" height="20px" text="test"/>
 							<g:Hyperlink styleName="register"></g:Hyperlink>
 						</g:HorizontalPanel>
 					</g:VerticalPanel>

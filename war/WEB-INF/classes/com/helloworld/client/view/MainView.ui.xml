@@ -1,14 +1,29 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:v="urn:import:com.helloworld.client.view" xmlns:C="urn:import:com.helloworld.client.view.ControlPanels">
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:v="urn:import:com.helloworld.client.view"
+	xmlns:C="urn:import:com.helloworld.client.view.ControlPanels">
 	<ui:style>
 	
 	</ui:style>
-	 <g:HTMLPanel>
-	<g:HorizontalPanel>
-	<C:ControlPanelsContainer ui:field="controlPanelContainer"></C:ControlPanelsContainer>
-	<g:VerticalPanel ui:field="center">
-		</g:VerticalPanel>
-	</g:HorizontalPanel>
+	<g:HTMLPanel>
+		<div style="padding-left:90%">
+			
+			
+			<g:DisclosurePanel ui:field="discPanel">
+				<g:customHeader>
+				<g:Label ui:field="lblWelcome"></g:Label></g:customHeader>
+				<g:VerticalPanel ui:field="discPanelContainer">
+				<g:Label ui:field="editAccount" styleName="blue point"> Edit Account</g:Label>
+				</g:VerticalPanel>
+			</g:DisclosurePanel>
+		</div>
+
+		<div style="float: left; padding:5px">
+			<C:ControlPanelsContainer ui:field="controlPanelContainer"></C:ControlPanelsContainer>
+		</div>
+		<div style="float: left; padding:5px">
+			<g:VerticalPanel ui:field="center">
+			</g:VerticalPanel>
+		</div>
 	</g:HTMLPanel>
 </ui:UiBinder> 

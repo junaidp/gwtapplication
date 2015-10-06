@@ -9,24 +9,31 @@ import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.helloworld.client.event.DashboardEvent;
 import com.helloworld.client.event.DashboardEventHandler;
+import com.helloworld.client.event.EditUserEvent;
+import com.helloworld.client.event.EditUserEventHandler;
 import com.helloworld.client.event.MainEvent;
 import com.helloworld.client.event.MainEventHandler;
 import com.helloworld.client.event.RegistrationEvent;
 import com.helloworld.client.event.RegistrationEventHandler;
 import com.helloworld.client.event.SearchDataEvent;
 import com.helloworld.client.event.SearchDataEventHandler;
+import com.helloworld.client.event.SubscriptionVerificationEvent;
+import com.helloworld.client.event.SubscriptionVerificationEventHandler;
 import com.helloworld.client.presenter.DashboardPresenter;
 import com.helloworld.client.presenter.LoginPresenter;
 import com.helloworld.client.presenter.MainPresenter;
 import com.helloworld.client.presenter.Presenter;
 import com.helloworld.client.presenter.RegistrationPresenter;
 import com.helloworld.client.presenter.SearchDataPresenter;
+import com.helloworld.client.presenter.SubscriptionVerificationPresenter;
 import com.helloworld.client.view.ApplicationConstants;
 import com.helloworld.client.view.DashboardView;
 import com.helloworld.client.view.LoginView;
 import com.helloworld.client.view.MainView;
 import com.helloworld.client.view.RegistrationView;
+import com.helloworld.client.view.SubscriptionVerificationView;
 import com.helloworld.client.view.CenterPanels.SearchDataView;
+import com.helloworld.shared.entity.User;
 
 
 public class AppController implements Presenter, ValueChangeHandler<String> {
@@ -35,6 +42,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 	private final HelloServiceAsync rpcService; 
 	private HasWidgets container;
 	private VerticalPanel center;
+	private User loggedInUser;
 
 	Presenter presenter = null;
 
@@ -52,8 +60,16 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 		eventBus.addHandler(MainEvent.TYPE,
 				new MainEventHandler() {
 			public void onMain(MainEvent event) {
-
+				loggedInUser = event.getUser();
 				History.newItem(ApplicationConstants.TOKEN_MAIN);
+			}
+		}); 
+		
+		eventBus.addHandler(EditUserEvent.TYPE,
+				new EditUserEventHandler() {
+			public void onEditUser(EditUserEvent event) {
+				loggedInUser = event.getUser();
+				History.newItem(ApplicationConstants.TOKEN_EDIT_USER);
 			}
 		}); 
 		
@@ -79,13 +95,20 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 				History.newItem(ApplicationConstants.TOKEN_REGISTRATION);
 			}
 		}); 
+		
+		eventBus.addHandler(SubscriptionVerificationEvent.TYPE,
+				new SubscriptionVerificationEventHandler() {
+			public void onSubscriptionVerification(SubscriptionVerificationEvent event) {
+				History.newItem(ApplicationConstants.TOKEN_SUBSCRIPTION_VERFICATION);
+			}
+		}); 
 	}
 
 	public void go(final HasWidgets container) {
 		this.container = container;
 
 		if ("".equals(History.getToken())) {
-			History.newItem(ApplicationConstants.TOKEN_LOGIN);
+			History.newItem(ApplicationConstants.TOKEN_SUBSCRIPTION_VERFICATION);
 		}
 		else {
 			History.fireCurrentHistoryState();
@@ -106,7 +129,14 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 			}
 
 			if (token.equals(ApplicationConstants.TOKEN_MAIN)) {
-				presenter = new MainPresenter(rpcService, eventBus, new MainView());
+				presenter = new MainPresenter(rpcService, eventBus, new MainView(loggedInUser));
+				if (presenter != null) {
+					presenter.go(container);
+				}
+			}
+			
+			if (token.equals(ApplicationConstants.TOKEN_EDIT_USER)) {
+				presenter = new RegistrationPresenter(rpcService, eventBus, new RegistrationView(loggedInUser));
 				if (presenter != null) {
 					presenter.go(container);
 				}
@@ -130,6 +160,14 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 			
 			if (token.equals(ApplicationConstants.TOKEN_REGISTRATION)) {
 				presenter = new RegistrationPresenter(rpcService, eventBus, new RegistrationView());
+				if (presenter != null) {
+					setContainer(container);
+					presenter.go(container);
+				}
+			}
+			
+			if (token.equals(ApplicationConstants.TOKEN_SUBSCRIPTION_VERFICATION)) {
+				presenter = new SubscriptionVerificationPresenter(rpcService, eventBus, new SubscriptionVerificationView());
 				if (presenter != null) {
 					setContainer(container);
 					presenter.go(container);
