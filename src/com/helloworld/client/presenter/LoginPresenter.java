@@ -29,7 +29,7 @@ public class LoginPresenter implements Presenter
 	{
 		Widget asWidget();
 		com.google.gwt.user.client.ui.Button getBtnSubmit();
-		Anchor getRegisterAccount();
+		
 		TextBox getTxtUserName();
 		PasswordTextBox getTxtPassword();
 		Label getLblError();
@@ -85,13 +85,7 @@ public class LoginPresenter implements Presenter
 				signIn();
 			}});
 		
-		display.getRegisterAccount().addClickHandler(new ClickHandler(){
-
-			@Override
-			public void onClick(ClickEvent event) {
-				eventBus.fireEvent(new RegistrationEvent());
-				
-			}});
+		
 	}
 }
 

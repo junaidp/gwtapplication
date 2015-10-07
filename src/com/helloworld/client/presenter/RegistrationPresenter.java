@@ -3,6 +3,7 @@ package com.helloworld.client.presenter;
 import com.claudiushauptmann.gwt.recaptcha.client.RecaptchaWidget;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
@@ -23,6 +24,7 @@ public class RegistrationPresenter implements Presenter
 
 	private final Display display;
 	private final HelloServiceAsync rpcService;
+	private final HandlerManager eventBus;
 
 	public interface Display 
 	{
@@ -50,6 +52,7 @@ public class RegistrationPresenter implements Presenter
 	{
 		this.display = view;
 		this.rpcService = rpcService;
+		this.eventBus = eventBus;
 	}
 
 	public void go(HasWidgets container) 
@@ -61,7 +64,11 @@ public class RegistrationPresenter implements Presenter
 	}
 
 	private void bind() {
-
+		if(display.getBtnSubmit().getText().equals("update")){
+			display.getRw().setVisible(false);
+		}else{
+			display.getRw().setVisible(true);
+		}
 	}
 
 	@Override
@@ -70,7 +77,11 @@ public class RegistrationPresenter implements Presenter
 
 			@Override
 			public void onClick(ClickEvent event) {
-				History.newItem(ApplicationConstants.TOKEN_LOGIN);
+				if(display.getBtnSubmit().getText().equals("update")){
+					History.newItem(ApplicationConstants.TOKEN_DASHBOARD);
+				}else{
+					History.newItem(ApplicationConstants.TOKEN_SUBSCRIPTION_VERFICATION);
+				}
 			}});
 
 		display.getBtnSubmit().addClickHandler(new ClickHandler() {
@@ -78,8 +89,7 @@ public class RegistrationPresenter implements Presenter
 			@Override
 			public void onClick(ClickEvent event) {
 				if(display.getBtnSubmit().getText().equals("update")){
-					display.getRw().setVisible(false);
-					editUser();
+					addUser(display.getLoggedInUser());
 				}else{
 					verifyCaptcha(display.getRw().getChallenge(), display.getRw().getResponse());
 				}
@@ -95,7 +105,8 @@ public class RegistrationPresenter implements Presenter
 				display.getRw().reload();
 				if(result){
 					display.getCaptchaError().setText("");
-					addUser();
+					User user = new User();
+					addUser(user);
 
 				}
 				else{
@@ -111,14 +122,18 @@ public class RegistrationPresenter implements Presenter
 		});
 	}
 
-	private void addUser(){
-		User user = new User();
+	private void addUser(User user){
 		user.setEmail(display.getEmail().getText());
 		user.setPassword(display.getPassword().getText());
 		user.setUserName(display.getUserName().getText());
 		user.setName(display.getName().getText());
-		new RegistratonFieldVerifier(display);
+		RegistratonFieldVerifier regFieldVerifier = new RegistratonFieldVerifier();
+		if(regFieldVerifier.registratonFieldsVerifid(display)){
+			addUserInDb(user);
+		}
+	}
 
+	private void addUserInDb(User user) {
 		rpcService.addUser(user, new AsyncCallback<String>() {
 
 			@Override
@@ -130,7 +145,9 @@ public class RegistrationPresenter implements Presenter
 					display.getUserNameError().setText(result);
 				}
 				else{
+					if(! display.getBtnSubmit().getText().equals("update")){
 					display.clearFields();
+					}
 					Window.alert(result);
 				}
 			}
@@ -138,38 +155,6 @@ public class RegistrationPresenter implements Presenter
 			@Override
 			public void onFailure(Throwable caught) {
 				Window.alert("Fail: addUser "+ caught.getMessage());
-
-			}
-		});
-	}
-	
-	private void editUser(){
-		User user = display.getLoggedInUser();
-		user.setEmail(display.getEmail().getText());
-		user.setPassword(display.getPassword().getText());
-		user.setUserName(display.getUserName().getText());
-		user.setName(display.getName().getText());
-		new RegistratonFieldVerifier(display);
-
-		rpcService.addUser(user, new AsyncCallback<String>() {
-
-			@Override
-			public void onSuccess(String result) {
-				if(result.equals(ApplicationConstants.INVALID_EMAIL) || result.equals(ApplicationConstants.EMAIL_NOT_AVAILABLE)) {
-					display.getEmailError().setText(result);
-				}
-				else if(result.equals(ApplicationConstants.USERNAME_NOT_AVAILABLE)){
-					display.getUserNameError().setText(result);
-				}
-				else{
-					display.clearFields();
-					Window.alert("User edited");
-				}
-			}
-
-			@Override
-			public void onFailure(Throwable caught) {
-				Window.alert("Fail: editUser "+ caught.getMessage());
 
 			}
 		});

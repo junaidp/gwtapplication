@@ -72,6 +72,11 @@ HelloService {
 			throws Exception {
 		return rdbHelper.signIn(userName, password);
 	}
+
+	@Override
+	public String editUser(User user) throws Exception {
+		return rdbHelper.addUser(user);
+	}
 	
 
 }

@@ -8,6 +8,7 @@
 <module rename-to='helloworldgwt'>
   <!-- Inherit the core Web Toolkit stuff.                        -->
   <inherits name='com.google.gwt.user.User'/>
+  <inherits name="gwtupload.GWTUpload"/>
  
  <!--  <inherits name="org.synthful.smartgwt.UISmartGWT" />
 <inherits name="com.smartgwt.SmartGwtNoTheme"/>
@@ -30,7 +31,7 @@
   <!-- Specify the app entry point class.                         -->
   <entry-point class='com.helloworld.client.HelloWorldGWT'/>
 
-
+<set-configuration-property name='xsiframe.failIfScriptTag' value='FALSE'/>
   <!-- Specify the paths for translatable code                    -->
   <source path='client'/>
   <source path='shared'/>

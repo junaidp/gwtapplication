@@ -51,7 +51,6 @@
 						</g:Button>
 					<g:VerticalPanel>
 					<g:Anchor styleName="hover" ui:field="forgotPassword">Forgot password</g:Anchor>
-					<g:Anchor styleName="hover" ui:field="registerAccount">Register new account</g:Anchor>
 					</g:VerticalPanel>
 					
 					</g:HorizontalPanel>

@@ -25,7 +25,7 @@ public class LoginView extends Composite implements Display  {
 	@UiField PasswordTextBox txtPassword;
 	@UiField Button btnSubmit;
 	@UiField Label lblError;
-	@UiField Anchor registerAccount;
+	
 	
 	public LoginView() {
 		initWidget(uiBinder.createAndBindUi(this));
@@ -58,10 +58,7 @@ public class LoginView extends Composite implements Display  {
 		this.btnSubmit = btnSubmit;
 	}
 
-	public Anchor getRegisterAccount() {
-		return registerAccount;
-	}
-
+	
 	public Label getLblError() {
 		return lblError;
 	}

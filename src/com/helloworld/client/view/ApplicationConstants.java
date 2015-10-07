@@ -30,6 +30,7 @@ public class ApplicationConstants {
 	public static final String EMAIL_NOT_AVAILABLE = "This email is already registered with our system";
 	public static final String USER_ADDED = "User Added";
 	public static final String USERNAME_PASSWORD_NOT_MATCH = "username/password do not match";
+	public static final String USER_UPDATED = "record updated";
 	
 	
 

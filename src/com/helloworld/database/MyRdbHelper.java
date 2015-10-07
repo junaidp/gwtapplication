@@ -23,15 +23,26 @@ public class MyRdbHelper {
 		Session session = null;
 		try{
 			session = sessionFactory.openSession();
-			if(userNameAlreadyExist(session, user.getUserName())){
+			
+			boolean existingUser = true;
+			if(user.getUserId()== 0){
+				existingUser = false;
+			}
+			
+			if(userNameAlreadyExist(session, user.getUserName(), user.getUserId())){
 				return ApplicationConstants.USERNAME_NOT_AVAILABLE;
 			}
-			if(emailAlreadyExist(session, user.getEmail())){
+			if(emailAlreadyExist(session, user.getEmail(),  user.getUserId())){
 				return ApplicationConstants.EMAIL_NOT_AVAILABLE;
 			}
+			
 			session.saveOrUpdate(user);
 			session.flush();
-			return ApplicationConstants.USER_ADDED;
+			if(existingUser){
+				return ApplicationConstants.USER_UPDATED;
+			}else{
+				return ApplicationConstants.USER_ADDED;
+			}
 
 		}
 		catch(Exception ex){
@@ -43,12 +54,13 @@ public class MyRdbHelper {
 			session.close();
 		}
 	}
-	
-	public boolean userNameAlreadyExist(Session session, String userName)throws Exception{
-		
+
+	public boolean userNameAlreadyExist(Session session, String userName, int userId)throws Exception{
+
 		try{
 			Criteria crit = session.createCriteria(User.class);
 			crit.add(Restrictions.eq("userName", userName));
+			crit.add(Restrictions.ne("userId", userId));
 			if(crit.list().size()>0){
 				return true;
 			}else{
@@ -59,13 +71,14 @@ public class MyRdbHelper {
 			System.out.println("Exception occured in userNameAlreadyExist"+ ex.getMessage());
 			throw new Exception("Exception occured in userNameAlreadyExist");
 		}
-		
+
 	}
-	
-	public boolean emailAlreadyExist(Session session, String email)throws Exception{
+
+	public boolean emailAlreadyExist(Session session, String email, int userId)throws Exception{
 		try{
 			Criteria crit = session.createCriteria(User.class);
 			crit.add(Restrictions.eq("email", email));
+			crit.add(Restrictions.ne("userId", userId));
 			if(crit.list().size()>0){
 				return true;
 			}else{

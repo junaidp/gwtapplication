@@ -15,6 +15,12 @@
 	<div style="padding-left:200px">
 	<g:Button styleName="btnStyle" ui:field="submit">Submit</g:Button>
 	</div>
+	<div>
+		<g:Anchor styleName="hover" ui:field="registerAccount">Register new account</g:Anchor>
+				
 	</div>
+	
+	</div>
+	
 	</g:HTMLPanel>
 </ui:UiBinder> 

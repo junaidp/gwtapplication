@@ -3,6 +3,7 @@ package com.helloworld.client.view;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.TextBox;
@@ -19,6 +20,7 @@ public class SubscriptionVerificationView extends Composite implements Display {
 	}
 	@UiField TextBox email;
 	@UiField Button submit;
+	@UiField Anchor registerAccount;
 	
 
 	public SubscriptionVerificationView() {
@@ -32,5 +34,10 @@ public class SubscriptionVerificationView extends Composite implements Display {
 	public Button getSubmit() {
 		return submit;
 	}
+	
+	public Anchor getRegisterAccount() {
+		return registerAccount;
+	}
+
 
 }

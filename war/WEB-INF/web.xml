@@ -16,6 +16,16 @@
     <url-pattern>/helloworldgwt/greet</url-pattern>
   </servlet-mapping>
   
+   <servlet>
+    <servlet-name>uploadServlet</servlet-name>
+    <servlet-class>com.helloworld.server.FileUploadServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>uploadServlet</servlet-name>
+    <url-pattern>/helloworldgwt/upload</url-pattern>
+  </servlet-mapping>
+  
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>HelloWorldGWT.html</welcome-file>

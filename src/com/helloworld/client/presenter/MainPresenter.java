@@ -13,6 +13,8 @@ import com.helloworld.client.event.EditUserEvent;
 import com.helloworld.client.event.IntelligencePackEvent;
 import com.helloworld.client.event.RegistrationEvent;
 import com.helloworld.client.event.SearchDataEvent;
+import com.helloworld.client.view.Attachment;
+import com.helloworld.client.view.PopupsView;
 import com.helloworld.client.view.ControlPanels.ControlPanelsContainer;
 import com.helloworld.shared.entity.User;
 
@@ -30,6 +32,7 @@ public class MainPresenter implements Presenter
 		VerticalPanel getCenter();
 		Label getEditAccount();
 		User getLoggedInUser();
+		Label getFileUpload();
 
 	}  
 
@@ -83,6 +86,14 @@ public class MainPresenter implements Presenter
 			public void onClick(ClickEvent event) {
 				eventBus.fireEvent(new EditUserEvent(display.getLoggedInUser()));
 			}});
+		
+		display.getFileUpload().addClickHandler(new ClickHandler(){
+
+			@Override
+			public void onClick(ClickEvent event) {
+				new PopupsView(new Attachment());
+			}});
+		
 	}
 
 

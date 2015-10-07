@@ -50,11 +50,15 @@ public class RegistrationView extends Composite implements Display, ViewFields {
 
 
 	public RegistrationView(User loggedInUser) {
+		this.loggedInUser = loggedInUser;
+		initWidget(uiBinder.createAndBindUi(this));
+		rw = new RecaptchaWidget("6LcEKg4TAAAAAFADmX5mrhcKkaeNMcxh7k5CiQ2K");
 		name.setText(loggedInUser.getName());
 		userName.setText(loggedInUser.getUserName());
 		password.setText(loggedInUser.getPassword());
 		email.setText(loggedInUser.getEmail());
 		btnSubmit.setText("update");
+		confirmPassword.setText(loggedInUser.getPassword());
 	}
 
 

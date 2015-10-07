@@ -14,4 +14,6 @@ public interface HelloService extends RemoteService {
 	boolean verifyCaptcha(String challenge, String response)throws Exception;
 	boolean verifySubscription(String email) throws Exception;
 	User signIn(String userName, String password) throws Exception;
+	String editUser(User user) throws Exception;
+
 }

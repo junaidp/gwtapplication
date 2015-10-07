@@ -11,9 +11,11 @@
 			
 			<g:DisclosurePanel ui:field="discPanel">
 				<g:customHeader>
-				<g:Label ui:field="lblWelcome"></g:Label></g:customHeader>
+				<g:Label ui:field="lblWelcome" styleName="controlPanelHeadings hover"></g:Label></g:customHeader>
 				<g:VerticalPanel ui:field="discPanelContainer">
-				<g:Label ui:field="editAccount" styleName="blue point"> Edit Account</g:Label>
+				<g:Label ui:field="editAccount" styleName="controlPanelHeadings hover"> Edit Account</g:Label>
+				<g:Label ui:field="fileUpload" styleName="controlPanelHeadings hover"> File Upload</g:Label>
+				
 				</g:VerticalPanel>
 			</g:DisclosurePanel>
 		</div>

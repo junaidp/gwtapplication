@@ -33,6 +33,7 @@ public class MainView extends Composite implements Display{
 	@UiField DisclosurePanel discPanel;
 	@UiField Label editAccount;
 	private User loggedInUser;
+	@UiField Label fileUpload;
 
 	public MainView(User loggedInUser) {
 		initWidget(uiBinder.createAndBindUi(this));
@@ -64,6 +65,10 @@ public class MainView extends Composite implements Display{
 
 	public User getLoggedInUser() {
 		return loggedInUser;
+	}
+
+	public Label getFileUpload() {
+		return fileUpload;
 	}
 
 }
