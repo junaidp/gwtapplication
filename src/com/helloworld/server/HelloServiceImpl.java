@@ -1,5 +1,8 @@
 package com.helloworld.server;
 
+import java.io.File;
+import java.util.ArrayList;
+
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
@@ -76,6 +79,18 @@ HelloService {
 	@Override
 	public String editUser(User user) throws Exception {
 		return rdbHelper.addUser(user);
+	}
+	
+	public ArrayList<String> readUploadedFiles(){
+		  String root = getServletContext().getRealPath("/");
+          ArrayList<String> fileNames = new ArrayList<String>();
+          File folder = new File(root + "/fileuploads");
+          File[] listOfFiles = folder.listFiles();
+
+              for (int i = 0; i < listOfFiles.length; i++) {
+            	  fileNames.add(listOfFiles[i].getName());
+              }
+              return fileNames;
 	}
 	
 

@@ -1,2 +1,3 @@
 # Module helloworldgwt
 # RPC service class, partial path of RPC policy file
+com.helloworld.client.HelloService, CA074181EA458AFE9F83B8179CC2C679.gwt.rpc

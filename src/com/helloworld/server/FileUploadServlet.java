@@ -79,22 +79,18 @@ public class FileUploadServlet extends UploadAction {
 	    for (FileItem item : sessionFiles) {
 	      if (false == item.isFormField()) {
 	        try {
-	          /// Create a new file based on the remote file name in the client
-	          // String saveName = item.getName().replaceAll("[\\\\/><\\|\\s\"'{}()\\[\\]]+", "_");
-	          // File file =new File("/tmp/" + saveName);
-	          
-	          /// Create a temporary file placed in /tmp (only works in unix)
-	          // File file = File.createTempFile("upload-", ".bin", new File("/tmp"));
-	          
-	          /// Create a temporary file placed in the default system temp folder
-	          File file = File.createTempFile("upload-", ".bin");
-	          item.write(file);
-	          
-	          /// Save a list with the received files
+	         	String fileName = item.getName();
+	            String root = getServletContext().getRealPath("/");
+                File path = new File(root + "/fileuploads");
+                if (!path.exists()) {
+                    boolean status = path.mkdirs();
+                }
+
+                File file = new File(path + "/" + fileName);
+                item.write(file);
+
 	          receivedFiles.put(item.getFieldName(), file);
 	          receivedContentTypes.put(item.getFieldName(), item.getContentType());
-	          
-	          /// Send a customized message to the client.
 	          response += "File saved as " + file.getAbsolutePath();
 
 	        } catch (Exception e) {
