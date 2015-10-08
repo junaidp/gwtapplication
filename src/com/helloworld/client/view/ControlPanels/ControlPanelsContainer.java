@@ -21,6 +21,8 @@ public class ControlPanelsContainer extends Composite {
 	SearchDataPanelView searchPanel;
 	@UiField
 	IntelligencePackPanelView intelligencePanel;
+	@UiField
+	DashboardAccordionPanelView dashboardAccordionPanel;
 
 	public ControlPanelsContainer() {
 		initWidget(uiBinder.createAndBindUi(this));
@@ -36,6 +38,10 @@ public class ControlPanelsContainer extends Composite {
 
 	public IntelligencePackPanelView getIntelligencePanel() {
 		return intelligencePanel;
+	}
+
+	public DashboardAccordionPanelView getDashboardAccordionPanel() {
+		return dashboardAccordionPanel;
 	}
 
 }

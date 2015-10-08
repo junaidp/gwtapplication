@@ -14,6 +14,9 @@
 	<div  style="padding:5px">
 	<C:IntelligencePackPanelView ui:field="intelligencePanel"></C:IntelligencePackPanelView>
 	</div>
+	<div style="padding:5px">
+	<C:DashboardAccordionPanelView ui:field="dashboardAccordionPanel"></C:DashboardAccordionPanelView>
+	</div>
 	
 	</g:HTMLPanel>
 </ui:UiBinder> 

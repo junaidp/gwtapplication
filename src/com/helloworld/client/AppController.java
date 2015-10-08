@@ -7,6 +7,8 @@ import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.helloworld.client.event.DashboardAccordionEvent;
+import com.helloworld.client.event.DashboardAccordionEventHandler;
 import com.helloworld.client.event.DashboardEvent;
 import com.helloworld.client.event.DashboardEventHandler;
 import com.helloworld.client.event.EditUserEvent;
@@ -19,6 +21,7 @@ import com.helloworld.client.event.SearchDataEvent;
 import com.helloworld.client.event.SearchDataEventHandler;
 import com.helloworld.client.event.SubscriptionVerificationEvent;
 import com.helloworld.client.event.SubscriptionVerificationEventHandler;
+import com.helloworld.client.presenter.DashboardAccordionPresenter;
 import com.helloworld.client.presenter.DashboardPresenter;
 import com.helloworld.client.presenter.LoginPresenter;
 import com.helloworld.client.presenter.MainPresenter;
@@ -27,11 +30,12 @@ import com.helloworld.client.presenter.RegistrationPresenter;
 import com.helloworld.client.presenter.SearchDataPresenter;
 import com.helloworld.client.presenter.SubscriptionVerificationPresenter;
 import com.helloworld.client.view.ApplicationConstants;
-import com.helloworld.client.view.DashboardView;
 import com.helloworld.client.view.LoginView;
 import com.helloworld.client.view.MainView;
 import com.helloworld.client.view.RegistrationView;
 import com.helloworld.client.view.SubscriptionVerificationView;
+import com.helloworld.client.view.CenterPanels.DashboardAccordion;
+import com.helloworld.client.view.CenterPanels.DashboardView;
 import com.helloworld.client.view.CenterPanels.SearchDataView;
 import com.helloworld.shared.entity.User;
 
@@ -80,6 +84,16 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 				History.newItem(ApplicationConstants.TOKEN_DASHBOARD);
 			}
 		}); 
+		
+		eventBus.addHandler(DashboardAccordionEvent.TYPE,
+				new DashboardAccordionEventHandler() {
+			public void onDashboardAccordion(DashboardAccordionEvent event) {
+				center = event.getCenter();
+				History.newItem(ApplicationConstants.TOKEN_DASHBOARD_ACCORDION);
+			}
+		}); 
+		
+		
 		
 		eventBus.addHandler(SearchDataEvent.TYPE,
 				new SearchDataEventHandler() {
@@ -144,6 +158,14 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 			
 			if (token.equals(ApplicationConstants.TOKEN_DASHBOARD)) {
 				presenter = new DashboardPresenter(rpcService, eventBus, new DashboardView());
+				if (presenter != null) {
+					setContainer(center);
+					presenter.go(container);
+				}
+			}
+			
+			if (token.equals(ApplicationConstants.TOKEN_DASHBOARD_ACCORDION)) {
+				presenter = new DashboardAccordionPresenter(rpcService, eventBus, new DashboardAccordion());
 				if (presenter != null) {
 					setContainer(center);
 					presenter.go(container);

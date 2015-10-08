@@ -8,6 +8,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.helloworld.client.HelloServiceAsync;
+import com.helloworld.client.event.DashboardAccordionEvent;
 import com.helloworld.client.event.DashboardEvent;
 import com.helloworld.client.event.EditUserEvent;
 import com.helloworld.client.event.IntelligencePackEvent;
@@ -16,6 +17,7 @@ import com.helloworld.client.event.SearchDataEvent;
 import com.helloworld.client.view.Attachment;
 import com.helloworld.client.view.PopupsView;
 import com.helloworld.client.view.ControlPanels.ControlPanelsContainer;
+import com.helloworld.client.view.ControlPanels.DashboardAccordionPanelView;
 import com.helloworld.shared.entity.User;
 
 public class MainPresenter implements Presenter 
@@ -92,6 +94,13 @@ public class MainPresenter implements Presenter
 			@Override
 			public void onClick(ClickEvent event) {
 				new PopupsView(new Attachment());
+			}});
+		
+		display.getControlPanelContainer().getDashboardAccordionPanel().getHeading().addClickHandler(new ClickHandler(){
+
+			@Override
+			public void onClick(ClickEvent event) {
+				eventBus.fireEvent(new DashboardAccordionEvent(display.getCenter()));
 			}});
 		
 	}

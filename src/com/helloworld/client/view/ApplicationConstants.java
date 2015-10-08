@@ -16,6 +16,7 @@ public class ApplicationConstants {
 	public static final String TOKEN_REGISTRATION = "registration";
 	public static final String TOKEN_SUBSCRIPTION_VERFICATION = "subscriptionVerification";
 	public static final String TOKEN_EDIT_USER = "editUser";
+	public static final String TOKEN_DASHBOARD_ACCORDION = "dashboardAccordion";
 	
 	///FIELD VERIFIERS///
 	public static final String INVALID_USERNAME = "username invalid";
@@ -31,6 +32,7 @@ public class ApplicationConstants {
 	public static final String USER_ADDED = "User Added";
 	public static final String USERNAME_PASSWORD_NOT_MATCH = "username/password do not match";
 	public static final String USER_UPDATED = "record updated";
+	
 	
 	
 
