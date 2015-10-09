@@ -15,6 +15,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.helloworld.client.HelloServiceAsync;
 import com.helloworld.client.view.ApplicationConstants;
+import com.helloworld.client.view.widgets.LoadingPopup;
 import com.helloworld.shared.entity.User;
 import com.helloworld.shared.utility.RegistratonFieldVerifier;
 
@@ -98,10 +99,16 @@ public class RegistrationPresenter implements Presenter
 	}
 
 	public void verifyCaptcha(String challenge, String response){
+		final LoadingPopup loadingPopup = new LoadingPopup();
+		loadingPopup.display();
 		rpcService.verifyCaptcha(challenge, response, new AsyncCallback<Boolean>() {
 
 			@Override
 			public void onSuccess(Boolean result) {
+				if(loadingPopup!=null){
+					loadingPopup.remove();
+				}
+			
 				display.getRw().reload();
 				if(result){
 					display.getCaptchaError().setText("");
@@ -117,6 +124,9 @@ public class RegistrationPresenter implements Presenter
 
 			@Override
 			public void onFailure(Throwable caught) {
+				if(loadingPopup!=null){
+					loadingPopup.remove();
+				}
 				Window.alert(caught.getLocalizedMessage());
 			}
 		});
@@ -134,10 +144,15 @@ public class RegistrationPresenter implements Presenter
 	}
 
 	private void addUserInDb(User user) {
+		final LoadingPopup loadingPopup = new LoadingPopup();
+		loadingPopup.display();
 		rpcService.addUser(user, new AsyncCallback<String>() {
 
 			@Override
 			public void onSuccess(String result) {
+				if(loadingPopup!=null){
+					loadingPopup.remove();
+				}
 				if(result.equals(ApplicationConstants.INVALID_EMAIL) || result.equals(ApplicationConstants.EMAIL_NOT_AVAILABLE)) {
 					display.getEmailError().setText(result);
 				}
@@ -148,12 +163,17 @@ public class RegistrationPresenter implements Presenter
 					if(! display.getBtnSubmit().getText().equals("update")){
 					display.clearFields();
 					}
+					
 					Window.alert(result);
 				}
+				
 			}
 
 			@Override
 			public void onFailure(Throwable caught) {
+				if(loadingPopup!=null){
+					loadingPopup.remove();
+				}
 				Window.alert("Fail: addUser "+ caught.getMessage());
 
 			}

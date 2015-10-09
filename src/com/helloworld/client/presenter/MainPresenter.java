@@ -3,6 +3,7 @@ package com.helloworld.client.presenter;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerManager;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -14,10 +15,11 @@ import com.helloworld.client.event.EditUserEvent;
 import com.helloworld.client.event.IntelligencePackEvent;
 import com.helloworld.client.event.RegistrationEvent;
 import com.helloworld.client.event.SearchDataEvent;
+import com.helloworld.client.view.ApplicationConstants;
 import com.helloworld.client.view.Attachment;
-import com.helloworld.client.view.PopupsView;
 import com.helloworld.client.view.ControlPanels.ControlPanelsContainer;
 import com.helloworld.client.view.ControlPanels.DashboardAccordionPanelView;
+import com.helloworld.client.view.widgets.PopupsView;
 import com.helloworld.shared.entity.User;
 
 public class MainPresenter implements Presenter 
@@ -101,6 +103,13 @@ public class MainPresenter implements Presenter
 			@Override
 			public void onClick(ClickEvent event) {
 				eventBus.fireEvent(new DashboardAccordionEvent(display.getCenter()));
+			}});
+		
+		display.getControlPanelContainer().getDashboardPortalPanel().getHeading().addClickHandler(new ClickHandler(){
+
+			@Override
+			public void onClick(ClickEvent event) {
+				History.newItem(ApplicationConstants.TOKEN_DASHBOARD_PORTAL);
 			}});
 		
 	}

@@ -17,6 +17,7 @@ public class ApplicationConstants {
 	public static final String TOKEN_SUBSCRIPTION_VERFICATION = "subscriptionVerification";
 	public static final String TOKEN_EDIT_USER = "editUser";
 	public static final String TOKEN_DASHBOARD_ACCORDION = "dashboardAccordion";
+	public static final String TOKEN_DASHBOARD_PORTAL = "dashboardPortal";
 	
 	///FIELD VERIFIERS///
 	public static final String INVALID_USERNAME = "username invalid";

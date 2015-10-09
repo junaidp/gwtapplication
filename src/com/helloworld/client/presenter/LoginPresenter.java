@@ -16,6 +16,7 @@ import com.helloworld.client.HelloServiceAsync;
 import com.helloworld.client.event.MainEvent;
 import com.helloworld.client.event.RegistrationEvent;
 import com.helloworld.client.view.ApplicationConstants;
+import com.helloworld.client.view.widgets.LoadingPopup;
 import com.helloworld.shared.entity.User;
 
 public class LoginPresenter implements Presenter 
@@ -57,11 +58,15 @@ public class LoginPresenter implements Presenter
 	public void signIn()
 	{
 		display.getLblError().setText("");
-		
+		final LoadingPopup loadingPopup = new LoadingPopup();
+		loadingPopup.display();
 		rpcService.signIn(display.getTxtUserName().getText(), display.getTxtPassword().getText(), new AsyncCallback<User>() {
 			
 			@Override
 			public void onSuccess(User user) {
+				if(loadingPopup!=null){
+					loadingPopup.remove();
+				}
 				if(user==null){
 					display.getLblError().setText(ApplicationConstants.USERNAME_PASSWORD_NOT_MATCH);
 				}else{
@@ -71,6 +76,9 @@ public class LoginPresenter implements Presenter
 			
 			@Override
 			public void onFailure(Throwable caught) {
+				if(loadingPopup!=null){
+					loadingPopup.remove();
+				}
 			}
 		});
 		

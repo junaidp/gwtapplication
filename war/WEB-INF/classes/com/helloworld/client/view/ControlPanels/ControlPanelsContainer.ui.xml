@@ -17,6 +17,9 @@
 	<div style="padding:5px">
 	<C:DashboardAccordionPanelView ui:field="dashboardAccordionPanel"></C:DashboardAccordionPanelView>
 	</div>
+	<div style="padding:5px">
+	<C:DashboardPortalPanelView ui:field="dashboardPortalPanel"></C:DashboardPortalPanelView>
+	</div>
 	
 	</g:HTMLPanel>
 </ui:UiBinder> 

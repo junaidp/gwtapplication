@@ -22,6 +22,7 @@ import com.helloworld.client.event.SearchDataEventHandler;
 import com.helloworld.client.event.SubscriptionVerificationEvent;
 import com.helloworld.client.event.SubscriptionVerificationEventHandler;
 import com.helloworld.client.presenter.DashboardAccordionPresenter;
+import com.helloworld.client.presenter.DashboardPortalPresenter;
 import com.helloworld.client.presenter.DashboardPresenter;
 import com.helloworld.client.presenter.LoginPresenter;
 import com.helloworld.client.presenter.MainPresenter;
@@ -35,6 +36,7 @@ import com.helloworld.client.view.MainView;
 import com.helloworld.client.view.RegistrationView;
 import com.helloworld.client.view.SubscriptionVerificationView;
 import com.helloworld.client.view.CenterPanels.DashboardAccordion;
+import com.helloworld.client.view.CenterPanels.DashboardPortalView;
 import com.helloworld.client.view.CenterPanels.DashboardView;
 import com.helloworld.client.view.CenterPanels.SearchDataView;
 import com.helloworld.shared.entity.User;
@@ -166,6 +168,14 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 			
 			if (token.equals(ApplicationConstants.TOKEN_DASHBOARD_ACCORDION)) {
 				presenter = new DashboardAccordionPresenter(rpcService, eventBus, new DashboardAccordion());
+				if (presenter != null) {
+					setContainer(center);
+					presenter.go(container);
+				}
+			}
+			
+			if (token.equals(ApplicationConstants.TOKEN_DASHBOARD_PORTAL)) {
+				presenter = new DashboardPortalPresenter(rpcService, eventBus, new DashboardPortalView());
 				if (presenter != null) {
 					setContainer(center);
 					presenter.go(container);

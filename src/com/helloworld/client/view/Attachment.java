@@ -9,14 +9,18 @@ import gwtupload.client.PreloadedImage;
 import gwtupload.client.PreloadedImage.OnLoadPreloadedImageHandler;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.helloworld.client.HelloService;
 import com.helloworld.client.HelloServiceAsync;
+import com.helloworld.client.view.widgets.LoadingPopup;
 
 import gwtupload.client.IUploadStatus.Status;
 
@@ -74,17 +78,31 @@ public class Attachment extends VerticalPanel {
 	
 	public void displayUploadedFiles(){
 		HelloServiceAsync rpcService = GWT.create(HelloService.class);
+		final LoadingPopup loadingPopup = new LoadingPopup();
+		loadingPopup.display();
 		rpcService.readUploadedFiles(new AsyncCallback<ArrayList<String>>() {
 			
 			@Override
 			public void onSuccess(ArrayList<String> result) {
+				if(loadingPopup!=null){
+					loadingPopup.remove();
+				}
 				Label lblFile = new Label("Already Uploaded files");
-				lblFile.setStyleName("blue");
 				vpnlFileNames.add(lblFile);
 				for(int i=0; i< result.size(); i++){
-					Label lbl = new Label();
+					final Anchor lbl = new Anchor();
 					lbl.setText(result.get(i));
 					vpnlFileNames.add(lbl);
+					lbl.addStyleName("hover");
+					
+					lbl.addClickHandler(new ClickHandler() {
+						
+						@Override
+						public void onClick(ClickEvent event) {
+							Window.open(GWT.getHostPageBaseURL() + "/fileuploads/"+lbl.getText(), "name", "enabled");
+
+						}
+					});
 				}
 				
 				add(vpnlFileNames);
@@ -92,6 +110,9 @@ public class Attachment extends VerticalPanel {
 			
 			@Override
 			public void onFailure(Throwable caught) {
+				if(loadingPopup!=null){
+					loadingPopup.remove();
+				}
 				Window.alert("reading uploaded files Failed:"+ caught.getLocalizedMessage());
 			}
 		});

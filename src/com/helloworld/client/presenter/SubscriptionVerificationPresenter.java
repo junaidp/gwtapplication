@@ -17,6 +17,7 @@ import com.helloworld.client.HelloServiceAsync;
 import com.helloworld.client.event.RegistrationEvent;
 import com.helloworld.client.event.SubscriptionVerificationEvent;
 import com.helloworld.client.view.ApplicationConstants;
+import com.helloworld.client.view.widgets.LoadingPopup;
 
 public class SubscriptionVerificationPresenter implements Presenter 
 
@@ -71,10 +72,15 @@ public class SubscriptionVerificationPresenter implements Presenter
 
 			@Override
 			public void onClick(ClickEvent event) {
+				final LoadingPopup loadingPopup = new LoadingPopup();
+				loadingPopup.display();
 				rpcService.verifySubscription(display.getEmail().getText(), new AsyncCallback<Boolean>() {
 					
 					@Override
 					public void onSuccess(Boolean result) {
+						if(loadingPopup!=null){
+							loadingPopup.remove();
+						}
 						if(result){
 						History.newItem(ApplicationConstants.TOKEN_LOGIN);
 						}else{
@@ -84,6 +90,9 @@ public class SubscriptionVerificationPresenter implements Presenter
 					
 					@Override
 					public void onFailure(Throwable caught) {
+						if(loadingPopup!=null){
+							loadingPopup.remove();
+						}
 						Window.alert("Fail verifySubscription: "+ caught.getLocalizedMessage());
 					}
 				});
