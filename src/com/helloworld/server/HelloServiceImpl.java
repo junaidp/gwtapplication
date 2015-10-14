@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+import javax.servlet.http.HttpSession;
 
 import com.helloworld.client.HelloService;
 import com.helloworld.client.view.ApplicationConstants;
@@ -24,6 +25,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class HelloServiceImpl extends RemoteServiceServlet implements
 HelloService {
 
+	
 	public String greetServer(String input) throws IllegalArgumentException {
 		return "";
 	}
@@ -31,6 +33,7 @@ HelloService {
 	ApplicationContext ctx = new ClassPathXmlApplicationContext(
 			"applicationContext.xml");
 	MyRdbHelper rdbHelper = (MyRdbHelper) ctx.getBean("ManagerApp");
+	HttpSession session ;
 
 	@Override
 	public String addUser(User user) throws Exception {
@@ -73,7 +76,13 @@ HelloService {
 	@Override
 	public User signIn(String userName, String password)
 			throws Exception {
-		return rdbHelper.signIn(userName, password);
+		User user =  rdbHelper.signIn(userName, password);
+		if(user!=null)
+		{
+			session=getThreadLocalRequest().getSession(true);
+			session.setAttribute("userId", user.getUserId());
+		}
+		return user;
 	}
 
 	@Override
@@ -91,6 +100,19 @@ HelloService {
             	  fileNames.add(listOfFiles[i].getName());
               }
               return fileNames;
+	}
+	
+	public String fetchUsersLogo(int userId){
+		String root = getServletContext().getRealPath("/");
+		File folder = new File(root + "/users"+"/"+userId+"/logo");
+		String logoUrl = null;
+		File[] logos = folder.listFiles();
+
+        for (int i = 0; i < logos.length; i++) {
+      	   logoUrl = "users"+"/"+userId+"/logo"+"/"+logos[0].getName();
+        }
+        return logoUrl;
+		
 	}
 	
 

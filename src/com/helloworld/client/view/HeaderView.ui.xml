@@ -1,0 +1,26 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	
+	</ui:style>
+	<g:HTMLPanel>
+		<div>
+			<g:HorizontalPanel styleName="blueBackground" width="100%">
+			<g:Image ui:field="imgLogo"></g:Image>
+			<g:Label styleName="blue">Banner</g:Label>
+			</g:HorizontalPanel>
+		</div>
+		<div>
+
+			<g:MenuBar>
+				<g:MenuItem>
+					Home
+					<g:MenuBar vertical="true">
+						<g:MenuItem>Demo</g:MenuItem>
+					</g:MenuBar>
+				</g:MenuItem>
+			</g:MenuBar>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder> 

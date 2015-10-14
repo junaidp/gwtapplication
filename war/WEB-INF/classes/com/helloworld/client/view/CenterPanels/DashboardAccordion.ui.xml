@@ -40,6 +40,10 @@
 				</g:stack>
 			</g:StackLayoutPanel>
 		</div>
+		
+		<div style="width:100%">
+			<g:Label styleName="labelStyle centeredText blue bold hover" ui:field="btnBack">Back</g:Label>
+		</div>
 
 	</g:HTMLPanel>
 </ui:UiBinder> 

@@ -1,7 +1,13 @@
 package com.helloworld.client.presenter;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.shared.HandlerManager;
+import com.google.gwt.user.client.History;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HasWidgets;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.helloworld.client.HelloServiceAsync;
 
@@ -14,6 +20,7 @@ public class DashboardPresenter implements Presenter
 	public interface Display 
 	{
 		Widget asWidget();
+		Label getBtnBack();
 	}  
 
 	public DashboardPresenter(HelloServiceAsync rpcService, HandlerManager eventBus, Display view) 
@@ -26,6 +33,7 @@ public class DashboardPresenter implements Presenter
 		container.clear();
 		container.add(display.asWidget());
 		bind();
+		setHandlers();
 	}
 
 	private void bind() {
@@ -35,8 +43,13 @@ public class DashboardPresenter implements Presenter
 
 	@Override
 	public void setHandlers() {
-		// TODO Auto-generated method stub
-		
+		display.getBtnBack().addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				History.back();
+			}
+		});
 	}
 	
 }

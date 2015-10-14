@@ -46,6 +46,16 @@
     <url-pattern>*.gupld</url-pattern>
   </servlet-mapping>
   
+   <servlet>
+    <servlet-name>logoUploadServlet</servlet-name>
+    <servlet-class>com.helloworld.server.LogoUploadServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>logoUploadServlet</servlet-name>
+    <url-pattern>*.gupld</url-pattern>
+  </servlet-mapping>
+  
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>HelloWorldGWT.html</welcome-file>

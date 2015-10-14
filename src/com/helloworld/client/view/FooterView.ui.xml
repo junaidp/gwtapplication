@@ -1,0 +1,14 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	
+	</ui:style>
+	<g:HTMLPanel width="100%">
+	<div style="width:100%; background-color:#F5F5F5" >
+	<g:HorizontalPanel ui:field="container" styleName="blueBackground" width="100%">
+	<g:Label styleName="blue">Footer Items</g:Label>
+	</g:HorizontalPanel>
+	</div>
+	</g:HTMLPanel>
+</ui:UiBinder> 

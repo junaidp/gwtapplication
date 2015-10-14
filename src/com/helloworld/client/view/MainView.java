@@ -32,6 +32,7 @@ public class MainView extends Composite implements Display{
 	@UiField Label lblWelcome;
 	@UiField DisclosurePanel discPanel;
 	@UiField Label editAccount;
+	@UiField Label globalPreferences;
 	private User loggedInUser;
 	@UiField Label fileUpload;
 
@@ -69,6 +70,10 @@ public class MainView extends Composite implements Display{
 
 	public Label getFileUpload() {
 		return fileUpload;
+	}
+
+	public Label getGlobalPreferences() {
+		return globalPreferences;
 	}
 
 }

@@ -2,6 +2,7 @@ package com.helloworld.client;
 
 import java.util.ArrayList;
 
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import com.helloworld.shared.entity.User;
@@ -18,5 +19,6 @@ public interface HelloService extends RemoteService {
 	User signIn(String userName, String password) throws Exception;
 	String editUser(User user) throws Exception;
 	ArrayList<String> readUploadedFiles() throws Exception;
+	String fetchUsersLogo(int userId) throws Exception;
 
 }

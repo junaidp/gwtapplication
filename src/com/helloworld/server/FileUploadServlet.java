@@ -15,49 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.fileupload.FileItem;
 
-//public class FileUploadServlet extends HttpServlet {
-// 
-//	 @Override
-//     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-//             throws ServletException, IOException {
-//         super.doGet(req, resp);
-//     }
-//     
-//     @Override
-//     protected void doPost(HttpServletRequest request, HttpServletResponse resp)
-//             throws ServletException, IOException {
-//         
-//		 boolean isMultipart = ServletFileUpload.isMultipartContent(request);
-//
-//		 if (isMultipart) {
-//		     FileItemFactory factory = new DiskFileItemFactory();
-//		     ServletFileUpload upload = new ServletFileUpload(factory);
-//
-//		     try {
-//		        List items = upload.parseRequest(request);
-//		         Iterator iterator = items.iterator();
-//		         while (iterator.hasNext()) {
-//		             FileItem item = (FileItem) iterator.next();
-//		             if (!item.isFormField()) {
-//		                 String fileName = item.getName();
-//
-//		                 String root = getServletContext().getRealPath("/");
-//		                 File path = new File(root + "/fileuploads");
-//		                 if (!path.exists()) {
-//		                     boolean status = path.mkdirs();
-//		                 }
-//
-//		                 File uploadedFile = new File(path + "/" + fileName);
-//		                 item.write(uploadedFile);
-//		             }
-//		         }
-//		     } catch (Exception e) {
-//		    	 }
-//		     }
-//     }
-//	 
-// }
-
 
 public class FileUploadServlet extends UploadAction {
 

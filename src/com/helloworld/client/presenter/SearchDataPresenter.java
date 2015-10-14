@@ -1,7 +1,11 @@
 package com.helloworld.client.presenter;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerManager;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.HasWidgets;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.helloworld.client.HelloServiceAsync;
 
@@ -14,6 +18,7 @@ public class SearchDataPresenter implements Presenter
 	public interface Display 
 	{
 		Widget asWidget();
+		Label getBtnBack();
 	}  
 
 	public SearchDataPresenter(HelloServiceAsync rpcService, HandlerManager eventBus, Display view) 
@@ -36,8 +41,13 @@ public class SearchDataPresenter implements Presenter
 
 	@Override
 	public void setHandlers() {
-		// TODO Auto-generated method stub
-		
+		display.getBtnBack().addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				History.back();
+			}
+		});
 	}
 	
 }

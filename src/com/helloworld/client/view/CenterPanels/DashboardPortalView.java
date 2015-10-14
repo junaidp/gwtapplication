@@ -43,16 +43,13 @@ public class DashboardPortalView extends Composite implements Display {
 	
 	@UiField 
 	VerticalPanel container;
+	@UiField
+	com.google.gwt.user.client.ui.Label btnBack;
 	
+	public com.google.gwt.user.client.ui.Label getBtnBack() {
+		return btnBack;
+	}
 	
-//	private static String[] colors = new String[]{  
-//        "FF6600", "808000", "008000", "008080", "0000FF", "666699",  
-//        "FF0000", "FF9900", "99CC00", "339966", "33CCCC", "3366FF",  
-//        "800080", "969696", "FF00FF", "FFCC00", "FFFF00", "00FF00",  
-//        "00FFFF", "00CCFF", "993366", "C0C0C0", "FF99CC", "FFCC99",  
-//        "FFFF99", "CCFFCC", "CCFFFF", "99CCFF", "CC99FF", "FFFFFF"  
-//};  
-
 	public DashboardPortalView() {
 		initWidget(uiBinder.createAndBindUi(this));
 		
@@ -62,73 +59,75 @@ public class DashboardPortalView extends Composite implements Display {
 	        portalLayout.setHeight100();  
 	        container.setWidth("1000px");
 	  
-	        // create portlets...  
+	        // create portlets... 
+	        for(int i=0; i<3 ; i++){
 	            Portlet portlet = new Portlet();  
-	            portlet.setTitle("Portlet");  
+	            portlet.setTitle("Portlet "+i);  
 	  
 	            Label label = new Label();  
 	            label.setAlign(Alignment.CENTER);  
 	            label.setLayoutAlign(VerticalAlignment.CENTER);  
-	            label.setContents("Portlet contents");  
+	            label.setContents("Portlet contents for portlet "+i);  
 	            portlet.addItem(label);  
 	            portalLayout.addPortlet(portlet);  
+	        }
 	      
 	  
 	        VLayout vLayout = new VLayout(15);  
 	        vLayout.setMargin(10);  
 	  
-	        final DynamicForm form = new DynamicForm();  
-	        form.setAutoWidth();  
-	        form.setNumCols(1);  
-	        final TextItem textPortletName = new TextItem();
-	        textPortletName.setTitle("Name");
-	        final ButtonItem addPortlet = new ButtonItem("addPortlet", "Add Portlet");  
-	        addPortlet.setStartRow(false);  
-	        addPortlet.setEndRow(false);  
-	        addPortlet.addClickHandler(new com.smartgwt.client.widgets.form.fields.events.ClickHandler() {  
-	            public void onClick(com.smartgwt.client.widgets.form.fields.events.ClickEvent event) {  
-	  
-	                final Portlet newPortlet = new Portlet();  
-	                newPortlet.setTitle(textPortletName.getValueAsString());  
-	  
-	                Label label = new Label();  
-	                label.setAlign(Alignment.CENTER);  
-	                label.setLayoutAlign(VerticalAlignment.CENTER);  
-	                label.setContents(textPortletName.getValueAsString()+" contents");  
-	                newPortlet.addItem(label);  
-	                newPortlet.setVisible(false);  
-	                PortalColumn column = portalLayout.addPortlet(newPortlet);  
-	                final LayoutSpacer placeHolder = new LayoutSpacer();  
-	                placeHolder.setRect(newPortlet.getRect());  
-	                column.addMember(placeHolder, 0); // add to top  
-	  
-	                // create an outline around the clicked button  
-	                final Canvas outline = new Canvas();  
-	                outline.setLeft(form.getAbsoluteLeft() + addPortlet.getLeft());  
-	                outline.setTop(form.getAbsoluteTop());  
-	                outline.setWidth(addPortlet.getWidth());  
-	                outline.setHeight(addPortlet.getHeight());  
-	                outline.setBorder("2px solid #8289A6");  
-	                outline.draw();  
-	                outline.bringToFront();  
-	  
-	                outline.animateRect(newPortlet.getPageLeft(), newPortlet.getPageTop(),  
-	                        newPortlet.getVisibleWidth(), newPortlet.getViewportHeight(),  
-	                        new AnimationCallback() {  
-	                            public void execute(boolean earlyFinish) {  
-	                                // callback at end of animation - destroy placeholder and outline; show the new portlet  
-	                                placeHolder.destroy();  
-	                                outline.destroy();  
-	                                newPortlet.show();  
-	                            }  
-	                        }, 750);  
-	            }  
-	        });  
-	  
-	  
-	        form.setItems(textPortletName, addPortlet);  
-	  
-	        vLayout.addMember(form);  
+//	        final DynamicForm form = new DynamicForm();  
+//	        form.setAutoWidth();  
+//	        form.setNumCols(1);  
+//	        final TextItem textPortletName = new TextItem();
+//	        textPortletName.setTitle("Name");
+//	        final ButtonItem addPortlet = new ButtonItem("addPortlet", "Add Portlet");  
+//	        addPortlet.setStartRow(false);  
+//	        addPortlet.setEndRow(false);  
+//	        addPortlet.addClickHandler(new com.smartgwt.client.widgets.form.fields.events.ClickHandler() {  
+//	            public void onClick(com.smartgwt.client.widgets.form.fields.events.ClickEvent event) {  
+//	  
+//	                final Portlet newPortlet = new Portlet();  
+//	                newPortlet.setTitle(textPortletName.getValueAsString());  
+//	  
+//	                Label label = new Label();  
+//	                label.setAlign(Alignment.CENTER);  
+//	                label.setLayoutAlign(VerticalAlignment.CENTER);  
+//	                label.setContents(textPortletName.getValueAsString()+" contents");  
+//	                newPortlet.addItem(label);  
+//	                newPortlet.setVisible(false);  
+//	                PortalColumn column = portalLayout.addPortlet(newPortlet);  
+//	                final LayoutSpacer placeHolder = new LayoutSpacer();  
+//	                placeHolder.setRect(newPortlet.getRect());  
+//	                column.addMember(placeHolder, 0); // add to top  
+//	  
+//	                // create an outline around the clicked button  
+//	                final Canvas outline = new Canvas();  
+//	                outline.setLeft(form.getAbsoluteLeft() + addPortlet.getLeft());  
+//	                outline.setTop(form.getAbsoluteTop());  
+//	                outline.setWidth(addPortlet.getWidth());  
+//	                outline.setHeight(addPortlet.getHeight());  
+//	                outline.setBorder("2px solid #8289A6");  
+//	                outline.draw();  
+//	                outline.bringToFront();  
+//	  
+//	                outline.animateRect(newPortlet.getPageLeft(), newPortlet.getPageTop(),  
+//	                        newPortlet.getVisibleWidth(), newPortlet.getViewportHeight(),  
+//	                        new AnimationCallback() {  
+//	                            public void execute(boolean earlyFinish) {  
+//	                                // callback at end of animation - destroy placeholder and outline; show the new portlet  
+//	                                placeHolder.destroy();  
+//	                                outline.destroy();  
+//	                                newPortlet.show();  
+//	                            }  
+//	                        }, 750);  
+//	            }  
+//	        });  
+//	  
+//	  
+//	        form.setItems(textPortletName);  
+//	  
+//	        vLayout.addMember(form);  
 	        vLayout.addMember(portalLayout);  
 	        container.add(vLayout);
 	    }  

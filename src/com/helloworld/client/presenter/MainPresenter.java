@@ -12,13 +12,14 @@ import com.helloworld.client.HelloServiceAsync;
 import com.helloworld.client.event.DashboardAccordionEvent;
 import com.helloworld.client.event.DashboardEvent;
 import com.helloworld.client.event.EditUserEvent;
+import com.helloworld.client.event.GlobalPreferencesEvent;
 import com.helloworld.client.event.IntelligencePackEvent;
 import com.helloworld.client.event.RegistrationEvent;
 import com.helloworld.client.event.SearchDataEvent;
 import com.helloworld.client.view.ApplicationConstants;
-import com.helloworld.client.view.Attachment;
 import com.helloworld.client.view.ControlPanels.ControlPanelsContainer;
 import com.helloworld.client.view.ControlPanels.DashboardAccordionPanelView;
+import com.helloworld.client.view.widgets.Attachment;
 import com.helloworld.client.view.widgets.PopupsView;
 import com.helloworld.shared.entity.User;
 
@@ -37,6 +38,7 @@ public class MainPresenter implements Presenter
 		Label getEditAccount();
 		User getLoggedInUser();
 		Label getFileUpload();
+		Label getGlobalPreferences();
 
 	}  
 
@@ -61,8 +63,7 @@ public class MainPresenter implements Presenter
 
 	@Override
 	public void setHandlers() {
-		eventBus.fireEvent(new DashboardEvent(display.getCenter()));
-
+		
 		display.getControlPanelContainer().getDashboardPanel().getHeading().addClickHandler(new ClickHandler(){
 
 			@Override
@@ -95,7 +96,7 @@ public class MainPresenter implements Presenter
 
 			@Override
 			public void onClick(ClickEvent event) {
-				new PopupsView(new Attachment());
+				History.newItem(ApplicationConstants.TOKEN_FILE_UPLOAD);
 			}});
 		
 		display.getControlPanelContainer().getDashboardAccordionPanel().getHeading().addClickHandler(new ClickHandler(){
@@ -110,6 +111,13 @@ public class MainPresenter implements Presenter
 			@Override
 			public void onClick(ClickEvent event) {
 				History.newItem(ApplicationConstants.TOKEN_DASHBOARD_PORTAL);
+			}});
+		
+		display.getGlobalPreferences().addClickHandler(new ClickHandler(){
+
+			@Override
+			public void onClick(ClickEvent event) {
+				eventBus.fireEvent(new GlobalPreferencesEvent(display.getLoggedInUser()));
 			}});
 		
 	}

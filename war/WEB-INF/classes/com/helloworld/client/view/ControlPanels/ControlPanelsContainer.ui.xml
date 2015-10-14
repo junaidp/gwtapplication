@@ -5,21 +5,23 @@
 	
 	</ui:style>
 	<g:HTMLPanel>
-	<div  style="padding:5px">
+	<div  style="padding:5px; float:left" >
 	<C:DashboardPanelView ui:field="dashboardPanel"></C:DashboardPanelView>
 	</div>
-	<div  style="padding:5px">
-	<C:SearchDataPanelView ui:field="searchPanel"></C:SearchDataPanelView>
-	</div>
-	<div  style="padding:5px">
-	<C:IntelligencePackPanelView ui:field="intelligencePanel"></C:IntelligencePackPanelView>
-	</div>
-	<div style="padding:5px">
+	<div style="padding:5px; float:left">
 	<C:DashboardAccordionPanelView ui:field="dashboardAccordionPanel"></C:DashboardAccordionPanelView>
 	</div>
-	<div style="padding:5px">
+	<div style="padding:5px; float:left">
 	<C:DashboardPortalPanelView ui:field="dashboardPortalPanel"></C:DashboardPortalPanelView>
 	</div>
+	
+	<div  style="padding:5px; float:left">
+	<C:SearchDataPanelView ui:field="searchPanel"></C:SearchDataPanelView>
+	</div>
+	<div  style="padding:5px; float:left">
+	<C:IntelligencePackPanelView ui:field="intelligencePanel"></C:IntelligencePackPanelView>
+	</div>
+
 	
 	</g:HTMLPanel>
 </ui:UiBinder> 

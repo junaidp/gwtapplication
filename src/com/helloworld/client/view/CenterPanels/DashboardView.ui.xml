@@ -5,21 +5,26 @@
 	
 	</ui:style>
 	<g:HTMLPanel>
-		<div>
-			<div style="float: left; padding:5px">
-				<M:ConfigurationView></M:ConfigurationView>
+			<div style="overflow: hidden">
+				<div style="float: left; padding:5px; width: 48%; height: 48%">
+					<M:ConfigurationView></M:ConfigurationView>
+
+				</div>
+				<div style=" float: left; padding:5px; width: 48%; height: 48%">
+					<M:RunTimeView></M:RunTimeView>
+				</div>
+				<div style="float: left; padding:5px; width: 48%; height: 48%">
+					<M:MyAccountView></M:MyAccountView>
+				</div>
+				<div style="float: left; padding:5px; width: 48%; height: 48%">
+					<M:ReportsView></M:ReportsView>
+				</div>
 			</div>
-			<div style=" float: left; padding:5px">
-				<M:RunTimeView></M:RunTimeView>
-			</div>
+		<div style="width:100%">
+			<g:Label styleName="labelStyle centeredText blue bold hover" ui:field="btnBack">Back</g:Label>
 		</div>
-		<div>
-			<div style="float: left; padding:5px">
-				<M:MyAccountView></M:MyAccountView>
-			</div>
-			<div style="float: left; padding:5px">
-				<M:ReportsView></M:ReportsView>
-			</div>
-		</div>
+
+
+
 	</g:HTMLPanel>
 </ui:UiBinder> 

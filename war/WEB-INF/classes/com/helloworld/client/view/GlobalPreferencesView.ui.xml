@@ -1,0 +1,17 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:G="urn:import:com.helloworld.client.view.GlobalPreferencesPanels">
+	<ui:style>
+	
+	</ui:style>
+	<g:HTMLPanel>
+		<g:TabPanel ui:field="tabPanelPreferences">
+			<g:Tab text="Header">
+				<G:HeaderItemsView></G:HeaderItemsView>
+			</g:Tab>
+			<g:Tab text="Footer">
+				<g:FlowPanel ui:field="tabFooterItems" />
+			</g:Tab>
+		</g:TabPanel>
+	</g:HTMLPanel>
+</ui:UiBinder> 

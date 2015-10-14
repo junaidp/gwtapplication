@@ -13,6 +13,8 @@ import com.helloworld.client.event.DashboardEvent;
 import com.helloworld.client.event.DashboardEventHandler;
 import com.helloworld.client.event.EditUserEvent;
 import com.helloworld.client.event.EditUserEventHandler;
+import com.helloworld.client.event.GlobalPreferencesEvent;
+import com.helloworld.client.event.GlobalPreferencesEventHandler;
 import com.helloworld.client.event.MainEvent;
 import com.helloworld.client.event.MainEventHandler;
 import com.helloworld.client.event.RegistrationEvent;
@@ -24,6 +26,8 @@ import com.helloworld.client.event.SubscriptionVerificationEventHandler;
 import com.helloworld.client.presenter.DashboardAccordionPresenter;
 import com.helloworld.client.presenter.DashboardPortalPresenter;
 import com.helloworld.client.presenter.DashboardPresenter;
+import com.helloworld.client.presenter.FileUploadPresenter;
+import com.helloworld.client.presenter.GlobalPreferencesPresenter;
 import com.helloworld.client.presenter.LoginPresenter;
 import com.helloworld.client.presenter.MainPresenter;
 import com.helloworld.client.presenter.Presenter;
@@ -31,6 +35,8 @@ import com.helloworld.client.presenter.RegistrationPresenter;
 import com.helloworld.client.presenter.SearchDataPresenter;
 import com.helloworld.client.presenter.SubscriptionVerificationPresenter;
 import com.helloworld.client.view.ApplicationConstants;
+import com.helloworld.client.view.FileUploadView;
+import com.helloworld.client.view.GlobalPreferencesView;
 import com.helloworld.client.view.LoginView;
 import com.helloworld.client.view.MainView;
 import com.helloworld.client.view.RegistrationView;
@@ -76,6 +82,14 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 			public void onEditUser(EditUserEvent event) {
 				loggedInUser = event.getUser();
 				History.newItem(ApplicationConstants.TOKEN_EDIT_USER);
+			}
+		}); 
+		
+		eventBus.addHandler(GlobalPreferencesEvent.TYPE,
+				new GlobalPreferencesEventHandler() {
+			public void onGlobalPreferences(GlobalPreferencesEvent event) {
+				loggedInUser = event.getUser();
+				History.newItem(ApplicationConstants.TOKEN_GLOBAL_PREFERENCES);
 			}
 		}); 
 		
@@ -161,7 +175,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 			if (token.equals(ApplicationConstants.TOKEN_DASHBOARD)) {
 				presenter = new DashboardPresenter(rpcService, eventBus, new DashboardView());
 				if (presenter != null) {
-					setContainer(center);
+//					setContainer(center);
 					presenter.go(container);
 				}
 			}
@@ -169,7 +183,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 			if (token.equals(ApplicationConstants.TOKEN_DASHBOARD_ACCORDION)) {
 				presenter = new DashboardAccordionPresenter(rpcService, eventBus, new DashboardAccordion());
 				if (presenter != null) {
-					setContainer(center);
+//					setContainer(center);
 					presenter.go(container);
 				}
 			}
@@ -177,7 +191,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 			if (token.equals(ApplicationConstants.TOKEN_DASHBOARD_PORTAL)) {
 				presenter = new DashboardPortalPresenter(rpcService, eventBus, new DashboardPortalView());
 				if (presenter != null) {
-					setContainer(center);
+//					setContainer(center);
 					presenter.go(container);
 				}
 			}
@@ -185,7 +199,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 			if (token.equals(ApplicationConstants.TOKEN_SEARCHDATA)) {
 				presenter = new SearchDataPresenter(rpcService, eventBus, new SearchDataView());
 				if (presenter != null) {
-					setContainer(center);
+//					setContainer(center);
 					presenter.go(container);
 				}
 			}
@@ -200,6 +214,22 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 			
 			if (token.equals(ApplicationConstants.TOKEN_SUBSCRIPTION_VERFICATION)) {
 				presenter = new SubscriptionVerificationPresenter(rpcService, eventBus, new SubscriptionVerificationView());
+				if (presenter != null) {
+					setContainer(container);
+					presenter.go(container);
+				}
+			}
+			
+			if (token.equals(ApplicationConstants.TOKEN_GLOBAL_PREFERENCES)) {
+				presenter = new GlobalPreferencesPresenter(rpcService, eventBus, new GlobalPreferencesView());
+				if (presenter != null) {
+					setContainer(container);
+					presenter.go(container);
+				}
+			}
+			
+			if (token.equals(ApplicationConstants.TOKEN_FILE_UPLOAD)) {
+				presenter = new FileUploadPresenter(rpcService, eventBus, new FileUploadView());
 				if (presenter != null) {
 					setContainer(container);
 					presenter.go(container);

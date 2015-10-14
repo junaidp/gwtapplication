@@ -22,7 +22,7 @@
 							<g:Label ui:field="lblError" styleName="error"
 								height="16px" width="279px" />
 						</g:HorizontalPanel>
-						<g:Label ui:field=" lblUserName " width="50px" styleName="h1"
+						<g:Label ui:field=" lblUserName " width="50px" 
 							text="Username">
 							username
 						</g:Label>

@@ -16,6 +16,9 @@ import com.helloworld.client.HelloServiceAsync;
 import com.helloworld.client.event.MainEvent;
 import com.helloworld.client.event.RegistrationEvent;
 import com.helloworld.client.view.ApplicationConstants;
+import com.helloworld.client.view.FooterView;
+import com.helloworld.client.view.HeaderView;
+import com.helloworld.client.view.CenterPanels.DashboardAccordion;
 import com.helloworld.client.view.widgets.LoadingPopup;
 import com.helloworld.shared.entity.User;
 
@@ -30,7 +33,7 @@ public class LoginPresenter implements Presenter
 	{
 		Widget asWidget();
 		com.google.gwt.user.client.ui.Button getBtnSubmit();
-		
+
 		TextBox getTxtUserName();
 		PasswordTextBox getTxtPassword();
 		Label getLblError();
@@ -61,7 +64,7 @@ public class LoginPresenter implements Presenter
 		final LoadingPopup loadingPopup = new LoadingPopup();
 		loadingPopup.display();
 		rpcService.signIn(display.getTxtUserName().getText(), display.getTxtPassword().getText(), new AsyncCallback<User>() {
-			
+
 			@Override
 			public void onSuccess(User user) {
 				if(loadingPopup!=null){
@@ -70,10 +73,14 @@ public class LoginPresenter implements Presenter
 				if(user==null){
 					display.getLblError().setText(ApplicationConstants.USERNAME_PASSWORD_NOT_MATCH);
 				}else{
-				eventBus.fireEvent(new MainEvent(user));
+					eventBus.fireEvent(new MainEvent(user));
+					setHeader(user);
+					setFooter();
 				}
+
+
 			}
-			
+
 			@Override
 			public void onFailure(Throwable caught) {
 				if(loadingPopup!=null){
@@ -81,7 +88,23 @@ public class LoginPresenter implements Presenter
 				}
 			}
 		});
-		
+
+	}
+
+	private void setFooter() {
+		FooterView footerView = new FooterView();
+		Presenter presenter = new FooterPresenter(rpcService, eventBus, footerView);
+
+		RootPanel.get("footerContainer").add(footerView);
+	}
+
+	private void setHeader(User user) {
+		HeaderView headerView = new HeaderView(user);
+		Presenter headerPresenter = new HeaderPresenter(rpcService, eventBus, headerView);
+		HasWidgets container = RootPanel.get("headerContainer");
+		container.clear();
+		headerPresenter.go(container);
+//		RootPanel.get("headerContainer").add(headerView);
 	}
 
 	@Override
@@ -92,8 +115,8 @@ public class LoginPresenter implements Presenter
 			public void onClick(ClickEvent event) {
 				signIn();
 			}});
-		
-		
+
+
 	}
 }
 

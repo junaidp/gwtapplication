@@ -97,7 +97,7 @@ public class PieChartDashboard extends VerticalPanel{
 	                new Point("dummy4", 40),
 	            })  
 	        );
-	       chart.setSize(370, 220);
+	       chart.setSize(370, 170);
 	        return chart;  
 	    }
 		

@@ -9,6 +9,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasText;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.helloworld.client.presenter.DashboardAccordionPresenter.Display;
 
@@ -19,6 +20,13 @@ public class DashboardAccordion extends Composite implements Display {
 
 	interface DashboardAccordionUiBinder extends
 			UiBinder<Widget, DashboardAccordion> {
+	}
+	
+	@UiField
+	Label btnBack;
+	
+	public Label getBtnBack() {
+		return btnBack;
 	}
 
 	public DashboardAccordion() {

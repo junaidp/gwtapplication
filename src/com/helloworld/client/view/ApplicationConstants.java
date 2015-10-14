@@ -18,6 +18,9 @@ public class ApplicationConstants {
 	public static final String TOKEN_EDIT_USER = "editUser";
 	public static final String TOKEN_DASHBOARD_ACCORDION = "dashboardAccordion";
 	public static final String TOKEN_DASHBOARD_PORTAL = "dashboardPortal";
+	public static final String TOKEN_GLOBAL_PREFERENCES = "globalPreferences";
+	public static final String TOKEN_FILE_UPLOAD = "fileUpload";
+
 	
 	///FIELD VERIFIERS///
 	public static final String INVALID_USERNAME = "username invalid";
@@ -33,7 +36,7 @@ public class ApplicationConstants {
 	public static final String USER_ADDED = "User Added";
 	public static final String USERNAME_PASSWORD_NOT_MATCH = "username/password do not match";
 	public static final String USER_UPDATED = "record updated";
-	
+		
 	
 	
 
