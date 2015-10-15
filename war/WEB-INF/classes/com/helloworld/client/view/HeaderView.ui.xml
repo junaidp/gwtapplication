@@ -8,12 +8,12 @@
 		<div>
 			<g:HorizontalPanel styleName="blueBackground" width="100%">
 			<g:Image ui:field="imgLogo"></g:Image>
-			<g:Label styleName="blue">Banner</g:Label>
+			<g:Label styleName="headerSigninSmall">Banner</g:Label>
 			</g:HorizontalPanel>
 		</div>
 		<div>
 
-			<g:MenuBar>
+			<g:MenuBar ui:field="mainMenuBar">
 				<g:MenuItem>
 					Home
 					<g:MenuBar vertical="true">

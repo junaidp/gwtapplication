@@ -17,7 +17,10 @@ import com.helloworld.client.HelloServiceAsync;
 import com.helloworld.client.event.RegistrationEvent;
 import com.helloworld.client.event.SubscriptionVerificationEvent;
 import com.helloworld.client.view.ApplicationConstants;
+import com.helloworld.client.view.FooterView;
+import com.helloworld.client.view.HeaderView;
 import com.helloworld.client.view.widgets.LoadingPopup;
+import com.helloworld.shared.entity.User;
 
 public class SubscriptionVerificationPresenter implements Presenter 
 
@@ -52,7 +55,7 @@ public class SubscriptionVerificationPresenter implements Presenter
 	private void bind() {
 		setHandlers();
 		RootPanel.get("loadingMessage").setVisible(false);
-
+	
 	}
 	
 	
@@ -99,6 +102,9 @@ public class SubscriptionVerificationPresenter implements Presenter
 			}});
 		
 	}
+	
+	
+	
 	
 	
 	

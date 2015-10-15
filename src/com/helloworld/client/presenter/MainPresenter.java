@@ -64,21 +64,21 @@ public class MainPresenter implements Presenter
 	@Override
 	public void setHandlers() {
 		
-		display.getControlPanelContainer().getDashboardPanel().getHeading().addClickHandler(new ClickHandler(){
+		display.getControlPanelContainer().getDashboardPanel().getFocusPanel().addClickHandler(new ClickHandler(){
 
 			@Override
 			public void onClick(ClickEvent event) {
 				eventBus.fireEvent(new DashboardEvent(display.getCenter()));
 			}});
 		
-		display.getControlPanelContainer().getIntelligencePanel().getHeading().addClickHandler(new ClickHandler(){
+		display.getControlPanelContainer().getIntelligencePanel().getFocusPanel().addClickHandler(new ClickHandler(){
 
 			@Override
 			public void onClick(ClickEvent event) {
 				eventBus.fireEvent(new IntelligencePackEvent(display.getCenter()));
 			}});
 		
-		display.getControlPanelContainer().getSearchPanel().getHeading().addClickHandler(new ClickHandler(){
+		display.getControlPanelContainer().getSearchPanel().getFocusPanel().addClickHandler(new ClickHandler(){
 
 			@Override
 			public void onClick(ClickEvent event) {
@@ -99,14 +99,14 @@ public class MainPresenter implements Presenter
 				History.newItem(ApplicationConstants.TOKEN_FILE_UPLOAD);
 			}});
 		
-		display.getControlPanelContainer().getDashboardAccordionPanel().getHeading().addClickHandler(new ClickHandler(){
+		display.getControlPanelContainer().getDashboardAccordionPanel().getFocusPanel().addClickHandler(new ClickHandler(){
 
 			@Override
 			public void onClick(ClickEvent event) {
 				eventBus.fireEvent(new DashboardAccordionEvent(display.getCenter()));
 			}});
 		
-		display.getControlPanelContainer().getDashboardPortalPanel().getHeading().addClickHandler(new ClickHandler(){
+		display.getControlPanelContainer().getDashboardPortalPanel().getFocusPanel().addClickHandler(new ClickHandler(){
 
 			@Override
 			public void onClick(ClickEvent event) {

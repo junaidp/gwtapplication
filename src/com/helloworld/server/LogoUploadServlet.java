@@ -39,13 +39,14 @@ public class LogoUploadServlet extends UploadAction {
 	        try {
 	         	String fileName = item.getName();
 	            String root = getServletContext().getRealPath("/");
-	            HttpSession session = request.getSession(true);
-	            File folder = new File(root+"/users");
+//	            HttpSession session = request.getSession(true);
+//	            File folder = new File(root+"/users");
+//	            folder.mkdirs();
+//	            int userId = (Integer) session.getAttribute("userId");
+//                File userLogoFolder = new File(folder+"/"+userId+"/"+"logo");
+	            File folder = new File(root+"/logo");
 	            folder.mkdirs();
-	            int userId = (Integer) session.getAttribute("userId");
-                File userLogoFolder = new File(folder+"/"+userId+"/"+"logo");
-                userLogoFolder.mkdirs();
-                File file = new File(userLogoFolder, fileName);
+                File file = new File(folder, fileName);
                 
                 item.write(file);
 

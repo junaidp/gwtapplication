@@ -21,10 +21,10 @@
 			</g:DisclosurePanel>
 		</div>
 
-		<div style="float: left; padding:5px">
+		<div style="padding:5px">
 			<C:ControlPanelsContainer ui:field="controlPanelContainer"></C:ControlPanelsContainer>
 		</div>
-		<div style="float: left; padding:5px">
+		<div style="padding:5px">
 			<g:VerticalPanel ui:field="center">
 			</g:VerticalPanel>
 		</div>

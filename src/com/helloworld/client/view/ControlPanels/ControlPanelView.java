@@ -4,6 +4,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FocusPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
@@ -21,6 +22,8 @@ public class ControlPanelView extends Composite {
 	Label heading;
 	@UiField
 	Image imageUrl;
+	@UiField
+	FocusPanel focusPanel;
 
 	public ControlPanelView() {
 		initWidget(uiBinder.createAndBindUi(this));
@@ -39,6 +42,10 @@ public class ControlPanelView extends Composite {
 
 	public void setHeading(Label heading) {
 		this.heading = heading;
+	}
+
+	public FocusPanel getFocusPanel() {
+		return focusPanel;
 	}
 
 }

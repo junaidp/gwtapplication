@@ -6,6 +6,7 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.HasWidgets;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.helloworld.client.event.DashboardAccordionEvent;
 import com.helloworld.client.event.DashboardAccordionEventHandler;
@@ -27,7 +28,9 @@ import com.helloworld.client.presenter.DashboardAccordionPresenter;
 import com.helloworld.client.presenter.DashboardPortalPresenter;
 import com.helloworld.client.presenter.DashboardPresenter;
 import com.helloworld.client.presenter.FileUploadPresenter;
+import com.helloworld.client.presenter.FooterPresenter;
 import com.helloworld.client.presenter.GlobalPreferencesPresenter;
+import com.helloworld.client.presenter.HeaderPresenter;
 import com.helloworld.client.presenter.LoginPresenter;
 import com.helloworld.client.presenter.MainPresenter;
 import com.helloworld.client.presenter.Presenter;
@@ -36,7 +39,9 @@ import com.helloworld.client.presenter.SearchDataPresenter;
 import com.helloworld.client.presenter.SubscriptionVerificationPresenter;
 import com.helloworld.client.view.ApplicationConstants;
 import com.helloworld.client.view.FileUploadView;
+import com.helloworld.client.view.FooterView;
 import com.helloworld.client.view.GlobalPreferencesView;
+import com.helloworld.client.view.HeaderView;
 import com.helloworld.client.view.LoginView;
 import com.helloworld.client.view.MainView;
 import com.helloworld.client.view.RegistrationView;
@@ -55,7 +60,8 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 	private HasWidgets container;
 	private VerticalPanel center;
 	private User loggedInUser;
-
+	private HeaderPresenter headerPresenter;
+	
 	Presenter presenter = null;
 
 	public AppController(HelloServiceAsync rpcService, HandlerManager eventBus) {
@@ -136,6 +142,8 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 
 	public void go(final HasWidgets container) {
 		this.container = container;
+		setHeader();
+		setFooter();
 
 		if ("".equals(History.getToken())) {
 			History.newItem(ApplicationConstants.TOKEN_SUBSCRIPTION_VERFICATION);
@@ -143,6 +151,22 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 		else {
 			History.fireCurrentHistoryState();
 		}
+	}
+	
+	private void setFooter() {
+		FooterView footerView = new FooterView();
+		Presenter presenter = new FooterPresenter(rpcService, eventBus, footerView);
+		HasWidgets container = RootPanel.get("footerContainer");
+		container.clear();
+		presenter.go(container);
+	}
+
+	private void setHeader() {
+		HeaderView headerView = new HeaderView();
+		headerPresenter = new HeaderPresenter(rpcService, eventBus, headerView);
+		HasWidgets container = RootPanel.get("headerContainer");
+		container.clear();
+		headerPresenter.go(container);
 	}
 
 	public void onValueChange(ValueChangeEvent<String> event) {
@@ -160,6 +184,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 
 			if (token.equals(ApplicationConstants.TOKEN_MAIN)) {
 				presenter = new MainPresenter(rpcService, eventBus, new MainView(loggedInUser));
+				headerPresenter.setUser(loggedInUser);
 				if (presenter != null) {
 					presenter.go(container);
 				}

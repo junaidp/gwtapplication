@@ -6,17 +6,17 @@
 	</ui:style>
 	<g:HTMLPanel>
 			<div style="overflow: hidden">
-				<div style="float: left; padding:5px; width: 48%; height: 48%">
+				<div style="float: left; padding:2px; width: 49.5%; height: 49%">
 					<M:ConfigurationView></M:ConfigurationView>
 
 				</div>
-				<div style=" float: left; padding:5px; width: 48%; height: 48%">
+				<div style=" float: left; padding:2px; width: 49.5%; height: 49%">
 					<M:RunTimeView></M:RunTimeView>
 				</div>
-				<div style="float: left; padding:5px; width: 48%; height: 48%">
+				<div style="float: left; padding:2px; width: 49.5%; height: 49%">
 					<M:MyAccountView></M:MyAccountView>
 				</div>
-				<div style="float: left; padding:5px; width: 48%; height: 48%">
+				<div style="float: left; padding:2px; width: 49.5%; height: 49%">
 					<M:ReportsView></M:ReportsView>
 				</div>
 			</div>

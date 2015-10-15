@@ -7,7 +7,7 @@
 	<g:HTMLPanel width="100%">
 	<div style="width:100%; background-color:#F5F5F5" >
 	<g:HorizontalPanel ui:field="container" styleName="blueBackground" width="100%">
-	<g:Label styleName="blue">Footer Items</g:Label>
+	<g:Label styleName="headerSigninSmall">Footer Items</g:Label>
 	</g:HorizontalPanel>
 	</div>
 	</g:HTMLPanel>

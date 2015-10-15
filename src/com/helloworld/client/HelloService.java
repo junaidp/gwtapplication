@@ -19,6 +19,6 @@ public interface HelloService extends RemoteService {
 	User signIn(String userName, String password) throws Exception;
 	String editUser(User user) throws Exception;
 	ArrayList<String> readUploadedFiles() throws Exception;
-	String fetchUsersLogo(int userId) throws Exception;
+	String fetchLogo() throws Exception;
 
 }

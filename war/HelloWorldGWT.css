@@ -57,7 +57,7 @@ html, body {
 }
 
 .blueBackground {
-	background-color: powderblue;
+	background-color: darkblue;
 	color: white;
 	font-size: 18px;
 }
@@ -401,6 +401,16 @@ TextBox {
 	margin-left: auto;
 	margin-right: auto;
 }
+.browserCenter{
+	padding-left: 25%;
+	padding-top:10%;
+	padding-bottom:10%;
+}
+.browserRight{
+	padding-left: 50%;
+	padding-top:10%;
+	padding-bottom:10%;
+}
 
 .hover:HOVER {
 	color: darkblue;
@@ -410,4 +420,129 @@ TextBox {
 .graybackground {
 	background-color: #F5F5F5;
 }
+
+/**  METRO CSS   */
+
+body {
+	background: url(https://cssbox.googlecode.com/svn/demo/Windows8MetroTiles/img/Background.jpg) bottom no-repeat;
+	background-color:58169a;
+}
+
+
+span.start {
+	color:white;
+	font-size:2em;
+
+}
+
+.credits {
+	color:white;
+	text-align:right;
+	text-decoration:none;
+	font-weight: bold;
+}
+
+
+.metro-surface{
+	padding: 40px 0px 0px 0px;
+}
+
+
+.metro-tile {
+	background-color: #D8512B;
+	border-color: #DC6241;
+	width: 400px;
+	height: 130px;
+	padding: 5px;
+	color: #FFF;
+	font-family: sans-serif;
+	font-size: 12px;
+	border-width: 3px;
+	border-style: solid;
+	cursor: default;
+	-webkit-transition: 0.1s all;
+	-moz-transition: 0.1s all;
+	-ms-transition: 0.1s all;
+	transition: 0.1s all;
+}
+
+
+.metro-tile-small {
+	width: 250px;
+	height: 130px;
+}
+
+.metro-tile-dashboard {
+	background: url(https://cssbox.googlecode.com/svn/demo/Windows8MetroTiles/img/XBox.png);
+	background-position: 8px 8px;
+        background-color:#6CB71E;
+        border-color:#6CB71E;
+}
+
+.metro-tile-portal {
+	background: url('https://cssbox.googlecode.com/svn/demo/Windows8MetroTiles/img/Music.png');
+        background-color: purple;
+	border-color: purple;
+}
+
+
+.metro-tile-accordion {
+	background: url(https://cssbox.googlecode.com/svn/demo/Windows8MetroTiles/img/Twitter.png);
+	background-color: #2878EC;
+	background-position: 0 10px;
+	border-color: #2878EC;
+}
+
+
+.metro-tile-aciii {
+	background: url(https://cssbox.googlecode.com/svn/demo/Windows8MetroTiles/img/AC3.jpg);
+	border-color: black;
+}
+
+
+.metro-tile-dropbox {
+	background: url(https://cssbox.googlecode.com/svn/demo/Windows8MetroTiles/img/Dropbox.png);
+	background-color: #2878EC;
+	border-color: #2878EC;
+}
+
+div.metro-tile:hover {
+	-webkit-transform: scale(0.97) perspective(400px) rotateY(0deg) rotateX(0deg);
+	-moz-transform: scale(0.97) perspective(400px) rotateY(0deg) rotateX(0deg);
+	-ms-transform: scale(0.97) perspective(400px) rotateY(0deg) rotateX(0deg);
+	transform: scale(0.97) perspective(400px) rotateY(0deg) rotateX(0deg);
+	border-width: 3px;
+	border-style:solid; 
+	
+	 -webkit-transition-property: top, bottom;
+        -webkit-transition-duration: 0.5s;
+}
+div.metro-tile:ACTIVE {
+    border-style: solid;
+    border-width: 3px;
+    transform: scale(0.97) perspective(400px) rotateY(0deg) rotateX(20deg);
+}
+
+
+div.metro-tile:hover > #content {
+   height: 30%;
+    width: 100%;
+}
+
+#content {
+    width: 20px;
+    background: white;
+    height: 0;
+    transition: all 0.4s ease-in-out;
+    position: margin-top: -100px;
+    -webkit-transition: all .8s ease;
+    -moz-transition: all .8s ease;
+    -ms-transition: all .8s ease;
+    -o-transition: all .8s ease;
+    transition: all .8s ease;
+    opacity: 0.4;
+    padding-top: 15px;
+}
+}
+/** METRO CSS END*/
 

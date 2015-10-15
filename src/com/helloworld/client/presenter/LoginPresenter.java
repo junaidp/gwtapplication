@@ -74,8 +74,7 @@ public class LoginPresenter implements Presenter
 					display.getLblError().setText(ApplicationConstants.USERNAME_PASSWORD_NOT_MATCH);
 				}else{
 					eventBus.fireEvent(new MainEvent(user));
-					setHeader(user);
-					setFooter();
+					
 				}
 
 
@@ -91,21 +90,7 @@ public class LoginPresenter implements Presenter
 
 	}
 
-	private void setFooter() {
-		FooterView footerView = new FooterView();
-		Presenter presenter = new FooterPresenter(rpcService, eventBus, footerView);
-
-		RootPanel.get("footerContainer").add(footerView);
-	}
-
-	private void setHeader(User user) {
-		HeaderView headerView = new HeaderView(user);
-		Presenter headerPresenter = new HeaderPresenter(rpcService, eventBus, headerView);
-		HasWidgets container = RootPanel.get("headerContainer");
-		container.clear();
-		headerPresenter.go(container);
-//		RootPanel.get("headerContainer").add(headerView);
-	}
+	
 
 	@Override
 	public void setHandlers() {

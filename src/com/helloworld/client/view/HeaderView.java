@@ -5,6 +5,7 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.Widget;
 import com.helloworld.client.presenter.HeaderPresenter.Display;
 import com.helloworld.shared.entity.User;
@@ -19,17 +20,23 @@ public class HeaderView extends Composite implements Display {
 
 	@UiField
 	Image imgLogo;
-	private User user;
-	public HeaderView(User user) {
+	@UiField
+	MenuBar mainMenuBar;
+	
+	public HeaderView() {
 		initWidget(uiBinder.createAndBindUi(this));
-		this.user = user;
+		
 	}
 	public Image getImgLogo() {
 		
 		return imgLogo;
 	}
-	public User getUser() {
-		return user;
+	public MenuBar getMainMenu() {
+		return mainMenuBar;
 	}
+	public void setMainMenu(MenuBar mainMenu) {
+		this.mainMenuBar = mainMenu;
+	}
+	
 
 }

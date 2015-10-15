@@ -25,6 +25,7 @@ public class SubscriptionVerificationView extends Composite implements Display {
 
 	public SubscriptionVerificationView() {
 		initWidget(uiBinder.createAndBindUi(this));
+		
 	}
 
 	public TextBox getEmail() {

@@ -17,6 +17,6 @@ public interface HelloServiceAsync {
 	void signIn(String userName, String password, AsyncCallback<User> callback);
 	void editUser(User user, AsyncCallback<String> callback);
 	void readUploadedFiles( AsyncCallback<ArrayList<String>> callback);
-	void fetchUsersLogo(int userId, AsyncCallback<String> callback);
+	void fetchLogo(AsyncCallback<String> callback);
 
 }

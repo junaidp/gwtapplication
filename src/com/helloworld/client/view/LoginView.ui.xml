@@ -7,8 +7,8 @@
 	}
 	</ui:style>
 	<g:HTMLPanel>
-
-		<div class="loginArea" ui:field="loginArea"	style = "width: 855px ,margin:0 auto, text-align: center">
+		<div class="browserCenter">
+	<!-- 	<div class="loginArea" ui:field="loginArea"	style = "width: 855px ,margin:0 auto, text-align: center">-->
 			<g:HorizontalPanel height="150px">
 				<g:Label />
 				<g:VerticalPanel styleName="border" width="500px">
@@ -59,8 +59,8 @@
 			</g:HorizontalPanel>
 		</div>
 		<div>
-		
 		</div>
+		
 	</g:HTMLPanel>
 
 </ui:UiBinder> 

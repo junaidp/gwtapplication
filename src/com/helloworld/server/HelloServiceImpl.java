@@ -25,11 +25,11 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class HelloServiceImpl extends RemoteServiceServlet implements
 HelloService {
 
-	
+
 	public String greetServer(String input) throws IllegalArgumentException {
 		return "";
 	}
-	
+
 	ApplicationContext ctx = new ClassPathXmlApplicationContext(
 			"applicationContext.xml");
 	MyRdbHelper rdbHelper = (MyRdbHelper) ctx.getBean("ManagerApp");
@@ -37,7 +37,7 @@ HelloService {
 
 	@Override
 	public String addUser(User user) throws Exception {
-		
+
 		if(isValidEmailAddress(user.getEmail())){
 			return rdbHelper.addUser(user);
 		}else{
@@ -69,7 +69,7 @@ HelloService {
 
 	@Override
 	public boolean verifySubscription(String email) throws Exception {
-		
+
 		return rdbHelper.verifySubscription(email);
 	}
 
@@ -89,31 +89,33 @@ HelloService {
 	public String editUser(User user) throws Exception {
 		return rdbHelper.addUser(user);
 	}
-	
+
 	public ArrayList<String> readUploadedFiles(){
-		  String root = getServletContext().getRealPath("/");
-          ArrayList<String> fileNames = new ArrayList<String>();
-          File folder = new File(root + "/fileuploads");
-          File[] listOfFiles = folder.listFiles();
-
-              for (int i = 0; i < listOfFiles.length; i++) {
-            	  fileNames.add(listOfFiles[i].getName());
-              }
-              return fileNames;
-	}
-	
-	public String fetchUsersLogo(int userId){
 		String root = getServletContext().getRealPath("/");
-		File folder = new File(root + "/users"+"/"+userId+"/logo");
-		String logoUrl = null;
-		File[] logos = folder.listFiles();
+		ArrayList<String> fileNames = new ArrayList<String>();
+		File folder = new File(root + "/fileuploads");
+		File[] listOfFiles = folder.listFiles();
 
-        for (int i = 0; i < logos.length; i++) {
-      	   logoUrl = "users"+"/"+userId+"/logo"+"/"+logos[0].getName();
-        }
-        return logoUrl;
-		
+		for (int i = 0; i < listOfFiles.length; i++) {
+			fileNames.add(listOfFiles[i].getName());
+		}
+		return fileNames;
 	}
-	
+
+	public String fetchLogo(){
+		String root = getServletContext().getRealPath("/");
+		//		File folder = new File(root + "/users"+"/"+userId+"/logo");
+		File folder = new File(root + "/logo");
+		String logoUrl = "";
+		File[] logos = folder.listFiles();
+		if(logos!=null){
+			for (int i = 0; i < logos.length; i++) {
+				logoUrl = "/logo"+"/"+logos[0].getName();
+			}
+		}
+		return logoUrl;
+
+	}
+
 
 }

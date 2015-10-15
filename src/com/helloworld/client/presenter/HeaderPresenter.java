@@ -10,6 +10,8 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.MenuBar;
+import com.google.gwt.user.client.ui.MenuItem;
 import com.google.gwt.user.client.ui.Widget;
 import com.helloworld.client.HelloService;
 import com.helloworld.client.HelloServiceAsync;
@@ -25,13 +27,14 @@ public class HeaderPresenter implements Presenter
 	{
 		Widget asWidget();
 		Image getImgLogo();
-		User getUser();
+		MenuBar getMainMenu();
 		
 	}  
 
 	public HeaderPresenter(HelloServiceAsync rpcService, HandlerManager eventBus, Display view) 
 	{
 		this.display = view;
+		
 	}
 
 	public void go(HasWidgets container) 
@@ -50,7 +53,7 @@ public class HeaderPresenter implements Presenter
 
 	private void fetchUsersLogo() {
 		HelloServiceAsync rpcService = GWT.create(HelloService.class);
-		rpcService.fetchUsersLogo(display.getUser().getUserId(), new AsyncCallback<String>() {
+		rpcService.fetchLogo(new AsyncCallback<String>() {
 			
 			@Override
 			public void onSuccess(String logoUrl) {
@@ -67,6 +70,11 @@ public class HeaderPresenter implements Presenter
 
 	@Override
 	public void setHandlers() {
+		
+	}
+
+	public void setUser(User loggedInUser) {
+//		display.getMainMenu().addItem(new MenuItem(loggedInUser.getName(), true));
 		
 	}
 	
