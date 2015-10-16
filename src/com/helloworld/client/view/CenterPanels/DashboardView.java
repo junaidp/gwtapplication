@@ -8,6 +8,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.helloworld.client.presenter.DashboardPresenter.Display;
+import com.helloworld.client.view.MyDashboard.MyAccountPanel;
 
 public class DashboardView extends Composite implements Display {
 
@@ -19,6 +20,8 @@ public class DashboardView extends Composite implements Display {
 	
 	@UiField
 	Label btnBack;
+	@UiField
+	MyAccountPanel myAccount;
 	
 	public Label getBtnBack() {
 		return btnBack;
@@ -26,6 +29,10 @@ public class DashboardView extends Composite implements Display {
 
 	public DashboardView() {
 		initWidget(uiBinder.createAndBindUi(this));
+	}
+
+	public MyAccountPanel getMyAccount() {
+		return myAccount;
 	}
 
 	

@@ -23,6 +23,7 @@ http://www.springframework.org/schema/beans/spring-beans-2.0.xsd"
 		<property name="annotatedClasses">
 			<list>
 				<value>com.helloworld.shared.entity.User</value>
+				<value>com.helloworld.shared.entity.MyAccountPreferences</value>
 				
 			
 			</list>

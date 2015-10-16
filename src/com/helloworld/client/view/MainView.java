@@ -15,7 +15,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.helloworld.client.presenter.MainPresenter.Display;
 import com.helloworld.client.view.ControlPanels.ControlPanelsContainer;
-import com.helloworld.shared.entity.User;
+import com.helloworld.shared.entity.UserEntity;
 
 public class MainView extends Composite implements Display{
 
@@ -33,10 +33,10 @@ public class MainView extends Composite implements Display{
 	@UiField DisclosurePanel discPanel;
 	@UiField Label editAccount;
 	@UiField Label globalPreferences;
-	private User loggedInUser;
+	private UserEntity loggedInUser;
 	@UiField Label fileUpload;
 
-	public MainView(User loggedInUser) {
+	public MainView(UserEntity loggedInUser) {
 		initWidget(uiBinder.createAndBindUi(this));
 		this.loggedInUser = loggedInUser;
 		lblWelcome.setText(loggedInUser.getUserName());
@@ -64,7 +64,7 @@ public class MainView extends Composite implements Display{
 		return editAccount;
 	}
 
-	public User getLoggedInUser() {
+	public UserEntity getLoggedInUser() {
 		return loggedInUser;
 	}
 

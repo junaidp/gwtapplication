@@ -4,8 +4,10 @@
 	<ui:style>
 	
 	</ui:style>
+	<g:FocusPanel ui:field="panel">
 	<g:HTMLPanel ui:field="container">
 	<g:Label styleName="centerPanelHeadings" ui:field="heading"></g:Label>
 	<g:Label>Reports Details</g:Label>
 	</g:HTMLPanel>
+	</g:FocusPanel>
 </ui:UiBinder> 

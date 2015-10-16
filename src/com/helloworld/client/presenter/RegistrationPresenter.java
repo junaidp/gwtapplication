@@ -16,7 +16,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.helloworld.client.HelloServiceAsync;
 import com.helloworld.client.view.ApplicationConstants;
 import com.helloworld.client.view.widgets.LoadingPopup;
-import com.helloworld.shared.entity.User;
+import com.helloworld.shared.entity.UserEntity;
 import com.helloworld.shared.utility.RegistratonFieldVerifier;
 
 public class RegistrationPresenter implements Presenter 
@@ -45,7 +45,7 @@ public class RegistrationPresenter implements Presenter
 		void clearFields();
 		RecaptchaWidget getRw();
 		Label getCaptchaError();
-		User getLoggedInUser();
+		UserEntity getLoggedInUser();
 
 	}  
 
@@ -112,7 +112,7 @@ public class RegistrationPresenter implements Presenter
 				display.getRw().reload();
 				if(result){
 					display.getCaptchaError().setText("");
-					User user = new User();
+					UserEntity user = new UserEntity();
 					addUser(user);
 
 				}
@@ -132,7 +132,7 @@ public class RegistrationPresenter implements Presenter
 		});
 	}
 
-	private void addUser(User user){
+	private void addUser(UserEntity user){
 		user.setEmail(display.getEmail().getText());
 		user.setPassword(display.getPassword().getText());
 		user.setUserName(display.getUserName().getText());
@@ -143,7 +143,7 @@ public class RegistrationPresenter implements Presenter
 		}
 	}
 
-	private void addUserInDb(User user) {
+	private void addUserInDb(UserEntity user) {
 		final LoadingPopup loadingPopup = new LoadingPopup();
 		loadingPopup.display();
 		rpcService.addUser(user, new AsyncCallback<String>() {

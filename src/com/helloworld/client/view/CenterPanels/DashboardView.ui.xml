@@ -14,7 +14,7 @@
 					<M:RunTimeView></M:RunTimeView>
 				</div>
 				<div style="float: left; padding:2px; width: 49.5%; height: 49%">
-					<M:MyAccountView></M:MyAccountView>
+					<M:MyAccountPanel ui:field="myAccount"></M:MyAccountPanel>
 				</div>
 				<div style="float: left; padding:2px; width: 49.5%; height: 49%">
 					<M:ReportsView></M:ReportsView>

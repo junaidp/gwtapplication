@@ -1,14 +1,14 @@
 package com.helloworld.client.event;
 
 import com.google.gwt.event.shared.GwtEvent;
-import com.helloworld.shared.entity.User;
+import com.helloworld.shared.entity.UserEntity;
 
 		public class MainEvent extends GwtEvent<MainEventHandler> {
 			
 		public static Type<MainEventHandler> TYPE = new Type<MainEventHandler>();
-		private User user;
+		private UserEntity user;
 
-		public MainEvent(User user) {
+		public MainEvent(UserEntity user) {
 			this.user = user;
 		}
 
@@ -23,11 +23,11 @@ import com.helloworld.shared.entity.User;
 			
 		}
 
-		public User getUser() {
+		public UserEntity getUser() {
 			return user;
 		}
 
-		public void setUser(User user) {
+		public void setUser(UserEntity user) {
 			this.user = user;
 		}
 

@@ -15,7 +15,7 @@ import com.google.gwt.user.client.ui.MenuItem;
 import com.google.gwt.user.client.ui.Widget;
 import com.helloworld.client.HelloService;
 import com.helloworld.client.HelloServiceAsync;
-import com.helloworld.shared.entity.User;
+import com.helloworld.shared.entity.UserEntity;
 
 public class HeaderPresenter implements Presenter 
 
@@ -73,7 +73,7 @@ public class HeaderPresenter implements Presenter
 		
 	}
 
-	public void setUser(User loggedInUser) {
+	public void setUser(UserEntity loggedInUser) {
 //		display.getMainMenu().addItem(new MenuItem(loggedInUser.getName(), true));
 		
 	}

@@ -1,7 +1,7 @@
 package com.helloworld.client.event;
 
 import com.google.gwt.event.shared.GwtEvent;
-import com.helloworld.shared.entity.User;
+import com.helloworld.shared.entity.UserEntity;
 
 		public class RegistrationEvent extends GwtEvent<RegistrationEventHandler> {
 			

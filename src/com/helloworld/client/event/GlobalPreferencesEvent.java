@@ -1,14 +1,14 @@
 package com.helloworld.client.event;
 
 import com.google.gwt.event.shared.GwtEvent;
-import com.helloworld.shared.entity.User;
+import com.helloworld.shared.entity.UserEntity;
 
 		public class GlobalPreferencesEvent extends GwtEvent<GlobalPreferencesEventHandler> {
 			
 		public static Type<GlobalPreferencesEventHandler> TYPE = new Type<GlobalPreferencesEventHandler>();
-		User user ;
+		UserEntity user ;
 		
-		public GlobalPreferencesEvent(User loggedInUser) {
+		public GlobalPreferencesEvent(UserEntity loggedInUser) {
 			this.user = loggedInUser;
 		}
 
@@ -23,7 +23,7 @@ import com.helloworld.shared.entity.User;
 			
 		}
 		
-		public User getUser() {
+		public UserEntity getUser() {
 			return user;
 		}
 

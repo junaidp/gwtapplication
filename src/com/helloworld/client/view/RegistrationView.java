@@ -4,7 +4,6 @@ import com.claudiushauptmann.gwt.recaptcha.client.RecaptchaWidget;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
@@ -12,9 +11,9 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.helloworld.client.presenter.RegistrationPresenter.Display;
-import com.helloworld.shared.entity.User;
+import com.helloworld.shared.entity.UserEntity;
 
-public class RegistrationView extends Composite implements Display, ViewFields {
+public class RegistrationView extends Composite implements Display {
 
 	private static RegistrationViewUiBinder uiBinder = GWT
 			.create(RegistrationViewUiBinder.class);
@@ -37,7 +36,7 @@ public class RegistrationView extends Composite implements Display, ViewFields {
 	@UiField Label emailError;
 	@UiField VerticalPanel container;
 	@UiField Label captchaError;
-	private User loggedInUser;
+	private UserEntity loggedInUser;
 	
 	private RecaptchaWidget rw;
 	
@@ -49,7 +48,7 @@ public class RegistrationView extends Composite implements Display, ViewFields {
 	}
 
 
-	public RegistrationView(User loggedInUser) {
+	public RegistrationView(UserEntity loggedInUser) {
 		this.loggedInUser = loggedInUser;
 		initWidget(uiBinder.createAndBindUi(this));
 		rw = new RecaptchaWidget("6LcEKg4TAAAAAFADmX5mrhcKkaeNMcxh7k5CiQ2K");
@@ -135,7 +134,7 @@ public class RegistrationView extends Composite implements Display, ViewFields {
 	}
 
 
-	public User getLoggedInUser() {
+	public UserEntity getLoggedInUser() {
 		return loggedInUser;
 	}
 

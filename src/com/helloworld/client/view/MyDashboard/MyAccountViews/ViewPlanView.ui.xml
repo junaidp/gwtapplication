@@ -1,0 +1,35 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	
+	</ui:style>
+	<g:HTMLPanel>
+		<g:FlowPanel ui:field="planTypePanel">
+			<g:HTMLPanel>
+				<div>
+					<g:Label styleName="centerPanelHeadings">Plan Type</g:Label>
+				</div>
+				<div>
+					<g:Label styleName="">User specific Plan Type Details here</g:Label>
+				</div>
+			</g:HTMLPanel>
+		</g:FlowPanel>
+
+		<g:FlowPanel ui:field="paymentDetailsPanel">
+			<g:HTMLPanel>
+				<div>
+					<g:Label styleName="centerPanelHeadings ">Payment Details</g:Label>
+				</div>
+				<div>
+					<g:Label styleName="controlPanelHeadings">User specific Payment Details here</g:Label>
+				</div>
+			</g:HTMLPanel>
+		</g:FlowPanel>
+		
+		<div style="width:100%">
+			<g:Label styleName="labelStyle centeredText blue bold hover" ui:field="btnBack">Back</g:Label>
+		</div>
+
+	</g:HTMLPanel>
+</ui:UiBinder> 

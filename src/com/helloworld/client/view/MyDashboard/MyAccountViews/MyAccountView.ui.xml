@@ -1,0 +1,40 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	
+	</ui:style>
+	<g:HTMLPanel>
+		<table>
+			<tr>
+				<td>
+				<g:FocusPanel ui:field="panelViewPlan">
+				<g:HTMLPanel>
+					<div class="metro-tile metro-tile-small metro-tile-dashboard">View Plan</div>
+				</g:HTMLPanel>
+				</g:FocusPanel>
+				</td>
+				<td>
+					<div class="metro-tile metro-tile-portal">View Registration</div>
+				</td>
+			</tr>
+			<table>
+			<tr>
+				<td>
+					<div class="metro-tile metro-tile-accordion">Edit Registration</div>
+				</td>
+			</tr>
+			</table>
+			<table>
+			<tr>
+			<td>
+				<div class="metro-tile metro-tile-small metro-tile-aciii">View Usage</div>
+				</td>
+			</tr>
+			</table>
+		</table>
+		<div>
+		<g:Label styleName="labelStyle centeredText blue bold hover" ui:field="btnBack">Back</g:Label>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder> 

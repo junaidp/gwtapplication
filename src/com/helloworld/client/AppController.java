@@ -18,12 +18,16 @@ import com.helloworld.client.event.GlobalPreferencesEvent;
 import com.helloworld.client.event.GlobalPreferencesEventHandler;
 import com.helloworld.client.event.MainEvent;
 import com.helloworld.client.event.MainEventHandler;
+import com.helloworld.client.event.MyAccountEvent;
+import com.helloworld.client.event.MyAccountEventHandler;
 import com.helloworld.client.event.RegistrationEvent;
 import com.helloworld.client.event.RegistrationEventHandler;
 import com.helloworld.client.event.SearchDataEvent;
 import com.helloworld.client.event.SearchDataEventHandler;
 import com.helloworld.client.event.SubscriptionVerificationEvent;
 import com.helloworld.client.event.SubscriptionVerificationEventHandler;
+import com.helloworld.client.event.ViewPlanEvent;
+import com.helloworld.client.event.ViewPlanEventHandler;
 import com.helloworld.client.presenter.DashboardAccordionPresenter;
 import com.helloworld.client.presenter.DashboardPortalPresenter;
 import com.helloworld.client.presenter.DashboardPresenter;
@@ -33,10 +37,12 @@ import com.helloworld.client.presenter.GlobalPreferencesPresenter;
 import com.helloworld.client.presenter.HeaderPresenter;
 import com.helloworld.client.presenter.LoginPresenter;
 import com.helloworld.client.presenter.MainPresenter;
+import com.helloworld.client.presenter.MyAccountPresenter;
 import com.helloworld.client.presenter.Presenter;
 import com.helloworld.client.presenter.RegistrationPresenter;
 import com.helloworld.client.presenter.SearchDataPresenter;
 import com.helloworld.client.presenter.SubscriptionVerificationPresenter;
+import com.helloworld.client.presenter.ViewPlanPresenter;
 import com.helloworld.client.view.ApplicationConstants;
 import com.helloworld.client.view.FileUploadView;
 import com.helloworld.client.view.FooterView;
@@ -50,7 +56,9 @@ import com.helloworld.client.view.CenterPanels.DashboardAccordion;
 import com.helloworld.client.view.CenterPanels.DashboardPortalView;
 import com.helloworld.client.view.CenterPanels.DashboardView;
 import com.helloworld.client.view.CenterPanels.SearchDataView;
-import com.helloworld.shared.entity.User;
+import com.helloworld.client.view.MyDashboard.MyAccountViews.MyAccountView;
+import com.helloworld.client.view.MyDashboard.MyAccountViews.ViewPlanView;
+import com.helloworld.shared.entity.UserEntity;
 
 
 public class AppController implements Presenter, ValueChangeHandler<String> {
@@ -59,7 +67,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 	private final HelloServiceAsync rpcService; 
 	private HasWidgets container;
 	private VerticalPanel center;
-	private User loggedInUser;
+	private UserEntity loggedInUser;
 	private HeaderPresenter headerPresenter;
 	
 	Presenter presenter = null;
@@ -115,6 +123,13 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 			}
 		}); 
 		
+		eventBus.addHandler(ViewPlanEvent.TYPE,
+				new ViewPlanEventHandler() {
+			public void onViewPlan(ViewPlanEvent event) {
+				History.newItem(ApplicationConstants.TOKEN_VIEW_PLAN);
+			}
+		}); 
+		
 		
 		
 		eventBus.addHandler(SearchDataEvent.TYPE,
@@ -136,6 +151,13 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 				new SubscriptionVerificationEventHandler() {
 			public void onSubscriptionVerification(SubscriptionVerificationEvent event) {
 				History.newItem(ApplicationConstants.TOKEN_SUBSCRIPTION_VERFICATION);
+			}
+		}); 
+		
+		eventBus.addHandler(MyAccountEvent.TYPE,
+				new MyAccountEventHandler() {
+			public void onMyAccount(MyAccountEvent event) {
+				History.newItem(ApplicationConstants.TOKEN_MY_ACCOUNT);
 			}
 		}); 
 	}
@@ -257,6 +279,21 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 				presenter = new FileUploadPresenter(rpcService, eventBus, new FileUploadView());
 				if (presenter != null) {
 					setContainer(container);
+					presenter.go(container);
+				}
+			}
+			
+			if (token.equals(ApplicationConstants.TOKEN_MY_ACCOUNT)) {
+				presenter = new MyAccountPresenter(rpcService, eventBus, new MyAccountView(), loggedInUser);
+				if (presenter != null) {
+					setContainer(container);
+					presenter.go(container);
+				}
+			}
+			
+			if (token.equals(ApplicationConstants.TOKEN_VIEW_PLAN)) {
+				presenter = new ViewPlanPresenter(rpcService, eventBus, new ViewPlanView());
+				if (presenter != null) {
 					presenter.go(container);
 				}
 			}

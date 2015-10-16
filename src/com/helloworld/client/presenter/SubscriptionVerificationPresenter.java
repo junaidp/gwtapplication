@@ -20,7 +20,7 @@ import com.helloworld.client.view.ApplicationConstants;
 import com.helloworld.client.view.FooterView;
 import com.helloworld.client.view.HeaderView;
 import com.helloworld.client.view.widgets.LoadingPopup;
-import com.helloworld.shared.entity.User;
+import com.helloworld.shared.entity.UserEntity;
 
 public class SubscriptionVerificationPresenter implements Presenter 
 

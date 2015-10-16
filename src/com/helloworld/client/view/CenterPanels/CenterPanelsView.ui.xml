@@ -4,10 +4,18 @@
 	<ui:style>
 	
 	</ui:style>
+	<g:FocusPanel ui:field="panel">
 	<g:HTMLPanel width="100%">
-		<div style="width: 100%; height: 250px;  background-color:#F5F5F5">
+		<!--  <div style="width: 100%; height: 250px;  background-color:#F5F5F5">
 			<g:Label styleName="centerPanelHeadings" ui:field="heading"></g:Label>
 			<g:HTMLPanel ui:field="container"></g:HTMLPanel>
 		</div>
+		-->
+		<div class="metro-tile metro-tile-dashboard">
+		<div id="content"></div>	
+		<g:Label styleName="centerPanelHeadings" ui:field="heading"></g:Label>
+			<g:HTMLPanel ui:field="container"></g:HTMLPanel>
+		</div>
 	</g:HTMLPanel>
+	</g:FocusPanel>
 </ui:UiBinder> 

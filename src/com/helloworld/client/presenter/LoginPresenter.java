@@ -20,7 +20,7 @@ import com.helloworld.client.view.FooterView;
 import com.helloworld.client.view.HeaderView;
 import com.helloworld.client.view.CenterPanels.DashboardAccordion;
 import com.helloworld.client.view.widgets.LoadingPopup;
-import com.helloworld.shared.entity.User;
+import com.helloworld.shared.entity.UserEntity;
 
 public class LoginPresenter implements Presenter 
 
@@ -63,10 +63,10 @@ public class LoginPresenter implements Presenter
 		display.getLblError().setText("");
 		final LoadingPopup loadingPopup = new LoadingPopup();
 		loadingPopup.display();
-		rpcService.signIn(display.getTxtUserName().getText(), display.getTxtPassword().getText(), new AsyncCallback<User>() {
+		rpcService.signIn(display.getTxtUserName().getText(), display.getTxtPassword().getText(), new AsyncCallback<UserEntity>() {
 
 			@Override
-			public void onSuccess(User user) {
+			public void onSuccess(UserEntity user) {
 				if(loadingPopup!=null){
 					loadingPopup.remove();
 				}

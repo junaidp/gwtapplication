@@ -7,7 +7,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 
 import com.helloworld.client.view.ApplicationConstants;
-import com.helloworld.shared.entity.User;
+import com.helloworld.shared.entity.UserEntity;
 
 public class MyRdbHelper {
 
@@ -19,7 +19,7 @@ public class MyRdbHelper {
 	}
 
 
-	public String addUser(User user) throws Exception {
+	public String addUser(UserEntity user) throws Exception {
 		Session session = null;
 		try{
 			session = sessionFactory.openSession();
@@ -58,7 +58,7 @@ public class MyRdbHelper {
 	public boolean userNameAlreadyExist(Session session, String userName, int userId)throws Exception{
 
 		try{
-			Criteria crit = session.createCriteria(User.class);
+			Criteria crit = session.createCriteria(UserEntity.class);
 			crit.add(Restrictions.eq("userName", userName));
 			crit.add(Restrictions.ne("userId", userId));
 			if(crit.list().size()>0){
@@ -76,7 +76,7 @@ public class MyRdbHelper {
 
 	public boolean emailAlreadyExist(Session session, String email, int userId)throws Exception{
 		try{
-			Criteria crit = session.createCriteria(User.class);
+			Criteria crit = session.createCriteria(UserEntity.class);
 			crit.add(Restrictions.eq("email", email));
 			crit.add(Restrictions.ne("userId", userId));
 			if(crit.list().size()>0){
@@ -96,7 +96,7 @@ public class MyRdbHelper {
 		Session session = null;
 		try{
 			session = sessionFactory.openSession();
-			Criteria crit = session.createCriteria(User.class);
+			Criteria crit = session.createCriteria(UserEntity.class);
 			crit.add(Restrictions.eq("email", email));
 			if(crit.list().size()>0){
 				return true;
@@ -113,16 +113,16 @@ public class MyRdbHelper {
 	}
 
 
-	public User signIn(String userName, String password) throws Exception{
+	public UserEntity signIn(String userName, String password) throws Exception{
 		Session session = null;
-		User user = null;
+		UserEntity user = null;
 		try{
 			session = sessionFactory.openSession();
-			Criteria crit = session.createCriteria(User.class);
+			Criteria crit = session.createCriteria(UserEntity.class);
 			crit.add(Restrictions.eq("userName", userName));
 			crit.add(Restrictions.eq("password", password));
 			if(crit.list().size()>0){
-				user = (User) crit.list().get(0);
+				user = (UserEntity) crit.list().get(0);
 				return user;
 			}else{
 				return null;

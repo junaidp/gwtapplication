@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 import com.helloworld.client.HelloService;
 import com.helloworld.client.view.ApplicationConstants;
 import com.helloworld.database.MyRdbHelper;
-import com.helloworld.shared.entity.User;
+import com.helloworld.shared.entity.UserEntity;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import net.tanesha.recaptcha.ReCaptcha;
@@ -36,7 +36,7 @@ HelloService {
 	HttpSession session ;
 
 	@Override
-	public String addUser(User user) throws Exception {
+	public String addUser(UserEntity user) throws Exception {
 
 		if(isValidEmailAddress(user.getEmail())){
 			return rdbHelper.addUser(user);
@@ -74,9 +74,9 @@ HelloService {
 	}
 
 	@Override
-	public User signIn(String userName, String password)
+	public UserEntity signIn(String userName, String password)
 			throws Exception {
-		User user =  rdbHelper.signIn(userName, password);
+		UserEntity user =  rdbHelper.signIn(userName, password);
 		if(user!=null)
 		{
 			session=getThreadLocalRequest().getSession(true);
@@ -86,7 +86,7 @@ HelloService {
 	}
 
 	@Override
-	public String editUser(User user) throws Exception {
+	public String editUser(UserEntity user) throws Exception {
 		return rdbHelper.addUser(user);
 	}
 

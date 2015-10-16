@@ -21,7 +21,7 @@ import com.helloworld.client.view.ControlPanels.ControlPanelsContainer;
 import com.helloworld.client.view.ControlPanels.DashboardAccordionPanelView;
 import com.helloworld.client.view.widgets.Attachment;
 import com.helloworld.client.view.widgets.PopupsView;
-import com.helloworld.shared.entity.User;
+import com.helloworld.shared.entity.UserEntity;
 
 public class MainPresenter implements Presenter 
 
@@ -36,7 +36,7 @@ public class MainPresenter implements Presenter
 		ControlPanelsContainer getControlPanelContainer();
 		VerticalPanel getCenter();
 		Label getEditAccount();
-		User getLoggedInUser();
+		UserEntity getLoggedInUser();
 		Label getFileUpload();
 		Label getGlobalPreferences();
 

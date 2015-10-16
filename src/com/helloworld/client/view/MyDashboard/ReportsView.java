@@ -17,7 +17,7 @@ public class ReportsView extends CenterPanelsView {
 	public ReportsView() {
 		container.add(uiBinder.createAndBindUi(this));
 		setHeading(ApplicationConstants.REPORTS_HEADING);
-		container.add(new PieChartDashboard());
+//		container.add(new PieChartDashboard());
 	}
 
 }
