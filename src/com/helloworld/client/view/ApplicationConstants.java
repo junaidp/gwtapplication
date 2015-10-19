@@ -45,6 +45,8 @@ public class ApplicationConstants {
 	public static final String EDIT_REGISTRATION = "Edit Registration";
 	public static final String VIEW_USAGE = "View Usage";
 	public static final String MY_ACCOUNT = "My Account";
+	public static final String GLOBALPREFERENCESUPDATED = "Global Preferences Updated";
+	public static final String MY_ACCOUNT_UPDATED = "Account updated";
 	
 	
 	

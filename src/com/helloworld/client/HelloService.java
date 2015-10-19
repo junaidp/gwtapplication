@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+import com.helloworld.shared.entity.GlobalPreferencesEntity;
+import com.helloworld.shared.entity.MyAccountEntity;
 import com.helloworld.shared.entity.UserEntity;
 
 /**
@@ -20,5 +22,7 @@ public interface HelloService extends RemoteService {
 	String editUser(UserEntity user) throws Exception;
 	ArrayList<String> readUploadedFiles() throws Exception;
 	String fetchLogo() throws Exception;
-
+	GlobalPreferencesEntity fetchGlobalPreferences() throws Exception;
+	String updateGlobalPreferences(GlobalPreferencesEntity globalPreferencesEntity) throws Exception;
+	String updateMyAccount (MyAccountEntity myAccountEntity)throws Exception;
 }

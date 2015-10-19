@@ -5,11 +5,19 @@
 	
 	</ui:style>
 	<g:HTMLPanel>
-	<div style="padding:3px">
-	<g:CheckBox ui:field="planType"> Show Plan Type</g:CheckBox>
-	</div>
-	<div  style="padding:3px">
-	<g:CheckBox ui:field="paymentDetails"> Show Payment Details</g:CheckBox>
-	</div>
+		<div style="padding:4px">
+			<g:CheckBox ui:field="checkBoxPlanType" styleName="inLine"> Plan Type</g:CheckBox>
+			<div style="padding-left:6px">
+				<g:CheckBox ui:field="checkBoxPaymentPlan" styleName="inLine" text="Payment Plan ("></g:CheckBox>
+				<g:CheckBox ui:field="checkBoxMonthly" styleName="inLine">Monthly</g:CheckBox>
+				<g:CheckBox ui:field="checkBoxQuaterly" styleName="inLine">Quartely</g:CheckBox>
+				<g:CheckBox ui:field="checkBoxYearly" text="Yearly )"></g:CheckBox>
+			</div>
+		
+		</div>
+		<div style="padding:4px">
+			<g:CheckBox ui:field="paymentDetails"> Payment Details</g:CheckBox>
+		</div>
+
 	</g:HTMLPanel>
 </ui:UiBinder> 

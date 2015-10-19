@@ -8,6 +8,7 @@ import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.helloworld.client.HelloServiceAsync;
+import com.helloworld.shared.entity.GlobalPreferencesEntity;
 
 public class FooterPresenter implements Presenter 
 
@@ -21,7 +22,7 @@ public class FooterPresenter implements Presenter
 		
 	}  
 
-	public FooterPresenter(HelloServiceAsync rpcService, HandlerManager eventBus, Display view) 
+	public FooterPresenter(HelloServiceAsync rpcService, HandlerManager eventBus, Display view, GlobalPreferencesEntity globalPreferencesEntity) 
 	{
 		this.display = view;
 	}

@@ -27,6 +27,18 @@ import javax.persistence.Table;
 		
 		@Column(name="showPaymentDetails")
 		private boolean showPaymentDetails;
+		
+		@Column(name="viewPlanPaymentTerms")
+		private boolean viewPaymentTerms;
+		
+		@Column(name="viewPlanMonthlyPayments")
+		private boolean viewPlanMonthlyPayments;
+		
+		@Column(name="viewPlanQuarterlyPayments")
+		private boolean viewPlanQuarterlyPayments;
+		
+		@Column(name="viewPlanYearlyPayments")
+		private boolean viewPlanYearlyPayments;
 
 		public int getMyAccountPreferencesId() {
 			return myAccountPreferencesId;
@@ -52,5 +64,38 @@ import javax.persistence.Table;
 			this.showPaymentDetails = showPaymentDetails;
 		}
 
+		public boolean isViewPaymentTerms() {
+			return viewPaymentTerms;
+		}
+
+		public void setViewPaymentTerms(boolean viewPaymentTerms) {
+			this.viewPaymentTerms = viewPaymentTerms;
+		}
+
+		public boolean isViewPlanMonthlyPayments() {
+			return viewPlanMonthlyPayments;
+		}
+
+		public void setViewPlanMonthlyPayments(boolean viewPlanMonthlyPayments) {
+			this.viewPlanMonthlyPayments = viewPlanMonthlyPayments;
+		}
+
+		public boolean isViewPlanQuarterlyPayments() {
+			return viewPlanQuarterlyPayments;
+		}
+
+		public void setViewPlanQuarterlyPayments(boolean viewPlanQuarterlyPayments) {
+			this.viewPlanQuarterlyPayments = viewPlanQuarterlyPayments;
+		}
+
+		public boolean isViewPlanYearlyPayments() {
+			return viewPlanYearlyPayments;
+		}
+
+		public void setViewPlanYearlyPayments(boolean viewPlanYearlyPayments) {
+			this.viewPlanYearlyPayments = viewPlanYearlyPayments;
+		}
+
+		
 		
 }

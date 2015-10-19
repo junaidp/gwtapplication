@@ -4,6 +4,7 @@ package com.helloworld.client.presenter;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerManager;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.HasWidgets;
@@ -20,6 +21,7 @@ import com.helloworld.client.view.FooterView;
 import com.helloworld.client.view.HeaderView;
 import com.helloworld.client.view.CenterPanels.DashboardAccordion;
 import com.helloworld.client.view.widgets.LoadingPopup;
+import com.helloworld.shared.entity.GlobalPreferencesEntity;
 import com.helloworld.shared.entity.UserEntity;
 
 public class LoginPresenter implements Presenter 
@@ -73,12 +75,15 @@ public class LoginPresenter implements Presenter
 				if(user==null){
 					display.getLblError().setText(ApplicationConstants.USERNAME_PASSWORD_NOT_MATCH);
 				}else{
-					eventBus.fireEvent(new MainEvent(user));
+					fetchGlobalPreferences(user);
+					
 					
 				}
 
 
 			}
+
+			
 
 			@Override
 			public void onFailure(Throwable caught) {
@@ -88,6 +93,24 @@ public class LoginPresenter implements Presenter
 			}
 		});
 
+	}
+	
+	private void fetchGlobalPreferences(final UserEntity user) {
+		rpcService.fetchGlobalPreferences(new AsyncCallback<GlobalPreferencesEntity>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert("Fail Fetch Global Preferences: "+ caught.getLocalizedMessage());
+			}
+
+			@Override
+			public void onSuccess(GlobalPreferencesEntity globalPreferences) {
+				eventBus.fireEvent(new MainEvent(user, globalPreferences));
+				
+			}
+		});
+		
+		
 	}
 
 	

@@ -14,6 +14,8 @@ public class SearchDataPresenter implements Presenter
 {
 	
 	private final Display display;
+	private final HelloServiceAsync rpcService;
+	private final HandlerManager eventBus;
 
 	public interface Display 
 	{
@@ -24,6 +26,8 @@ public class SearchDataPresenter implements Presenter
 	public SearchDataPresenter(HelloServiceAsync rpcService, HandlerManager eventBus, Display view) 
 	{
 		this.display = view;
+		this.eventBus = eventBus;
+		this.rpcService = rpcService;
 	}
 
 	public void go(HasWidgets container) 

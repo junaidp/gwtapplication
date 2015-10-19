@@ -7,6 +7,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 
 import com.helloworld.client.view.ApplicationConstants;
+import com.helloworld.shared.entity.GlobalPreferencesEntity;
+import com.helloworld.shared.entity.MyAccountEntity;
 import com.helloworld.shared.entity.UserEntity;
 
 public class MyRdbHelper {
@@ -36,6 +38,7 @@ public class MyRdbHelper {
 				return ApplicationConstants.EMAIL_NOT_AVAILABLE;
 			}
 			
+			session.saveOrUpdate(user.getMyAccountId());
 			session.saveOrUpdate(user);
 			session.flush();
 			if(existingUser){
@@ -121,6 +124,8 @@ public class MyRdbHelper {
 			Criteria crit = session.createCriteria(UserEntity.class);
 			crit.add(Restrictions.eq("userName", userName));
 			crit.add(Restrictions.eq("password", password));
+			crit.createAlias("myAccountId", "myAccount");
+//			crit.add(Restrictions.eq("myAccount.myAccountId", value))
 			if(crit.list().size()>0){
 				user = (UserEntity) crit.list().get(0);
 				return user;
@@ -131,6 +136,59 @@ public class MyRdbHelper {
 			logger.warn(String.format("Exception occured in signIn", ex.getMessage()), ex);
 			System.out.println("Exception occured in signIn"+ ex.getMessage());
 			throw new Exception("Exception occured in signIn");
+		}
+	}
+
+
+	public GlobalPreferencesEntity fetchGlobalPreferences()throws Exception {
+		Session session = null;
+		try{
+			session = sessionFactory.openSession();
+			Criteria crit = session.createCriteria(GlobalPreferencesEntity.class);
+			crit.createAlias("myAccountPreferencesId", "myAccountPreferences");
+			if(crit.list().size()>0){
+			GlobalPreferencesEntity globalPreferencesEntity = (GlobalPreferencesEntity) crit.list().get(0);
+			return globalPreferencesEntity;
+			}
+			else {
+				return null;
+			}
+		}catch(Exception ex){
+			logger.warn(String.format("Exception occured in fetchGlobalPreferences", ex.getMessage()), ex);
+			System.out.println("Exception occured in fetchGlobalPreferences"+ ex.getMessage());
+			throw new Exception("Exception occured in fetchGlobalPreferences");
+		}
+	}
+
+
+	public String updateGlobalPreferences(
+			GlobalPreferencesEntity globalPreferencesEntity)throws Exception {
+		Session session = null;
+		try{
+			session = sessionFactory.openSession();
+			session.saveOrUpdate(globalPreferencesEntity.getMyAccountPreferencesId());
+			session.saveOrUpdate(globalPreferencesEntity);
+			session.flush();
+			return ApplicationConstants.GLOBALPREFERENCESUPDATED;
+		}catch(Exception ex){
+			logger.warn(String.format("Exception occured in updateGlobalPreferences", ex.getMessage()), ex);
+			System.out.println("Exception occured in updateGlobalPreferences"+ ex.getMessage());
+			throw new Exception("Exception occured in updateGlobalPreferences");
+		}
+	}
+
+
+	public String updateMyAccount(MyAccountEntity myAccountEntity)throws Exception {
+		Session session = null;
+		try{
+			session = sessionFactory.openSession();
+			session.update(myAccountEntity);
+			session.flush();
+			return ApplicationConstants.MY_ACCOUNT_UPDATED;
+		}catch(Exception ex){
+			logger.warn(String.format("Exception occured in updateGlobalPreferences", ex.getMessage()), ex);
+			System.out.println("Exception occured in updateGlobalPreferences"+ ex.getMessage());
+			throw new Exception("Exception occured in updateGlobalPreferences");
 		}
 	}
 }

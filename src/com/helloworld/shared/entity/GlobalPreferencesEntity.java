@@ -4,10 +4,12 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
@@ -24,11 +26,26 @@ import javax.persistence.Table;
 		private int globalPrefrencesId;
 		
 		@JoinColumn(name="myAccountPreferencesId")
+		@ManyToOne( fetch = FetchType.LAZY )
 		private MyAccountPreferencesEntity myAccountPreferencesId;
-		
-		@Column(name="showPaymentDetails")
-		private boolean showPaymentDetails;
 
-		
+		public int getGlobalPrefrencesId() {
+			return globalPrefrencesId;
+		}
+
+		public void setGlobalPrefrencesId(int globalPrefrencesId) {
+			this.globalPrefrencesId = globalPrefrencesId;
+		}
+
+		public MyAccountPreferencesEntity getMyAccountPreferencesId() {
+			return myAccountPreferencesId;
+		}
+
+		public void setMyAccountPreferencesId(
+				MyAccountPreferencesEntity myAccountPreferencesId) {
+			this.myAccountPreferencesId = myAccountPreferencesId;
+		}
+
+	
 		
 }

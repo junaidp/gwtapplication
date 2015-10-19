@@ -7,29 +7,38 @@
 	<g:HTMLPanel>
 		<g:FlowPanel ui:field="planTypePanel">
 			<g:HTMLPanel>
-				<div>
+				<div style="padding:4px">
 					<g:Label styleName="centerPanelHeadings">Plan Type</g:Label>
 				</div>
-				<div>
-					<g:Label styleName="">User specific Plan Type Details here</g:Label>
+				<div style="padding-left:4px">
+					<g:Label>User specific Plan Type Details here</g:Label>
 				</div>
 			</g:HTMLPanel>
 		</g:FlowPanel>
 
 		<g:FlowPanel ui:field="paymentDetailsPanel">
 			<g:HTMLPanel>
-				<div>
+				<div style="padding:4px">
 					<g:Label styleName="centerPanelHeadings ">Payment Details</g:Label>
 				</div>
-				<div>
-					<g:Label styleName="controlPanelHeadings">User specific Payment Details here</g:Label>
+				<div style="padding-left:4px">
+					<g:FlowPanel ui:field="panelPaymentTerms"></g:FlowPanel>
+					<g:Label ui:field="lblPaymentTerms" styleName="blue">Payment Terms</g:Label>
+					<g:RadioButton ui:field="radioMonthlyPayments" name="paymentsGroup">Monthly</g:RadioButton>
+					<g:RadioButton ui:field="radioQuarterlyPayments" name="paymentsGroup">Quarterly</g:RadioButton>
+					<g:RadioButton ui:field="radioYearlyPayments" name="paymentsGroup">Yearly</g:RadioButton>
+
 				</div>
 			</g:HTMLPanel>
 		</g:FlowPanel>
-		
+
 		<div style="width:100%">
-			<g:Label styleName="labelStyle centeredText blue bold hover" ui:field="btnBack">Back</g:Label>
+			<g:Label styleName="labelStyle centeredText blue bold hover"
+				ui:field="btnBack">Back</g:Label>
 		</div>
 
+		<div style="padding:5px">
+		<g:Button styleName="btnStyle" ui:field="btnUpdate"> update </g:Button>
+		</div>
 	</g:HTMLPanel>
 </ui:UiBinder> 

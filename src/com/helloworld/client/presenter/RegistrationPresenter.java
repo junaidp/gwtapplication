@@ -16,6 +16,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.helloworld.client.HelloServiceAsync;
 import com.helloworld.client.view.ApplicationConstants;
 import com.helloworld.client.view.widgets.LoadingPopup;
+import com.helloworld.shared.entity.MyAccountEntity;
 import com.helloworld.shared.entity.UserEntity;
 import com.helloworld.shared.utility.RegistratonFieldVerifier;
 
@@ -137,6 +138,10 @@ public class RegistrationPresenter implements Presenter
 		user.setPassword(display.getPassword().getText());
 		user.setUserName(display.getUserName().getText());
 		user.setName(display.getName().getText());
+		
+		MyAccountEntity myAccountEntity = new MyAccountEntity();
+		user.setMyAccountId(myAccountEntity);
+		
 		RegistratonFieldVerifier regFieldVerifier = new RegistratonFieldVerifier();
 		if(regFieldVerifier.registratonFieldsVerifid(display)){
 			addUserInDb(user);

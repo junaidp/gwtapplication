@@ -58,6 +58,7 @@ import com.helloworld.client.view.CenterPanels.DashboardView;
 import com.helloworld.client.view.CenterPanels.SearchDataView;
 import com.helloworld.client.view.MyDashboard.MyAccountViews.MyAccountView;
 import com.helloworld.client.view.MyDashboard.MyAccountViews.ViewPlanView;
+import com.helloworld.shared.entity.GlobalPreferencesEntity;
 import com.helloworld.shared.entity.UserEntity;
 
 
@@ -69,12 +70,14 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 	private VerticalPanel center;
 	private UserEntity loggedInUser;
 	private HeaderPresenter headerPresenter;
+	private GlobalPreferencesEntity globalPreferencesEntity;
 	
 	Presenter presenter = null;
 
 	public AppController(HelloServiceAsync rpcService, HandlerManager eventBus) {
 		this.eventBus = eventBus;
 		this.rpcService = rpcService;
+	
 
 		bind();
 	}
@@ -87,6 +90,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 				new MainEventHandler() {
 			public void onMain(MainEvent event) {
 				loggedInUser = event.getUser();
+				globalPreferencesEntity =event.getGlobalPreferences();
 				History.newItem(ApplicationConstants.TOKEN_MAIN);
 			}
 		}); 
@@ -177,7 +181,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 	
 	private void setFooter() {
 		FooterView footerView = new FooterView();
-		Presenter presenter = new FooterPresenter(rpcService, eventBus, footerView);
+		Presenter presenter = new FooterPresenter(rpcService, eventBus, footerView, globalPreferencesEntity);
 		HasWidgets container = RootPanel.get("footerContainer");
 		container.clear();
 		presenter.go(container);
@@ -292,7 +296,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 			}
 			
 			if (token.equals(ApplicationConstants.TOKEN_VIEW_PLAN)) {
-				presenter = new ViewPlanPresenter(rpcService, eventBus, new ViewPlanView());
+				presenter = new ViewPlanPresenter(rpcService, eventBus, new ViewPlanView(), globalPreferencesEntity, loggedInUser);
 				if (presenter != null) {
 					presenter.go(container);
 				}

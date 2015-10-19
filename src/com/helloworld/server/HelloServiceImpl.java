@@ -10,6 +10,8 @@ import javax.servlet.http.HttpSession;
 import com.helloworld.client.HelloService;
 import com.helloworld.client.view.ApplicationConstants;
 import com.helloworld.database.MyRdbHelper;
+import com.helloworld.shared.entity.GlobalPreferencesEntity;
+import com.helloworld.shared.entity.MyAccountEntity;
 import com.helloworld.shared.entity.UserEntity;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
@@ -115,6 +117,23 @@ HelloService {
 		}
 		return logoUrl;
 
+	}
+
+	@Override
+	public GlobalPreferencesEntity fetchGlobalPreferences() throws Exception {
+		return rdbHelper.fetchGlobalPreferences();
+	}
+
+	@Override
+	public String updateGlobalPreferences(
+			GlobalPreferencesEntity globalPreferencesEntity) throws Exception {
+		return rdbHelper.updateGlobalPreferences(globalPreferencesEntity);
+	}
+
+	@Override
+	public String updateMyAccount(MyAccountEntity myAccountEntity)
+			throws Exception {
+		return rdbHelper.updateMyAccount(myAccountEntity);
 	}
 
 
