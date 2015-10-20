@@ -22,6 +22,8 @@ public class ApplicationConstants {
 	public static final String TOKEN_FILE_UPLOAD = "fileUpload";
 	public static final String TOKEN_MY_ACCOUNT = "myAccount";
 	public static final String TOKEN_VIEW_PLAN = "viewPlan";
+	public static final String TOKEN_ADMIN = "admin";
+	
 	
 	///FIELD VERIFIERS///
 	public static final String INVALID_USERNAME = "username invalid";

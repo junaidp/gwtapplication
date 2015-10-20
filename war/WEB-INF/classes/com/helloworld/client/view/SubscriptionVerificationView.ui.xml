@@ -14,7 +14,7 @@
 			</div>
 			<div style="padding:5px; padding-top:5px">
 				<g:TextBox styleName="textBoxStyle inLine" ui:field="email"
-					text="test@test.com">
+					text="admin@email.com">
 				</g:TextBox>
 			</div>
 			<div style="padding-left:200px">

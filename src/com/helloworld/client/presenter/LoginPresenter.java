@@ -14,6 +14,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.helloworld.client.HelloServiceAsync;
+import com.helloworld.client.event.AdminEvent;
 import com.helloworld.client.event.MainEvent;
 import com.helloworld.client.event.RegistrationEvent;
 import com.helloworld.client.view.ApplicationConstants;
@@ -74,17 +75,14 @@ public class LoginPresenter implements Presenter
 				}
 				if(user==null){
 					display.getLblError().setText(ApplicationConstants.USERNAME_PASSWORD_NOT_MATCH);
-				}else{
+				}else if(user.isAdmin()){
+					eventBus.fireEvent(new AdminEvent());
+				}
+				else{
 					fetchGlobalPreferences(user);
 					
-					
 				}
-
-
 			}
-
-			
-
 			@Override
 			public void onFailure(Throwable caught) {
 				if(loadingPopup!=null){

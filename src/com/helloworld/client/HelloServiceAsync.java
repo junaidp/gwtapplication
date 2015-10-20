@@ -23,4 +23,5 @@ public interface HelloServiceAsync {
 	void fetchGlobalPreferences(AsyncCallback<GlobalPreferencesEntity> callback);
 	void updateGlobalPreferences(GlobalPreferencesEntity globalPreferencesEntity, AsyncCallback<String> callback);
 	void updateMyAccount(MyAccountEntity myAccountEntity, AsyncCallback<String> callback);
+	void logOut(AsyncCallback<String> callback);
 }

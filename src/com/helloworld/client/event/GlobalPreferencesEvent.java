@@ -6,10 +6,9 @@ import com.helloworld.shared.entity.UserEntity;
 		public class GlobalPreferencesEvent extends GwtEvent<GlobalPreferencesEventHandler> {
 			
 		public static Type<GlobalPreferencesEventHandler> TYPE = new Type<GlobalPreferencesEventHandler>();
-		UserEntity user ;
 		
-		public GlobalPreferencesEvent(UserEntity loggedInUser) {
-			this.user = loggedInUser;
+		public GlobalPreferencesEvent() {
+			
 		}
 
 		@Override
@@ -23,9 +22,7 @@ import com.helloworld.shared.entity.UserEntity;
 			
 		}
 		
-		public UserEntity getUser() {
-			return user;
-		}
+	
 
 	}
 

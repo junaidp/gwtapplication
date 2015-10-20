@@ -25,4 +25,5 @@ public interface HelloService extends RemoteService {
 	GlobalPreferencesEntity fetchGlobalPreferences() throws Exception;
 	String updateGlobalPreferences(GlobalPreferencesEntity globalPreferencesEntity) throws Exception;
 	String updateMyAccount (MyAccountEntity myAccountEntity)throws Exception;
+	String logOut() throws Exception;
 }

@@ -27,19 +27,19 @@
 							username
 						</g:Label>
 						<g:HorizontalPanel>
-							<g:TextBox ui:field="txtUserName" width="250px" height="20px" text="test"/>
+							<g:TextBox ui:field="txtUserName" width="250px" height="20px" text="admin"/>
 							<g:Hyperlink styleName="register">
 							</g:Hyperlink>
 						</g:HorizontalPanel>
 					</g:VerticalPanel>
 
 					<g:VerticalPanel styleName="fieldsStyle">
-						<g:Label ui:field=" lblPassword " width="50px" text="Password" >
+						<g:Label ui:field=" lblPassword " width="50px" text="admin" >
 							password
 						</g:Label>
 						<g:HorizontalPanel>
 							<g:PasswordTextBox ui:field="txtPassword"
-								width="250px" height="20px" text="test"/>
+								width="250px" height="20px" text="admin"/>
 							<g:Hyperlink styleName="register"></g:Hyperlink>
 						</g:HorizontalPanel>
 					</g:VerticalPanel>

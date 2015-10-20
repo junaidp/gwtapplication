@@ -40,6 +40,9 @@ import javax.persistence.Table;
 		@JoinColumn(name="myAccountId")
 		@ManyToOne( fetch = FetchType.LAZY )
 		private MyAccountEntity myAccountId;
+		
+		@Column(name="isAdmin")
+		private boolean isAdmin;
 
 		public int getUserId() {
 			return userId;
@@ -91,6 +94,14 @@ import javax.persistence.Table;
 
 		public void setMyAccountId(MyAccountEntity myAccountId) {
 			this.myAccountId = myAccountId;
+		}
+
+		public boolean isAdmin() {
+			return isAdmin;
+		}
+
+		public void setAdmin(boolean isAdmin) {
+			this.isAdmin = isAdmin;
 		}
 		
 	

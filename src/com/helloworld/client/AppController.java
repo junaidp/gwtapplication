@@ -8,6 +8,8 @@ import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.helloworld.client.event.AdminEvent;
+import com.helloworld.client.event.AdminEventHandler;
 import com.helloworld.client.event.DashboardAccordionEvent;
 import com.helloworld.client.event.DashboardAccordionEventHandler;
 import com.helloworld.client.event.DashboardEvent;
@@ -28,6 +30,7 @@ import com.helloworld.client.event.SubscriptionVerificationEvent;
 import com.helloworld.client.event.SubscriptionVerificationEventHandler;
 import com.helloworld.client.event.ViewPlanEvent;
 import com.helloworld.client.event.ViewPlanEventHandler;
+import com.helloworld.client.presenter.AdminPresenter;
 import com.helloworld.client.presenter.DashboardAccordionPresenter;
 import com.helloworld.client.presenter.DashboardPortalPresenter;
 import com.helloworld.client.presenter.DashboardPresenter;
@@ -43,6 +46,7 @@ import com.helloworld.client.presenter.RegistrationPresenter;
 import com.helloworld.client.presenter.SearchDataPresenter;
 import com.helloworld.client.presenter.SubscriptionVerificationPresenter;
 import com.helloworld.client.presenter.ViewPlanPresenter;
+import com.helloworld.client.view.AdminView;
 import com.helloworld.client.view.ApplicationConstants;
 import com.helloworld.client.view.FileUploadView;
 import com.helloworld.client.view.FooterView;
@@ -58,6 +62,7 @@ import com.helloworld.client.view.CenterPanels.DashboardView;
 import com.helloworld.client.view.CenterPanels.SearchDataView;
 import com.helloworld.client.view.MyDashboard.MyAccountViews.MyAccountView;
 import com.helloworld.client.view.MyDashboard.MyAccountViews.ViewPlanView;
+import com.helloworld.server.GlobalPreferencesXmlView;
 import com.helloworld.shared.entity.GlobalPreferencesEntity;
 import com.helloworld.shared.entity.UserEntity;
 
@@ -106,8 +111,14 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 		eventBus.addHandler(GlobalPreferencesEvent.TYPE,
 				new GlobalPreferencesEventHandler() {
 			public void onGlobalPreferences(GlobalPreferencesEvent event) {
-				loggedInUser = event.getUser();
 				History.newItem(ApplicationConstants.TOKEN_GLOBAL_PREFERENCES);
+			}
+		}); 
+		
+		eventBus.addHandler(AdminEvent.TYPE,
+				new AdminEventHandler() {
+			public void onAdmin(AdminEvent event) {
+				History.newItem(ApplicationConstants.TOKEN_ADMIN);
 			}
 		}); 
 		
@@ -210,7 +221,8 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 
 			if (token.equals(ApplicationConstants.TOKEN_MAIN)) {
 				presenter = new MainPresenter(rpcService, eventBus, new MainView(loggedInUser));
-				headerPresenter.setUser(loggedInUser);
+				headerPresenter.setData(loggedInUser, globalPreferencesEntity);
+				
 				if (presenter != null) {
 					presenter.go(container);
 				}
@@ -273,6 +285,8 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 			
 			if (token.equals(ApplicationConstants.TOKEN_GLOBAL_PREFERENCES)) {
 				presenter = new GlobalPreferencesPresenter(rpcService, eventBus, new GlobalPreferencesView());
+//				presenter = new GlobalPreferencesPresenter(rpcService, eventBus, new GlobalPreferencesXmlView());
+				
 				if (presenter != null) {
 					setContainer(container);
 					presenter.go(container);
@@ -297,6 +311,13 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 			
 			if (token.equals(ApplicationConstants.TOKEN_VIEW_PLAN)) {
 				presenter = new ViewPlanPresenter(rpcService, eventBus, new ViewPlanView(), globalPreferencesEntity, loggedInUser);
+				if (presenter != null) {
+					presenter.go(container);
+				}
+			}
+			
+			if (token.equals(ApplicationConstants.TOKEN_ADMIN)) {
+				presenter = new AdminPresenter(rpcService, eventBus, new AdminView());
 				if (presenter != null) {
 					presenter.go(container);
 				}

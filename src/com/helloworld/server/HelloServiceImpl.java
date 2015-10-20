@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import com.helloworld.client.HelloService;
 import com.helloworld.client.view.ApplicationConstants;
+import com.helloworld.client.view.ReadGlobalPreferencesXml;
 import com.helloworld.database.MyRdbHelper;
 import com.helloworld.shared.entity.GlobalPreferencesEntity;
 import com.helloworld.shared.entity.MyAccountEntity;
@@ -123,7 +124,7 @@ HelloService {
 	public GlobalPreferencesEntity fetchGlobalPreferences() throws Exception {
 		return rdbHelper.fetchGlobalPreferences();
 	}
-
+	
 	@Override
 	public String updateGlobalPreferences(
 			GlobalPreferencesEntity globalPreferencesEntity) throws Exception {
@@ -134,6 +135,13 @@ HelloService {
 	public String updateMyAccount(MyAccountEntity myAccountEntity)
 			throws Exception {
 		return rdbHelper.updateMyAccount(myAccountEntity);
+	}
+
+	@Override
+	public String logOut() throws Exception {
+		session=getThreadLocalRequest().getSession(true);
+		session.invalidate();
+		return "loggedOut";
 	}
 
 

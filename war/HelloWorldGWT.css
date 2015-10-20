@@ -156,6 +156,10 @@ html, body {
 	height: 28px;
 }
 
+.point{
+	cursor: pointer;
+}
+
 .linkStyle {
 	font: arial;
 	color: blue;

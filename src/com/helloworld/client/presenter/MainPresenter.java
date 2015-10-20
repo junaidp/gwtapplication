@@ -117,7 +117,7 @@ public class MainPresenter implements Presenter
 
 			@Override
 			public void onClick(ClickEvent event) {
-				eventBus.fireEvent(new GlobalPreferencesEvent(display.getLoggedInUser()));
+				eventBus.fireEvent(new GlobalPreferencesEvent());
 			}});
 		
 	}

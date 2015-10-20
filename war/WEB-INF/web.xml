@@ -53,7 +53,7 @@
   
   <servlet-mapping>
     <servlet-name>logoUploadServlet</servlet-name>
-    <url-pattern>*.gupld</url-pattern>
+    <url-pattern>*.gupld1</url-pattern>
   </servlet-mapping>
   
   <!-- Default page to serve -->

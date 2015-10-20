@@ -15,6 +15,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.helloworld.client.HelloServiceAsync;
 import com.helloworld.client.view.ApplicationConstants;
+import com.helloworld.client.view.widgets.DisplayAlert;
 import com.helloworld.client.view.widgets.LoadingPopup;
 import com.helloworld.shared.entity.MyAccountEntity;
 import com.helloworld.shared.entity.UserEntity;
@@ -169,7 +170,8 @@ public class RegistrationPresenter implements Presenter
 					display.clearFields();
 					}
 					
-					Window.alert(result);
+					new DisplayAlert(result);
+					History.newItem(ApplicationConstants.TOKEN_LOGIN);
 				}
 				
 			}
@@ -180,7 +182,7 @@ public class RegistrationPresenter implements Presenter
 					loadingPopup.remove();
 				}
 				Window.alert("Fail: addUser "+ caught.getMessage());
-
+				History.newItem(ApplicationConstants.TOKEN_LOGIN);
 			}
 		});
 	}

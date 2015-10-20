@@ -14,10 +14,10 @@
 		<div>
 
 			<g:MenuBar ui:field="mainMenuBar">
-				<g:MenuItem>
+				<g:MenuItem ui:field="menuHome">
 					Home
 					<g:MenuBar vertical="true">
-						<g:MenuItem>Demo</g:MenuItem>
+						
 					</g:MenuBar>
 				</g:MenuItem>
 			</g:MenuBar>

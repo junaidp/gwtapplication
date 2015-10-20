@@ -1,15 +1,23 @@
 package com.helloworld.client.presenter;
 
+import org.eclipse.jetty.server.Authentication.User;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.HandlerManager;
+import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.MenuBar;
+import com.google.gwt.user.client.ui.MenuItem;
 import com.google.gwt.user.client.ui.Widget;
 import com.helloworld.client.HelloService;
 import com.helloworld.client.HelloServiceAsync;
+import com.helloworld.client.event.MainEvent;
+import com.helloworld.client.view.ApplicationConstants;
+import com.helloworld.shared.entity.GlobalPreferencesEntity;
 import com.helloworld.shared.entity.UserEntity;
 
 public class HeaderPresenter implements Presenter 
@@ -17,18 +25,23 @@ public class HeaderPresenter implements Presenter
 {
 	
 	private final Display display;
+	private UserEntity loggedInUser ;
+	private final HandlerManager eventBus;
+	private GlobalPreferencesEntity globalPreferencesEntity ;
 
 	public interface Display 
 	{
 		Widget asWidget();
 		Image getImgLogo();
 		MenuBar getMainMenu();
+		MenuItem getMenuHome();
 		
 	}  
 
 	public HeaderPresenter(HelloServiceAsync rpcService, HandlerManager eventBus, Display view) 
 	{
 		this.display = view;
+		this.eventBus = eventBus;
 		
 	}
 
@@ -42,7 +55,7 @@ public class HeaderPresenter implements Presenter
 
 	public void bind() {
 		
-		fetchUsersLogo();
+//		fetchUsersLogo();
 
 	}
 
@@ -63,13 +76,32 @@ public class HeaderPresenter implements Presenter
 		});
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void setHandlers() {
+		
+		display.getMenuHome().setCommand(new Command() {
+			
+			@Override
+			public void execute() {
+				if(loggedInUser!=null && !loggedInUser.isAdmin()){
+				eventBus.fireEvent(new MainEvent(loggedInUser, globalPreferencesEntity));
+				}
+			}
+		});
 		
 	}
 
 	public void setUser(UserEntity loggedInUser) {
-//		display.getMainMenu().addItem(new MenuItem(loggedInUser.getName(), true));
+		
+		
+	}
+
+	public void setData(UserEntity loggedInUser,
+			GlobalPreferencesEntity globalPreferencesEntity) {
+		this.loggedInUser = loggedInUser;
+		this.globalPreferencesEntity = globalPreferencesEntity;
+		
 		
 	}
 	
