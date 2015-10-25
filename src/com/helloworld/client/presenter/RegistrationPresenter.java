@@ -139,6 +139,7 @@ public class RegistrationPresenter implements Presenter
 		user.setPassword(display.getPassword().getText());
 		user.setUserName(display.getUserName().getText());
 		user.setName(display.getName().getText());
+		user.setStatus(ApplicationConstants.ACTIVE);
 		
 		MyAccountEntity myAccountEntity = new MyAccountEntity();
 		user.setMyAccountId(myAccountEntity);

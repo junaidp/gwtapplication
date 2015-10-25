@@ -23,6 +23,7 @@ public class ApplicationConstants {
 	public static final String TOKEN_MY_ACCOUNT = "myAccount";
 	public static final String TOKEN_VIEW_PLAN = "viewPlan";
 	public static final String TOKEN_ADMIN = "admin";
+	public static final String TOKEN_FORGOT_PASSWORD = "forgotPassword";
 	
 	
 	///FIELD VERIFIERS///
@@ -39,7 +40,15 @@ public class ApplicationConstants {
 	public static final String USER_ADDED = "User Added";
 	public static final String USERNAME_PASSWORD_NOT_MATCH = "username/password do not match";
 	public static final String USER_UPDATED = "record updated";
-		
+	public static final String ENTER_REGISTERED_EMAIL = "Enter your registered email";
+	public static final String ENTER_USERNAME = "Enter username";
+	public static final String ENTER_PASSWORD = "Enter password";
+	public static final int BLOCK = 2;
+	public static final int ACTIVE = 1;
+	public static final String ACCOUNT_INACTIVATED = "Account Inactivated";
+	public static final String USER_NOT_FOUND = "Username not found";
+	public static final String CONTACT_ADMIN = "Your account is inactive, please contact your Administrator";
+	
 	
 	//GLOBAL PREFERENCES
 	public static final String VIEW_PLAN = "View Plan";
@@ -49,8 +58,7 @@ public class ApplicationConstants {
 	public static final String MY_ACCOUNT = "My Account";
 	public static final String GLOBALPREFERENCESUPDATED = "Global Preferences Updated";
 	public static final String MY_ACCOUNT_UPDATED = "Account updated";
-	
-	
+
 	
 
 }

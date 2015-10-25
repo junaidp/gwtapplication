@@ -32,8 +32,8 @@
 			</g:FlowPanel>
 		</g:HorizontalSplitPanel>
 		<div style="padding-left60%">
-		<g:Button styleName="btnStyle inLine" ui:field="btnCancel"> Cancel </g:Button>
-		<g:Button styleName="btnStyle inLine" ui:field="btnSave"> Save </g:Button>
+		<g:Button styleName="button primary inLine" ui:field="btnCancel"> Cancel </g:Button>
+		<g:Button styleName="button primary inLine" ui:field="btnSave"> Save </g:Button>
 		</div>	
 	</g:HTMLPanel>
 </ui:UiBinder> 

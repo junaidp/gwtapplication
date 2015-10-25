@@ -7,10 +7,10 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 			
 		public static Type<DashboardEventHandler> TYPE = new Type<DashboardEventHandler>();
 		
-		VerticalPanel center;
 		
-		public DashboardEvent(VerticalPanel center){
-			this.center = center;
+		
+		public DashboardEvent(){
+			
 		}
 
 		@Override
@@ -24,14 +24,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 			
 		}
 
-		public VerticalPanel getCenter() {
-			return center;
-		}
-
-		public void setCenter(VerticalPanel center) {
-			this.center = center;
-		}
-
+	
 	}
 
 

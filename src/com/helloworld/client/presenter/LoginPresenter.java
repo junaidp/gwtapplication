@@ -4,6 +4,7 @@ package com.helloworld.client.presenter;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerManager;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Anchor;
@@ -36,7 +37,7 @@ public class LoginPresenter implements Presenter
 	{
 		Widget asWidget();
 		com.google.gwt.user.client.ui.Button getBtnSubmit();
-
+		Label getBtnForgotPassword();
 		TextBox getTxtUserName();
 		PasswordTextBox getTxtPassword();
 		Label getLblError();
@@ -121,7 +122,13 @@ public class LoginPresenter implements Presenter
 			public void onClick(ClickEvent event) {
 				signIn();
 			}});
+		
+		display.getBtnForgotPassword().addClickHandler(new ClickHandler(){
 
+			@Override
+			public void onClick(ClickEvent event) {
+				History.newItem(ApplicationConstants.TOKEN_FORGOT_PASSWORD);
+			}});
 
 	}
 }

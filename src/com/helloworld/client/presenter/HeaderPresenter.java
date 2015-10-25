@@ -3,11 +3,14 @@ package com.helloworld.client.presenter;
 import org.eclipse.jetty.server.Authentication.User;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.FocusPanel;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.MenuBar;
@@ -33,8 +36,7 @@ public class HeaderPresenter implements Presenter
 	{
 		Widget asWidget();
 		Image getImgLogo();
-		MenuBar getMainMenu();
-		MenuItem getMenuHome();
+		FocusPanel getMenuHome();
 		
 	}  
 
@@ -80,15 +82,15 @@ public class HeaderPresenter implements Presenter
 	@Override
 	public void setHandlers() {
 		
-		display.getMenuHome().setCommand(new Command() {
-			
+		display.getMenuHome().addClickHandler(new ClickHandler(){
+
 			@Override
-			public void execute() {
+			public void onClick(ClickEvent event) {
 				if(loggedInUser!=null && !loggedInUser.isAdmin()){
-				eventBus.fireEvent(new MainEvent(loggedInUser, globalPreferencesEntity));
-				}
-			}
-		});
+					eventBus.fireEvent(new MainEvent(loggedInUser, globalPreferencesEntity));
+					}
+			}});
+		
 		
 	}
 

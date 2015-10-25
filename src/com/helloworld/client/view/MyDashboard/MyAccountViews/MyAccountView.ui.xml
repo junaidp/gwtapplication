@@ -5,6 +5,7 @@
 	
 	</ui:style>
 	<g:HTMLPanel>
+	<div style="padding-top:50px">
 		<table>
 			<tr>
 				<td>
@@ -36,6 +37,7 @@
 		<div>
 			<g:Label styleName="labelStyle centeredText blue bold hover"
 				ui:field="btnBack">Back</g:Label>
+		</div>
 		</div>
 	</g:HTMLPanel>
 </ui:UiBinder> 

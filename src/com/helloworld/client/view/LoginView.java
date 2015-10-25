@@ -3,7 +3,6 @@ package com.helloworld.client.view;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
@@ -25,10 +24,14 @@ public class LoginView extends Composite implements Display  {
 	@UiField PasswordTextBox txtPassword;
 	@UiField Button btnSubmit;
 	@UiField Label lblError;
+	@UiField Label btnForgotPassword;
 	
 	
 	public LoginView() {
 		initWidget(uiBinder.createAndBindUi(this));
+		txtUserName.getElement().setPropertyString("placeholder", ApplicationConstants.ENTER_USERNAME);
+		txtPassword.getElement().setPropertyString("placeholder", ApplicationConstants.ENTER_PASSWORD);
+
 	}
 
 	public TextBox getTxtUserName() {
@@ -61,6 +64,10 @@ public class LoginView extends Composite implements Display  {
 	
 	public Label getLblError() {
 		return lblError;
+	}
+
+	public Label getBtnForgotPassword() {
+		return btnForgotPassword;
 	}
 
 

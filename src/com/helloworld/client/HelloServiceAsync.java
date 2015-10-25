@@ -24,4 +24,8 @@ public interface HelloServiceAsync {
 	void updateGlobalPreferences(GlobalPreferencesEntity globalPreferencesEntity, AsyncCallback<String> callback);
 	void updateMyAccount(MyAccountEntity myAccountEntity, AsyncCallback<String> callback);
 	void logOut(AsyncCallback<String> callback);
+	void fetchUserStatus(String userName, AsyncCallback<String> callback);
+	void inactivateAccount (String userName, AsyncCallback<String> callback);
+	void sendActivationEmailForgotPassword(String userName,AsyncCallback<String> callback);
+	
 }

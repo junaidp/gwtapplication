@@ -36,6 +36,7 @@ import com.helloworld.client.presenter.DashboardPortalPresenter;
 import com.helloworld.client.presenter.DashboardPresenter;
 import com.helloworld.client.presenter.FileUploadPresenter;
 import com.helloworld.client.presenter.FooterPresenter;
+import com.helloworld.client.presenter.ForgotPasswordPresenter;
 import com.helloworld.client.presenter.GlobalPreferencesPresenter;
 import com.helloworld.client.presenter.HeaderPresenter;
 import com.helloworld.client.presenter.LoginPresenter;
@@ -50,6 +51,7 @@ import com.helloworld.client.view.AdminView;
 import com.helloworld.client.view.ApplicationConstants;
 import com.helloworld.client.view.FileUploadView;
 import com.helloworld.client.view.FooterView;
+import com.helloworld.client.view.ForgotPasswordView;
 import com.helloworld.client.view.GlobalPreferencesView;
 import com.helloworld.client.view.HeaderView;
 import com.helloworld.client.view.LoginView;
@@ -72,7 +74,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 
 	private final HelloServiceAsync rpcService; 
 	private HasWidgets container;
-	private VerticalPanel center;
+//	private VerticalPanel center;
 	private UserEntity loggedInUser;
 	private HeaderPresenter headerPresenter;
 	private GlobalPreferencesEntity globalPreferencesEntity;
@@ -125,7 +127,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 		eventBus.addHandler(DashboardEvent.TYPE,
 				new DashboardEventHandler() {
 			public void onDashboard(DashboardEvent event) {
-				center = event.getCenter();
+//				center = event.getCenter();
 				History.newItem(ApplicationConstants.TOKEN_DASHBOARD);
 			}
 		}); 
@@ -133,7 +135,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 		eventBus.addHandler(DashboardAccordionEvent.TYPE,
 				new DashboardAccordionEventHandler() {
 			public void onDashboardAccordion(DashboardAccordionEvent event) {
-				center = event.getCenter();
+//				center = event.getCenter();
 				History.newItem(ApplicationConstants.TOKEN_DASHBOARD_ACCORDION);
 			}
 		}); 
@@ -150,7 +152,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 		eventBus.addHandler(SearchDataEvent.TYPE,
 				new SearchDataEventHandler() {
 			public void onSearchData(SearchDataEvent event) {
-				center = event.getCenter();
+//				center = event.getCenter();
 				History.newItem(ApplicationConstants.TOKEN_SEARCHDATA);
 			}
 		}); 
@@ -239,6 +241,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 				presenter = new DashboardPresenter(rpcService, eventBus, new DashboardView());
 				if (presenter != null) {
 //					setContainer(center);
+					setContainer(container);
 					presenter.go(container);
 				}
 			}
@@ -247,6 +250,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 				presenter = new DashboardAccordionPresenter(rpcService, eventBus, new DashboardAccordion());
 				if (presenter != null) {
 //					setContainer(center);
+					setContainer(container);
 					presenter.go(container);
 				}
 			}
@@ -255,6 +259,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 				presenter = new DashboardPortalPresenter(rpcService, eventBus, new DashboardPortalView());
 				if (presenter != null) {
 //					setContainer(center);
+					setContainer(container);
 					presenter.go(container);
 				}
 			}
@@ -263,6 +268,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 				presenter = new SearchDataPresenter(rpcService, eventBus, new SearchDataView());
 				if (presenter != null) {
 //					setContainer(center);
+					setContainer(container);
 					presenter.go(container);
 				}
 			}
@@ -318,6 +324,13 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 			
 			if (token.equals(ApplicationConstants.TOKEN_ADMIN)) {
 				presenter = new AdminPresenter(rpcService, eventBus, new AdminView());
+				if (presenter != null) {
+					presenter.go(container);
+				}
+			}
+			
+			if (token.equals(ApplicationConstants.TOKEN_FORGOT_PASSWORD)) {
+				presenter = new ForgotPasswordPresenter(rpcService, eventBus, new ForgotPasswordView());
 				if (presenter != null) {
 					presenter.go(container);
 				}

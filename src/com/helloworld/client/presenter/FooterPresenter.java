@@ -1,10 +1,13 @@
 package com.helloworld.client.presenter;
 
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.History;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.FocusPanel;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
@@ -23,7 +26,7 @@ public class FooterPresenter implements Presenter
 	public interface Display 
 	{
 		Widget asWidget();
-		Label getLogOut();
+		FocusPanel getLogOut();
 		
 	}  
 
@@ -53,10 +56,12 @@ public class FooterPresenter implements Presenter
 			
 			@Override
 			public void onClick(ClickEvent event) {
+				
 				rpcService.logOut(new AsyncCallback<String>() {
 					
 					@Override
 					public void onSuccess(String result) {
+						
 						History.newItem(ApplicationConstants.TOKEN_LOGIN);
 					}
 					

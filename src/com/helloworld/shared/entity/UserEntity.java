@@ -1,6 +1,7 @@
 package com.helloworld.shared.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,12 +38,21 @@ import javax.persistence.Table;
 		@Column(name="email")
 		private String email;
 		
+		@Column(name="status")
+		private int status;
+		
+		@Column(name="tokenGeneratedDate")
+		private Date tokenGeneratedDate;
+		
 		@JoinColumn(name="myAccountId")
 		@ManyToOne( fetch = FetchType.LAZY )
 		private MyAccountEntity myAccountId;
 		
 		@Column(name="isAdmin")
 		private boolean isAdmin;
+		
+		@Column(name="token")
+		private String token;
 
 		public int getUserId() {
 			return userId;
@@ -102,6 +112,30 @@ import javax.persistence.Table;
 
 		public void setAdmin(boolean isAdmin) {
 			this.isAdmin = isAdmin;
+		}
+
+		public int getStatus() {
+			return status;
+		}
+
+		public void setStatus(int status) {
+			this.status = status;
+		}
+
+		public Date getTokenGeneratedDate() {
+			return tokenGeneratedDate;
+		}
+
+		public void setTokenGeneratedDate(Date tokenGeneratedDate) {
+			this.tokenGeneratedDate = tokenGeneratedDate;
+		}
+
+		public String getToken() {
+			return token;
+		}
+
+		public void setToken(String token) {
+			this.token = token;
 		}
 		
 	

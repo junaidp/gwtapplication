@@ -68,7 +68,7 @@ public class MainPresenter implements Presenter
 
 			@Override
 			public void onClick(ClickEvent event) {
-				eventBus.fireEvent(new DashboardEvent(display.getCenter()));
+				eventBus.fireEvent(new DashboardEvent());
 			}});
 		
 		display.getControlPanelContainer().getIntelligencePanel().getFocusPanel().addClickHandler(new ClickHandler(){

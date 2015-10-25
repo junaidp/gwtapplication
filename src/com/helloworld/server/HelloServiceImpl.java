@@ -144,5 +144,22 @@ HelloService {
 		return "loggedOut";
 	}
 
+	@Override
+	public String fetchUserStatus(String userName) throws Exception {
+		return rdbHelper.fetchUserStatus(userName);
+	}
+
+	@Override
+	public String inactivateAccount(String userName) throws Exception {
+		return rdbHelper.inactivateAccount(userName);
+	}
+
+	@Override
+	public String sendActivationEmailForgotPassword(String userName)
+			throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

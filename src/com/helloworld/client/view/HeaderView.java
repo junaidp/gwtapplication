@@ -4,6 +4,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FocusPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
@@ -22,9 +23,7 @@ public class HeaderView extends Composite implements Display {
 	@UiField
 	Image imgLogo;
 	@UiField
-	MenuBar mainMenuBar;
-	@UiField
-	MenuItem menuHome;
+	FocusPanel menuHome;
 	
 	public HeaderView() {
 		initWidget(uiBinder.createAndBindUi(this));
@@ -35,13 +34,8 @@ public class HeaderView extends Composite implements Display {
 		
 		return imgLogo;
 	}
-	public MenuBar getMainMenu() {
-		return mainMenuBar;
-	}
-	public void setMainMenu(MenuBar mainMenu) {
-		this.mainMenuBar = mainMenu;
-	}
-	public MenuItem getMenuHome() {
+	
+	public FocusPanel getMenuHome() {
 		return menuHome;
 	}
 	

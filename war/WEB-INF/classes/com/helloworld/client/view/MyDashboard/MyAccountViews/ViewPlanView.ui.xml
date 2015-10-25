@@ -5,6 +5,7 @@
 	
 	</ui:style>
 	<g:HTMLPanel>
+	<div style="padding-top:50px">
 		<g:FlowPanel ui:field="planTypePanel">
 			<g:HTMLPanel>
 				<div style="padding:4px">
@@ -38,7 +39,8 @@
 		</div>
 
 		<div style="padding:5px">
-		<g:Button styleName="btnStyle" ui:field="btnUpdate"> update </g:Button>
+		<g:Button styleName="button primary" ui:field="btnUpdate"> update </g:Button>
+		</div>
 		</div>
 	</g:HTMLPanel>
 </ui:UiBinder> 

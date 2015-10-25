@@ -7,60 +7,78 @@
 	}
 	</ui:style>
 	<g:HTMLPanel>
-		<div class="browserCenter">
-	<!-- 	<div class="loginArea" ui:field="loginArea"	style = "width: 855px ,margin:0 auto, text-align: center">-->
-			<g:HorizontalPanel height="150px">
-				<g:Label />
-				<g:VerticalPanel styleName="border" width="500px">
-					<g:HTMLPanel styleName="headerSignin" height="30px"
-						width="500px">
-						Sign in
-					</g:HTMLPanel>
+		<head>
+			<link href="Metro-UI-CSS-master/build/css/metro.css" rel="stylesheet" />
+			<link href="Metro-UI-CSS-master/build/css/metro.min.css" rel="stylesheet" />
+			<link href="Metro-UI-CSS-master/build/css/metro.responsive" rel="stylesheet" />
+			<link href="Metro-UI-CSS-master/build/css/metro.schemes" rel="stylesheet" />
+			<link href="Metro-UI-CSS-master/build/css/metro.icons" rel="stylesheet" />
 
-					<g:VerticalPanel styleName="fieldsStyle">
-						<g:HorizontalPanel width="290px">
-							<g:Label ui:field="lblError" styleName="error"
-								height="16px" width="279px" />
-						</g:HorizontalPanel>
-						<g:Label ui:field=" lblUserName " width="50px" 
-							text="Username">
-							username
-						</g:Label>
-						<g:HorizontalPanel>
-							<g:TextBox ui:field="txtUserName" width="250px" height="20px" text="admin"/>
-							<g:Hyperlink styleName="register">
-							</g:Hyperlink>
-						</g:HorizontalPanel>
-					</g:VerticalPanel>
+			<script src="jquery.js"></script>
+			<script src="Metro-UI-CSS-master/build/js/metro.js"></script>
+		</head>
+		<body class="metro">
+			<div style="padding-left:40%; padding-top:15%">
+				<div class="padding20">
+					<form>
+						<h4 class="text-light">Login</h4>
+						<div>
+							<g:Label ui:field="lblError" styleName="error"></g:Label>
+						</div>
+						<div>
+							<span class="mif-user prepend-icon"></span>
+							<g:TextBox ui:field="txtUserName" styleName="input-control text"
+								text="user1" />
+						</div>
+						<div>
+							<span class="mif-lock prepend-icon"></span>
+							<g:PasswordTextBox ui:field="txtPassword" text="user1"
+								styleName="input-control text" />
+						</div>
 
-					<g:VerticalPanel styleName="fieldsStyle">
-						<g:Label ui:field=" lblPassword " width="50px" text="admin" >
-							password
-						</g:Label>
-						<g:HorizontalPanel>
-							<g:PasswordTextBox ui:field="txtPassword"
-								width="250px" height="20px" text="admin"/>
-							<g:Hyperlink styleName="register"></g:Hyperlink>
-						</g:HorizontalPanel>
-					</g:VerticalPanel>
-					<g:HorizontalPanel spacing="10">
-						<g:HorizontalPanel width="100px"></g:HorizontalPanel>
-						<g:Button ui:field="btnSubmit" styleName="btnStyle"
-							width="90px" height="28px">
-							Sign in
-						</g:Button>
-					<g:VerticalPanel>
-					<g:Anchor styleName="hover" ui:field="forgotPassword">Forgot password</g:Anchor>
-					</g:VerticalPanel>
-					
-					</g:HorizontalPanel>
+						<div class="form-actions">
+							<g:Button styleName="button primary" ui:field="btnSubmit">Login</g:Button>
 
-				</g:VerticalPanel>
-			</g:HorizontalPanel>
-		</div>
-		<div>
-		</div>
-		
+						</div>
+						<div>
+							<g:Label styleName="labelStyle centeredText blue bold hover"
+								ui:field="btnForgotPassword">Forgot password</g:Label>
+						</div>
+					</form>
+				</div>
+
+			</div>
+		</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<!-- <g:HorizontalPanel height="150px"> <g:Label /> <g:VerticalPanel styleName="border" 
+			width="500px"> <g:HTMLPanel styleName="headerSignin" height="30px" width="500px"> 
+			Sign in </g:HTMLPanel> <g:VerticalPanel styleName="fieldsStyle"> <g:HorizontalPanel 
+			width="290px"> <g:Label ui:field="lblError" styleName="error" height="16px" 
+			width="279px" /> </g:HorizontalPanel> <g:Label ui:field=" lblUserName " width="50px" 
+			text="Username"> username </g:Label> <g:HorizontalPanel> <g:TextBox ui:field="txtUserName" 
+			width="250px" height="20px" text="admin"/> <g:Hyperlink styleName="register"> 
+			</g:Hyperlink> </g:HorizontalPanel> </g:VerticalPanel> <g:VerticalPanel styleName="fieldsStyle"> 
+			<g:Label ui:field=" lblPassword " width="50px" text="admin" > password </g:Label> 
+			<g:HorizontalPanel> <g:PasswordTextBox ui:field="txtPassword" width="250px" 
+			height="20px" text="admin"/> <g:Hyperlink styleName="register"></g:Hyperlink> 
+			</g:HorizontalPanel> </g:VerticalPanel> <g:HorizontalPanel spacing="10"> 
+			<g:HorizontalPanel width="100px"></g:HorizontalPanel> <g:Button ui:field="btnSubmit" 
+			styleName="btnStyle" width="90px" height="28px"> Sign in </g:Button> <g:VerticalPanel> 
+			<g:Anchor styleName="hover" ui:field="forgotPassword">Forgot password</g:Anchor> 
+			</g:VerticalPanel> </g:HorizontalPanel> </g:VerticalPanel> </g:HorizontalPanel> 
+			</div> <div> </div> -->
 	</g:HTMLPanel>
 
 </ui:UiBinder> 

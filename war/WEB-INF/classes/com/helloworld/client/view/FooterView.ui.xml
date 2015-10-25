@@ -5,10 +5,33 @@
 	
 	</ui:style>
 	<g:HTMLPanel width="100%">
-	<div style="width:100%; background-color:#F5F5F5" >
-	<g:HorizontalPanel ui:field="container" styleName="blueBackground" width="100%">
-	<g:Label styleName="headerSigninSmall point white" ui:field="logOut"> logout </g:Label>
-	</g:HorizontalPanel>
-	</div>
+
+		<head>
+			<link href="Metro-UI-CSS-master/build/css/metro.css" rel="stylesheet" />
+			<link href="Metro-UI-CSS-master/build/css/metro.min.css" rel="stylesheet" />
+			<link href="Metro-UI-CSS-master/build/css/metro.responsive" rel="stylesheet" />
+			<link href="Metro-UI-CSS-master/build/css/metro.schemes" rel="stylesheet" />
+			<script src="jquery.js"></script>
+			<script src="Metro-UI-CSS-master/build/js/metro.js"></script>
+		</head>
+		<body class="metro">
+			<div class="app-bar">
+				<a class="app-bar-element place-right">
+					<g:HTMLPanel>
+						<g:FocusPanel ui:field="logOut">
+							<g:HTMLPanel>
+								<div style="padding-left:20px; padding-right:20px">
+									Log off
+
+								</div>
+							</g:HTMLPanel>
+						</g:FocusPanel>
+					</g:HTMLPanel>
+				</a>
+				<span class="app-bar-divider"></span>
+			</div>
+		</body>
+
+
 	</g:HTMLPanel>
 </ui:UiBinder> 

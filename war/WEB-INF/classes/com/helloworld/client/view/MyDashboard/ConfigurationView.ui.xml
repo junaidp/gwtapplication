@@ -4,10 +4,26 @@
 	<ui:style>
 	
 	</ui:style>
-	<g:FocusPanel ui:field="panel">
+	<!-- 
+		<g:FocusPanel ui:field="panel">
 	<g:HTMLPanel ui:field="container">
 	<g:Label styleName="centerPanelHeadings" ui:field="heading"></g:Label>
 	<g:Label>Configuration Details</g:Label>
 	</g:HTMLPanel>
 	</g:FocusPanel>
-</ui:UiBinder> 
+	-->
+	<g:HTMLPanel>
+	<div class="tile">
+    <div class="tile-content slide-up  metro-tile-portal white">
+        <div class="slide">
+            Configuration
+        </div>
+        <div class="slide-over">
+           <div class="slideUpPanel">
+           Configuration Details
+           </div>
+        </div>
+    </div>
+</div>
+</g:HTMLPanel>
+	</ui:UiBinder>
