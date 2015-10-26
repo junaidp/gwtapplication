@@ -161,5 +161,25 @@ HelloService {
 		return null;
 	}
 
+	@Override
+	public boolean isLoggedInWithin20Mins(UserEntity user) throws Exception {
+		return rdbHelper.isLoggedInWithin20Mins(user);
+	}
+
+	@Override
+	public UserEntity fetchNewUser(String passwordToken) throws Exception {
+		return rdbHelper.fetchNewUser(passwordToken);
+	}
+
+	@Override
+	public String updatePassword(UserEntity user) throws Exception {
+		return rdbHelper.updatePassword(user);
+	}
+
+	@Override
+	public String emailUserName(String email) throws Exception {
+		return rdbHelper.emailUserName(email);
+	}
+
 
 }

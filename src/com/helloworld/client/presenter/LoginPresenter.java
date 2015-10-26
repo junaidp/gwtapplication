@@ -8,6 +8,7 @@ import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Anchor;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PasswordTextBox;
@@ -37,10 +38,11 @@ public class LoginPresenter implements Presenter
 	{
 		Widget asWidget();
 		com.google.gwt.user.client.ui.Button getBtnSubmit();
-		Label getBtnForgotPassword();
+		Anchor getBtnForgotPassword();
 		TextBox getTxtUserName();
 		PasswordTextBox getTxtPassword();
 		Label getLblError();
+		Anchor getBtnForgotUsername();
 	}  
 
 	public LoginPresenter(HelloServiceAsync rpcService, HandlerManager eventBus, Display view) 
@@ -129,7 +131,14 @@ public class LoginPresenter implements Presenter
 			public void onClick(ClickEvent event) {
 				History.newItem(ApplicationConstants.TOKEN_FORGOT_PASSWORD);
 			}});
-
+		
+		display.getBtnForgotUsername().addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				History.newItem(ApplicationConstants.TOKEN_FORGOT_USERNAME);
+			}
+		});
 	}
 }
 

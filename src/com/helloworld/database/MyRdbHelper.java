@@ -16,12 +16,15 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import org.joda.time.DateTime;
+import org.joda.time.Minutes;
 import org.mindrot.BCrypt;
 
 import com.helloworld.client.view.ApplicationConstants;
 import com.helloworld.shared.entity.GlobalPreferencesEntity;
 import com.helloworld.shared.entity.MyAccountEntity;
 import com.helloworld.shared.entity.UserEntity;
+
 
 public class MyRdbHelper {
 
@@ -43,8 +46,7 @@ public class MyRdbHelper {
 			if(user.getUserId()== 0){
 				existingUser = false;
 			}
-			String generatedPassword = user.getPassword();
-
+			
 			if(userNameAlreadyExist(session, user.getUserName(), user.getUserId())){
 				return ApplicationConstants.USERNAME_NOT_AVAILABLE;
 			}
@@ -56,6 +58,8 @@ public class MyRdbHelper {
 				String password = createBCrypt(user.getPassword());
 				user.setPassword(password);
 			}
+			String generatedPassword = user.getPassword();
+
 			user.setTokenGeneratedDate(new Date());
 			user.setToken(generatedPassword);
 			
@@ -301,9 +305,9 @@ public class MyRdbHelper {
 			if(crit.list().size()>0){
 				UserEntity user = (UserEntity) crit.list().get(0);
 				status = user.getStatus();
-				if(status==1){
-					sendActivationEmailForgotPassword(username);
-				}
+//				if(status==1){
+//					sendActivationEmailForgotPassword(username);
+//				}
 			}
 		}catch(Exception ex){
 			logger.warn(String.format("Exception occured in fetchUserStatus", ex.getLocalizedMessage()), ex);
@@ -372,7 +376,7 @@ public class MyRdbHelper {
 			message.setFrom(new InternetAddress("hyphenconsult@gmail.com"));
 			message.setRecipients(Message.RecipientType.TO,
 					InternetAddress.parse(user.getEmail()));
-			message.setSubject("TIE Account Password changed");
+			message.setSubject("Account Password changed");
 
 			message.setContent("Dear " + user.getName() +" <br></br> <br></br>"
 					+ "Your Password updated <br></br> <br></br>"
@@ -380,7 +384,9 @@ public class MyRdbHelper {
 					//					+" Your password must be at least 8 charcters long, should have atleast 1 digit(0-9) and should have an uppercase letter.<br></br>"
 					//					+" You secret question must be at least  8 characters long and should have an uppercase letter, You will need to answer the secret question if you ever forget your password.<br></br>"
 					+" To activate your account, please click on the link below.<br></br> <br></br>"
-					+" <a href= http://localhost:8080/tie/#"+ user.getToken()+">"+"Activate Account</a>","text/html" );
+//					+" <a href= http://localhost:8080/tie/#"+ user.getToken()+">"+"Activate Account</a>","text/html" );
+					+" <a href= http://127.0.0.1:8888/HelloWorldGWT.html?gwt.codesvr=127.0.0.1:9997#!"+ user.getToken()+">"+"Activate Account</a>","text/html" );
+					
 
 
 			Transport.send(message);
@@ -391,6 +397,127 @@ public class MyRdbHelper {
 			throw new RuntimeException(e);
 		}
 
+	}
+	
+	public UserEntity fetchNewUser(String token)throws Exception {
+		Session session = null;
+		UserEntity user = null;
+		try{
+			session = sessionFactory.openSession();
+			Criteria crit = session.createCriteria(UserEntity.class);
+			crit.add(Restrictions.eq("token", token));
+			crit.createAlias("myAccountId", "myAccount");
+
+		
+			if(crit.list().size()>0){
+				user =(UserEntity) crit.list().get(0);
+			}
+			return user;
+		}catch(Exception ex){
+			logger.warn(String.format("Exception occured in fetchNewUser", ex.getMessage()), ex);
+			throw new Exception("Exception occured in fetchNewUser");
+		}
+		finally{
+			session.close();
+		}
+		
+	}
+	
+	public Boolean isLoggedInWithin20Mins(UserEntity user) throws Exception {
+
+		DateTime passwordGenerateDate = new DateTime(user.getTokenGeneratedDate()); 
+		DateTime currentDate = new DateTime(); //current date
+		Minutes diff =  Minutes.minutesBetween(passwordGenerateDate, currentDate);
+
+		if (diff.getMinutes()>20){
+			return false;
+		}else 
+			return true;
+
+	}
+
+
+	public String updatePassword(UserEntity user)throws Exception {
+		Session session = null;
+		try{
+		String password = createBCrypt(user.getPassword());
+		user.setPassword(password);
+	
+			session = sessionFactory.openSession();
+			session.update(user);
+			session.flush();
+			return ApplicationConstants.PASSWORD_UPDATED;
+		}catch(Exception ex){
+			logger.warn(String.format("Exception occured in updatePassword", ex.getMessage()), ex);
+			throw new Exception("Exception occured in updatePassword");
+		}
+		
+	}
+
+
+	public String emailUserName(String email)throws Exception {
+		Session session = null;
+		String userName;
+		try{
+			
+			session = sessionFactory.openSession();
+			Criteria crit = session.createCriteria(UserEntity.class);
+			crit.add(Restrictions.eq("email", email));
+			if(crit.list().size()>0){
+				UserEntity user = (UserEntity) crit.list().get(0);
+				userName = user.getUserName();
+				emailUserNameToUser(user);
+				return ApplicationConstants.USERNAME_EMAIL_SENT;
+			}else{
+				return ApplicationConstants.EMAIL_NOT_VALID;
+			}
+			
+		}catch(Exception ex){
+			logger.warn(String.format("Exception occured in updatePassword", ex.getMessage()), ex);
+			throw new Exception("Exception occured in updatePassword");
+		}
+		
+	}
+
+
+	private void emailUserNameToUser(UserEntity user) {
+		final String username = "hyphenconsult@gmail.com";
+		final String password = "ilzhkshpmtqduzuc";
+
+		Properties props = new Properties();
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.host", "smtp.gmail.com");
+		props.put("mail.smtp.port", "587");
+
+		javax.mail.Session sessionMail = javax.mail.Session.getInstance(props,
+				new javax.mail.Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(username, password);
+			}
+		});
+
+		try {
+
+			Message message = new MimeMessage(sessionMail);
+			message.setFrom(new InternetAddress("hyphenconsult@gmail.com"));
+			message.setRecipients(Message.RecipientType.TO,
+					InternetAddress.parse(user.getEmail()));
+			message.setSubject("Requested Username");
+
+			message.setContent("Dear " + user.getName() +" <br></br> <br></br>"
+					+ "As per your request ,please find below your username <br></br> <br></br>"
+					+ user.getUserName()+" <br></br> <br></br>"
+					+ "Thank You <br></br>"
+					+ "","text/html" );
+					
+			Transport.send(message);
+
+			System.out.println("email sent forgot username");
+
+		} catch (MessagingException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 }

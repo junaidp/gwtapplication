@@ -27,5 +27,9 @@ public interface HelloServiceAsync {
 	void fetchUserStatus(String userName, AsyncCallback<String> callback);
 	void inactivateAccount (String userName, AsyncCallback<String> callback);
 	void sendActivationEmailForgotPassword(String userName,AsyncCallback<String> callback);
+	void isLoggedInWithin20Mins(UserEntity user,AsyncCallback<Boolean> asyncCallback);
+	void fetchNewUser(String createPasswordToken, AsyncCallback<UserEntity> asyncCallback);
+	void updatePassword(UserEntity user, AsyncCallback<String> asyncCallback);
+	void emailUserName(String email, AsyncCallback<String> asyncCallback);
 	
 }

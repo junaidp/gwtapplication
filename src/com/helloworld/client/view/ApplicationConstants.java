@@ -24,6 +24,8 @@ public class ApplicationConstants {
 	public static final String TOKEN_VIEW_PLAN = "viewPlan";
 	public static final String TOKEN_ADMIN = "admin";
 	public static final String TOKEN_FORGOT_PASSWORD = "forgotPassword";
+	public static final String TOKEN_FORGOT_USERNAME = "forgotUsername";
+
 	
 	
 	///FIELD VERIFIERS///
@@ -48,6 +50,9 @@ public class ApplicationConstants {
 	public static final String ACCOUNT_INACTIVATED = "Account Inactivated";
 	public static final String USER_NOT_FOUND = "Username not found";
 	public static final String CONTACT_ADMIN = "Your account is inactive, please contact your Administrator";
+	public static final String PASSWORD_UPDATED = "Password updated";
+	public static final String EMAIL_NOT_VALID = "This Email Address is not in our system , Please try again";
+
 	
 	
 	//GLOBAL PREFERENCES
@@ -58,7 +63,8 @@ public class ApplicationConstants {
 	public static final String MY_ACCOUNT = "My Account";
 	public static final String GLOBALPREFERENCESUPDATED = "Global Preferences Updated";
 	public static final String MY_ACCOUNT_UPDATED = "Account updated";
-
+	public static final String USERNAME_EMAIL_SENT = "Username sent, please check your email. Thank you";
+	
 	
 
 }

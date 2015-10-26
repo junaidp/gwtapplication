@@ -40,9 +40,13 @@
 							<g:Button styleName="button primary" ui:field="btnSubmit">Login</g:Button>
 
 						</div>
-						<div>
-							<g:Label styleName="labelStyle centeredText blue bold hover"
-								ui:field="btnForgotPassword">Forgot password</g:Label>
+						<div style="padding-left:50px;padding-top:15px">
+							<g:Anchor styleName="hover"
+								ui:field="btnForgotPassword">Forgot password</g:Anchor>
+						</div>
+						<div style="padding-left:50px;padding-top:5px">
+							<g:Anchor styleName="hover"
+								ui:field="btnForgotUsername">Forgot username</g:Anchor>
 						</div>
 					</form>
 				</div>
@@ -50,35 +54,6 @@
 			</div>
 		</body>
 
-
-
-
-
-
-
-
-
-
-
-
-
-		<!-- <g:HorizontalPanel height="150px"> <g:Label /> <g:VerticalPanel styleName="border" 
-			width="500px"> <g:HTMLPanel styleName="headerSignin" height="30px" width="500px"> 
-			Sign in </g:HTMLPanel> <g:VerticalPanel styleName="fieldsStyle"> <g:HorizontalPanel 
-			width="290px"> <g:Label ui:field="lblError" styleName="error" height="16px" 
-			width="279px" /> </g:HorizontalPanel> <g:Label ui:field=" lblUserName " width="50px" 
-			text="Username"> username </g:Label> <g:HorizontalPanel> <g:TextBox ui:field="txtUserName" 
-			width="250px" height="20px" text="admin"/> <g:Hyperlink styleName="register"> 
-			</g:Hyperlink> </g:HorizontalPanel> </g:VerticalPanel> <g:VerticalPanel styleName="fieldsStyle"> 
-			<g:Label ui:field=" lblPassword " width="50px" text="admin" > password </g:Label> 
-			<g:HorizontalPanel> <g:PasswordTextBox ui:field="txtPassword" width="250px" 
-			height="20px" text="admin"/> <g:Hyperlink styleName="register"></g:Hyperlink> 
-			</g:HorizontalPanel> </g:VerticalPanel> <g:HorizontalPanel spacing="10"> 
-			<g:HorizontalPanel width="100px"></g:HorizontalPanel> <g:Button ui:field="btnSubmit" 
-			styleName="btnStyle" width="90px" height="28px"> Sign in </g:Button> <g:VerticalPanel> 
-			<g:Anchor styleName="hover" ui:field="forgotPassword">Forgot password</g:Anchor> 
-			</g:VerticalPanel> </g:HorizontalPanel> </g:VerticalPanel> </g:HorizontalPanel> 
-			</div> <div> </div> -->
 	</g:HTMLPanel>
 
 </ui:UiBinder> 

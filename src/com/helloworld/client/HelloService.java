@@ -29,4 +29,8 @@ public interface HelloService extends RemoteService {
 	String fetchUserStatus(String userName) throws Exception;
 	String inactivateAccount(String userName) throws Exception;
 	String sendActivationEmailForgotPassword(String userName) throws Exception;
+	boolean isLoggedInWithin20Mins(UserEntity user) throws Exception;
+	UserEntity fetchNewUser(String createPasswordToken)throws Exception;
+	String updatePassword(UserEntity user)throws Exception;
+	String emailUserName(String email)throws Exception;
 }

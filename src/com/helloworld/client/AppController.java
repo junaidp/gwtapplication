@@ -31,12 +31,14 @@ import com.helloworld.client.event.SubscriptionVerificationEventHandler;
 import com.helloworld.client.event.ViewPlanEvent;
 import com.helloworld.client.event.ViewPlanEventHandler;
 import com.helloworld.client.presenter.AdminPresenter;
+import com.helloworld.client.presenter.CreatePasswordPresenter;
 import com.helloworld.client.presenter.DashboardAccordionPresenter;
 import com.helloworld.client.presenter.DashboardPortalPresenter;
 import com.helloworld.client.presenter.DashboardPresenter;
 import com.helloworld.client.presenter.FileUploadPresenter;
 import com.helloworld.client.presenter.FooterPresenter;
 import com.helloworld.client.presenter.ForgotPasswordPresenter;
+import com.helloworld.client.presenter.ForgotUserNamePresenter;
 import com.helloworld.client.presenter.GlobalPreferencesPresenter;
 import com.helloworld.client.presenter.HeaderPresenter;
 import com.helloworld.client.presenter.LoginPresenter;
@@ -49,9 +51,11 @@ import com.helloworld.client.presenter.SubscriptionVerificationPresenter;
 import com.helloworld.client.presenter.ViewPlanPresenter;
 import com.helloworld.client.view.AdminView;
 import com.helloworld.client.view.ApplicationConstants;
+import com.helloworld.client.view.CreatePasswordView;
 import com.helloworld.client.view.FileUploadView;
 import com.helloworld.client.view.FooterView;
 import com.helloworld.client.view.ForgotPasswordView;
+import com.helloworld.client.view.ForgotUserNameView;
 import com.helloworld.client.view.GlobalPreferencesView;
 import com.helloworld.client.view.HeaderView;
 import com.helloworld.client.view.LoginView;
@@ -69,6 +73,7 @@ import com.helloworld.shared.entity.GlobalPreferencesEntity;
 import com.helloworld.shared.entity.UserEntity;
 
 
+
 public class AppController implements Presenter, ValueChangeHandler<String> {
 	private final HandlerManager eventBus;
 
@@ -78,6 +83,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 	private UserEntity loggedInUser;
 	private HeaderPresenter headerPresenter;
 	private GlobalPreferencesEntity globalPreferencesEntity;
+	private String createPasswordtoken ="";
 	
 	Presenter presenter = null;
 
@@ -186,6 +192,10 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 
 		if ("".equals(History.getToken())) {
 			History.newItem(ApplicationConstants.TOKEN_SUBSCRIPTION_VERFICATION);
+		}
+		else if(History.getToken().startsWith("!")){
+			createPasswordtoken = History.getToken().substring(1);
+			History.newItem("createPassword");
 		}
 		else {
 			History.fireCurrentHistoryState();
@@ -331,6 +341,22 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 			
 			if (token.equals(ApplicationConstants.TOKEN_FORGOT_PASSWORD)) {
 				presenter = new ForgotPasswordPresenter(rpcService, eventBus, new ForgotPasswordView());
+				if (presenter != null) {
+					presenter.go(container);
+				}
+			}
+			
+			if (token.equals("createPassword")) {
+				presenter = new CreatePasswordPresenter(rpcService, eventBus, new CreatePasswordView(loggedInUser, createPasswordtoken));
+				
+				if (presenter != null) {
+					presenter.go(container);
+				}
+			}
+			
+			if (token.equals(ApplicationConstants.TOKEN_FORGOT_USERNAME)) {
+				presenter = new ForgotUserNamePresenter(rpcService, eventBus, new ForgotUserNameView());
+				
 				if (presenter != null) {
 					presenter.go(container);
 				}

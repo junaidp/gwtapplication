@@ -3,6 +3,7 @@ package com.helloworld.client.view;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
@@ -24,7 +25,8 @@ public class LoginView extends Composite implements Display  {
 	@UiField PasswordTextBox txtPassword;
 	@UiField Button btnSubmit;
 	@UiField Label lblError;
-	@UiField Label btnForgotPassword;
+	@UiField Anchor btnForgotPassword;
+	@UiField Anchor btnForgotUsername;
 	
 	
 	public LoginView() {
@@ -66,8 +68,12 @@ public class LoginView extends Composite implements Display  {
 		return lblError;
 	}
 
-	public Label getBtnForgotPassword() {
+	public Anchor getBtnForgotPassword() {
 		return btnForgotPassword;
+	}
+
+	public Anchor getBtnForgotUsername() {
+		return btnForgotUsername;
 	}
 
 

@@ -104,8 +104,7 @@ public class ForgotPasswordPresenter implements Presenter
 						}
 						
 						if(username.equals(worngPasswordUser) && worngPasswordCount>=2 ){
-							display.setHtmlError(SafeHtmlUtils.fromTrustedString("The answer you have enterted does not match the answer you submitted at <br>" +
-									" the time of creating the password" + ". Please contact your TIE administrator "));
+							display.setHtmlError(SafeHtmlUtils.fromTrustedString("..."));
 							
 							inactiveAccount(username);
 						}else{
