@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 
 	@Entity
@@ -53,6 +54,9 @@ import javax.persistence.Table;
 		
 		@Column(name="token")
 		private String token;
+		
+		@Transient
+		private String userFetchStatus;
 
 		public int getUserId() {
 			return userId;
@@ -136,6 +140,14 @@ import javax.persistence.Table;
 
 		public void setToken(String token) {
 			this.token = token;
+		}
+
+		public String getUserFetchStatus() {
+			return userFetchStatus;
+		}
+
+		public void setUserFetchStatus(String userFetchStatus) {
+			this.userFetchStatus = userFetchStatus;
 		}
 		
 	

@@ -5,7 +5,9 @@
 	
 	</ui:style>
 	<g:HTMLPanel>
-		<div class="browserRight">
+		<!-- <div class="browserRight">-->
+		<div style="padding-top:50px">
+		<h4 class="text-light blue">Create New Account</h4>
 			<div style="padding:5px">
 				<g:Label styleName="inLine" width="200px">Name</g:Label>
 				<g:TextBox styleName="inLine textBoxStyle" ui:field="name"></g:TextBox>
@@ -46,8 +48,8 @@
 
 			<div style="padding-left:350px; padding-top:5px">
 
-				<g:Button styleName="inLine  btnStyle" ui:field="btnCancel"> Cancel </g:Button>
-				<g:Button styleName="inLine  btnStyle" ui:field="btnSubmit"> Submit </g:Button>
+				<g:Button styleName="inLine  button primary" ui:field="btnCancel"> Cancel </g:Button>
+				<g:Button styleName="inLine  button primary" ui:field="btnSubmit"> Submit </g:Button>
 			</div>
 
 		</div>

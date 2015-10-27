@@ -43,7 +43,7 @@ public class GlobalPreferencesPresenter implements Presenter
 		Tree getTreePreferences();
 		HorizontalSplitPanel getSplitPanel();
 		HasClickHandlers getBtnCancel();
-		HasClickHandlers getBtnSave();
+		Button getBtnSave();
 	}  
 
 	public GlobalPreferencesPresenter(HelloServiceAsync rpcService, HandlerManager eventBus, Display view) 
@@ -142,17 +142,20 @@ public class GlobalPreferencesPresenter implements Presenter
 			globalPreferencesEntity.getMyAccountPreferencesId().setViewPlanQuarterlyPayments(viewPlan.getCheckBoxQuaterly().isChecked());
 			globalPreferencesEntity.getMyAccountPreferencesId().setViewPlanYearlyPayments(viewPlan.getCheckBoxYearly().isChecked());
 		}
+		display.getBtnSave().addStyleName("loading-pulse");
 		rpcService.updateGlobalPreferences(globalPreferencesEntity, new AsyncCallback<String>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
 				Window.alert(caught.getLocalizedMessage());
+				display.getBtnSave().removeStyleName("loading-pulse");
 			}
 
 			@Override
 			public void onSuccess(String result) {
 				new DisplayAlert(result);
 				History.back();
+				display.getBtnSave().removeStyleName("loading-pulse");
 			}
 		});
 

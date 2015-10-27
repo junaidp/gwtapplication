@@ -4,6 +4,7 @@ package com.helloworld.client.presenter;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerManager;
+import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -33,6 +34,8 @@ public class LoginPresenter implements Presenter
 	private final HelloServiceAsync rpcService;
 	private final HandlerManager eventBus;
 	private final Display display;
+	private int worngPasswordCount = 0;
+	private String worngPasswordUser = "";
 
 	public interface Display 
 	{
@@ -67,35 +70,57 @@ public class LoginPresenter implements Presenter
 	public void signIn()
 	{
 		display.getLblError().setText("");
-		final LoadingPopup loadingPopup = new LoadingPopup();
-		loadingPopup.display();
-		rpcService.signIn(display.getTxtUserName().getText(), display.getTxtPassword().getText(), new AsyncCallback<UserEntity>() {
+		final String username = display.getTxtUserName().getText();
+//		final LoadingPopup loadingPopup = new LoadingPopup();
+		display.getBtnSubmit().addStyleName("loading-pulse");
+		
+		
+//		loadingPopup.display();
+		rpcService.signIn(username, display.getTxtPassword().getText(), new AsyncCallback<UserEntity>() {
 
 			@Override
 			public void onSuccess(UserEntity user) {
-				if(loadingPopup!=null){
-					loadingPopup.remove();
+//				if(loadingPopup!=null){
+//					loadingPopup.remove();
+//				}
+				if(user!=null && user.getUserFetchStatus().equals(ApplicationConstants.USER_NOT_FOUND)){
+					display.getLblError().setText(ApplicationConstants.USER_NOT_FOUND);
 				}
-				if(user==null){
+				else if(user!=null && user.getUserFetchStatus().equals(ApplicationConstants.USERNAME_PASSWORD_NOT_MATCH)){
+					if(username.equals(worngPasswordUser)){
+						worngPasswordCount = worngPasswordCount+1;
+					}else{
+						worngPasswordCount = 0;
+					}
+
+					if(username.equals(worngPasswordUser) && worngPasswordCount>=2 ){
+						inactiveAccount(username);
+					}
 					display.getLblError().setText(ApplicationConstants.USERNAME_PASSWORD_NOT_MATCH);
-				}else if(user.isAdmin()){
+					worngPasswordUser = username;
+				}
+
+				else if(user.isAdmin()){
 					eventBus.fireEvent(new AdminEvent());
 				}
 				else{
 					fetchGlobalPreferences(user);
-					
+
 				}
+				display.getBtnSubmit().removeStyleName("loading-pulse");
+				
 			}
 			@Override
 			public void onFailure(Throwable caught) {
-				if(loadingPopup!=null){
-					loadingPopup.remove();
-				}
+//				if(loadingPopup!=null){
+//					loadingPopup.remove();
+//				}
+				display.getBtnSubmit().removeStyleName("loading-pulse");
 			}
 		});
 
 	}
-	
+
 	private void fetchGlobalPreferences(final UserEntity user) {
 		rpcService.fetchGlobalPreferences(new AsyncCallback<GlobalPreferencesEntity>() {
 
@@ -107,14 +132,29 @@ public class LoginPresenter implements Presenter
 			@Override
 			public void onSuccess(GlobalPreferencesEntity globalPreferences) {
 				eventBus.fireEvent(new MainEvent(user, globalPreferences));
-				
+
 			}
 		});
-		
-		
+
+
 	}
 
-	
+	public void inactiveAccount(String username){
+		rpcService.inactivateAccount(username, new AsyncCallback<String>(){
+
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert("Failed: Incativating account" + caught.getLocalizedMessage());
+			}
+
+			@Override
+			public void onSuccess(String result) {
+				display.getLblError().setText(result);
+
+			}});
+	}
+
+
 
 	@Override
 	public void setHandlers() {
@@ -124,16 +164,16 @@ public class LoginPresenter implements Presenter
 			public void onClick(ClickEvent event) {
 				signIn();
 			}});
-		
+
 		display.getBtnForgotPassword().addClickHandler(new ClickHandler(){
 
 			@Override
 			public void onClick(ClickEvent event) {
 				History.newItem(ApplicationConstants.TOKEN_FORGOT_PASSWORD);
 			}});
-		
+
 		display.getBtnForgotUsername().addClickHandler(new ClickHandler() {
-			
+
 			@Override
 			public void onClick(ClickEvent event) {
 				History.newItem(ApplicationConstants.TOKEN_FORGOT_USERNAME);

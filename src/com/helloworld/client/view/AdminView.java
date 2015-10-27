@@ -3,6 +3,7 @@ package com.helloworld.client.view;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
@@ -17,14 +18,20 @@ public class AdminView extends Composite implements Display {
 	}
 
 	@UiField
-	Label globalPreferences;
+	Anchor anchorGlobalPreferences;
+	@UiField
+	Anchor anchorEditUser;
 	
 	public AdminView() {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 
-	public Label getGlobalPreferences() {
-		return globalPreferences;
+	public Anchor getGlobalPreferences() {
+		return anchorGlobalPreferences;
+	}
+
+	public Anchor getAnchorEditUser() {
+		return anchorEditUser;
 	}
 
 }

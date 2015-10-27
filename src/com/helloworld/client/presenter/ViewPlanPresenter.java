@@ -87,15 +87,18 @@ public class ViewPlanPresenter implements Presenter
 	}
 	
 	private void updateMyAccountInDb() {
+		display.getBtnUpdate().addStyleName("loading-pulse");
 			rpcService.updateMyAccount(loggedInUser.getMyAccountId(), new AsyncCallback<String>() {
 				
 				@Override
 				public void onSuccess(String result) {
 					new DisplayAlert(result);
+					display.getBtnUpdate().removeStyleName("loading-pulse");
 				}
 				
 				@Override
 				public void onFailure(Throwable caught) {
+					display.getBtnUpdate().removeStyleName("loading-pulse");
 					Window.alert("Fail int"+ caught.getLocalizedMessage());
 				}
 			});

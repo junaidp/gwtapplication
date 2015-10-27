@@ -25,7 +25,7 @@ public class ForgotUserNameView extends Composite implements Display {
 	@UiField
 	Label lblError;
 	@UiField
-	Button btnBack;
+	Label btnBack;
 	
 
 	public ForgotUserNameView() {
@@ -46,7 +46,7 @@ public class ForgotUserNameView extends Composite implements Display {
 		return lblError;
 	}
 
-	public Button getBtnBack() {
+	public Label getBtnBack() {
 		return btnBack;
 	}
 

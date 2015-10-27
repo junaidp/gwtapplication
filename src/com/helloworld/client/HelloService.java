@@ -26,11 +26,14 @@ public interface HelloService extends RemoteService {
 	String updateGlobalPreferences(GlobalPreferencesEntity globalPreferencesEntity) throws Exception;
 	String updateMyAccount (MyAccountEntity myAccountEntity)throws Exception;
 	String logOut() throws Exception;
-	String fetchUserStatus(String userName) throws Exception;
+	String fetchUserStatus(String userName, String email) throws Exception;
 	String inactivateAccount(String userName) throws Exception;
 	String sendActivationEmailForgotPassword(String userName) throws Exception;
 	boolean isLoggedInWithin20Mins(UserEntity user) throws Exception;
 	UserEntity fetchNewUser(String createPasswordToken)throws Exception;
 	String updatePassword(UserEntity user)throws Exception;
 	String emailUserName(String email)throws Exception;
+	ArrayList<UserEntity>fetchAllUsers()throws Exception;
+	String updateUserAccount(UserEntity user)throws Exception;
+	
 }

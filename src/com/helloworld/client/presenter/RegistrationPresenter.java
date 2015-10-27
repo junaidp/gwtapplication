@@ -151,15 +151,16 @@ public class RegistrationPresenter implements Presenter
 	}
 
 	private void addUserInDb(UserEntity user) {
-		final LoadingPopup loadingPopup = new LoadingPopup();
-		loadingPopup.display();
+//		final LoadingPopup loadingPopup = new LoadingPopup();
+//		loadingPopup.display();
+		display.getBtnSubmit().addStyleName("loading-pulse");
 		rpcService.addUser(user, new AsyncCallback<String>() {
 
 			@Override
 			public void onSuccess(String result) {
-				if(loadingPopup!=null){
-					loadingPopup.remove();
-				}
+//				if(loadingPopup!=null){
+//					loadingPopup.remove();
+//				}
 				if(result.equals(ApplicationConstants.INVALID_EMAIL) || result.equals(ApplicationConstants.EMAIL_NOT_AVAILABLE)) {
 					display.getEmailError().setText(result);
 				}
@@ -174,16 +175,17 @@ public class RegistrationPresenter implements Presenter
 					new DisplayAlert(result);
 					History.newItem(ApplicationConstants.TOKEN_LOGIN);
 				}
-				
+				display.getBtnSubmit().removeStyleName("loading-pulse");
 			}
 
 			@Override
 			public void onFailure(Throwable caught) {
-				if(loadingPopup!=null){
-					loadingPopup.remove();
-				}
+//				if(loadingPopup!=null){
+//					loadingPopup.remove();
+//				}
 				Window.alert("Fail: addUser "+ caught.getMessage());
 				History.newItem(ApplicationConstants.TOKEN_LOGIN);
+				display.getBtnSubmit().removeStyleName("loading-pulse");
 			}
 		});
 	}

@@ -5,8 +5,12 @@
 	
 	</ui:style>
 	<g:HTMLPanel>
-	<div>
-	<g:Label styleName="blue controlPanelHeadings hover" ui:field="globalPreferences"> Global Preferences</g:Label>
+	<div style="padding-top:5%;padding-left:20px">
+	<g:Anchor styleName="hover" ui:field="anchorGlobalPreferences">Global Preferences</g:Anchor>
 	</div>
+	<div style="padding-left:20px;padding-top:10px">
+	<g:Anchor styleName="hover" ui:field="anchorEditUser">Manage Users</g:Anchor>
+	</div>
+	
 	</g:HTMLPanel>
 </ui:UiBinder> 

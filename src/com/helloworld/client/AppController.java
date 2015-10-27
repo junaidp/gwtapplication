@@ -43,6 +43,7 @@ import com.helloworld.client.presenter.GlobalPreferencesPresenter;
 import com.helloworld.client.presenter.HeaderPresenter;
 import com.helloworld.client.presenter.LoginPresenter;
 import com.helloworld.client.presenter.MainPresenter;
+import com.helloworld.client.presenter.ManageUserPresenter;
 import com.helloworld.client.presenter.MyAccountPresenter;
 import com.helloworld.client.presenter.Presenter;
 import com.helloworld.client.presenter.RegistrationPresenter;
@@ -60,6 +61,7 @@ import com.helloworld.client.view.GlobalPreferencesView;
 import com.helloworld.client.view.HeaderView;
 import com.helloworld.client.view.LoginView;
 import com.helloworld.client.view.MainView;
+import com.helloworld.client.view.ManageUserView;
 import com.helloworld.client.view.RegistrationView;
 import com.helloworld.client.view.SubscriptionVerificationView;
 import com.helloworld.client.view.CenterPanels.DashboardAccordion;
@@ -356,6 +358,14 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 			
 			if (token.equals(ApplicationConstants.TOKEN_FORGOT_USERNAME)) {
 				presenter = new ForgotUserNamePresenter(rpcService, eventBus, new ForgotUserNameView());
+				
+				if (presenter != null) {
+					presenter.go(container);
+				}
+			}
+			
+			if (token.equals(ApplicationConstants.TOKEN_MANAGE_USER)) {
+				presenter = new ManageUserPresenter(rpcService, eventBus, new ManageUserView());
 				
 				if (presenter != null) {
 					presenter.go(container);

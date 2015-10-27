@@ -145,8 +145,8 @@ HelloService {
 	}
 
 	@Override
-	public String fetchUserStatus(String userName) throws Exception {
-		return rdbHelper.fetchUserStatus(userName);
+	public String fetchUserStatus(String userName, String email) throws Exception {
+		return rdbHelper.fetchUserStatus(userName, email);
 	}
 
 	@Override
@@ -179,6 +179,16 @@ HelloService {
 	@Override
 	public String emailUserName(String email) throws Exception {
 		return rdbHelper.emailUserName(email);
+	}
+
+	@Override
+	public ArrayList<UserEntity> fetchAllUsers() throws Exception {
+		return rdbHelper.fetchAllUsers();
+	}
+
+	@Override
+	public String updateUserAccount(UserEntity user) throws Exception {
+		return rdbHelper.updateUserAccount(user);
 	}
 
 

@@ -29,7 +29,7 @@ public class ForgotUserNamePresenter implements Presenter
 		TextBox getTxtEmail();
 		Button getBtnSubmit();
 		Label getLblError();
-		Button getBtnBack();
+		Label getBtnBack();
 
 	}  
 
@@ -59,6 +59,7 @@ public class ForgotUserNamePresenter implements Presenter
 
 			@Override
 			public void onClick(ClickEvent event) {
+				display.getLblError().setText("");
 				emailUserName();
 			}
 
@@ -73,6 +74,7 @@ public class ForgotUserNamePresenter implements Presenter
 	}
 
 	private void emailUserName() {
+		display.getBtnSubmit().addStyleName("loading-pulse");
 		rpcService.emailUserName(display.getTxtEmail().getText(), new AsyncCallback<String>() {
 
 			@Override
@@ -80,14 +82,16 @@ public class ForgotUserNamePresenter implements Presenter
 				if(result.equals(ApplicationConstants.EMAIL_NOT_VALID)){
 					display.getLblError().setText(result);
 				}else{
-					display.getLblError().setText("");
+					
 					new DisplayAlert(result);
 					History.newItem(ApplicationConstants.TOKEN_LOGIN);
 				}
+				display.getBtnSubmit().removeStyleName("loading-pulse");
 			}
 
 			@Override
 			public void onFailure(Throwable caught) {
+				display.getBtnSubmit().removeStyleName("loading-pulse");
 				Window.alert("fail email UserName "+ caught.getLocalizedMessage());
 			}
 		});

@@ -25,8 +25,20 @@ public class ApplicationConstants {
 	public static final String TOKEN_ADMIN = "admin";
 	public static final String TOKEN_FORGOT_PASSWORD = "forgotPassword";
 	public static final String TOKEN_FORGOT_USERNAME = "forgotUsername";
+	public static final String TOKEN_MANAGE_USER = "manageUser";
+
 
 	
+	//GLOBAL PREFERENCES
+		public static final String VIEW_PLAN = "View Plan";
+		public static final String VIEW_REGISTRATION = "View Registration";
+		public static final String EDIT_REGISTRATION = "Edit Registration";
+		public static final String VIEW_USAGE = "View Usage";
+		public static final String MY_ACCOUNT = "My Account";
+		public static final String GLOBALPREFERENCESUPDATED = "Global Preferences Updated";
+		public static final String MY_ACCOUNT_UPDATED = "Account updated";
+		public static final String USERNAME_EMAIL_SENT = "Username sent, please check your email. Thank you";
+		
 	
 	///FIELD VERIFIERS///
 	public static final String INVALID_USERNAME = "username invalid";
@@ -47,23 +59,19 @@ public class ApplicationConstants {
 	public static final String ENTER_PASSWORD = "Enter password";
 	public static final int BLOCK = 2;
 	public static final int ACTIVE = 1;
-	public static final String ACCOUNT_INACTIVATED = "Account Inactivated";
-	public static final String USER_NOT_FOUND = "Username not found";
+	public static final String ACCOUNT_INACTIVATED = "You Account has been locked, Please contact your Administrator";
+	public static final String USER_NOT_FOUND = "This Username is not in our system";
 	public static final String CONTACT_ADMIN = "Your account is inactive, please contact your Administrator";
 	public static final String PASSWORD_UPDATED = "Password updated";
 	public static final String EMAIL_NOT_VALID = "This Email Address is not in our system , Please try again";
-
+	public static final String ENTER_NEW_PASSWORD = "Enter new password";
+	public static final String CONFIRM_NEW_PASSWORD = "Confirm new password";
+	public static final String EMAIL_NOT_CORRECT = "Email Address not correct";
 	
 	
-	//GLOBAL PREFERENCES
-	public static final String VIEW_PLAN = "View Plan";
-	public static final String VIEW_REGISTRATION = "View Registration";
-	public static final String EDIT_REGISTRATION = "Edit Registration";
-	public static final String VIEW_USAGE = "View Usage";
-	public static final String MY_ACCOUNT = "My Account";
-	public static final String GLOBALPREFERENCESUPDATED = "Global Preferences Updated";
-	public static final String MY_ACCOUNT_UPDATED = "Account updated";
-	public static final String USERNAME_EMAIL_SENT = "Username sent, please check your email. Thank you";
+	
+	
+	
 	
 	
 

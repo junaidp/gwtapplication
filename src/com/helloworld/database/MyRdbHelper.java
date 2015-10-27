@@ -1,5 +1,6 @@
 package com.helloworld.database;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
 
@@ -54,7 +55,10 @@ public class MyRdbHelper {
 				return ApplicationConstants.EMAIL_NOT_AVAILABLE;
 			}
 
-			if(! existingUser){
+			try{// Check if coming password is in Bcrypt form already {in case of editing User account ,when user only changing other fields but not password}
+				BCrypt.checkpw("test", user.getPassword());
+			}catch(Exception ex){
+				//It will come inside Exception Only when the password is not a Bcrypted hashed password, So only then we will make it Bcrypted
 				String password = createBCrypt(user.getPassword());
 				user.setPassword(password);
 			}
@@ -178,13 +182,18 @@ public class MyRdbHelper {
 				user = (UserEntity) crit.list().get(0);
 				if(checkPassword(password, user.getPassword())){
 					System.out.println("User LoggedIn "+ user.getName());
+					user.setUserFetchStatus("Success");
 					return user;
 				}else{
 					System.out.println("User Login Attemt failed "+ user.getName());
-					return null;
+					UserEntity noUser = new UserEntity();
+					noUser.setUserFetchStatus(ApplicationConstants.USERNAME_PASSWORD_NOT_MATCH);
+					return noUser;
 				}
 			}else{
-				return null;
+				UserEntity noUser = new UserEntity();
+				noUser.setUserFetchStatus(ApplicationConstants.USER_NOT_FOUND);
+				return noUser;
 			}
 		}catch(Exception ex){
 			logger.warn(String.format("Exception occured in signIn", ex.getMessage()), ex);
@@ -295,7 +304,7 @@ public class MyRdbHelper {
 
 	}
 
-	public String fetchUserStatus(String username)throws Exception {
+	public String fetchUserStatus(String username, String email)throws Exception {
 		Session session = null;
 		int status = 0;
 		try{
@@ -305,9 +314,9 @@ public class MyRdbHelper {
 			if(crit.list().size()>0){
 				UserEntity user = (UserEntity) crit.list().get(0);
 				status = user.getStatus();
-//				if(status==1){
-//					sendActivationEmailForgotPassword(username);
-//				}
+
+			}else{
+				return ApplicationConstants.USER_NOT_FOUND;
 			}
 		}catch(Exception ex){
 			logger.warn(String.format("Exception occured in fetchUserStatus", ex.getLocalizedMessage()), ex);
@@ -321,12 +330,12 @@ public class MyRdbHelper {
 			return ApplicationConstants.CONTACT_ADMIN;
 		}
 		else{
-			return sendActivationEmailForgotPassword(username);
+			return sendActivationEmailForgotPassword(username, email);
 			
 		}
 	}
 
-	public String sendActivationEmailForgotPassword(String username) throws Exception {
+	public String sendActivationEmailForgotPassword(String username, String email) throws Exception {
 
 		UserEntity user = fetchUser(username);
 		if(user ==null){
@@ -336,6 +345,7 @@ public class MyRdbHelper {
 			Session session = sessionFactory.openSession();
 			Criteria crit = session.createCriteria(UserEntity.class);
 			crit.add(Restrictions.eq("userName", username));
+			crit.add(Restrictions.eq("email", email));
 
 			if(crit.list().size() > 0){
 				user = (UserEntity) crit.list().get(0);
@@ -345,10 +355,9 @@ public class MyRdbHelper {
 				tr.commit();
 				sendEmailForgotPassword(user);
 			}else{
-				return "The answer you have enterted does not match the answer you submitted at <br>" +
-						"the time of creating the password. Please try again ";
+				return ApplicationConstants.EMAIL_NOT_CORRECT;
 			}
-			return "Thank you for you answer. A new temporary password token <br>" +
+			return "A new temporary password token <br>" +
 			"has been emailed to you";
 		}
 	}
@@ -507,7 +516,7 @@ public class MyRdbHelper {
 
 			message.setContent("Dear " + user.getName() +" <br></br> <br></br>"
 					+ "As per your request ,please find below your username <br></br> <br></br>"
-					+ user.getUserName()+" <br></br> <br></br>"
+					+ "Username: <b> "+user.getUserName()+"</b>"+" <br></br> <br></br>"
 					+ "Thank You <br></br>"
 					+ "","text/html" );
 					
@@ -517,6 +526,40 @@ public class MyRdbHelper {
 
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);
+		}
+	}
+
+
+	public ArrayList<UserEntity> fetchAllUsers()throws Exception {
+		Session session = null;
+		ArrayList<UserEntity> users = new ArrayList<UserEntity>();
+		try{
+			session = sessionFactory.openSession();
+			Criteria crit = session.createCriteria(UserEntity.class);
+			crit.createAlias("myAccountId", "myAccount");
+			for(int i=0; i< crit.list().size(); i++){
+				UserEntity user = (UserEntity) crit.list().get(i);
+				users.add(user);
+			}
+			return users;
+		}catch(Exception ex){
+			logger.warn(String.format("Exception occured in fetchAllUsers", ex.getMessage()), ex);
+			throw new Exception("Exception occured in fetchAllUsers");
+		}
+		
+	}
+
+
+	public String updateUserAccount(UserEntity user)throws Exception {
+		Session session =null;
+		try{
+			session = sessionFactory.openSession();
+			session.update(user);
+			session.flush();
+			return ApplicationConstants.USER_UPDATED;
+		}catch(Exception ex){
+			logger.warn(String.format("Exception occured in updateUserAccount", ex.getMessage()), ex);
+			throw new Exception("Exception occured in updateUserAccount");
 		}
 	}
 

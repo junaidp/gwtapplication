@@ -20,8 +20,9 @@
 		<body class="metro">
 			<div style="padding-left:40%; padding-top:15%">
 				<div class="padding20">
+				<h4 class="text-light blue">Sign In</h4>
 					<form>
-						<h4 class="text-light">Login</h4>
+						
 						<div>
 							<g:Label ui:field="lblError" styleName="error"></g:Label>
 						</div>

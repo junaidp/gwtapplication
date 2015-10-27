@@ -7,6 +7,7 @@
 	
 	</ui:style>
 	<g:HTMLPanel>
+	<div  style="padding-top:4%">
 		<g:HorizontalSplitPanel width="100%" ui:field="splitPanel">
 		
 			<g:Tree ui:field='treePreferences'>
@@ -35,5 +36,6 @@
 		<g:Button styleName="button primary inLine" ui:field="btnCancel"> Cancel </g:Button>
 		<g:Button styleName="button primary inLine" ui:field="btnSave"> Save </g:Button>
 		</div>	
+		</div>
 	</g:HTMLPanel>
 </ui:UiBinder> 

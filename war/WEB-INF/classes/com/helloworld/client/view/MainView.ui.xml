@@ -6,7 +6,7 @@
 	
 	</ui:style>
 	<g:HTMLPanel>
-		<div style="padding-left:90%">
+		<div style="padding-left:90%;padding-top:4%">
 			
 			
 			<g:DisclosurePanel ui:field="discPanel">

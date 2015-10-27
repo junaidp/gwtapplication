@@ -15,6 +15,8 @@ import com.helloworld.client.HelloServiceAsync;
 import com.helloworld.client.view.ApplicationConstants;
 import com.helloworld.client.view.widgets.DisplayAlert;
 import com.helloworld.shared.entity.UserEntity;
+import com.helloworld.shared.utility.CreatePasswordFieldVerifier;
+import com.helloworld.shared.utility.RegistratonFieldVerifier;
 
 
 public class CreatePasswordPresenter implements Presenter 
@@ -33,6 +35,9 @@ public class CreatePasswordPresenter implements Presenter
 		PasswordTextBox getTxtConfirmPassword();
 		Button getBtnSubmit();
 		String getCreatePasswordToken();
+		Label getLblError();
+		Label getConfirmPasswordError();
+		Label getNewPasswordError();
 		
 	}  
 
@@ -100,23 +105,31 @@ public class CreatePasswordPresenter implements Presenter
 
 			@Override
 			public void onClick(ClickEvent event) {
-				user.setPassword(display.getTxtNewPassword().getText());
-				updatePassword();
+				
+					CreatePasswordFieldVerifier fieldVerifier = new CreatePasswordFieldVerifier();
+				if(fieldVerifier.registratonFieldsVerifid(display)){
+					user.setPassword(display.getTxtNewPassword().getText());
+					updatePassword();
+				}
+				
 			}});
 		
 	}
 	
 	public void updatePassword(){
+		display.getBtnSubmit().addStyleName("loading-pulse");
 		rpcService.updatePassword(user, new AsyncCallback<String>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
+				display.getBtnSubmit().removeStyleName("loading-pulse");
 				Window.alert("Update password failed:"+ caught.getLocalizedMessage());
 			}
 
 			@Override
 			public void onSuccess(String result) {
 				new DisplayAlert(result);
+				display.getBtnSubmit().removeStyleName("loading-pulse");
 				History.newItem(ApplicationConstants.TOKEN_LOGIN);
 			}
 		});

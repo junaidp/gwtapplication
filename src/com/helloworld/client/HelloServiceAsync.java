@@ -24,12 +24,13 @@ public interface HelloServiceAsync {
 	void updateGlobalPreferences(GlobalPreferencesEntity globalPreferencesEntity, AsyncCallback<String> callback);
 	void updateMyAccount(MyAccountEntity myAccountEntity, AsyncCallback<String> callback);
 	void logOut(AsyncCallback<String> callback);
-	void fetchUserStatus(String userName, AsyncCallback<String> callback);
+	void fetchUserStatus(String userName, String email, AsyncCallback<String> callback);
 	void inactivateAccount (String userName, AsyncCallback<String> callback);
 	void sendActivationEmailForgotPassword(String userName,AsyncCallback<String> callback);
 	void isLoggedInWithin20Mins(UserEntity user,AsyncCallback<Boolean> asyncCallback);
 	void fetchNewUser(String createPasswordToken, AsyncCallback<UserEntity> asyncCallback);
 	void updatePassword(UserEntity user, AsyncCallback<String> asyncCallback);
 	void emailUserName(String email, AsyncCallback<String> asyncCallback);
-	
+	void fetchAllUsers(AsyncCallback<ArrayList<UserEntity>> asyncCallback);
+	void updateUserAccount(UserEntity user, AsyncCallback<String> asyncCallback);
 }

@@ -25,8 +25,7 @@ public class ForgotPasswordPresenter implements Presenter
 	private final Display display;
 	private final HelloServiceAsync rpcService;
 	private final HandlerManager eventBus;
-	private int worngPasswordCount = 0;
-	private String worngPasswordUser = "";
+	
 
 	public interface Display 
 	{
@@ -65,6 +64,7 @@ public class ForgotPasswordPresenter implements Presenter
 
 			@Override
 			public void onClick(ClickEvent event) {
+				display.setHtmlError(SafeHtmlUtils.fromTrustedString(""));
 				forgotPassword();
 			}
 
@@ -80,57 +80,46 @@ public class ForgotPasswordPresenter implements Presenter
 	}
 	
 	private void forgotPassword() {
-		checkUserStatus(display.getTxtUserName().getText());
+		checkUserStatus(display.getTxtUserName().getText(), display.getTxtEmail().getText());
 	}
 	
-	public void checkUserStatus(final String username){
-		rpcService.fetchUserStatus(username, new AsyncCallback<String>(){
+	public void checkUserStatus(final String username, String email){
+		display.getBtnSubmit().addStyleName("loading-pulse");
+		rpcService.fetchUserStatus(username, email , new AsyncCallback<String>(){
 
 			@Override
 			public void onFailure(Throwable caught) {
+				display.getBtnSubmit().removeStyleName("loading-pulse");
 				Window.alert("Fail: fetch user status");
 			}
 
 			@Override
 			public void onSuccess(String result) {
 				if(result.equals(ApplicationConstants.CONTACT_ADMIN)){
-				new DisplayAlert(result);
+					display.setHtmlError(SafeHtmlUtils.fromTrustedString(result));
 				}else{
 					if(result.contains("does not match")){
-						if(username.equals(worngPasswordUser)){
-							worngPasswordCount = worngPasswordCount+1;
-						}else{
-							worngPasswordCount = 0;
-						}
-						
-						if(username.equals(worngPasswordUser) && worngPasswordCount>=2 ){
-							display.setHtmlError(SafeHtmlUtils.fromTrustedString("..."));
-							
-							inactiveAccount(username);
-						}else{
+//						if(username.equals(worngPasswordUser)){
+//							worngPasswordCount = worngPasswordCount+1;
+//						}else{
+//							worngPasswordCount = 0;
+//						}
+//						
+//						if(username.equals(worngPasswordUser) && worngPasswordCount>=2 ){
+//							inactiveAccount(username);
+//						}
+//						else{
 							display.setHtmlError(SafeHtmlUtils.fromTrustedString(result));
-						}
-						worngPasswordUser = username;
+//						}
+//						worngPasswordUser = username;
 					}else{
 						display.setHtmlError(SafeHtmlUtils.fromTrustedString(result));
 					}
 				}
-
+				display.getBtnSubmit().removeStyleName("loading-pulse");
 			}});
 	}
 
-	public void inactiveAccount(String username){
-		rpcService.inactivateAccount(username, new AsyncCallback<String>(){
-
-			@Override
-			public void onFailure(Throwable caught) {
-				Window.alert("Failed: Incativating account");
-			}
-
-			@Override
-			public void onSuccess(String result) {
-				
-			}});
-	}
+	
 	
 }

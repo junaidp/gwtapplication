@@ -76,15 +76,14 @@ public class SubscriptionVerificationPresenter implements Presenter
 
 			@Override
 			public void onClick(ClickEvent event) {
-				final LoadingPopup loadingPopup = new LoadingPopup();
-				loadingPopup.display();
+//				final LoadingPopup loadingPopup = new LoadingPopup();
+//				loadingPopup.display();
+				display.getSubmit().addStyleName("loading-pulse");
 				rpcService.verifySubscription(display.getEmail().getText(), new AsyncCallback<Boolean>() {
 					
 					@Override
 					public void onSuccess(Boolean result) {
-						if(loadingPopup!=null){
-							loadingPopup.remove();
-						}
+						display.getSubmit().removeStyleName("loading-pulse");
 						if(result){
 						History.newItem(ApplicationConstants.TOKEN_LOGIN);
 						}else{
@@ -94,9 +93,7 @@ public class SubscriptionVerificationPresenter implements Presenter
 					
 					@Override
 					public void onFailure(Throwable caught) {
-						if(loadingPopup!=null){
-							loadingPopup.remove();
-						}
+						display.getSubmit().removeStyleName("loading-pulse");
 						Window.alert("Fail verifySubscription: "+ caught.getLocalizedMessage());
 					}
 				});

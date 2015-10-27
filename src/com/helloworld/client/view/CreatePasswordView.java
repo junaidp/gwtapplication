@@ -5,6 +5,7 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.helloworld.client.presenter.CreatePasswordPresenter.Display;
@@ -25,6 +26,14 @@ public class CreatePasswordView extends Composite implements Display {
 	PasswordTextBox txtConfirmPassword;
 	@UiField
 	Button btnSubmit;
+	@UiField
+	Label lblError;
+	@UiField
+	Label confirmPasswordError;
+	@UiField
+	Label newPasswordError;
+	
+	
 	private UserEntity loggedInUser ;
 	private String createPasswordToken;
 
@@ -32,6 +41,9 @@ public class CreatePasswordView extends Composite implements Display {
 		initWidget(uiBinder.createAndBindUi(this));
 		this.loggedInUser = loggedInUser;
 		this.createPasswordToken = createPasswordtoken;
+		txtNewPassword.getElement().setPropertyString("placeholder", ApplicationConstants.ENTER_NEW_PASSWORD);
+		txtConfirmPassword.getElement().setPropertyString("placeholder", ApplicationConstants.CONFIRM_NEW_PASSWORD);
+		
 	}
 
 	public PasswordTextBox getTxtNewPassword() {
@@ -52,6 +64,18 @@ public class CreatePasswordView extends Composite implements Display {
 
 	public String getCreatePasswordToken() {
 		return createPasswordToken;
+	}
+
+	public Label getLblError() {
+		return lblError;
+	}
+
+	public Label getConfirmPasswordError() {
+		return confirmPasswordError;
+	}
+
+	public Label getNewPasswordError() {
+		return newPasswordError;
 	}
 
 }
