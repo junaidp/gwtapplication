@@ -30,7 +30,6 @@ public class ViewPlanPresenter implements Presenter
 	public interface Display 
 	{
 		Widget asWidget();
-		Label getBtnBack();
 		void displaySelectedPanels(MyAccountPreferencesEntity myAccountPreferencesEntity);
 		Button getBtnUpdate();
 		void updateFields(MyAccountEntity myAccountEntity);
@@ -75,15 +74,7 @@ public class ViewPlanPresenter implements Presenter
 
 			});
 		
-		display.getBtnBack().addClickHandler(new ClickHandler() {
-
-			@Override
-			public void onClick(ClickEvent event) {
-				History.back();
-			}
-		});
-
-
+	
 	}
 	
 	private void updateMyAccountInDb() {

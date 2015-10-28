@@ -7,8 +7,5 @@
 	<g:HTMLPanel>
 		<Label>Search view</Label>
 		
-	<div style="width:100%">
-			<g:Label styleName="labelStyle centeredText blue bold hover" ui:field="btnBack">Back</g:Label>
-		</div>
-	</g:HTMLPanel>
+		</g:HTMLPanel>
 </ui:UiBinder> 

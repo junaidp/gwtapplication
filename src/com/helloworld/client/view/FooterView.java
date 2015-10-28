@@ -19,6 +19,8 @@ public class FooterView extends Composite implements Display {
 	
 	@UiField
 	FocusPanel logOut;
+	@UiField
+	FocusPanel back;
 
 	public FooterView() {
 		initWidget(uiBinder.createAndBindUi(this));
@@ -26,6 +28,10 @@ public class FooterView extends Composite implements Display {
 
 	public FocusPanel getLogOut() {
 		return logOut;
+	}
+
+	public FocusPanel getBack() {
+		return back;
 	}
 
 }

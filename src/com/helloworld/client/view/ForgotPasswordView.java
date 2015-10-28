@@ -21,8 +21,7 @@ public class ForgotPasswordView extends Composite implements Display{
 			UiBinder<Widget, ForgotPasswordView> {
 	}
 	
-	@UiField 
-	Label btnBack;
+	
 	@UiField
 	Button btnSubmit;
 	@UiField
@@ -40,10 +39,7 @@ public class ForgotPasswordView extends Composite implements Display{
 		txtEmail.getElement().setPropertyString("placeholder", ApplicationConstants.ENTER_REGISTERED_EMAIL);
 	}
 
-	public Label getBtnBack() {
-		return btnBack;
-	}
-
+	
 	public Button getBtnSubmit() {
 		return btnSubmit;
 	}

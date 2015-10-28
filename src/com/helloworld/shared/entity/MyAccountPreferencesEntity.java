@@ -39,6 +39,29 @@ import javax.persistence.Table;
 		
 		@Column(name="viewPlanYearlyPayments")
 		private boolean viewPlanYearlyPayments;
+		
+		@Column(name="viewRegLastName")
+		private boolean viewRegLastName;
+		
+		@Column(name="viewRegFirstName")
+		private boolean viewRegFirstName;
+		
+		@Column(name="viewRegShowPanel")
+		private boolean viewRegShowPanel;
+		
+		@Column(name="viewRegRegisteredTo")
+		private boolean viewRegRegisteredTo;
+		
+		@Column(name="viewRegPassword")
+		private boolean viewRegPassword;
+		
+		@Column(name="viewRegLastEdited")
+		private boolean viewRegLastEdited;
+		
+		@Column(name="viewRegAllowEditing")
+		private boolean viewRegAllowEditing;
+
+		
 
 		public int getMyAccountPreferencesId() {
 			return myAccountPreferencesId;
@@ -94,6 +117,62 @@ import javax.persistence.Table;
 
 		public void setViewPlanYearlyPayments(boolean viewPlanYearlyPayments) {
 			this.viewPlanYearlyPayments = viewPlanYearlyPayments;
+		}
+
+		public boolean isViewRegLastName() {
+			return viewRegLastName;
+		}
+
+		public void setViewRegLastName(boolean viewRegLastName) {
+			this.viewRegLastName = viewRegLastName;
+		}
+
+		public boolean isViewRegFirstName() {
+			return viewRegFirstName;
+		}
+
+		public void setViewRegFirstName(boolean viewRegFirstName) {
+			this.viewRegFirstName = viewRegFirstName;
+		}
+
+		public boolean isViewRegShowPanel() {
+			return viewRegShowPanel;
+		}
+
+		public void setViewRegShowPanel(boolean viewRegShowPanel) {
+			this.viewRegShowPanel = viewRegShowPanel;
+		}
+
+		public boolean isViewRegRegisteredTo() {
+			return viewRegRegisteredTo;
+		}
+
+		public void setViewRegRegisteredTo(boolean viewRegRegisteredTo) {
+			this.viewRegRegisteredTo = viewRegRegisteredTo;
+		}
+
+		public boolean isViewRegPassword() {
+			return viewRegPassword;
+		}
+
+		public void setViewRegPassword(boolean viewRegPassword) {
+			this.viewRegPassword = viewRegPassword;
+		}
+
+		public boolean isViewRegLastEdited() {
+			return viewRegLastEdited;
+		}
+
+		public void setViewRegLastEdited(boolean viewRegLastEdited) {
+			this.viewRegLastEdited = viewRegLastEdited;
+		}
+
+		public boolean isViewRegAllowEditing() {
+			return viewRegAllowEditing;
+		}
+
+		public void setViewRegAllowEditing(boolean viewRegAllowEditing) {
+			this.viewRegAllowEditing = viewRegAllowEditing;
 		}
 
 		

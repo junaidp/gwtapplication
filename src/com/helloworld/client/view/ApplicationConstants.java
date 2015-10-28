@@ -26,6 +26,7 @@ public class ApplicationConstants {
 	public static final String TOKEN_FORGOT_PASSWORD = "forgotPassword";
 	public static final String TOKEN_FORGOT_USERNAME = "forgotUsername";
 	public static final String TOKEN_MANAGE_USER = "manageUser";
+	public static final String TOKEN_VIEW_EDIT_REG = "viewEditReg";
 
 
 	
@@ -68,11 +69,4 @@ public class ApplicationConstants {
 	public static final String CONFIRM_NEW_PASSWORD = "Confirm new password";
 	public static final String EMAIL_NOT_CORRECT = "Email Address not correct";
 	
-	
-	
-	
-	
-	
-	
-
 }

@@ -105,7 +105,11 @@ public class GlobalPreferencesPresenter implements Presenter
 					display.getSplitPanel().setRightWidget(viewPlan);
 					break;
 				case ApplicationConstants.VIEW_REGISTRATION:  
+					if(viewRegistration == null){
 					viewRegistration = new ViewRegistrationDetails();
+					viewRegistration.updateFieldsWithAlreadySavedPreferences(alreadySavedGlobalPreferencesEntity);
+					
+					}
 					display.getSplitPanel().setRightWidget(viewRegistration);
 					break;
 				case ApplicationConstants.EDIT_REGISTRATION:
@@ -142,6 +146,17 @@ public class GlobalPreferencesPresenter implements Presenter
 			globalPreferencesEntity.getMyAccountPreferencesId().setViewPlanQuarterlyPayments(viewPlan.getCheckBoxQuaterly().isChecked());
 			globalPreferencesEntity.getMyAccountPreferencesId().setViewPlanYearlyPayments(viewPlan.getCheckBoxYearly().isChecked());
 		}
+		if(viewRegistration!=null){
+			globalPreferencesEntity.getMyAccountPreferencesId().setViewRegFirstName(viewRegistration.getCheckFirstName().isChecked());
+			globalPreferencesEntity.getMyAccountPreferencesId().setViewRegLastEdited(viewRegistration.getCheckLastTimeEdited().isChecked());
+			globalPreferencesEntity.getMyAccountPreferencesId().setViewRegLastName(viewRegistration.getCheckLastName().isChecked());
+			globalPreferencesEntity.getMyAccountPreferencesId().setViewRegPassword(viewRegistration.getCheckPassword().isChecked());
+			globalPreferencesEntity.getMyAccountPreferencesId().setViewRegRegisteredTo(viewRegistration.getCheckRegisteredTo().isChecked());
+			globalPreferencesEntity.getMyAccountPreferencesId().setViewRegShowPanel(viewRegistration.getCheckShowThisPanel().isChecked());
+			globalPreferencesEntity.getMyAccountPreferencesId().setViewRegAllowEditing(viewRegistration.getCheckAllowEditing().isChecked());
+			
+		}
+		
 		display.getBtnSave().addStyleName("loading-pulse");
 		rpcService.updateGlobalPreferences(globalPreferencesEntity, new AsyncCallback<String>() {
 

@@ -22,7 +22,6 @@ public class DashboardPresenter implements Presenter
 	public interface Display 
 	{
 		Widget asWidget();
-		Label getBtnBack();
 		MyAccountPanel getMyAccount();
 	}  
 
@@ -47,13 +46,6 @@ public class DashboardPresenter implements Presenter
 
 	@Override
 	public void setHandlers() {
-		display.getBtnBack().addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				History.back();
-			}
-		});
 		
 		display.getMyAccount().getPanel().addClickHandler(new ClickHandler(){
 

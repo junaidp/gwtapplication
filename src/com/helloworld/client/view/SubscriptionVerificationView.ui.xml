@@ -13,7 +13,7 @@
 			<script src="Metro-UI-CSS-master/build/js/metro.js"></script>
 		</head>
 
-		<div style="padding-left:500px; padding-top:15%">
+		<div style="padding-left:500px; padding-top:10%">
 
 			<div style="padding:5px; padding-top:5px">
 				<g:TextBox styleName="input-control text" ui:field="email" text="admin@email.com">

@@ -18,15 +18,10 @@ public class DashboardView extends Composite implements Display {
 	interface DashboardViewUiBinder extends UiBinder<Widget, DashboardView> {
 	}
 	
-	@UiField
-	Label btnBack;
+	
 	@UiField
 	MyAccountPanel myAccount;
 	
-	public Label getBtnBack() {
-		return btnBack;
-	}
-
 	public DashboardView() {
 		initWidget(uiBinder.createAndBindUi(this));
 	}

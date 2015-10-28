@@ -9,7 +9,7 @@
 			<link href="Metro-UI-CSS-master/build/css/metro.css" rel="stylesheet" />
 		</head>
 		<body class="metro">
-			<div style="padding-left:40%; padding-top:15%">
+			<div style="padding-left:40%; padding-top:10%">
 				<div class="padding20">
 					<form>
 						<h4 class="text-light blue">Forgot Username</h4>
@@ -30,9 +30,7 @@
 
 			</div>
 		</body>
-		<div style="width:100%">
-			<g:Label styleName="labelStyle centeredText blue bold hover" ui:field="btnBack">Back</g:Label>
-		</div>
+		
 
 	</g:HTMLPanel>
 

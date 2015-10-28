@@ -30,7 +30,6 @@ public class ForgotPasswordPresenter implements Presenter
 	public interface Display 
 	{
 		Widget asWidget();
-		Label getBtnBack();
 		Button getBtnSubmit();
 		void setHtmlError(SafeHtml safeHtml);
 		TextBox getTxtUserName();
@@ -70,13 +69,7 @@ public class ForgotPasswordPresenter implements Presenter
 
 			});
 		
-		display.getBtnBack().addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				History.back();
-			}
-		});
+		
 	}
 	
 	private void forgotPassword() {

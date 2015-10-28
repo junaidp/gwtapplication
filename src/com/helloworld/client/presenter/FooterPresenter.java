@@ -27,7 +27,7 @@ public class FooterPresenter implements Presenter
 	{
 		Widget asWidget();
 		FocusPanel getLogOut();
-		
+		FocusPanel getBack();
 	}  
 
 	public FooterPresenter(HelloServiceAsync rpcService, HandlerManager eventBus, Display view, GlobalPreferencesEntity globalPreferencesEntity) 
@@ -52,6 +52,14 @@ public class FooterPresenter implements Presenter
 
 	@Override
 	public void setHandlers() {
+		
+		display.getBack().addClickHandler(new ClickHandler(){
+
+			@Override
+			public void onClick(ClickEvent event) {
+				History.back();
+			}});
+		
 		display.getLogOut().addClickHandler(new ClickHandler() {
 			
 			@Override

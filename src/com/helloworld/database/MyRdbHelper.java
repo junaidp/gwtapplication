@@ -181,7 +181,7 @@ public class MyRdbHelper {
 			if(crit.list().size()>0){
 				user = (UserEntity) crit.list().get(0);
 				if(checkPassword(password, user.getPassword())){
-					System.out.println("User LoggedIn "+ user.getName());
+					System.out.println("User LoggedIn : "+ user.getName());
 					user.setUserFetchStatus("Success");
 					return user;
 				}else{
@@ -245,6 +245,7 @@ public class MyRdbHelper {
 		Session session = null;
 		try{
 			session = sessionFactory.openSession();
+			myAccountEntity.setLastEdited(new Date());
 			session.update(myAccountEntity);
 			session.flush();
 			return ApplicationConstants.MY_ACCOUNT_UPDATED;
@@ -394,8 +395,9 @@ public class MyRdbHelper {
 					//					+" You secret question must be at least  8 characters long and should have an uppercase letter, You will need to answer the secret question if you ever forget your password.<br></br>"
 					+" To activate your account, please click on the link below.<br></br> <br></br>"
 //					+" <a href= http://localhost:8080/tie/#"+ user.getToken()+">"+"Activate Account</a>","text/html" );
-					+" <a href= http://127.0.0.1:8888/HelloWorldGWT.html?gwt.codesvr=127.0.0.1:9997#!"+ user.getToken()+">"+"Activate Account</a>","text/html" );
-					
+//					+" <a href= http://127.0.0.1:8888/HelloWorldGWT.html?gwt.codesvr=127.0.0.1:9997#!"+ user.getToken()+">"+"Activate Account</a>","text/html" );
+					+" <a href= abilite.ddns.net/gwtapp/#!"+ user.getToken()+">"+"Activate Account</a>","text/html" );
+				
 
 
 			Transport.send(message);

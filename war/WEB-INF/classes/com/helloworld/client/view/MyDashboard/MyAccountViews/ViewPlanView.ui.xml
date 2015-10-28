@@ -5,7 +5,7 @@
 	
 	</ui:style>
 	<g:HTMLPanel>
-	<div style="padding-top:50px">
+	<div>
 		<g:FlowPanel ui:field="planTypePanel">
 			<g:HTMLPanel>
 				<div style="padding:4px">
@@ -33,10 +33,7 @@
 			</g:HTMLPanel>
 		</g:FlowPanel>
 
-		<div style="width:100%">
-			<g:Label styleName="labelStyle centeredText blue bold hover"
-				ui:field="btnBack">Back</g:Label>
-		</div>
+		
 
 		<div style="padding:5px">
 		<g:Button styleName="button primary" ui:field="btnUpdate"> update </g:Button>

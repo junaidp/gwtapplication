@@ -5,19 +5,26 @@
 	
 	</ui:style>
 	<g:HTMLPanel>
-	<div>
+	<h4 class="text-light blue">View Registration</h4>
+	<div style="padding-left:30px">
+	<g:CheckBox ui:field="checkShowThisPanel">Show this panel</g:CheckBox>
+	</div>
+	<div style="padding-left:10px; padding-top:5px">
 	<g:CheckBox ui:field="checkRegisteredTo">Registered to</g:CheckBox>
 	</div>
-	<div>
-	<g:CheckBox ui:field="checkName">Name</g:CheckBox>
+	<div style="padding-left:10px; padding-top:5px">
+	<g:CheckBox ui:field="checkFirstName">Name</g:CheckBox>
 	</div>
-	<div>
+	<div style="padding-left:10px; padding-top:5px">
 	<g:CheckBox ui:field="checkLastName">Last name</g:CheckBox>
 	</div>
-	<div>
+	<div style="padding-left:10px; padding-top:5px">
 	<g:CheckBox ui:field="checkPassword">Password</g:CheckBox>
 	</div>
-	<div>
+	<div style="padding-left:10px; padding-top:5px">
+	<g:CheckBox ui:field="checkAllowEditing">Allow Edidting</g:CheckBox>
+	</div>
+	<div style="padding-left:10px; padding-top:5px">
 	<g:CheckBox ui:field="checkLastTimeEdited">Last time edited</g:CheckBox>
 	</div>
 	</g:HTMLPanel>

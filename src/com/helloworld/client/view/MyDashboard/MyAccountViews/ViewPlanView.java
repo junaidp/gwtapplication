@@ -21,8 +21,7 @@ public class ViewPlanView extends Composite implements Display {
 	interface ViewPlanViewUiBinder extends UiBinder<Widget, ViewPlanView> {
 	}
 
-	@UiField 
-	Label btnBack;
+
 	@UiField
 	FlowPanel planTypePanel;
 	@UiField
@@ -45,11 +44,6 @@ public class ViewPlanView extends Composite implements Display {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 
-	@Override
-	public Label getBtnBack() {
-
-		return btnBack;
-	}
 
 	//Display only panels which Admin selected from Global preferences
 	public void displaySelectedPanels(MyAccountPreferencesEntity myAccountPreferencesEntity){

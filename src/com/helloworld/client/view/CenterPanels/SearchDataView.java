@@ -16,13 +16,6 @@ public class SearchDataView extends Composite implements Display {
 	interface SearchDataViewUiBinder extends UiBinder<Widget, SearchDataView> {
 	}
 	
-	@UiField
-	Label btnBack;
-	
-	public Label getBtnBack() {
-		return btnBack;
-	}
-
 	public SearchDataView() {
 		initWidget(uiBinder.createAndBindUi(this));
 	}

@@ -1,6 +1,7 @@
 package com.helloworld.shared.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,7 +31,19 @@ import javax.persistence.Table;
 		
 		@Column(name="yearlyPaymentPlan")
 		private boolean yearlyPaymentPlan;
-
+		
+		@Column(name="firstName")
+		private String firstName;
+		
+		@Column(name="lastName")
+		private String lastName;
+		
+		@Column(name="registeredTo")
+		private String registeredTo;
+		
+		@Column(name="lastEdited")
+		private Date lastEdited;
+		
 		public int getMyAccountId() {
 			return myAccountId;
 		}
@@ -62,7 +75,40 @@ import javax.persistence.Table;
 		public void setYearlyPaymentPlan(boolean yearlyPaymentPlan) {
 			this.yearlyPaymentPlan = yearlyPaymentPlan;
 		}
-		
+
+		public String getFirstName() {
+			return firstName;
+		}
+
+		public void setFirstName(String firstName) {
+			this.firstName = firstName;
+		}
+
+		public String getLastName() {
+			return lastName;
+		}
+
+		public void setLastName(String lastName) {
+			this.lastName = lastName;
+		}
+
+		public String getRegisteredTo() {
+			return registeredTo;
+		}
+
+		public void setRegisteredTo(String registeredTo) {
+			this.registeredTo = registeredTo;
+		}
+
+		public Date getLastEdited() {
+			return lastEdited;
+		}
+
+		public void setLastEdited(Date lastEdited) {
+			this.lastEdited = lastEdited;
+		}
+
+	
 	
 
 	

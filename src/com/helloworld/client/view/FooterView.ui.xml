@@ -16,7 +16,20 @@
 		</head>
 		<body class="metro">
 			<div class="app-bar">
+			<a class="app-bar-element">
+			<g:HTMLPanel>
+						<g:FocusPanel ui:field="back">
+							<g:HTMLPanel>
+								<div style="padding-left:20px; padding-right:20px">
+									Back
+
+								</div>
+							</g:HTMLPanel>
+						</g:FocusPanel>
+					</g:HTMLPanel>
+			</a>
 				<a class="app-bar-element place-right">
+				<span class="app-bar-divider"></span>
 					<g:HTMLPanel>
 						<g:FocusPanel ui:field="logOut">
 							<g:HTMLPanel>
@@ -30,8 +43,9 @@
 				</a>
 				<span class="app-bar-divider"></span>
 			</div>
+			
 		</body>
-
+	
 
 	</g:HTMLPanel>
 </ui:UiBinder> 

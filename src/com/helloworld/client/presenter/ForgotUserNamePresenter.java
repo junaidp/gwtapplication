@@ -29,8 +29,6 @@ public class ForgotUserNamePresenter implements Presenter
 		TextBox getTxtEmail();
 		Button getBtnSubmit();
 		Label getLblError();
-		Label getBtnBack();
-
 	}  
 
 	public ForgotUserNamePresenter(HelloServiceAsync rpcService, HandlerManager eventBus, Display view) 
@@ -65,12 +63,6 @@ public class ForgotUserNamePresenter implements Presenter
 
 		});
 		
-		display.getBtnBack().addClickHandler(new ClickHandler(){
-
-			@Override
-			public void onClick(ClickEvent event) {
-				History.back();
-			}});
 	}
 
 	private void emailUserName() {

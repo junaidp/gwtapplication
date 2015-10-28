@@ -5,6 +5,7 @@
 	
 	</ui:style>
 	<g:HTMLPanel>
+	<h4 class="text-light blue">View Plan</h4>
 		<div style="padding:4px">
 			<g:CheckBox ui:field="checkBoxPlanType" styleName="inLine"> Plan Type</g:CheckBox>
 			<div style="padding-left:6px">

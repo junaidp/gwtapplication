@@ -6,7 +6,7 @@
 	</ui:style>
 	<g:HTMLPanel>
 		<!-- <div class="browserRight">-->
-		<div style="padding-top:50px">
+		<div>
 		<h4 class="text-light blue">Create New Account</h4>
 			<div style="padding:5px">
 				<g:Label styleName="inLine" width="200px">Name</g:Label>

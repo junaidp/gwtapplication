@@ -43,12 +43,6 @@ public class DashboardPortalView extends Composite implements Display {
 	
 	@UiField 
 	VerticalPanel container;
-	@UiField
-	com.google.gwt.user.client.ui.Label btnBack;
-	
-	public com.google.gwt.user.client.ui.Label getBtnBack() {
-		return btnBack;
-	}
 	
 	public DashboardPortalView() {
 		initWidget(uiBinder.createAndBindUi(this));

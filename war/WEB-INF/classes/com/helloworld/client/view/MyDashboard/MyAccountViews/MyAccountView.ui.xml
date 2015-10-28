@@ -5,39 +5,34 @@
 	
 	</ui:style>
 	<g:HTMLPanel>
-	<div style="padding-top:50px">
-		<table>
-			<tr>
-				<td>
-					<g:FocusPanel ui:field="panelViewPlan">
-						<g:HTMLPanel>
-							<div class="metro-tile metro-tile-small metro-tile-dashboard">View Plan</div>
-						</g:HTMLPanel>
-					</g:FocusPanel>
-				</td>
-				<td>
-					<div class="metro-tile metro-tile-portal">View Registration</div>
-				</td>
-			</tr>
-			<table>
-				<tr>
-					<td>
-						<div class="metro-tile metro-tile-accordion">Edit Registration</div>
-					</td>
-				</tr>
-			</table>
-			<table>
-				<tr>
-					<td>
-						<div class="metro-tile metro-tile-small metro-tile-reports">View Usage</div>
-					</td>
-				</tr>
-			</table>
-		</table>
 		<div>
-			<g:Label styleName="labelStyle centeredText blue bold hover"
-				ui:field="btnBack">Back</g:Label>
-		</div>
+			<table>
+				<tr>
+					<td>
+						<g:FocusPanel ui:field="panelViewPlan">
+							<g:HTMLPanel>
+								<div class="metro-tile metro-tile-small metro-tile-dashboard">View Plan</div>
+							</g:HTMLPanel>
+						</g:FocusPanel>
+					</td>
+					<td>
+						<g:FocusPanel ui:field="panelViewEditReg">
+							<g:HTMLPanel>
+								<div class="metro-tile metro-tile-portal">View/Edit Registration</div>
+							</g:HTMLPanel>
+						</g:FocusPanel>
+					</td>
+				</tr>
+
+				<table>
+					<tr>
+						<td>
+							<div class="metro-tile metro-tile-small metro-tile-reports">View Usage</div>
+						</td>
+					</tr>
+				</table>
+			</table>
+
 		</div>
 	</g:HTMLPanel>
 </ui:UiBinder> 

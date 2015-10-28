@@ -17,23 +17,22 @@ public class MyAccountView extends Composite implements Display {
 	interface myAccountViewUiBinder extends UiBinder<Widget, MyAccountView> {
 	}
 	
-	@UiField 
-	Label btnBack;
+	
 	@UiField
 	FocusPanel panelViewPlan;
+	@UiField
+	FocusPanel panelViewEditReg;
 
 	public MyAccountView() {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 
-	@Override
-	public Label getBtnBack() {
-		
-		return btnBack;
-	}
-
 	public FocusPanel getPanelViewPlan() {
 		return panelViewPlan;
+	}
+
+	public FocusPanel getPanelViewEditReg() {
+		return panelViewEditReg;
 	}
 
 }

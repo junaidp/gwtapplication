@@ -28,6 +28,8 @@ import com.helloworld.client.event.SearchDataEvent;
 import com.helloworld.client.event.SearchDataEventHandler;
 import com.helloworld.client.event.SubscriptionVerificationEvent;
 import com.helloworld.client.event.SubscriptionVerificationEventHandler;
+import com.helloworld.client.event.ViewEditRegistrationEvent;
+import com.helloworld.client.event.ViewEditRegistrationEventHandler;
 import com.helloworld.client.event.ViewPlanEvent;
 import com.helloworld.client.event.ViewPlanEventHandler;
 import com.helloworld.client.presenter.AdminPresenter;
@@ -50,6 +52,7 @@ import com.helloworld.client.presenter.RegistrationPresenter;
 import com.helloworld.client.presenter.SearchDataPresenter;
 import com.helloworld.client.presenter.SubscriptionVerificationPresenter;
 import com.helloworld.client.presenter.ViewPlanPresenter;
+import com.helloworld.client.presenter.ViewRegistrationPresenter;
 import com.helloworld.client.view.AdminView;
 import com.helloworld.client.view.ApplicationConstants;
 import com.helloworld.client.view.CreatePasswordView;
@@ -70,6 +73,7 @@ import com.helloworld.client.view.CenterPanels.DashboardView;
 import com.helloworld.client.view.CenterPanels.SearchDataView;
 import com.helloworld.client.view.MyDashboard.MyAccountViews.MyAccountView;
 import com.helloworld.client.view.MyDashboard.MyAccountViews.ViewPlanView;
+import com.helloworld.client.view.MyDashboard.MyAccountViews.ViewRegistrationView;
 import com.helloworld.server.GlobalPreferencesXmlView;
 import com.helloworld.shared.entity.GlobalPreferencesEntity;
 import com.helloworld.shared.entity.UserEntity;
@@ -152,6 +156,13 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 				new ViewPlanEventHandler() {
 			public void onViewPlan(ViewPlanEvent event) {
 				History.newItem(ApplicationConstants.TOKEN_VIEW_PLAN);
+			}
+		}); 
+		
+		eventBus.addHandler(ViewEditRegistrationEvent.TYPE,
+				new ViewEditRegistrationEventHandler() {
+			public void onViewEditRegistration(ViewEditRegistrationEvent event) {
+				History.newItem(ApplicationConstants.TOKEN_VIEW_EDIT_REG);
 			}
 		}); 
 		
@@ -320,7 +331,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 			}
 			
 			if (token.equals(ApplicationConstants.TOKEN_MY_ACCOUNT)) {
-				presenter = new MyAccountPresenter(rpcService, eventBus, new MyAccountView(), loggedInUser);
+				presenter = new MyAccountPresenter(rpcService, eventBus, new MyAccountView(), loggedInUser, globalPreferencesEntity);
 				if (presenter != null) {
 					setContainer(container);
 					presenter.go(container);
@@ -329,6 +340,13 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 			
 			if (token.equals(ApplicationConstants.TOKEN_VIEW_PLAN)) {
 				presenter = new ViewPlanPresenter(rpcService, eventBus, new ViewPlanView(), globalPreferencesEntity, loggedInUser);
+				if (presenter != null) {
+					presenter.go(container);
+				}
+			}
+			
+			if (token.equals(ApplicationConstants.TOKEN_VIEW_EDIT_REG)) {
+				presenter = new ViewRegistrationPresenter(rpcService, eventBus, new ViewRegistrationView(), globalPreferencesEntity, loggedInUser);
 				if (presenter != null) {
 					presenter.go(container);
 				}

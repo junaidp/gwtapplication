@@ -22,13 +22,6 @@ public class DashboardAccordion extends Composite implements Display {
 			UiBinder<Widget, DashboardAccordion> {
 	}
 	
-	@UiField
-	Label btnBack;
-	
-	public Label getBtnBack() {
-		return btnBack;
-	}
-
 	public DashboardAccordion() {
 		initWidget(uiBinder.createAndBindUi(this));
 	}

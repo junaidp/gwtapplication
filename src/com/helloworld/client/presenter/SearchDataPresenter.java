@@ -20,7 +20,6 @@ public class SearchDataPresenter implements Presenter
 	public interface Display 
 	{
 		Widget asWidget();
-		Label getBtnBack();
 	}  
 
 	public SearchDataPresenter(HelloServiceAsync rpcService, HandlerManager eventBus, Display view) 
@@ -45,13 +44,7 @@ public class SearchDataPresenter implements Presenter
 
 	@Override
 	public void setHandlers() {
-		display.getBtnBack().addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				History.back();
-			}
-		});
+		
 	}
 	
 }

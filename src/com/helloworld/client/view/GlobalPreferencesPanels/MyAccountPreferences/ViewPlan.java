@@ -8,9 +8,10 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
+import com.helloworld.client.view.GlobalPreferencesPanels.GlobalPreferencesPanels;
 import com.helloworld.shared.entity.GlobalPreferencesEntity;
 
-public class ViewPlan extends Composite {
+public class ViewPlan extends Composite implements GlobalPreferencesPanels {
 
 	private static ViewPlanUiBinder uiBinder = GWT
 			.create(ViewPlanUiBinder.class);
@@ -113,6 +114,18 @@ public class ViewPlan extends Composite {
 
 	public CheckBox getCheckBoxYearly() {
 		return checkBoxYearly;
+	}
+
+	@Override
+	public void disableAllFields() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void enableAllFields() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -18,7 +18,7 @@
 			<script src="Metro-UI-CSS-master/build/js/metro.js"></script>
 		</head>
 		<body class="metro">
-			<div style="padding-left:40%; padding-top:15%">
+			<div style="padding-left:40%; padding-top:10%">
 				<div class="padding20">
 				<h4 class="text-light blue">Sign In</h4>
 					<form>
