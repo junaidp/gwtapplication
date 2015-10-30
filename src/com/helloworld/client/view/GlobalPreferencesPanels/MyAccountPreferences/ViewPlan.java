@@ -18,12 +18,12 @@ public class ViewPlan extends Composite implements GlobalPreferencesPanels {
 
 	interface ViewPlanUiBinder extends UiBinder<Widget, ViewPlan> {
 	}
-	@UiField CheckBox checkBoxPlanType;
 	@UiField CheckBox paymentDetails;
 	@UiField CheckBox checkBoxPaymentPlan;
 	@UiField CheckBox checkBoxMonthly;
 	@UiField CheckBox checkBoxQuaterly;
 	@UiField CheckBox checkBoxYearly;
+	@UiField CheckBox checkShowThisPanel;
 	
 	public ViewPlan() {
 		initWidget(uiBinder.createAndBindUi(this));
@@ -33,60 +33,43 @@ public class ViewPlan extends Composite implements GlobalPreferencesPanels {
 	@SuppressWarnings("deprecation")
 	public void updateFieldsWithAlreadySavedPreferences(GlobalPreferencesEntity alreadySavedGlobalPreferencesEntity){
 		if(alreadySavedGlobalPreferencesEntity != null){
-			checkBoxPlanType.setChecked(alreadySavedGlobalPreferencesEntity.getMyAccountPreferencesId().isShowPlanType());
 			paymentDetails.setChecked(alreadySavedGlobalPreferencesEntity.getMyAccountPreferencesId().isShowPaymentDetails());
 			checkBoxPaymentPlan.setChecked(alreadySavedGlobalPreferencesEntity.getMyAccountPreferencesId().isViewPaymentTerms());
 			checkBoxMonthly.setChecked(alreadySavedGlobalPreferencesEntity.getMyAccountPreferencesId().isViewPlanMonthlyPayments());
 			checkBoxQuaterly.setChecked(alreadySavedGlobalPreferencesEntity.getMyAccountPreferencesId().isViewPlanQuarterlyPayments());
 			checkBoxYearly.setChecked(alreadySavedGlobalPreferencesEntity.getMyAccountPreferencesId().isViewPlanYearlyPayments());
+			checkShowThisPanel.setChecked(alreadySavedGlobalPreferencesEntity.getMyAccountPreferencesId().isViewPlanShowPanel());
 		}
 	}
 	
 	public void setPaymentTermsLayout(){
-		checkBoxMonthly.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
+		checkShowThisPanel.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
 
 			@Override
 			public void onValueChange(ValueChangeEvent<Boolean> event) {
 				if(event.getValue() == true){
-					checkBoxPaymentPlan.setChecked(true);
+					enableAllFields();
+				}else{
+					disableAllFields();
 				}
 			}
-			
-			
 		});
 		
-		checkBoxQuaterly.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
+		checkBoxPaymentPlan.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
 
 			@Override
 			public void onValueChange(ValueChangeEvent<Boolean> event) {
 				if(event.getValue() == true){
-					checkBoxPaymentPlan.setChecked(true);
+					enablePaymentFields();
+				}else{
+					disablePaymentFields();
 				}
 			}
-			
-			
-		});
-		
-		checkBoxYearly.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
 
-			@Override
-			public void onValueChange(ValueChangeEvent<Boolean> event) {
-				if(event.getValue() == true){
-					checkBoxPaymentPlan.setChecked(true);
-				}
-			}
-			
 			
 		});
 	}
 
-	public CheckBox getPlanType() {
-		return checkBoxPlanType;
-	}
-
-	public void setPlanType(CheckBox planType) {
-		this.checkBoxPlanType = planType;
-	}
 
 	public CheckBox getPaymentDetails() {
 		return paymentDetails;
@@ -96,9 +79,7 @@ public class ViewPlan extends Composite implements GlobalPreferencesPanels {
 		this.paymentDetails = paymentDetails;
 	}
 
-	public CheckBox getCheckBoxPlanType() {
-		return checkBoxPlanType;
-	}
+
 
 	public CheckBox getCheckBoxPaymentPlan() {
 		return checkBoxPaymentPlan;
@@ -118,14 +99,54 @@ public class ViewPlan extends Composite implements GlobalPreferencesPanels {
 
 	@Override
 	public void disableAllFields() {
-		// TODO Auto-generated method stub
+		paymentDetails.setChecked(false);
+		paymentDetails.setEnabled(false);
+		checkBoxPaymentPlan.setChecked(false);
+		checkBoxPaymentPlan.setEnabled(false);
+		checkBoxMonthly.setChecked(false);
+		checkBoxMonthly.setEnabled(false);
+		checkBoxQuaterly.setChecked(false);
+		checkBoxQuaterly.setEnabled(false);
+		checkBoxYearly.setChecked(false);
+		checkBoxYearly.setEnabled(false);
 		
 	}
 
 	@Override
 	public void enableAllFields() {
-		// TODO Auto-generated method stub
+		paymentDetails.setChecked(true);
+		paymentDetails.setEnabled(true);
+		checkBoxPaymentPlan.setChecked(true);
+		checkBoxPaymentPlan.setEnabled(true);
+		checkBoxMonthly.setChecked(true);
+		checkBoxMonthly.setEnabled(true);
+		checkBoxQuaterly.setChecked(true);
+		checkBoxQuaterly.setEnabled(true);
+		checkBoxYearly.setChecked(true);
+		checkBoxYearly.setEnabled(true);
+	}
+	
+	private void disablePaymentFields() {
 		
+		checkBoxMonthly.setChecked(false);
+		checkBoxMonthly.setEnabled(false);
+		checkBoxQuaterly.setChecked(false);
+		checkBoxQuaterly.setEnabled(false);
+		checkBoxYearly.setChecked(false);
+		checkBoxYearly.setEnabled(false);
+	}
+
+	private void enablePaymentFields() {
+		checkBoxMonthly.setChecked(true);
+		checkBoxMonthly.setEnabled(true);
+		checkBoxQuaterly.setChecked(true);
+		checkBoxQuaterly.setEnabled(true);
+		checkBoxYearly.setChecked(true);
+		checkBoxYearly.setEnabled(true);
+	}
+
+	public CheckBox getCheckShowThisPanel() {
+		return checkShowThisPanel;
 	}
 
 }

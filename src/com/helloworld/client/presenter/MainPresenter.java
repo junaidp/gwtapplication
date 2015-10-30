@@ -20,6 +20,7 @@ import com.helloworld.client.view.ApplicationConstants;
 import com.helloworld.client.view.ControlPanels.ControlPanelsContainer;
 import com.helloworld.client.view.ControlPanels.DashboardAccordionPanelView;
 import com.helloworld.client.view.widgets.Attachment;
+import com.helloworld.client.view.widgets.DisplayAlert;
 import com.helloworld.client.view.widgets.PopupsView;
 import com.helloworld.shared.entity.UserEntity;
 
@@ -35,10 +36,8 @@ public class MainPresenter implements Presenter
 		Widget asWidget();
 		ControlPanelsContainer getControlPanelContainer();
 		VerticalPanel getCenter();
-		Label getEditAccount();
 		UserEntity getLoggedInUser();
 		Label getFileUpload();
-		Label getGlobalPreferences();
 
 	}  
 
@@ -85,13 +84,6 @@ public class MainPresenter implements Presenter
 				eventBus.fireEvent(new SearchDataEvent(display.getCenter()));
 			}});
 		
-		display.getEditAccount().addClickHandler(new ClickHandler(){
-
-			@Override
-			public void onClick(ClickEvent event) {
-				eventBus.fireEvent(new EditUserEvent(display.getLoggedInUser()));
-			}});
-		
 		display.getFileUpload().addClickHandler(new ClickHandler(){
 
 			@Override
@@ -110,15 +102,11 @@ public class MainPresenter implements Presenter
 
 			@Override
 			public void onClick(ClickEvent event) {
-				History.newItem(ApplicationConstants.TOKEN_DASHBOARD_PORTAL);
+				new DisplayAlert("Removed for testing purpose");
+//				History.newItem(ApplicationConstants.TOKEN_DASHBOARD_PORTAL);
 			}});
 		
-		display.getGlobalPreferences().addClickHandler(new ClickHandler(){
-
-			@Override
-			public void onClick(ClickEvent event) {
-				eventBus.fireEvent(new GlobalPreferencesEvent());
-			}});
+		
 		
 	}
 

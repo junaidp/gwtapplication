@@ -15,6 +15,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.helloworld.client.presenter.ViewRegistrationPresenter.Display;
 import com.helloworld.shared.entity.MyAccountEntity;
 import com.helloworld.shared.entity.MyAccountPreferencesEntity;
+import com.helloworld.shared.entity.UserEntity;
 
 public class ViewRegistrationView extends Composite implements Display{
 
@@ -25,25 +26,25 @@ public class ViewRegistrationView extends Composite implements Display{
 			UiBinder<Widget, ViewRegistrationView> {
 	}
 	@UiField
-	HTMLPanel panelFirstName;
+	HTMLPanel panelName;
 	@UiField
-	HTMLPanel panelLastName;
+	HTMLPanel panelUserName;
+	@UiField
+	HTMLPanel panelEmail;
 	@UiField
 	HTMLPanel panelRegisteredTo;
 	@UiField
 	HTMLPanel panelLastEdited;
 	@UiField
-	TextBox txtFirstName;
+	Label lblName;
 	@UiField
-	TextBox txtLastName;
+	Label lblUserName;
 	@UiField
-	TextBox txtRegisteredTo;
+	Label lblEmail;
+	@UiField
+	Label lblRegisteredTo;
 	@UiField
 	Label lblLastEdited;
-	@UiField
-	Button btnUpdate;
-	@UiField
-	Anchor ancEdit;
 
 	public ViewRegistrationView() {
 		initWidget(uiBinder.createAndBindUi(this));
@@ -52,55 +53,36 @@ public class ViewRegistrationView extends Composite implements Display{
 	}
 
 	private void setHandlers() {
-		ancEdit.addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				enableAllFields();
-			}
-
-			
-		});
+		
 	}
 
 	@Override
 	public void displaySelectedPanels(
 			MyAccountPreferencesEntity myAccountPreferencesEntity) {
 		if(myAccountPreferencesEntity!=null){
-			panelFirstName.setVisible(myAccountPreferencesEntity.isViewRegFirstName());
+			panelName.setVisible(myAccountPreferencesEntity.isViewRegName());
 			panelLastEdited.setVisible(myAccountPreferencesEntity.isViewRegLastEdited());
-			panelLastName.setVisible(myAccountPreferencesEntity.isViewRegLastName());
+			panelUserName.setVisible(myAccountPreferencesEntity.isViewRegUserName());
+			panelEmail.setVisible(myAccountPreferencesEntity.isViewRegEmail());
 			panelRegisteredTo.setVisible(myAccountPreferencesEntity.isViewRegRegisteredTo());
-			ancEdit.setVisible(myAccountPreferencesEntity.isViewRegAllowEditing());
+		
 		}
 	}
 
-	@Override
-	public Button getBtnUpdate() {
-		return btnUpdate;
-	}
-
-	@Override
-	public void updateUIFields(MyAccountEntity myAccountEntity) {
-		txtFirstName.setText(myAccountEntity.getFirstName());
-		txtLastName.setText(myAccountEntity.getLastName());
-		txtRegisteredTo.setText(myAccountEntity.getRegisteredTo());
-		lblLastEdited.setText(myAccountEntity.getLastEdited().toLocaleString().substring(10));
-	}
-
-	@Override
-	public void updateEntity(MyAccountEntity myAccountEntity) {
-		myAccountEntity.setFirstName(txtFirstName.getText());
-		myAccountEntity.setLastName(txtLastName.getText());
-		myAccountEntity.setRegisteredTo(txtRegisteredTo.getText());
-	}
 	
-	private void enableAllFields() {
-		txtFirstName.setEnabled(true);
-		txtLastName.setEnabled(true);
-		txtRegisteredTo.setEnabled(true);
-		
-		
+
+	@Override
+	public void updateUIFields(UserEntity userEntity) {
+		lblName.setText(userEntity.getName());
+		lblUserName.setText(userEntity.getUserName());
+		lblEmail.setText(userEntity.getEmail());
+		lblRegisteredTo.setText(userEntity.getMyAccountId().getRegisteredTo());
+		lblLastEdited.setText(userEntity.getMyAccountId().getLastEdited()+"");
 	}
+
+	
+	
+	
+
 
 }

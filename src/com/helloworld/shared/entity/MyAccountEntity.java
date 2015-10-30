@@ -32,12 +32,6 @@ import javax.persistence.Table;
 		@Column(name="yearlyPaymentPlan")
 		private boolean yearlyPaymentPlan;
 		
-		@Column(name="firstName")
-		private String firstName;
-		
-		@Column(name="lastName")
-		private String lastName;
-		
 		@Column(name="registeredTo")
 		private String registeredTo;
 		
@@ -76,22 +70,7 @@ import javax.persistence.Table;
 			this.yearlyPaymentPlan = yearlyPaymentPlan;
 		}
 
-		public String getFirstName() {
-			return firstName;
-		}
-
-		public void setFirstName(String firstName) {
-			this.firstName = firstName;
-		}
-
-		public String getLastName() {
-			return lastName;
-		}
-
-		public void setLastName(String lastName) {
-			this.lastName = lastName;
-		}
-
+	
 		public String getRegisteredTo() {
 			return registeredTo;
 		}

@@ -25,11 +25,11 @@ public class ViewRegistrationDetails extends Composite implements GlobalPreferen
 	@UiField
 	CheckBox checkRegisteredTo;
 	@UiField
-	CheckBox checkFirstName;
+	CheckBox checkName;
 	@UiField
-	CheckBox checkLastName;
+	CheckBox checkEmail;
 	@UiField
-	CheckBox checkPassword;
+	CheckBox checkUserName;
 	@UiField
 	CheckBox checkLastTimeEdited;
 	@UiField
@@ -38,12 +38,67 @@ public class ViewRegistrationDetails extends Composite implements GlobalPreferen
 
 	public ViewRegistrationDetails() {
 		initWidget(uiBinder.createAndBindUi(this));
-		
 		setHandlers();
 	}
 
 
 	private void setHandlers() {
+		
+//		checkRegisteredTo.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
+//
+//			@Override
+//			public void onValueChange(ValueChangeEvent<Boolean> event) {
+//				if(event.getValue()== true){
+//					checkShowThisPanel.setChecked(true);
+//				}
+//			}
+//		});
+//		checkFirstName.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
+//
+//			@Override
+//			public void onValueChange(ValueChangeEvent<Boolean> event) {
+//				if(event.getValue()== true){
+//					checkShowThisPanel.setChecked(true);
+//				}
+//			}
+//		});
+//		checkLastName.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
+//
+//			@Override
+//			public void onValueChange(ValueChangeEvent<Boolean> event) {
+//				if(event.getValue()== true){
+//					checkShowThisPanel.setChecked(true);
+//				}
+//			}
+//		});
+//		checkPassword.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
+//
+//			@Override
+//			public void onValueChange(ValueChangeEvent<Boolean> event) {
+//				if(event.getValue()== true){
+//					checkShowThisPanel.setChecked(true);
+//				}
+//			}
+//		});
+//		checkLastTimeEdited.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
+//
+//			@Override
+//			public void onValueChange(ValueChangeEvent<Boolean> event) {
+//				if(event.getValue()== true){
+//					checkShowThisPanel.setChecked(true);
+//				}
+//			}
+//		});
+//		checkAllowEditing.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
+//
+//			@Override
+//			public void onValueChange(ValueChangeEvent<Boolean> event) {
+//				if(event.getValue()== true){
+//					checkShowThisPanel.setChecked(true);
+//				}
+//			}
+//		});
+		
 		checkShowThisPanel.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
 			
 			@Override
@@ -78,26 +133,6 @@ public class ViewRegistrationDetails extends Composite implements GlobalPreferen
 	}
 
 
-	public CheckBox getCheckLastName() {
-		return checkLastName;
-	}
-
-
-	public void setCheckLastName(CheckBox checkLastName) {
-		this.checkLastName = checkLastName;
-	}
-
-
-	public CheckBox getCheckPassword() {
-		return checkPassword;
-	}
-
-
-	public void setCheckPassword(CheckBox checkPassword) {
-		this.checkPassword = checkPassword;
-	}
-
-
 	public CheckBox getCheckLastTimeEdited() {
 		return checkLastTimeEdited;
 	}
@@ -113,13 +148,12 @@ public class ViewRegistrationDetails extends Composite implements GlobalPreferen
 	public void updateFieldsWithAlreadySavedPreferences(
 			GlobalPreferencesEntity alreadySavedGlobalPreferencesEntity) {
 		if(alreadySavedGlobalPreferencesEntity != null){
-			checkLastName.setChecked(alreadySavedGlobalPreferencesEntity.getMyAccountPreferencesId().isViewRegLastName());
-			checkFirstName.setChecked(alreadySavedGlobalPreferencesEntity.getMyAccountPreferencesId().isViewRegFirstName());
+			checkName.setChecked(alreadySavedGlobalPreferencesEntity.getMyAccountPreferencesId().isViewRegName());
+			checkUserName.setChecked(alreadySavedGlobalPreferencesEntity.getMyAccountPreferencesId().isViewRegUserName());
+			checkEmail.setChecked(alreadySavedGlobalPreferencesEntity.getMyAccountPreferencesId().isViewRegEmail());
 			checkLastTimeEdited.setChecked(alreadySavedGlobalPreferencesEntity.getMyAccountPreferencesId().isViewRegLastEdited());
-			checkPassword.setChecked(alreadySavedGlobalPreferencesEntity.getMyAccountPreferencesId().isViewRegPassword());
 			checkRegisteredTo.setChecked(alreadySavedGlobalPreferencesEntity.getMyAccountPreferencesId().isViewRegRegisteredTo());
 			checkShowThisPanel.setChecked(alreadySavedGlobalPreferencesEntity.getMyAccountPreferencesId().isViewRegShowPanel());
-			checkAllowEditing.setChecked(alreadySavedGlobalPreferencesEntity.getMyAccountPreferencesId().isViewRegAllowEditing());
 			
 		}
 	}
@@ -127,40 +161,74 @@ public class ViewRegistrationDetails extends Composite implements GlobalPreferen
 	@SuppressWarnings("deprecation")
 	@Override
 	public void disableAllFields() {
-		checkShowThisPanel.setChecked(false);
 		checkRegisteredTo.setChecked(false);
-		checkFirstName.setChecked(false);
-		checkLastName.setChecked(false);
-		checkPassword.setChecked(false);
+		checkName.setChecked(false);
+		checkUserName.setChecked(false);
+		checkEmail.setChecked(false);
 		checkLastTimeEdited.setChecked(false);
 		checkAllowEditing.setChecked(false);
+		
+		checkRegisteredTo.setEnabled(false);
+		checkName.setEnabled(false);
+		checkUserName.setEnabled(false);
+		checkEmail.setEnabled(false);
+		checkLastTimeEdited.setEnabled(false);
+		checkAllowEditing.setEnabled(false);
 	}
 
 	@SuppressWarnings("deprecation")
 	@Override
 	public void enableAllFields() {
-		checkShowThisPanel.setChecked(true);
 		checkRegisteredTo.setChecked(true);
-		checkFirstName.setChecked(true);
-		checkLastName.setChecked(true);
-		checkPassword.setChecked(true);
+		checkName.setChecked(true);
+		checkUserName.setChecked(true);
+		checkEmail.setChecked(true);
 		checkLastTimeEdited.setChecked(true);
 		checkAllowEditing.setChecked(true);
+		
+		checkRegisteredTo.setEnabled(true);
+		checkName.setEnabled(true);
+		checkUserName.setEnabled(true);
+		checkEmail.setEnabled(true);
+		checkLastTimeEdited.setEnabled(true);
+		checkAllowEditing.setEnabled(true);
 	}
 
 
-	public CheckBox getCheckFirstName() {
-		return checkFirstName;
-	}
-
-
-	public void setCheckFirstName(CheckBox checkFirstName) {
-		this.checkFirstName = checkFirstName;
-	}
 
 
 	public CheckBox getCheckAllowEditing() {
 		return checkAllowEditing;
+	}
+
+
+	public CheckBox getCheckName() {
+		return checkName;
+	}
+
+
+	public void setCheckName(CheckBox checkName) {
+		this.checkName = checkName;
+	}
+
+
+	public CheckBox getCheckUserName() {
+		return checkUserName;
+	}
+
+
+	public void setCheckUserName(CheckBox checkUserName) {
+		this.checkUserName = checkUserName;
+	}
+
+
+	public CheckBox getCheckEmail() {
+		return checkEmail;
+	}
+
+
+	public void setCheckEmail(CheckBox checkEmail) {
+		this.checkEmail = checkEmail;
 	}
 
 }

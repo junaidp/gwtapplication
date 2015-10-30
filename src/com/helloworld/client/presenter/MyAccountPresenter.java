@@ -10,6 +10,8 @@ import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.helloworld.client.HelloServiceAsync;
+import com.helloworld.client.event.EditUserEvent;
+import com.helloworld.client.event.RegistrationEvent;
 import com.helloworld.client.event.ViewEditRegistrationEvent;
 import com.helloworld.client.event.ViewPlanEvent;
 import com.helloworld.shared.entity.GlobalPreferencesEntity;
@@ -29,7 +31,8 @@ public class MyAccountPresenter implements Presenter
 	{
 		Widget asWidget();
 		FocusPanel getPanelViewPlan();
-		FocusPanel getPanelViewEditReg();
+		FocusPanel getPanelViewReg();
+		FocusPanel getPanelEditReg();
 	}  
 
 	public MyAccountPresenter(HelloServiceAsync rpcService, HandlerManager eventBus, Display view, UserEntity user, GlobalPreferencesEntity globalPreferencesEntity) 
@@ -52,9 +55,9 @@ public class MyAccountPresenter implements Presenter
 	private void bind() {
 		try{
 		if(globalPreferencesEntity.getMyAccountPreferencesId()!=null){
-			if(! globalPreferencesEntity.getMyAccountPreferencesId().isViewRegShowPanel()){
-				display.getPanelViewEditReg().setVisible(false);
-			}
+			display.getPanelViewReg().setVisible(globalPreferencesEntity.getMyAccountPreferencesId().isViewRegShowPanel());
+			display.getPanelEditReg().setVisible(globalPreferencesEntity.getMyAccountPreferencesId().isEditRegShowPanel());
+			display.getPanelViewPlan().setVisible(globalPreferencesEntity.getMyAccountPreferencesId().isViewPlanShowPanel());
 		}
 		}catch(Exception ex){
 			//Global preferences entity not available yet
@@ -73,11 +76,18 @@ public class MyAccountPresenter implements Presenter
 			}
 		});
 		
-		display.getPanelViewEditReg().addClickHandler(new ClickHandler(){
+		display.getPanelViewReg().addClickHandler(new ClickHandler(){
 
 			@Override
 			public void onClick(ClickEvent event) {
 				eventBus.fireEvent(new ViewEditRegistrationEvent(loggedInUser));
+			}});
+		
+		display.getPanelEditReg().addClickHandler(new ClickHandler(){
+
+			@Override
+			public void onClick(ClickEvent event) {
+				eventBus.fireEvent(new EditUserEvent(loggedInUser));
 			}});
 	}
 	

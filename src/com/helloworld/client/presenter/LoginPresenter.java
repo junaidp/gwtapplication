@@ -71,18 +71,20 @@ public class LoginPresenter implements Presenter
 	{
 		display.getLblError().setText("");
 		final String username = display.getTxtUserName().getText();
-//		final LoadingPopup loadingPopup = new LoadingPopup();
+		//		final LoadingPopup loadingPopup = new LoadingPopup();
 		display.getBtnSubmit().addStyleName("loading-pulse");
-		
-		
-//		loadingPopup.display();
+
+
+		//		loadingPopup.display();
 		rpcService.signIn(username, display.getTxtPassword().getText(), new AsyncCallback<UserEntity>() {
 
 			@Override
 			public void onSuccess(UserEntity user) {
-//				if(loadingPopup!=null){
-//					loadingPopup.remove();
-//				}
+				if(user.getStatus() == ApplicationConstants.BLOCK || user.getStatus() == ApplicationConstants.CLOSED ){
+					String status = user.getStatus() == ApplicationConstants.BLOCK?"Blocked":"Closed";
+					display.getLblError().setText("Your Account is " + status + " , Please Conatct Adminstrator for activation");
+				}
+				else{
 				if(user!=null && user.getUserFetchStatus().equals(ApplicationConstants.USER_NOT_FOUND)){
 					display.getLblError().setText(ApplicationConstants.USER_NOT_FOUND);
 				}
@@ -100,6 +102,8 @@ public class LoginPresenter implements Presenter
 					worngPasswordUser = username;
 				}
 
+
+
 				else if(user.isAdmin()){
 					eventBus.fireEvent(new AdminEvent());
 				}
@@ -107,14 +111,15 @@ public class LoginPresenter implements Presenter
 					fetchGlobalPreferences(user);
 
 				}
-				display.getBtnSubmit().removeStyleName("loading-pulse");
 				
+			}
+				display.getBtnSubmit().removeStyleName("loading-pulse");
 			}
 			@Override
 			public void onFailure(Throwable caught) {
-//				if(loadingPopup!=null){
-//					loadingPopup.remove();
-//				}
+				//				if(loadingPopup!=null){
+				//					loadingPopup.remove();
+				//				}
 				display.getBtnSubmit().removeStyleName("loading-pulse");
 			}
 		});

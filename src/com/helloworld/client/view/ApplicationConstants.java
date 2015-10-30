@@ -27,6 +27,7 @@ public class ApplicationConstants {
 	public static final String TOKEN_FORGOT_USERNAME = "forgotUsername";
 	public static final String TOKEN_MANAGE_USER = "manageUser";
 	public static final String TOKEN_VIEW_EDIT_REG = "viewEditReg";
+	public static final String TOKEN_VIEW_REG = "viewRegistration";
 
 
 	
@@ -60,6 +61,7 @@ public class ApplicationConstants {
 	public static final String ENTER_PASSWORD = "Enter password";
 	public static final int BLOCK = 2;
 	public static final int ACTIVE = 1;
+	public static final int CLOSED = 3;
 	public static final String ACCOUNT_INACTIVATED = "You Account has been locked, Please contact your Administrator";
 	public static final String USER_NOT_FOUND = "This Username is not in our system";
 	public static final String CONTACT_ADMIN = "Your account is inactive, please contact your Administrator";
@@ -68,5 +70,8 @@ public class ApplicationConstants {
 	public static final String ENTER_NEW_PASSWORD = "Enter new password";
 	public static final String CONFIRM_NEW_PASSWORD = "Confirm new password";
 	public static final String EMAIL_NOT_CORRECT = "Email Address not correct";
+	public static final String CLOSE_ACCOUNT_WARNING = "You will no loger be able to access your account . Are You sure you want to close this Account !";
+	public static final String ACCOUNT_CLOSED = "Account Closed";
+	
 	
 }

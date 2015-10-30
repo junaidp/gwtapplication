@@ -5,7 +5,8 @@
 	
 	</ui:style>
 	<g:HTMLPanel>
-	<div>
+	<div style="padding-left:40%">
+			<h4 class="text-light blue">View Plan</h4>
 		<g:FlowPanel ui:field="planTypePanel">
 			<g:HTMLPanel>
 				<div style="padding:4px">

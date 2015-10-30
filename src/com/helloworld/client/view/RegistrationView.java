@@ -6,11 +6,13 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.helloworld.client.presenter.RegistrationPresenter.Display;
+import com.helloworld.shared.entity.GlobalPreferencesEntity;
 import com.helloworld.shared.entity.UserEntity;
 
 public class RegistrationView extends Composite implements Display {
@@ -22,7 +24,6 @@ public class RegistrationView extends Composite implements Display {
 			UiBinder<Widget, RegistrationView> {
 	}
 	
-	@UiField Button btnCancel;
 	@UiField Button btnSubmit;
 	@UiField TextBox name;
 	@UiField TextBox userName;
@@ -34,9 +35,22 @@ public class RegistrationView extends Composite implements Display {
 	@UiField Label passwordError;
 	@UiField Label confirmPasswordError;
 	@UiField Label emailError;
+	@UiField TextBox registeredTo;
+	@UiField Label registedToError;
+	@UiField HTMLPanel panelRegisteredTo;
 	@UiField VerticalPanel container;
 	@UiField Label captchaError;
+	@UiField HTMLPanel panelName;
+	@UiField HTMLPanel panelUserName;
+	@UiField HTMLPanel panelEmail;
+	@UiField HTMLPanel panelPassword;
+	@UiField HTMLPanel panelConfirmPassword;
+	@UiField HTMLPanel panelCloseAccount;
+	@UiField Button btnCloseAccount;
+	
 	private UserEntity loggedInUser;
+	private GlobalPreferencesEntity globalPreferencesEntity;
+	
 	
 	private RecaptchaWidget rw;
 	
@@ -44,12 +58,14 @@ public class RegistrationView extends Composite implements Display {
 		initWidget(uiBinder.createAndBindUi(this));
 		rw = new RecaptchaWidget("6LcEKg4TAAAAAFADmX5mrhcKkaeNMcxh7k5CiQ2K");
 		container.add(rw);
+		btnCloseAccount.setVisible(false);
 
 	}
 
 
-	public RegistrationView(UserEntity loggedInUser) {
+	public RegistrationView(UserEntity loggedInUser, GlobalPreferencesEntity globalPreferencesEntity) {
 		this.loggedInUser = loggedInUser;
+		this.globalPreferencesEntity = globalPreferencesEntity;
 		initWidget(uiBinder.createAndBindUi(this));
 		rw = new RecaptchaWidget("6LcEKg4TAAAAAFADmX5mrhcKkaeNMcxh7k5CiQ2K");
 		name.setText(loggedInUser.getName());
@@ -57,13 +73,12 @@ public class RegistrationView extends Composite implements Display {
 		password.setText(loggedInUser.getPassword());
 		email.setText(loggedInUser.getEmail());
 		btnSubmit.setText("update");
+		btnCloseAccount.setVisible(true);
 		confirmPassword.setText(loggedInUser.getPassword());
+		registeredTo.setText(loggedInUser.getMyAccountId().getRegisteredTo());
+		displayPanelsAsPerGlobalPreferences();
 	}
 
-
-	public Button getBtnCancel() {
-		return btnCancel;
-	}
 
 	public Button getBtnSubmit() {
 		return btnSubmit;
@@ -121,7 +136,19 @@ public class RegistrationView extends Composite implements Display {
 		passwordError.setText("");
 		confirmPasswordError.setText("");
 		userNameError.setText("");
+		registeredTo.setText("");
+		registedToError.setText("");
 		captchaError.setText("");
+	}
+	
+	public void displayPanelsAsPerGlobalPreferences(){
+		panelEmail.setVisible(globalPreferencesEntity.getMyAccountPreferencesId().isEditRegEmail());
+		panelConfirmPassword.setVisible(globalPreferencesEntity.getMyAccountPreferencesId().isEditRegPassword());
+		panelPassword.setVisible(globalPreferencesEntity.getMyAccountPreferencesId().isEditRegPassword());
+		panelName.setVisible(globalPreferencesEntity.getMyAccountPreferencesId().isEditRegName());
+		panelUserName.setVisible(globalPreferencesEntity.getMyAccountPreferencesId().isEditRegUserName());
+		panelRegisteredTo.setVisible(globalPreferencesEntity.getMyAccountPreferencesId().isEditRegRegisteredTo());
+		panelCloseAccount.setVisible(globalPreferencesEntity.getMyAccountPreferencesId().isEditRegCloseAccount());
 	}
 
 	public RecaptchaWidget getRw() {
@@ -136,6 +163,21 @@ public class RegistrationView extends Composite implements Display {
 
 	public UserEntity getLoggedInUser() {
 		return loggedInUser;
+	}
+
+
+	public TextBox getRegisteredTo() {
+		return registeredTo;
+	}
+
+
+	public Label getRegistedToError() {
+		return registedToError;
+	}
+
+
+	public Button getBtnCloseAccount() {
+		return btnCloseAccount;
 	}
 
 }

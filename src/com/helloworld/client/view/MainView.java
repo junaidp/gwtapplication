@@ -31,8 +31,6 @@ public class MainView extends Composite implements Display{
 	ControlPanelsContainer controlPanelContainer;
 	@UiField Label lblWelcome;
 	@UiField DisclosurePanel discPanel;
-	@UiField Label editAccount;
-	@UiField Label globalPreferences;
 	private UserEntity loggedInUser;
 	@UiField Label fileUpload;
 
@@ -60,9 +58,6 @@ public class MainView extends Composite implements Display{
 		this.center = center;
 	}
 
-	public Label getEditAccount() {
-		return editAccount;
-	}
 
 	public UserEntity getLoggedInUser() {
 		return loggedInUser;
@@ -72,8 +67,5 @@ public class MainView extends Composite implements Display{
 		return fileUpload;
 	}
 
-	public Label getGlobalPreferences() {
-		return globalPreferences;
-	}
 
 }

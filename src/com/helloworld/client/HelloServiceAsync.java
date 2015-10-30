@@ -33,4 +33,5 @@ public interface HelloServiceAsync {
 	void emailUserName(String email, AsyncCallback<String> asyncCallback);
 	void fetchAllUsers(AsyncCallback<ArrayList<UserEntity>> asyncCallback);
 	void updateUserAccount(UserEntity user, AsyncCallback<String> asyncCallback);
+	void closeAccount(UserEntity user, AsyncCallback<String> asyncCallback);
 }

@@ -35,5 +35,6 @@ public interface HelloService extends RemoteService {
 	String emailUserName(String email)throws Exception;
 	ArrayList<UserEntity>fetchAllUsers()throws Exception;
 	String updateUserAccount(UserEntity user)throws Exception;
+	String closeAccount(UserEntity user) throws Exception;
 	
 }

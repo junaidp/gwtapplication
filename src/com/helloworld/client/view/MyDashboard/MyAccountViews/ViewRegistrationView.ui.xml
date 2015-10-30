@@ -5,44 +5,46 @@
 	
 	</ui:style>
 	<g:HTMLPanel>
-	<div style="padding-left:70%">
-	<g:Anchor ui:field="ancEdit" styleName="hover" text="Edit"> Edit</g:Anchor>
-	</div>
-		<div style="padding-left:10%">
+	
+		<div style="padding-left:40%">
 			<h4 class="text-light blue">View Registration</h4>
-			<g:HTMLPanel ui:field="panelFirstName">
-				<div>
-					<g:Label styleName="text-light blue inLine" text="First Name: "></g:Label>
-					<g:TextBox styleName="input-control text inLine" ui:field="txtFirstName" enabled="false"></g:TextBox>
+			<g:HTMLPanel ui:field="panelName">
+				<div style="padding-top:5px">
+					<g:Label styleName="text-light blue inLine" text="Name: "></g:Label>
+					<g:Label styleName="text-light inLine" ui:field="lblName" ></g:Label>
 				</div>
 			</g:HTMLPanel>
 
-			<g:HTMLPanel ui:field="panelLastName">
-				<div>
-					<g:Label styleName="text-light blue inLine" text="Last Name: "></g:Label>
-					<g:TextBox styleName="input-control text inLine" ui:field="txtLastName" enabled="false"></g:TextBox>
+			<g:HTMLPanel ui:field="panelUserName">
+				<div style="padding-top:5px">
+					<g:Label styleName="text-light blue inLine" text="User Name: "></g:Label>
+					<g:Label styleName="text-light inLine" ui:field="lblUserName" ></g:Label>
+				</div>
+			</g:HTMLPanel>
+			
+			<g:HTMLPanel ui:field="panelEmail">
+				<div style="padding-top:5px">
+					<g:Label styleName="text-light blue inLine" text="Email: "></g:Label>
+					<g:Label styleName="text-light inLine inLine" ui:field="lblEmail" ></g:Label>
 				</div>
 			</g:HTMLPanel>
 
 			<g:HTMLPanel ui:field="panelRegisteredTo">
-				<div>
+				<div style="padding-top:5px">
 					<g:Label styleName="text-light blue inLine" text="Registered to: "></g:Label>
-					<g:TextBox styleName="input-control text inLine" ui:field="txtRegisteredTo" enabled="false"></g:TextBox>
+					<g:Label styleName="text-light inLine" ui:field="lblRegisteredTo" ></g:Label>
 				</div>
 			</g:HTMLPanel>
 
 			<g:HTMLPanel ui:field="panelLastEdited">
-				<div>
+				<div style="padding-top:5px">
 					<g:Label styleName="text-light blue inLine" text="Last Edited: "></g:Label>
 					<g:Label styleName="text-light inLine" ui:field="lblLastEdited" ></g:Label>
 				</div>
 			</g:HTMLPanel>
 
 		</div>
-		
-		<div style="padding:5px">
-		<g:Button styleName="button primary" ui:field="btnUpdate"> update </g:Button>
-		</div>
+
 
 	</g:HTMLPanel>
 </ui:UiBinder> 

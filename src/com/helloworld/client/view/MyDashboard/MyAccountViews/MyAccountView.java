@@ -21,7 +21,9 @@ public class MyAccountView extends Composite implements Display {
 	@UiField
 	FocusPanel panelViewPlan;
 	@UiField
-	FocusPanel panelViewEditReg;
+	FocusPanel panelViewReg;
+	@UiField
+	FocusPanel panelEditReg;
 
 	public MyAccountView() {
 		initWidget(uiBinder.createAndBindUi(this));
@@ -31,8 +33,21 @@ public class MyAccountView extends Composite implements Display {
 		return panelViewPlan;
 	}
 
-	public FocusPanel getPanelViewEditReg() {
-		return panelViewEditReg;
+	public FocusPanel getPanelViewReg() {
+		return panelViewReg;
 	}
 
+	public void setPanelViewReg(FocusPanel panelViewReg) {
+		this.panelViewReg = panelViewReg;
+	}
+
+	public FocusPanel getPanelEditReg() {
+		return panelEditReg;
+	}
+
+	public void setPanelEditReg(FocusPanel panelEditReg) {
+		this.panelEditReg = panelEditReg;
+	}
+
+	
 }

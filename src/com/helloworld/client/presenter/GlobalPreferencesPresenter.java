@@ -112,11 +112,16 @@ public class GlobalPreferencesPresenter implements Presenter
 					}
 					display.getSplitPanel().setRightWidget(viewRegistration);
 					break;
-				case ApplicationConstants.EDIT_REGISTRATION:
-					editRegistration = new EditRegistrationDetails();
+					
+				case ApplicationConstants.EDIT_REGISTRATION:  
+					if(editRegistration == null){
+						editRegistration = new EditRegistrationDetails();
+						editRegistration.updateFieldsWithAlreadySavedPreferences(alreadySavedGlobalPreferencesEntity);
+					
+					}
 					display.getSplitPanel().setRightWidget(editRegistration);
 					break;
-				}		
+				}	
 			}
 		});
 	}
@@ -140,20 +145,29 @@ public class GlobalPreferencesPresenter implements Presenter
 	private void saveGlobalPreferences(GlobalPreferencesEntity globalPreferencesEntity) {
 		if(viewPlan!=null){
 			globalPreferencesEntity.getMyAccountPreferencesId().setShowPaymentDetails(viewPlan.getPaymentDetails().isChecked());
-			globalPreferencesEntity.getMyAccountPreferencesId().setShowPlanType(viewPlan.getPlanType().isChecked());
 			globalPreferencesEntity.getMyAccountPreferencesId().setViewPaymentTerms(viewPlan.getCheckBoxPaymentPlan().isChecked());
 			globalPreferencesEntity.getMyAccountPreferencesId().setViewPlanMonthlyPayments(viewPlan.getCheckBoxMonthly().isChecked());
 			globalPreferencesEntity.getMyAccountPreferencesId().setViewPlanQuarterlyPayments(viewPlan.getCheckBoxQuaterly().isChecked());
 			globalPreferencesEntity.getMyAccountPreferencesId().setViewPlanYearlyPayments(viewPlan.getCheckBoxYearly().isChecked());
+			globalPreferencesEntity.getMyAccountPreferencesId().setViewPlanShowPanel(viewPlan.getCheckShowThisPanel().isChecked());
+			
 		}
 		if(viewRegistration!=null){
-			globalPreferencesEntity.getMyAccountPreferencesId().setViewRegFirstName(viewRegistration.getCheckFirstName().isChecked());
+			globalPreferencesEntity.getMyAccountPreferencesId().setViewRegName(viewRegistration.getCheckName().isChecked());
 			globalPreferencesEntity.getMyAccountPreferencesId().setViewRegLastEdited(viewRegistration.getCheckLastTimeEdited().isChecked());
-			globalPreferencesEntity.getMyAccountPreferencesId().setViewRegLastName(viewRegistration.getCheckLastName().isChecked());
-			globalPreferencesEntity.getMyAccountPreferencesId().setViewRegPassword(viewRegistration.getCheckPassword().isChecked());
+			globalPreferencesEntity.getMyAccountPreferencesId().setViewRegUserName(viewRegistration.getCheckUserName().isChecked());
+			globalPreferencesEntity.getMyAccountPreferencesId().setViewRegEmail(viewRegistration.getCheckEmail().isChecked());
 			globalPreferencesEntity.getMyAccountPreferencesId().setViewRegRegisteredTo(viewRegistration.getCheckRegisteredTo().isChecked());
 			globalPreferencesEntity.getMyAccountPreferencesId().setViewRegShowPanel(viewRegistration.getCheckShowThisPanel().isChecked());
-			globalPreferencesEntity.getMyAccountPreferencesId().setViewRegAllowEditing(viewRegistration.getCheckAllowEditing().isChecked());
+			
+		}if(editRegistration!=null){
+			globalPreferencesEntity.getMyAccountPreferencesId().setEditRegName(editRegistration.getCheckName().isChecked());
+			globalPreferencesEntity.getMyAccountPreferencesId().setEditRegUserName(editRegistration.getCheckUserName().isChecked());
+			globalPreferencesEntity.getMyAccountPreferencesId().setEditRegEmail(editRegistration.getCheckEmail().isChecked());
+			globalPreferencesEntity.getMyAccountPreferencesId().setEditRegRegisteredTo(editRegistration.getCheckRegisteredTo().isChecked());
+			globalPreferencesEntity.getMyAccountPreferencesId().setEditRegShowPanel(editRegistration.getCheckShowThisPanel().isChecked());
+			globalPreferencesEntity.getMyAccountPreferencesId().setEditRegPassword(editRegistration.getCheckPassword().isChecked());
+			globalPreferencesEntity.getMyAccountPreferencesId().setEditRegCloseAccount(editRegistration.getCheckCloseAccount().isChecked());
 			
 		}
 		

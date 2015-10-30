@@ -191,5 +191,10 @@ HelloService {
 		return rdbHelper.updateUserAccount(user);
 	}
 
+	@Override
+	public String closeAccount(UserEntity user) throws Exception {
+		return rdbHelper.closeAccount(user);
+	}
+
 
 }

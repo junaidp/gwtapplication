@@ -40,11 +40,17 @@ import javax.persistence.Table;
 		@Column(name="viewPlanYearlyPayments")
 		private boolean viewPlanYearlyPayments;
 		
-		@Column(name="viewRegLastName")
-		private boolean viewRegLastName;
+		@Column(name="viewPlanShowPanel")
+		private boolean viewPlanShowPanel;
 		
-		@Column(name="viewRegFirstName")
-		private boolean viewRegFirstName;
+		@Column(name="viewRegName")
+		private boolean viewRegName;
+		
+		@Column(name="viewRegUserName")
+		private boolean viewRegUserName;
+		
+		@Column(name="viewRegEmail")
+		private boolean viewRegEmail;
 		
 		@Column(name="viewRegShowPanel")
 		private boolean viewRegShowPanel;
@@ -52,15 +58,33 @@ import javax.persistence.Table;
 		@Column(name="viewRegRegisteredTo")
 		private boolean viewRegRegisteredTo;
 		
-		@Column(name="viewRegPassword")
-		private boolean viewRegPassword;
+		@Column(name="editRegPassword")
+		private boolean editRegPassword;
 		
 		@Column(name="viewRegLastEdited")
 		private boolean viewRegLastEdited;
 		
-		@Column(name="viewRegAllowEditing")
-		private boolean viewRegAllowEditing;
-
+		
+		
+		
+		
+		@Column(name="editRegName")
+		private boolean editRegName;
+		
+		@Column(name="editRegUserName")
+		private boolean editRegUserName;
+		
+		@Column(name="editRegEmail")
+		private boolean editRegEmail;
+		
+		@Column(name="editRegShowPanel")
+		private boolean editRegShowPanel;
+		
+		@Column(name="editRegRegisteredTo")
+		private boolean editRegRegisteredTo;
+		
+		@Column(name="editRegCloseAccount")
+		private boolean editRegCloseAccount;
 		
 
 		public int getMyAccountPreferencesId() {
@@ -119,22 +143,7 @@ import javax.persistence.Table;
 			this.viewPlanYearlyPayments = viewPlanYearlyPayments;
 		}
 
-		public boolean isViewRegLastName() {
-			return viewRegLastName;
-		}
-
-		public void setViewRegLastName(boolean viewRegLastName) {
-			this.viewRegLastName = viewRegLastName;
-		}
-
-		public boolean isViewRegFirstName() {
-			return viewRegFirstName;
-		}
-
-		public void setViewRegFirstName(boolean viewRegFirstName) {
-			this.viewRegFirstName = viewRegFirstName;
-		}
-
+	
 		public boolean isViewRegShowPanel() {
 			return viewRegShowPanel;
 		}
@@ -151,14 +160,6 @@ import javax.persistence.Table;
 			this.viewRegRegisteredTo = viewRegRegisteredTo;
 		}
 
-		public boolean isViewRegPassword() {
-			return viewRegPassword;
-		}
-
-		public void setViewRegPassword(boolean viewRegPassword) {
-			this.viewRegPassword = viewRegPassword;
-		}
-
 		public boolean isViewRegLastEdited() {
 			return viewRegLastEdited;
 		}
@@ -167,12 +168,92 @@ import javax.persistence.Table;
 			this.viewRegLastEdited = viewRegLastEdited;
 		}
 
-		public boolean isViewRegAllowEditing() {
-			return viewRegAllowEditing;
+		public boolean isViewRegName() {
+			return viewRegName;
 		}
 
-		public void setViewRegAllowEditing(boolean viewRegAllowEditing) {
-			this.viewRegAllowEditing = viewRegAllowEditing;
+		public void setViewRegName(boolean viewRegName) {
+			this.viewRegName = viewRegName;
+		}
+
+		public boolean isViewRegUserName() {
+			return viewRegUserName;
+		}
+
+		public void setViewRegUserName(boolean viewRegUserName) {
+			this.viewRegUserName = viewRegUserName;
+		}
+
+		public boolean isViewRegEmail() {
+			return viewRegEmail;
+		}
+
+		public void setViewRegEmail(boolean viewRegEmail) {
+			this.viewRegEmail = viewRegEmail;
+		}
+
+		public boolean isEditRegPassword() {
+			return editRegPassword;
+		}
+
+		public void setEditRegPassword(boolean editRegPassword) {
+			this.editRegPassword = editRegPassword;
+		}
+
+		public boolean isEditRegName() {
+			return editRegName;
+		}
+
+		public void setEditRegName(boolean editRegName) {
+			this.editRegName = editRegName;
+		}
+
+		public boolean isEditRegUserName() {
+			return editRegUserName;
+		}
+
+		public void setEditRegUserName(boolean editRegUserName) {
+			this.editRegUserName = editRegUserName;
+		}
+
+		public boolean isEditRegEmail() {
+			return editRegEmail;
+		}
+
+		public void setEditRegEmail(boolean editRegEmail) {
+			this.editRegEmail = editRegEmail;
+		}
+
+		public boolean isEditRegShowPanel() {
+			return editRegShowPanel;
+		}
+
+		public void setEditRegShowPanel(boolean editRegShowPanel) {
+			this.editRegShowPanel = editRegShowPanel;
+		}
+
+		public boolean isEditRegRegisteredTo() {
+			return editRegRegisteredTo;
+		}
+
+		public void setEditRegRegisteredTo(boolean editRegRegisteredTo) {
+			this.editRegRegisteredTo = editRegRegisteredTo;
+		}
+
+		public boolean isViewPlanShowPanel() {
+			return viewPlanShowPanel;
+		}
+
+		public void setViewPlanShowPanel(boolean viewPlanShowPanel) {
+			this.viewPlanShowPanel = viewPlanShowPanel;
+		}
+
+		public boolean isEditRegCloseAccount() {
+			return editRegCloseAccount;
+		}
+
+		public void setEditRegCloseAccount(boolean editRegCloseAccount) {
+			this.editRegCloseAccount = editRegCloseAccount;
 		}
 
 		

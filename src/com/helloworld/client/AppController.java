@@ -68,7 +68,7 @@ import com.helloworld.client.view.ManageUserView;
 import com.helloworld.client.view.RegistrationView;
 import com.helloworld.client.view.SubscriptionVerificationView;
 import com.helloworld.client.view.CenterPanels.DashboardAccordion;
-import com.helloworld.client.view.CenterPanels.DashboardPortalView;
+//import com.helloworld.client.view.CenterPanels.DashboardPortalView;
 import com.helloworld.client.view.CenterPanels.DashboardView;
 import com.helloworld.client.view.CenterPanels.SearchDataView;
 import com.helloworld.client.view.MyDashboard.MyAccountViews.MyAccountView;
@@ -162,7 +162,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 		eventBus.addHandler(ViewEditRegistrationEvent.TYPE,
 				new ViewEditRegistrationEventHandler() {
 			public void onViewEditRegistration(ViewEditRegistrationEvent event) {
-				History.newItem(ApplicationConstants.TOKEN_VIEW_EDIT_REG);
+				History.newItem(ApplicationConstants.TOKEN_VIEW_REG);
 			}
 		}); 
 		
@@ -254,7 +254,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 			}
 			
 			if (token.equals(ApplicationConstants.TOKEN_EDIT_USER)) {
-				presenter = new RegistrationPresenter(rpcService, eventBus, new RegistrationView(loggedInUser));
+				presenter = new RegistrationPresenter(rpcService, eventBus, new RegistrationView(loggedInUser, globalPreferencesEntity));
 				if (presenter != null) {
 					presenter.go(container);
 				}
@@ -278,14 +278,14 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 				}
 			}
 			
-			if (token.equals(ApplicationConstants.TOKEN_DASHBOARD_PORTAL)) {
-				presenter = new DashboardPortalPresenter(rpcService, eventBus, new DashboardPortalView());
-				if (presenter != null) {
-//					setContainer(center);
-					setContainer(container);
-					presenter.go(container);
-				}
-			}
+//			if (token.equals(ApplicationConstants.TOKEN_DASHBOARD_PORTAL)) {
+//				presenter = new DashboardPortalPresenter(rpcService, eventBus, new DashboardPortalView());
+//				if (presenter != null) {
+////					setContainer(center);
+//					setContainer(container);
+//					presenter.go(container);
+//				}
+//			}
 			
 			if (token.equals(ApplicationConstants.TOKEN_SEARCHDATA)) {
 				presenter = new SearchDataPresenter(rpcService, eventBus, new SearchDataView());
@@ -345,7 +345,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 				}
 			}
 			
-			if (token.equals(ApplicationConstants.TOKEN_VIEW_EDIT_REG)) {
+			if (token.equals(ApplicationConstants.TOKEN_VIEW_REG)) {
 				presenter = new ViewRegistrationPresenter(rpcService, eventBus, new ViewRegistrationView(), globalPreferencesEntity, loggedInUser);
 				if (presenter != null) {
 					presenter.go(container);

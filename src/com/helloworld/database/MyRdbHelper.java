@@ -66,7 +66,7 @@ public class MyRdbHelper {
 
 			user.setTokenGeneratedDate(new Date());
 			user.setToken(generatedPassword);
-			
+			user.getMyAccountId().setLastEdited(new Date());
 			session.saveOrUpdate(user.getMyAccountId());
 			session.saveOrUpdate(user);
 			session.flush();
@@ -562,6 +562,20 @@ public class MyRdbHelper {
 		}catch(Exception ex){
 			logger.warn(String.format("Exception occured in updateUserAccount", ex.getMessage()), ex);
 			throw new Exception("Exception occured in updateUserAccount");
+		}
+	}
+
+
+	public String closeAccount(UserEntity user) throws Exception {
+		Session session = null;
+		try{
+			session = sessionFactory.openSession();
+			session.update(user);
+			session.flush();
+			return ApplicationConstants.ACCOUNT_CLOSED;
+		}catch(Exception ex){
+			logger.warn(String.format("Exception occured in closeAccount", ex.getMessage()), ex);
+			throw new Exception("Exception occured in closeAccount");
 		}
 	}
 

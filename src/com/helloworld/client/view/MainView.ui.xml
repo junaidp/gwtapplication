@@ -13,9 +13,7 @@
 				<g:customHeader>
 				<g:Label ui:field="lblWelcome" styleName="labelStyle hover"></g:Label></g:customHeader>
 				<g:VerticalPanel ui:field="discPanelContainer">
-				<g:Label ui:field="editAccount" styleName="labelStyle hover"> Edit Account</g:Label>
 				<g:Label ui:field="fileUpload" styleName="labelStyle hover"> File Upload</g:Label>
-				<g:Label ui:field="globalPreferences" styleName="labelStyle hover" visible="false"> Global Preferences</g:Label>
 				
 				</g:VerticalPanel>
 			</g:DisclosurePanel>

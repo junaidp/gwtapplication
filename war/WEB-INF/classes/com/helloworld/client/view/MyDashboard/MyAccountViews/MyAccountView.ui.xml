@@ -16,14 +16,14 @@
 						</g:FocusPanel>
 					</td>
 					<td>
-						<g:FocusPanel ui:field="panelViewEditReg">
+						<g:FocusPanel ui:field="panelViewReg">
 							<g:HTMLPanel>
-								<div class="metro-tile metro-tile-portal">View/Edit Registration</div>
+								<div class="metro-tile metro-tile-portal">View Registration</div>
 							</g:HTMLPanel>
 						</g:FocusPanel>
 					</td>
 				</tr>
-
+<!-- 
 				<table>
 					<tr>
 						<td>
@@ -31,7 +31,21 @@
 						</td>
 					</tr>
 				</table>
+				-->
+				<table>
+					<tr>
+						<td>
+						<g:FocusPanel ui:field="panelEditReg">
+							<g:HTMLPanel>
+							<div class="metro-tile metro-tile-small metro-tile-accordion">Edit Registration</div>
+						</g:HTMLPanel>
+						</g:FocusPanel>
+						</td>
+					</tr>
+				</table>
 			</table>
+			
+			
 
 		</div>
 	</g:HTMLPanel>

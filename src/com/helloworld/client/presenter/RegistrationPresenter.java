@@ -32,7 +32,6 @@ public class RegistrationPresenter implements Presenter
 	public interface Display 
 	{
 		Widget asWidget();
-		Button getBtnCancel();
 		Button getBtnSubmit();
 		TextBox getName();
 		TextBox getUserName();
@@ -48,6 +47,9 @@ public class RegistrationPresenter implements Presenter
 		RecaptchaWidget getRw();
 		Label getCaptchaError();
 		UserEntity getLoggedInUser();
+		TextBox getRegisteredTo();
+		Label getRegistedToError();
+		Button getBtnCloseAccount();
 
 	}  
 
@@ -76,23 +78,26 @@ public class RegistrationPresenter implements Presenter
 
 	@Override
 	public void setHandlers() {
-		display.getBtnCancel().addClickHandler(new ClickHandler(){
-
+		
+		display.getBtnCloseAccount().addClickHandler(new ClickHandler() {
+			
 			@Override
 			public void onClick(ClickEvent event) {
-				if(display.getBtnSubmit().getText().equals("update")){
-					History.newItem(ApplicationConstants.TOKEN_DASHBOARD);
-				}else{
-					History.newItem(ApplicationConstants.TOKEN_SUBSCRIPTION_VERFICATION);
+				boolean confirm = Window.confirm(ApplicationConstants.CLOSE_ACCOUNT_WARNING);
+				if(confirm){
+					closeAccount();
 				}
-			}});
+			}
+
+		
+		});
 
 		display.getBtnSubmit().addClickHandler(new ClickHandler() {
 
 			@Override
 			public void onClick(ClickEvent event) {
 				if(display.getBtnSubmit().getText().equals("update")){
-					addUser(display.getLoggedInUser());
+					addUpdateUser(display.getLoggedInUser());
 				}else{
 					verifyCaptcha(display.getRw().getChallenge(), display.getRw().getResponse());
 				}
@@ -115,7 +120,7 @@ public class RegistrationPresenter implements Presenter
 				if(result){
 					display.getCaptchaError().setText("");
 					UserEntity user = new UserEntity();
-					addUser(user);
+					addUpdateUser(user);
 
 				}
 				else{
@@ -134,15 +139,19 @@ public class RegistrationPresenter implements Presenter
 		});
 	}
 
-	private void addUser(UserEntity user){
+	private void addUpdateUser(UserEntity user){
 		user.setEmail(display.getEmail().getText());
 		user.setPassword(display.getPassword().getText());
 		user.setUserName(display.getUserName().getText());
 		user.setName(display.getName().getText());
 		user.setStatus(ApplicationConstants.ACTIVE);
+		if(user.getMyAccountId()==null){
+			MyAccountEntity myAccountEntity = new MyAccountEntity();
+			user.setMyAccountId(myAccountEntity);
+		}
+		user.getMyAccountId().setRegisteredTo(display.getRegisteredTo().getText());
 		
-		MyAccountEntity myAccountEntity = new MyAccountEntity();
-		user.setMyAccountId(myAccountEntity);
+		
 		
 		RegistratonFieldVerifier regFieldVerifier = new RegistratonFieldVerifier();
 		if(regFieldVerifier.registratonFieldsVerifid(display)){
@@ -188,6 +197,24 @@ public class RegistrationPresenter implements Presenter
 				display.getBtnSubmit().removeStyleName("loading-pulse");
 			}
 		});
+	}
+	
+	private void closeAccount() {
+		display.getLoggedInUser().setStatus(ApplicationConstants.CLOSED);
+		rpcService.closeAccount(display.getLoggedInUser(), new AsyncCallback<String>() {
+			
+			@Override
+			public void onSuccess(String result) {
+				new DisplayAlert(result);
+				History.newItem(ApplicationConstants.TOKEN_LOGIN);
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert("Fail Account close : "+ caught.getLocalizedMessage());
+			}
+		});
+		
 	}
 
 }

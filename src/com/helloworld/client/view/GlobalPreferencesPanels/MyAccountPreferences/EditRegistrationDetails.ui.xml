@@ -5,14 +5,31 @@
 	
 	</ui:style>
 	<g:HTMLPanel>
-	<div>
-	<g:RadioButton ui:field="radioOnlyAdminCanEdit" name="editRegGroup"> only admin can edit</g:RadioButton>
-	</div>
-	<div>
-	<g:RadioButton ui:field="radioOnlyUserCanEdit" name="editRegGroup">onlu user can edit</g:RadioButton>
-	</div>
-	<div>
-	<g:RadioButton ui:field="radioAdminUserBothcanEdit" name="editRegGroup">both admin and user can edit</g:RadioButton>
-	</div>
+		<div style="padding-left:40%">
+		<h4 class="text-light blue">Edit Registration</h4>
+		
+			<g:CheckBox ui:field="checkShowThisPanel">Show this panel</g:CheckBox>
+		</div>
+		<div style="padding-left:5px; padding-top:5px">
+			<g:CheckBox ui:field="checkName">Name</g:CheckBox>
+		</div>
+		<div style="padding-left:5px; padding-top:5px">
+			<g:CheckBox ui:field="checkEmail">Email</g:CheckBox>
+		</div>
+		<div style="padding-left:5px; padding-top:5px">
+			<g:CheckBox ui:field="checkRegisteredTo">Registered to</g:CheckBox>
+		</div>
+		<div style="padding-left:5px; padding-top:5px">
+			<g:CheckBox ui:field="checkUserName">User Name</g:CheckBox>
+		</div>
+
+		<div style="padding-left:5px; padding-top:5px">
+			<g:CheckBox ui:field="checkPassword">Password</g:CheckBox>
+		</div>
+		
+		<div style="padding-left:5px; padding-top:5px">
+			<g:CheckBox ui:field="checkCloseAccount">Close Account</g:CheckBox>
+		</div>
+
 	</g:HTMLPanel>
 </ui:UiBinder> 
