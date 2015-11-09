@@ -11,12 +11,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 
+	@SuppressWarnings("serial")
 	@Entity
 
 	@Table(name="myaccount")
 	public class MyAccountEntity   implements Serializable {
 
-		private static final long serialVersionUID = 1L;
+		
 
 		@Id 
 		@GeneratedValue(strategy=GenerationType.AUTO)

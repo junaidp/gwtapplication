@@ -13,8 +13,8 @@
 				<g:customHeader>
 				<g:Label ui:field="lblWelcome" styleName="labelStyle hover"></g:Label></g:customHeader>
 				<g:VerticalPanel ui:field="discPanelContainer">
-				<g:Label ui:field="fileUpload" styleName="labelStyle hover"> File Upload</g:Label>
-				
+				<g:Anchor ui:field="ancFileUpload" styleName=" hover"> File Upload</g:Anchor>
+				<g:Anchor ui:field="ancJavaBeanEditor" styleName=" hover"> JavaBean Editor</g:Anchor>
 				</g:VerticalPanel>
 			</g:DisclosurePanel>
 		</div>

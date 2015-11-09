@@ -28,6 +28,8 @@ public class ApplicationConstants {
 	public static final String TOKEN_MANAGE_USER = "manageUser";
 	public static final String TOKEN_VIEW_EDIT_REG = "viewEditReg";
 	public static final String TOKEN_VIEW_REG = "viewRegistration";
+	public static final String TOKEN_JAVA_BEAN_EDITOR = "javaBeanEditor";
+	
 
 
 	

@@ -4,6 +4,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.History;
+import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -14,6 +15,7 @@ import com.helloworld.client.event.DashboardEvent;
 import com.helloworld.client.event.EditUserEvent;
 import com.helloworld.client.event.GlobalPreferencesEvent;
 import com.helloworld.client.event.IntelligencePackEvent;
+import com.helloworld.client.event.JavaBeanEditorEvent;
 import com.helloworld.client.event.RegistrationEvent;
 import com.helloworld.client.event.SearchDataEvent;
 import com.helloworld.client.view.ApplicationConstants;
@@ -37,7 +39,8 @@ public class MainPresenter implements Presenter
 		ControlPanelsContainer getControlPanelContainer();
 		VerticalPanel getCenter();
 		UserEntity getLoggedInUser();
-		Label getFileUpload();
+		Anchor getFileUpload();
+		Anchor getAncJavaBeanEditor();
 
 	}  
 
@@ -105,6 +108,14 @@ public class MainPresenter implements Presenter
 				new DisplayAlert("Removed for testing purpose");
 //				History.newItem(ApplicationConstants.TOKEN_DASHBOARD_PORTAL);
 			}});
+		
+		display.getAncJavaBeanEditor().addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				eventBus.fireEvent(new JavaBeanEditorEvent());
+			}
+		});
 		
 		
 		

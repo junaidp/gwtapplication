@@ -1,0 +1,12 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	
+	</ui:style>
+	<g:HTMLPanel>
+	<div style="padding-left:50%">
+		<g:Button styleName="button primary" ui:field="btnGenerate">Submit</g:Button>
+	</div>
+	</g:HTMLPanel>
+</ui:UiBinder> 

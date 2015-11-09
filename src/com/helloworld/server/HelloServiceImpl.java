@@ -196,5 +196,13 @@ HelloService {
 		return rdbHelper.closeAccount(user);
 	}
 
+	@Override
+	public String fetchBeanJSON(String className) throws Exception {
+		String json =  rdbHelper.fetchBeanJSON(className);
+		session=getThreadLocalRequest().getSession(true);
+		session.setAttribute("json", json);
+		return json;
+	}
+
 
 }

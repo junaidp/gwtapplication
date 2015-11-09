@@ -50,7 +50,7 @@ import javax.persistence.Transient;
 		private MyAccountEntity myAccountId;
 		
 		@Column(name="isAdmin")
-		private boolean isAdmin;
+		private boolean admin;
 		
 		@Column(name="token")
 		private String token;
@@ -90,10 +90,7 @@ import javax.persistence.Transient;
 			this.email = email;
 		}
 
-		public static long getSerialversionuid() {
-			return serialVersionUID;
-		}
-
+	
 		public String getName() {
 			return name;
 		}
@@ -111,11 +108,11 @@ import javax.persistence.Transient;
 		}
 
 		public boolean isAdmin() {
-			return isAdmin;
+			return admin;
 		}
 
 		public void setAdmin(boolean isAdmin) {
-			this.isAdmin = isAdmin;
+			this.admin = isAdmin;
 		}
 
 		public int getStatus() {

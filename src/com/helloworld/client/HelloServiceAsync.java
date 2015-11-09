@@ -34,4 +34,5 @@ public interface HelloServiceAsync {
 	void fetchAllUsers(AsyncCallback<ArrayList<UserEntity>> asyncCallback);
 	void updateUserAccount(UserEntity user, AsyncCallback<String> asyncCallback);
 	void closeAccount(UserEntity user, AsyncCallback<String> asyncCallback);
+	void fetchBeanJSON(String className, AsyncCallback<String> asyncCallback);
 }

@@ -18,6 +18,8 @@ import com.helloworld.client.event.EditUserEvent;
 import com.helloworld.client.event.EditUserEventHandler;
 import com.helloworld.client.event.GlobalPreferencesEvent;
 import com.helloworld.client.event.GlobalPreferencesEventHandler;
+import com.helloworld.client.event.JavaBeanEditorEvent;
+import com.helloworld.client.event.JavaBeanEditorEventHandler;
 import com.helloworld.client.event.MainEvent;
 import com.helloworld.client.event.MainEventHandler;
 import com.helloworld.client.event.MyAccountEvent;
@@ -43,6 +45,7 @@ import com.helloworld.client.presenter.ForgotPasswordPresenter;
 import com.helloworld.client.presenter.ForgotUserNamePresenter;
 import com.helloworld.client.presenter.GlobalPreferencesPresenter;
 import com.helloworld.client.presenter.HeaderPresenter;
+import com.helloworld.client.presenter.JavaBeanEditorPresenter;
 import com.helloworld.client.presenter.LoginPresenter;
 import com.helloworld.client.presenter.MainPresenter;
 import com.helloworld.client.presenter.ManageUserPresenter;
@@ -62,6 +65,7 @@ import com.helloworld.client.view.ForgotPasswordView;
 import com.helloworld.client.view.ForgotUserNameView;
 import com.helloworld.client.view.GlobalPreferencesView;
 import com.helloworld.client.view.HeaderView;
+import com.helloworld.client.view.JavaBeanEditorView;
 import com.helloworld.client.view.LoginView;
 import com.helloworld.client.view.MainView;
 import com.helloworld.client.view.ManageUserView;
@@ -194,6 +198,13 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 				new MyAccountEventHandler() {
 			public void onMyAccount(MyAccountEvent event) {
 				History.newItem(ApplicationConstants.TOKEN_MY_ACCOUNT);
+			}
+		}); 
+		
+		eventBus.addHandler(JavaBeanEditorEvent.TYPE,
+				new JavaBeanEditorEventHandler() {
+			public void onJavaBeanEditor(JavaBeanEditorEvent event) {
+				History.newItem(ApplicationConstants.TOKEN_JAVA_BEAN_EDITOR);
 			}
 		}); 
 	}
@@ -384,6 +395,14 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 			
 			if (token.equals(ApplicationConstants.TOKEN_MANAGE_USER)) {
 				presenter = new ManageUserPresenter(rpcService, eventBus, new ManageUserView());
+				
+				if (presenter != null) {
+					presenter.go(container);
+				}
+			}
+			
+			if (token.equals(ApplicationConstants.TOKEN_JAVA_BEAN_EDITOR)) {
+				presenter = new JavaBeanEditorPresenter(rpcService, eventBus, new JavaBeanEditorView());
 				
 				if (presenter != null) {
 					presenter.go(container);

@@ -7,6 +7,7 @@ import com.google.gwt.event.logical.shared.OpenEvent;
 import com.google.gwt.event.logical.shared.OpenHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DisclosurePanel;
 import com.google.gwt.user.client.ui.Label;
@@ -32,7 +33,8 @@ public class MainView extends Composite implements Display{
 	@UiField Label lblWelcome;
 	@UiField DisclosurePanel discPanel;
 	private UserEntity loggedInUser;
-	@UiField Label fileUpload;
+	@UiField Anchor ancFileUpload;
+	@UiField Anchor ancJavaBeanEditor;
 
 	public MainView(UserEntity loggedInUser) {
 		initWidget(uiBinder.createAndBindUi(this));
@@ -63,8 +65,12 @@ public class MainView extends Composite implements Display{
 		return loggedInUser;
 	}
 
-	public Label getFileUpload() {
-		return fileUpload;
+	public Anchor getFileUpload() {
+		return ancFileUpload;
+	}
+
+	public Anchor getAncJavaBeanEditor() {
+		return ancJavaBeanEditor;
 	}
 
 

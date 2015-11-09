@@ -10,8 +10,8 @@ import javax.mail.PasswordAuthentication;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-
 import org.apache.log4j.Logger;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -20,8 +20,9 @@ import org.hibernate.criterion.Restrictions;
 import org.joda.time.DateTime;
 import org.joda.time.Minutes;
 import org.mindrot.BCrypt;
-
 import com.helloworld.client.view.ApplicationConstants;
+import com.helloworld.shared.DynamicCompilation;
+//import com.helloworld.shared.beans.BeanSet;
 import com.helloworld.shared.entity.GlobalPreferencesEntity;
 import com.helloworld.shared.entity.MyAccountEntity;
 import com.helloworld.shared.entity.UserEntity;
@@ -578,6 +579,24 @@ public class MyRdbHelper {
 			throw new Exception("Exception occured in closeAccount");
 		}
 	}
+
+
+	public String fetchBeanJSON(String className) throws Exception {
+		String jsonInString = "";
+		try{
+		new DynamicCompilation(className, "BeanSet");
+    
+		Class myClass = Class.forName(className);
+		Object obj = myClass.newInstance();
+		ObjectMapper mapper = new ObjectMapper();
+		jsonInString = mapper.writeValueAsString(obj);
+		}catch(Exception ex){
+			throw new Exception( "Exception occured in Reflection"+ ex);
+		}
+		return jsonInString;
+
+	}
+	
 
 }
 
