@@ -35,6 +35,7 @@ public class MainView extends Composite implements Display{
 	private UserEntity loggedInUser;
 	@UiField Anchor ancFileUpload;
 	@UiField Anchor ancJavaBeanEditor;
+	@UiField Anchor ancGlobalPreferences;
 
 	public MainView(UserEntity loggedInUser) {
 		initWidget(uiBinder.createAndBindUi(this));
@@ -71,6 +72,10 @@ public class MainView extends Composite implements Display{
 
 	public Anchor getAncJavaBeanEditor() {
 		return ancJavaBeanEditor;
+	}
+
+	public Anchor getAncGlobalPreferences() {
+		return ancGlobalPreferences;
 	}
 
 

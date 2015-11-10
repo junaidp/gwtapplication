@@ -10,6 +10,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.helloworld.client.HelloServiceAsync;
+import com.helloworld.client.event.AdminEvent;
 import com.helloworld.client.event.DashboardAccordionEvent;
 import com.helloworld.client.event.DashboardEvent;
 import com.helloworld.client.event.EditUserEvent;
@@ -41,6 +42,7 @@ public class MainPresenter implements Presenter
 		UserEntity getLoggedInUser();
 		Anchor getFileUpload();
 		Anchor getAncJavaBeanEditor();
+		Anchor getAncGlobalPreferences();
 
 	}  
 
@@ -116,6 +118,14 @@ public class MainPresenter implements Presenter
 				eventBus.fireEvent(new JavaBeanEditorEvent());
 			}
 		});
+		
+		display.getAncGlobalPreferences().addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				eventBus.fireEvent(new GlobalPreferencesEvent());
+			}
+		});	
 		
 		
 		

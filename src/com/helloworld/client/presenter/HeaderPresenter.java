@@ -1,20 +1,15 @@
 package com.helloworld.client.presenter;
 
-import org.eclipse.jetty.server.Authentication.User;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerManager;
-import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.FocusPanel;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.MenuBar;
-import com.google.gwt.user.client.ui.MenuItem;
 import com.google.gwt.user.client.ui.Widget;
 import com.helloworld.client.HelloService;
 import com.helloworld.client.HelloServiceAsync;
@@ -40,10 +35,12 @@ public class HeaderPresenter implements Presenter
 		
 	}  
 
-	public HeaderPresenter(HelloServiceAsync rpcService, HandlerManager eventBus, Display view) 
+	public HeaderPresenter(HelloServiceAsync rpcService, HandlerManager eventBus, Display view, UserEntity user, GlobalPreferencesEntity globalPreferences) 
 	{
 		this.display = view;
 		this.eventBus = eventBus;
+		this.loggedInUser = user;
+		this.globalPreferencesEntity = globalPreferences;
 		
 	}
 
@@ -86,7 +83,9 @@ public class HeaderPresenter implements Presenter
 
 			@Override
 			public void onClick(ClickEvent event) {
-				if(loggedInUser!=null && !loggedInUser.isAdmin()){
+				if(loggedInUser == null){
+					History.newItem(ApplicationConstants.TOKEN_LOGIN);
+				}else{
 					eventBus.fireEvent(new MainEvent(loggedInUser, globalPreferencesEntity));
 					}
 			}});
@@ -94,17 +93,6 @@ public class HeaderPresenter implements Presenter
 		
 	}
 
-	public void setUser(UserEntity loggedInUser) {
-		
-		
-	}
-
-	public void setData(UserEntity loggedInUser,
-			GlobalPreferencesEntity globalPreferencesEntity) {
-		this.loggedInUser = loggedInUser;
-		this.globalPreferencesEntity = globalPreferencesEntity;
-		
-		
-	}
+	
 	
 }

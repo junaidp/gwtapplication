@@ -44,6 +44,7 @@ public class SubscriptionVerificationPresenter implements Presenter
 		this.display = view;
 		this.rpcService = rpcService;
 		this.eventBus = eventBus;
+		
 	}
 
 	public void go(HasWidgets container) 

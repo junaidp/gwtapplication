@@ -15,6 +15,9 @@
 				<g:VerticalPanel ui:field="discPanelContainer">
 				<g:Anchor ui:field="ancFileUpload" styleName=" hover"> File Upload</g:Anchor>
 				<g:Anchor ui:field="ancJavaBeanEditor" styleName=" hover"> JavaBean Editor</g:Anchor>
+				<g:Anchor ui:field="ancGlobalPreferences" styleName=" hover"> Global Preferences</g:Anchor>
+				
+				
 				</g:VerticalPanel>
 			</g:DisclosurePanel>
 		</div>

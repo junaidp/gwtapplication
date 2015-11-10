@@ -36,7 +36,7 @@ public class LoginPresenter implements Presenter
 	private final Display display;
 	private int worngPasswordCount = 0;
 	private String worngPasswordUser = "";
-
+	
 	public interface Display 
 	{
 		Widget asWidget();
@@ -53,6 +53,7 @@ public class LoginPresenter implements Presenter
 		this.rpcService = rpcService;
 		this.eventBus = eventBus;
 		this.display = view;
+		
 	}
 
 	public void go(HasWidgets container) 
@@ -104,10 +105,11 @@ public class LoginPresenter implements Presenter
 
 
 
-				else if(user.isAdmin()){
-					eventBus.fireEvent(new AdminEvent());
-				}
+//				else if(user.isAdmin()){
+//					eventBus.fireEvent(new AdminEvent());
+//				}
 				else{
+					
 					fetchGlobalPreferences(user);
 
 				}
@@ -125,6 +127,22 @@ public class LoginPresenter implements Presenter
 		});
 
 	}
+	
+	private void setFooter(GlobalPreferencesEntity globalPreferencesEntity) {
+		FooterView footerView = new FooterView();
+		Presenter presenter = new FooterPresenter(rpcService, eventBus, footerView, globalPreferencesEntity);
+		HasWidgets container = RootPanel.get("footerContainer");
+		container.clear();
+		presenter.go(container);
+	}
+
+	private void setHeader(UserEntity user, GlobalPreferencesEntity globalPreferences) {
+		HeaderView headerView = new HeaderView();
+		HeaderPresenter headerPresenter = new HeaderPresenter(rpcService, eventBus, headerView, user, globalPreferences);
+		HasWidgets container = RootPanel.get("headerContainer");
+		container.clear();
+		headerPresenter.go(container);
+	}
 
 	private void fetchGlobalPreferences(final UserEntity user) {
 		rpcService.fetchGlobalPreferences(new AsyncCallback<GlobalPreferencesEntity>() {
@@ -136,6 +154,8 @@ public class LoginPresenter implements Presenter
 
 			@Override
 			public void onSuccess(GlobalPreferencesEntity globalPreferences) {
+				setHeader(user, globalPreferences);
+				setFooter(globalPreferences);
 				eventBus.fireEvent(new MainEvent(user, globalPreferences));
 
 			}

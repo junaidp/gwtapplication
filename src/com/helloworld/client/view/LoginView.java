@@ -8,6 +8,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PasswordTextBox;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.helloworld.client.presenter.LoginPresenter.Display;
@@ -33,7 +34,9 @@ public class LoginView extends Composite implements Display  {
 		initWidget(uiBinder.createAndBindUi(this));
 		txtUserName.getElement().setPropertyString("placeholder", ApplicationConstants.ENTER_USERNAME);
 		txtPassword.getElement().setPropertyString("placeholder", ApplicationConstants.ENTER_PASSWORD);
-
+		RootPanel.get("headerContainer").clear();
+		RootPanel.get("footerContainer").clear();
+	
 	}
 
 	public TextBox getTxtUserName() {

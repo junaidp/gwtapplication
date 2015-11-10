@@ -211,8 +211,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 
 	public void go(final HasWidgets container) {
 		this.container = container;
-		setHeader();
-		setFooter();
+		
 
 		if ("".equals(History.getToken())) {
 			History.newItem(ApplicationConstants.TOKEN_SUBSCRIPTION_VERFICATION);
@@ -226,21 +225,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 		}
 	}
 	
-	private void setFooter() {
-		FooterView footerView = new FooterView();
-		Presenter presenter = new FooterPresenter(rpcService, eventBus, footerView, globalPreferencesEntity);
-		HasWidgets container = RootPanel.get("footerContainer");
-		container.clear();
-		presenter.go(container);
-	}
-
-	private void setHeader() {
-		HeaderView headerView = new HeaderView();
-		headerPresenter = new HeaderPresenter(rpcService, eventBus, headerView);
-		HasWidgets container = RootPanel.get("headerContainer");
-		container.clear();
-		headerPresenter.go(container);
-	}
+	
 
 	public void onValueChange(ValueChangeEvent<String> event) {
 		String token = event.getValue();
@@ -257,7 +242,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 
 			if (token.equals(ApplicationConstants.TOKEN_MAIN)) {
 				presenter = new MainPresenter(rpcService, eventBus, new MainView(loggedInUser));
-				headerPresenter.setData(loggedInUser, globalPreferencesEntity);
+//				headerPresenter.setData(loggedInUser, globalPreferencesEntity);
 				
 				if (presenter != null) {
 					presenter.go(container);

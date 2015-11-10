@@ -6,6 +6,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.helloworld.client.presenter.SubscriptionVerificationPresenter.Display;
@@ -26,6 +27,8 @@ public class SubscriptionVerificationView extends Composite implements Display {
 	public SubscriptionVerificationView() {
 		initWidget(uiBinder.createAndBindUi(this));
 		email.getElement().setPropertyString("placeholder", ApplicationConstants.ENTER_REGISTERED_EMAIL);
+		RootPanel.get("headerContainer").clear();
+		RootPanel.get("footerContainer").clear();
 	}
 
 	public TextBox getEmail() {

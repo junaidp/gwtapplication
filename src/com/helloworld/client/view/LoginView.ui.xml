@@ -18,38 +18,41 @@
 			<script src="Metro-UI-CSS-master/build/js/metro.js"></script>
 		</head>
 		<body class="metro">
-			<div style="padding-left:40%; padding-top:10%">
-				<div class="padding20">
-				<h4 class="text-light blue">Sign In</h4>
-					<form>
-						
-						<div>
-							<g:Label ui:field="lblError" styleName="error"></g:Label>
-						</div>
-						<div>
-							<span class="mif-user prepend-icon"></span>
-							<g:TextBox ui:field="txtUserName" styleName="input-control text"
-								text="user1" />
-						</div>
-						<div>
-							<span class="mif-lock prepend-icon"></span>
-							<g:PasswordTextBox ui:field="txtPassword" text="user1"
-								styleName="input-control text" />
-						</div>
 
-						<div class="form-actions">
-							<g:Button styleName="button primary" ui:field="btnSubmit">Login</g:Button>
+			<div style="padding-left:25%; padding-top:5%">
 
-						</div>
-						<div style="padding-left:50px;padding-top:15px">
-							<g:Anchor styleName="hover"
-								ui:field="btnForgotPassword">Forgot password</g:Anchor>
-						</div>
-						<div style="padding-left:50px;padding-top:5px">
-							<g:Anchor styleName="hover"
-								ui:field="btnForgotUsername">Forgot username</g:Anchor>
-						</div>
-					</form>
+				<div class="shadowDiv">
+				
+					<div style="padding-left:35px">
+						<h4 class="text-light blue">Sign In</h4>
+						<form>
+
+							<div>
+								<g:Label ui:field="lblError" styleName="error"></g:Label>
+							</div>
+							<div>
+								<g:TextBox ui:field="txtUserName" styleName="input-control text userIcon"
+									text="user1" />
+							</div>
+							<div>
+								<span class="mif-lock prepend-icon"></span>
+								<g:PasswordTextBox ui:field="txtPassword"
+									text="user1" styleName="input-control text passwordIcon" />
+							</div>
+
+							<div style="padding-left:40px">
+								<g:Button styleName="button primary" ui:field="btnSubmit"
+									width="120px">Login</g:Button>
+
+							</div>
+							<div style="padding-left:50px;padding-top:15px">
+								<g:Anchor styleName="hover" ui:field="btnForgotPassword">Forgot Password</g:Anchor>
+							</div>
+							<div style="padding-left:50px;padding-top:5px">
+								<g:Anchor styleName="hover" ui:field="btnForgotUsername">Forgot Username</g:Anchor>
+							</div>
+						</form>
+					</div>
 				</div>
 
 			</div>

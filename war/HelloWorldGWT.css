@@ -576,10 +576,23 @@ div.metro-tile:hover > #content {
     position: relative;
     z-index: 1;
 }
-/*************** - Sticky Footer ******************/
-
-
-
-/********  S T Y L I N G  ********/
-
-
+/*************** - Sticky Footer End ******************/
+.shadowDiv{
+ 	background-color: #FEFEFE;
+    border: 2px none;
+    box-shadow: 5px 5px 5px #888888;
+    height: 300px;
+    padding-left: 20%;
+    width: 500px;
+    padding-top: 20px;
+}
+.userIcon{
+	background-image:url('images/user.png');
+	background-repeat:no-repeat;
+	padding-left:30px;
+}
+.passwordIcon{
+	background-image:url('images/password.png');
+	background-repeat:no-repeat;
+	padding-left:30px;
+}
