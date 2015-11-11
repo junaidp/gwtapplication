@@ -3,13 +3,16 @@ package com.helloworld.client.presenter;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerManager;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
 import com.helloworld.client.HelloServiceAsync;
+import com.helloworld.client.view.ApplicationConstants;
+import com.helloworld.client.view.widgets.AddBeanProportyWidget;
 import com.helloworld.client.view.widgets.DisplayAlert;
+import com.helloworld.client.view.widgets.PopupsView;
+import com.smartgwt.client.widgets.Window;
 
 
 public class JavaBeanEditorPresenter implements Presenter 
@@ -23,6 +26,7 @@ public class JavaBeanEditorPresenter implements Presenter
 	{
 		Widget asWidget();
 		Button getBtnGenerate();
+		Button getBtnAddProperty();
 	}  
 
 	public JavaBeanEditorPresenter(HelloServiceAsync rpcService, HandlerManager eventBus, Display view) 
@@ -40,8 +44,7 @@ public class JavaBeanEditorPresenter implements Presenter
 	}
 
 	private void bind() {
-
-
+		
 	}
 
 	@Override
@@ -55,6 +58,20 @@ public class JavaBeanEditorPresenter implements Presenter
 			}
 
 			
+		});
+		
+		display.getBtnAddProperty().addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				Window window = new Window();
+				window.setSize("500px", "500px");
+				window.setCanDragResize(true);
+				window.addItem(new AddBeanProportyWidget());
+				window.setTitle("Bean Properties");
+				window.moveTo(400, 500);
+				window.show();
+			}
 		});
 	}
 	
@@ -70,7 +87,7 @@ public class JavaBeanEditorPresenter implements Presenter
 			
 			@Override
 			public void onFailure(Throwable caught) {
-				Window.alert("fail fetchBeanJson: "+ caught.getLocalizedMessage());
+				new DisplayAlert("fail fetchBeanJson: "+ caught.getLocalizedMessage());
 			}
 		});
 	}

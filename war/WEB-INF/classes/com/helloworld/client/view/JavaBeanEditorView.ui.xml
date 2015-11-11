@@ -5,8 +5,13 @@
 	
 	</ui:style>
 	<g:HTMLPanel>
-	<div style="padding-left:50%">
-		<g:Button styleName="button primary" ui:field="btnGenerate">Submit</g:Button>
-	</div>
+		<div class="shadowDiv">
+			<g:TextBox ui:field="txtBeanName" styleName="input-control text">
+			</g:TextBox>
+			<g:Button ui:field="btnAddProperty" styleName="button primary">Add Property</g:Button>
+		</div>
+		<div>
+			<g:Button styleName="button primary" ui:field="btnGenerate">Reflection</g:Button>
+		</div>
 	</g:HTMLPanel>
 </ui:UiBinder> 

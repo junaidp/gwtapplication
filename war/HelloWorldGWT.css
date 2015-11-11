@@ -581,10 +581,10 @@ div.metro-tile:hover > #content {
  	background-color: #FEFEFE;
     border: 2px none;
     box-shadow: 5px 5px 5px #888888;
-    height: 300px;
     padding-left: 20%;
+    padding-top: 50px;
     width: 500px;
-    padding-top: 20px;
+    padding-bottom: 50px;
 }
 .userIcon{
 	background-image:url('images/user.png');

@@ -107,8 +107,7 @@ public class MainPresenter implements Presenter
 
 			@Override
 			public void onClick(ClickEvent event) {
-				new DisplayAlert("Removed for testing purpose");
-//				History.newItem(ApplicationConstants.TOKEN_DASHBOARD_PORTAL);
+				History.newItem(ApplicationConstants.TOKEN_DASHBOARD_PORTAL);
 			}});
 		
 		display.getAncJavaBeanEditor().addClickHandler(new ClickHandler() {

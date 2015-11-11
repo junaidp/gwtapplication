@@ -41,7 +41,7 @@ public class DashboardPresenter implements Presenter
 
 	private void bind() {
 
-
+		
 	}
 
 	@Override

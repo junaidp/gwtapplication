@@ -9,7 +9,7 @@
   <!-- Inherit the core Web Toolkit stuff.                        -->
   <inherits name='com.google.gwt.user.User'/>
   <inherits name="gwtupload.GWTUpload"/>
-  <!-- <inherits name="com.smartgwt.SmartGwt"/> -->
+  <inherits name="com.smartgwt.SmartGwt"/> 
   
  
  <!--  <inherits name="org.synthful.smartgwt.UISmartGWT" />

@@ -29,5 +29,7 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/jbcrypt-0.2.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/joda-time-1.5.2.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/jackson-all-1.9.0.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/smartgwt-skins.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/smartgwt.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>
