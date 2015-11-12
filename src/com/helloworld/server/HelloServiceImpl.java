@@ -11,6 +11,7 @@ import com.helloworld.client.HelloService;
 import com.helloworld.client.view.ApplicationConstants;
 import com.helloworld.client.view.ReadGlobalPreferencesXml;
 import com.helloworld.database.MyRdbHelper;
+import com.helloworld.shared.AddedBeanDTO;
 import com.helloworld.shared.entity.GlobalPreferencesEntity;
 import com.helloworld.shared.entity.MyAccountEntity;
 import com.helloworld.shared.entity.UserEntity;
@@ -202,6 +203,12 @@ HelloService {
 		session=getThreadLocalRequest().getSession(true);
 		session.setAttribute("json", json);
 		return json;
+	}
+
+	@Override
+	public String generateBean(AddedBeanDTO addedBeanDTO) throws Exception {
+		FilesCreationHelper filesCreationHelper = new FilesCreationHelper();
+		filesCreationHelper.
 	}
 
 

@@ -3,6 +3,7 @@ package com.helloworld.client;
 import java.util.ArrayList;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.helloworld.shared.AddedBeanDTO;
 import com.helloworld.shared.entity.GlobalPreferencesEntity;
 import com.helloworld.shared.entity.MyAccountEntity;
 import com.helloworld.shared.entity.UserEntity;
@@ -35,4 +36,5 @@ public interface HelloServiceAsync {
 	void updateUserAccount(UserEntity user, AsyncCallback<String> asyncCallback);
 	void closeAccount(UserEntity user, AsyncCallback<String> asyncCallback);
 	void fetchBeanJSON(String className, AsyncCallback<String> asyncCallback);
+	void generateBean(AddedBeanDTO addedBeanDTO, AsyncCallback<String> asyncCallback);
 }

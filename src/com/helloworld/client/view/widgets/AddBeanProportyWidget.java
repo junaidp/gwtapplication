@@ -11,9 +11,12 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.helloworld.shared.entity.UserEntity;
+import com.smartgwt.client.widgets.IButton;
 import com.smartgwt.client.widgets.form.DynamicForm;
+import com.smartgwt.client.widgets.form.fields.ButtonItem;
 import com.smartgwt.client.widgets.form.fields.ComboBoxItem;
 import com.smartgwt.client.widgets.form.fields.SelectItem;
+import com.smartgwt.client.widgets.form.fields.TextItem;
 import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
 import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
 
@@ -28,17 +31,15 @@ public class AddBeanProportyWidget extends Composite {
 	
 	@UiField
 	HTMLPanel comboContainer;
+	ComboBoxItem listDataType = new ComboBoxItem("dataType");  
+	private SelectItem listAccessModifiers = new SelectItem();
+	private SelectItem listHaveGetterSetters = new SelectItem();
+	private SelectItem listNonAccessModifiers = new SelectItem();
+	private ButtonItem btnSave = new ButtonItem("Save");
+	private TextItem textPropertyName = new TextItem();
 
 	public AddBeanProportyWidget() {
 		initWidget(uiBinder.createAndBindUi(this));
-		
-		ComboBoxItem listDataType = new ComboBoxItem("dataType");  
-		final SelectItem listAccessModifiers = new SelectItem();
-		final SelectItem listHaveGetterSetters = new SelectItem();
-		final SelectItem listNonAccessModifiers = new SelectItem();
-		
-		
-		
 		listDataType.setTitle("Data Type");  
 		listAccessModifiers.setTitle("Access Modifiers");
 		listNonAccessModifiers.setTitle("Non Access Modifiers");
@@ -52,6 +53,7 @@ public class AddBeanProportyWidget extends Composite {
 		listAccessModifiers.setWrapTitle(false);
 		listHaveGetterSetters.setWrapTitle(false);
 		listNonAccessModifiers.setWrapTitle(false);
+		textPropertyName.setWidth(300);
 		
 		
 		//TODO: Populate lists from database....
@@ -78,7 +80,7 @@ public class AddBeanProportyWidget extends Composite {
         listDataType.setValueMap(valueMapDataType);
         listHaveGetterSetters.setValueMap(valueMapGetterSetters);
       
-        form.setItems(listDataType, listAccessModifiers, listHaveGetterSetters);
+        form.setItems(textPropertyName, listDataType, listAccessModifiers, listHaveGetterSetters, btnSave);
         
         populateList(listAccessModifiers);
         
@@ -117,6 +119,34 @@ public class AddBeanProportyWidget extends Composite {
 //		}
 		 listAccessModifiers.setValueMap(valueMapAccessModifiers); 
 			
+	}
+
+	public HTMLPanel getComboContainer() {
+		return comboContainer;
+	}
+
+	public ComboBoxItem getListDataType() {
+		return listDataType;
+	}
+
+	public SelectItem getListAccessModifiers() {
+		return listAccessModifiers;
+	}
+
+	public SelectItem getListHaveGetterSetters() {
+		return listHaveGetterSetters;
+	}
+
+	public SelectItem getListNonAccessModifiers() {
+		return listNonAccessModifiers;
+	}
+
+	public TextItem getTextPropertyName() {
+		return textPropertyName;
+	}
+
+	public ButtonItem getBtnSave() {
+		return btnSave;
 	}
 
 }
