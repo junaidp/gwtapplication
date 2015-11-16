@@ -30,6 +30,7 @@ public class DynamicCompilation {
 		Class myClass = Class.forName(className);
 		Class[] listofImplements = myClass.getInterfaces();
 		myClass.getSimpleName();
+		
 		Method[] method = myClass.getDeclaredMethods();
 		Field[] field = myClass.getDeclaredFields();
 		myClass.getModifiers();

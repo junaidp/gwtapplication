@@ -39,6 +39,7 @@ public interface HelloService extends RemoteService {
 	String closeAccount(UserEntity user) throws Exception;
 	String fetchBeanJSON(String className) throws Exception;
 	String generateBean(AddedBeanDTO addedBeanDTO)throws Exception;
+	ArrayList<String> fetchPackages()throws Exception;
 	
 	
 }

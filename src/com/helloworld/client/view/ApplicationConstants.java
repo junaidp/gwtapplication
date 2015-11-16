@@ -74,8 +74,10 @@ public class ApplicationConstants {
 	public static final String EMAIL_NOT_CORRECT = "Email Address not correct";
 	public static final String CLOSE_ACCOUNT_WARNING = "You will no loger be able to access your account . Are You sure you want to close this Account !";
 	public static final String ACCOUNT_CLOSED = "Account Closed";
-	public static final String ENTER_BEANNAME = "Enter Bean name with package";
+	public static final String ENTER_BEANNAME = "Enter Bean Name";
 	public static final String SELECT_PACKAGE = "Select Package";
+	public static final String SAVE = "Save";
+	public static final String PROPERTY_NAME = "Enter Property Name";
 
 	
 }

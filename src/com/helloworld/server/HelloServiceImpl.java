@@ -208,8 +208,19 @@ HelloService {
 	@Override
 	public String generateBean(AddedBeanDTO addedBeanDTO) throws Exception {
 		FilesCreationHelper filesCreationHelper = new FilesCreationHelper();
-		filesCreationHelper.
+		return filesCreationHelper.generateBean(addedBeanDTO);
 	}
 
+	@Override
+	public ArrayList<String> fetchPackages() throws Exception {
+		Package[] packageslist = Package.getPackages();
+		ArrayList<String> packagesList = new ArrayList<String>();
+		for(int i=0; i< packageslist.length; i++){
+			packagesList.add(packageslist[i].getName());
+		}
+		return packagesList	;
+	}
+
+	
 
 }

@@ -10,6 +10,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.helloworld.client.view.ApplicationConstants;
 import com.helloworld.shared.entity.UserEntity;
 import com.smartgwt.client.widgets.IButton;
 import com.smartgwt.client.widgets.form.DynamicForm;
@@ -19,6 +20,7 @@ import com.smartgwt.client.widgets.form.fields.SelectItem;
 import com.smartgwt.client.widgets.form.fields.TextItem;
 import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
 import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
+import com.smartgwt.client.widgets.layout.HLayout;
 
 public class AddBeanProportyWidget extends Composite {
 
@@ -35,7 +37,7 @@ public class AddBeanProportyWidget extends Composite {
 	private SelectItem listAccessModifiers = new SelectItem();
 	private SelectItem listHaveGetterSetters = new SelectItem();
 	private SelectItem listNonAccessModifiers = new SelectItem();
-	private ButtonItem btnSave = new ButtonItem("Save");
+	private ButtonItem btnSave = new ButtonItem();
 	private TextItem textPropertyName = new TextItem();
 
 	public AddBeanProportyWidget() {
@@ -54,6 +56,7 @@ public class AddBeanProportyWidget extends Composite {
 		listHaveGetterSetters.setWrapTitle(false);
 		listNonAccessModifiers.setWrapTitle(false);
 		textPropertyName.setWidth(300);
+		textPropertyName.setTitle(ApplicationConstants.PROPERTY_NAME);
 		
 		
 		//TODO: Populate lists from database....
@@ -72,15 +75,17 @@ public class AddBeanProportyWidget extends Composite {
         valueMapDataType.put("double", "double");  
         valueMapDataType.put("boolean", "boolean");  
         valueMapDataType.put("char", "char");
-        valueMapDataType.put("string", "string");
+        valueMapDataType.put("string", "String");
+        valueMapDataType.put("byte", "byte");
        
         DynamicForm form = new DynamicForm();
         comboContainer.add(form);
-        
+        btnSave.setTitle(ApplicationConstants.SAVE);
         listDataType.setValueMap(valueMapDataType);
         listHaveGetterSetters.setValueMap(valueMapGetterSetters);
       
         form.setItems(textPropertyName, listDataType, listAccessModifiers, listHaveGetterSetters, btnSave);
+        form.setHeight(300);
         
         populateList(listAccessModifiers);
         
@@ -88,36 +93,19 @@ public class AddBeanProportyWidget extends Composite {
 			
 			@Override
 			public void onChanged(ChangedEvent event) {
-				Window.alert(listAccessModifiers.getValueAsString());
-				Window.alert(listAccessModifiers.getDisplayValue());
+				
 			}
 		});
        
 	}
 	
 	public void populateList(SelectItem listAccessModifiers){
-		ArrayList<UserEntity> users = new ArrayList<UserEntity>();
-		UserEntity user1 = new UserEntity();
-		user1.setUserId(1);
-		user1.setUserName("u1");
-		UserEntity user2 = new UserEntity();
-		user2.setUserId(2);
-		user2.setUserName("u2");
-		
-		users.add(user1);
-		users.add(user2);
-		
 		
 		LinkedHashMap<String, String> valueMapAccessModifiers = new LinkedHashMap<String, String>();  
-		valueMapAccessModifiers.put("public"   , "Public");  
-		valueMapAccessModifiers.put("protected", "Protected"); 
-		valueMapAccessModifiers.put("private"  , "Private"); 
-		
-//		valueMapAccessModifiers.clear();
-//		for(int i=0; i< users.size(); i++){
-//			valueMapAccessModifiers.put(users.get(i).getUserId()+""   , users.get(i).getUserName());  
-//		}
-		 listAccessModifiers.setValueMap(valueMapAccessModifiers); 
+		valueMapAccessModifiers.put("public"   , "public");  
+		valueMapAccessModifiers.put("protected", "protected"); 
+		valueMapAccessModifiers.put("private"  , "private"); 
+		listAccessModifiers.setValueMap(valueMapAccessModifiers); 
 			
 	}
 

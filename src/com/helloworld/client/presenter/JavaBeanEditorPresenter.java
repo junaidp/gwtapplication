@@ -17,6 +17,9 @@ import com.smartgwt.client.util.BooleanCallback;
 import com.smartgwt.client.util.SC;
 import com.smartgwt.client.widgets.Window;
 import com.smartgwt.client.widgets.form.fields.ButtonItem;
+import com.smartgwt.client.widgets.form.fields.ComboBoxItem;
+import com.smartgwt.client.widgets.form.fields.SelectItem;
+import com.smartgwt.client.widgets.form.fields.TextItem;
 import com.smartgwt.client.widgets.form.fields.events.ClickEvent;
 import com.smartgwt.client.widgets.form.fields.events.ClickHandler;
 
@@ -35,6 +38,9 @@ public class JavaBeanEditorPresenter implements Presenter
 		ButtonItem getBtnGenerate();
 		ButtonItem getBtnAddProperty();
 		ButtonItem getBtnCreate();
+		TextItem getTxtBeanName();
+		ComboBoxItem getListPackages();
+		void clearFields();
 	}  
 
 	public JavaBeanEditorPresenter(HelloServiceAsync rpcService, HandlerManager eventBus, Display view) 
@@ -57,14 +63,27 @@ public class JavaBeanEditorPresenter implements Presenter
 	
 	public void populatePackagesList(){
 		
-		LinkedHashMap<String, String> valueMapPackagesList = new LinkedHashMap<String, String>();  
+		final LinkedHashMap<String, String> valueMapPackagesList = new LinkedHashMap<String, String>();  
 		   
-		valueMapGetterSetters.put("getters", "Getters");
-		
-		Package[] packagesList = Package.getPackages();
-		for(int i=0; i< packagesList.length; i++){
-			packagesList[i].getName();
-		}
+		rpcService.fetchPackages(new AsyncCallback<ArrayList<String>>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				SC.warn("fetchPackages failed : "+ caught.getLocalizedMessage());
+			}
+
+			@Override
+			public void onSuccess(ArrayList<String> result) {
+				for(int i=0; i< result.size(); i++){
+					if(result.get(i).startsWith("com.helloworld")){
+					valueMapPackagesList.put(result.get(i), result.get(i));
+					}
+				}
+				display.getListPackages().setValueMap(valueMapPackagesList);
+				
+			}
+		});
+
 	}
 
 	@Override
@@ -87,6 +106,8 @@ public class JavaBeanEditorPresenter implements Presenter
 				
 				if(listAddedBeanPropertyDTO.size()<1){
 					alertNoProperties();
+				}else{
+					generateBean();
 				}
 			}
 		});
@@ -103,7 +124,7 @@ public class JavaBeanEditorPresenter implements Presenter
 				AddBeanProportyWidget addBeanProportyWidget = new AddBeanProportyWidget();
 				window.addItem(addBeanProportyWidget);
 				window.setTitle("Bean Properties");
-				window.moveTo(400, 300);
+				window.moveTo(450, 200);
 				window.show();
 				addBeanProportyWidgetHandlers(addBeanProportyWidget);
 				
@@ -112,11 +133,10 @@ public class JavaBeanEditorPresenter implements Presenter
 	}
 	
 	private void addBeanProportyWidgetHandlers(final AddBeanProportyWidget addBeanProportyWidget) {
-		addBeanProportyWidget.getBtnSave().addClickHandler(new com.smartgwt.client.widgets.form.fields.events.ClickHandler() {
+		addBeanProportyWidget.getBtnSave().addClickHandler(new ClickHandler() {
 			
 			@Override
-			public void onClick(
-					com.smartgwt.client.widgets.form.fields.events.ClickEvent event) {
+			public void onClick(ClickEvent event) {
 				saveBeanProperty(addBeanProportyWidget);
 			}
 		});
@@ -136,7 +156,20 @@ public class JavaBeanEditorPresenter implements Presenter
 	private void generateBean() {
 		AddedBeanDTO addedBeanDTO = new AddedBeanDTO();
 		addedBeanDTO.setListProperties(listAddedBeanPropertyDTO);
-		rpcService.generateBean();
+		addedBeanDTO.setBeanName(display.getTxtBeanName().getDisplayValue());
+		addedBeanDTO.setPackageName(display.getListPackages().getDisplayValue());
+		rpcService.generateBean(addedBeanDTO, new AsyncCallback<String>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				SC.warn(caught.getLocalizedMessage());
+			}
+
+			@Override
+			public void onSuccess(String result) {
+				SC.say(result);
+			}
+		});
 	}  
 	
 	private void saveBeanProperty(
@@ -148,6 +181,7 @@ public class JavaBeanEditorPresenter implements Presenter
 		addedBeanPropertyDTO.setModifier(addBeanProportyWidget.getListAccessModifiers().getDisplayValue());
 		addedBeanPropertyDTO.setName(addBeanProportyWidget.getTextPropertyName().getDisplayValue());
 		listAddedBeanPropertyDTO.add(addedBeanPropertyDTO);
+		display.clearFields();
 	
 	}
 	

@@ -4,11 +4,12 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.helloworld.client.presenter.JavaBeanEditorPresenter.Display;
-import com.helloworld.client.view.widgets.AddBeanProportyWidget;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.form.fields.ButtonItem;
+import com.smartgwt.client.widgets.form.fields.ComboBoxItem;
 import com.smartgwt.client.widgets.form.fields.SelectItem;
 import com.smartgwt.client.widgets.form.fields.TextItem;
 
@@ -20,22 +21,42 @@ public class JavaBeanEditorView extends Composite implements Display {
 	}
 	
 	@UiField
-	DynamicForm form;
+	HTMLPanel panelBeanGenerator;
 	@UiField
-	DynamicForm formReflection;
-	private ButtonItem btnGenerate = new ButtonItem("Create Reflection");
-	private ButtonItem btnAddProperty = new ButtonItem("Add Property");
+	HTMLPanel panelReflection;
+	private ButtonItem btnGenerate = new ButtonItem();
+	private ButtonItem btnAddProperty = new ButtonItem();
 	private TextItem txtBeanName = new TextItem();
-	private ButtonItem btnCreate = new ButtonItem("Create Bean");
+	private ButtonItem btnCreate = new ButtonItem();
 	private SelectItem listBeans = new SelectItem();
-	private SelectItem listPackages = new SelectItem();
+	private ComboBoxItem listPackages = new ComboBoxItem();
+	
 	
 	public JavaBeanEditorView() {
 		initWidget(uiBinder.createAndBindUi(this));
-		listPackages.setTitle(ApplicationConstants.SELECT_PACKAGE);
-		txtBeanName.setEmptyDisplayValue(ApplicationConstants.ENTER_BEANNAME);
-		form.setItems(listPackages, txtBeanName, btnAddProperty, btnCreate);
+//		listPackages.setTitle(ApplicationConstants.SELECT_PACKAGE);
+//		txtBeanName.setEmptyDisplayValue(ApplicationConstants.ENTER_BEANNAME);
+		DynamicForm formBeanGenerator = new DynamicForm();
+		DynamicForm formReflection = new DynamicForm();
+		panelBeanGenerator.add(formBeanGenerator);
+		panelReflection.add(formReflection);
+		formBeanGenerator.setItems(listPackages, txtBeanName, btnAddProperty, btnCreate);
 		formReflection.setItems(listBeans, btnGenerate);
+		btnGenerate.setTitle("Generate Reflection");
+		btnCreate.setTitle("Create Bean");
+		btnAddProperty.setTitle("Add Property");
+		listPackages.setTitle("Select Package");
+		txtBeanName.setTitle("Enter Bean Name");
+		listBeans.setTitle("Select Bean For Reflection");
+		listBeans.setWrapTitle(false);
+		listPackages.setWrapTitle(false);
+		txtBeanName.setWrapTitle(false);
+		
+		
+	}
+	
+	public void clearFields(){
+		
 	}
 	
 	public ButtonItem getBtnGenerate() {
@@ -61,6 +82,10 @@ public class JavaBeanEditorView extends Composite implements Display {
 	}
 	public void setBtnCreate(ButtonItem btnCreate) {
 		this.btnCreate = btnCreate;
+	}
+
+	public ComboBoxItem getListPackages() {
+		return listPackages;
 	}
 
 	

@@ -37,4 +37,5 @@ public interface HelloServiceAsync {
 	void closeAccount(UserEntity user, AsyncCallback<String> asyncCallback);
 	void fetchBeanJSON(String className, AsyncCallback<String> asyncCallback);
 	void generateBean(AddedBeanDTO addedBeanDTO, AsyncCallback<String> asyncCallback);
+	void fetchPackages(AsyncCallback<ArrayList<String>> asyncCallback);
 }

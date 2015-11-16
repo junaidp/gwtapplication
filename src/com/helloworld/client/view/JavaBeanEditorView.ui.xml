@@ -1,14 +1,14 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:f="urn:import:com.smartgwt.client.widgets.form" xmlns:s="urn:import:com.smartgwt.client.widgets">
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 	<ui:style>
 	
 	</ui:style>
 	<g:HTMLPanel>
 		<div class="shadowDiv">
-			<s:HTMLPane>
-			<f:DynamicForm ui:field="form">	</f:DynamicForm>
-			</s:HTMLPane>
+			<g:HTMLPanel ui:field="panelBeanGenerator">
+			
+			</g:HTMLPanel>
 			<!-- <g:TextBox ui:field="txtBeanName" styleName="input-control text">
 			</g:TextBox>
 			<g:Button ui:field="btnAddProperty" styleName="button primary">Add Property</g:Button>
@@ -16,9 +16,10 @@
 			-->
 		</div>
 		<div>
-		<s:HTMLPane>
-			<f:DynamicForm ui:field="formReflection">	</f:DynamicForm>
-			</s:HTMLPane>
+		<g:HTMLPanel ui:field="panelReflection" >
+			
+			</g:HTMLPanel >
+			
 		</div>
 	</g:HTMLPanel>
 </ui:UiBinder> 
