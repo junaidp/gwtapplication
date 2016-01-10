@@ -1,0 +1,51 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	
+	</ui:style>
+	<g:HTMLPanel width="100%">
+
+		<head>
+			<link href="Metro-UI-CSS-master/build/css/metro.css" rel="stylesheet" />
+			<link href="Metro-UI-CSS-master/build/css/metro.min.css" rel="stylesheet" />
+			<link href="Metro-UI-CSS-master/build/css/metro.responsive" rel="stylesheet" />
+			<link href="Metro-UI-CSS-master/build/css/metro.schemes" rel="stylesheet" />
+			<script src="jquery.js"></script>
+			<script src="Metro-UI-CSS-master/build/js/metro.js"></script>
+		</head>
+		<body class="metro">
+			<div class="app-bar">
+			<a class="app-bar-element">
+			<g:HTMLPanel>
+						<g:FocusPanel ui:field="back">
+							<g:HTMLPanel>
+								<div style="padding-left:20px; padding-right:20px">
+									Back
+
+								</div>
+							</g:HTMLPanel>
+						</g:FocusPanel>
+					</g:HTMLPanel>
+			</a>
+				<a class="app-bar-element place-right">
+				<span class="app-bar-divider"></span>
+					<g:HTMLPanel>
+						<g:FocusPanel ui:field="logOut">
+							<g:HTMLPanel>
+								<div style="padding-left:20px; padding-right:20px">
+									Log off
+
+								</div>
+							</g:HTMLPanel>
+						</g:FocusPanel>
+					</g:HTMLPanel>
+				</a>
+				<span class="app-bar-divider"></span>
+			</div>
+			
+		</body>
+	
+
+	</g:HTMLPanel>
+</ui:UiBinder> 
