@@ -380,10 +380,6 @@ HelloService {
 		Reflections reflectionsCDI = new Reflections("javax.enterprise");
 		Reflections reflectionsLang = new Reflections("java.lang");
 
-		//		Reflections reflectionsWidget = new Reflections("com.google.gwt.widget");
-		//		Set<Class<? extends UIObject>> annotationsWidget = 
-		//				reflectionsWidget.get
-
 		ArrayList<AnnotationsDTO> listAnnotationsDTO = new ArrayList<AnnotationsDTO>();
 		Set<Class<? extends Annotation>> annotationsHibernate = 
 				reflectionsHibernate.getSubTypesOf(Annotation.class);

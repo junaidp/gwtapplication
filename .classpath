@@ -32,5 +32,7 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/smartgwt-skins.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/smartgwt.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/reflections-0.9.9-RC1-uberjar.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/guava-18.0.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/javassist.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>
