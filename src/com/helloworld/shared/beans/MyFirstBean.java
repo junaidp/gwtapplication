@@ -1,44 +1,52 @@
-package com.helloworld.shared.beans;
-
+package com.helloworld.shared.beans; 
+ 
+import java.util.*; 
 import java.io.Serializable;
-
 import com.helloworld.shared.entity.UserEntity;
+import com.helloworld.shared.entity.MyAccountEntity;
+public class MyFirstBean implements Serializable
+{ 
 
-public class MyFirstBean implements Serializable {
-	
-	public MyFirstBean(){
-		
-	}
-	
-	private int id;
-	private String name;
-	private String address;
-	private UserEntity user;
-	
-	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
-	public UserEntity getUser() {
-		return user;
-	}
-	public void setUser(UserEntity user) {
-		this.user = user;
-	}
+public MyFirstBean() {
 
+}
+
+private int id;
+private String name;
+private String address;
+private UserEntity user;
+
+private MyAccountEntity myAccount;
+
+
+public  String getAddress(){ 
+return address;
+ }
+public  String getName(){ 
+return name;
+ }
+public  int getId(){ 
+return id;
+ }
+public  void setName(String arg0){ 
+this.name = arg0;
+ }
+public  void setId(int arg0){ 
+this.id = arg0;
+ }
+public  void setAddress(String arg0){ 
+this.address = arg0;
+ }
+public  void setMyAccount(MyAccountEntity arg0){ 
+this.myAccount = arg0;
+ }
+public  UserEntity getUser(){ 
+return user;
+ }
+public  void setUser(UserEntity arg0){ 
+this.user = arg0;
+ }
+public  MyAccountEntity getMyAccount(){ 
+return myAccount;
+ }
 }

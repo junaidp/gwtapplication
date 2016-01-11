@@ -19,7 +19,7 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.joda.time.DateTime;
 import org.joda.time.Minutes;
-import org.mindrot.jbcrypt.BCrypt;
+import org.mindrot.BCrypt;
 import com.helloworld.client.view.ApplicationConstants;
 import com.helloworld.shared.DynamicCompilation;
 //import com.helloworld.shared.beans.BeanSet;
@@ -581,21 +581,7 @@ public class MyRdbHelper {
 	}
 
 
-	public String fetchBeanJSON(String className) throws Exception {
-		String jsonInString = "";
-		try{
-		new DynamicCompilation(className, "BeanSet");
-    
-		Class myClass = Class.forName(className);
-		Object obj = myClass.newInstance();
-		ObjectMapper mapper = new ObjectMapper();
-		jsonInString = mapper.writeValueAsString(obj);
-		}catch(Exception ex){
-			throw new Exception( "Exception occured in Reflection"+ ex);
-		}
-		return jsonInString;
-
-	}
+	
 	
 
 }

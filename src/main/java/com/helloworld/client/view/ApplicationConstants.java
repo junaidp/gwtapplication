@@ -1,5 +1,7 @@
 package com.helloworld.client.view;
 
+import com.google.gwt.i18n.client.HasDirection.Direction;
+
 public class ApplicationConstants {
 	
 	///LAYOUT HEADINGS///
@@ -29,7 +31,8 @@ public class ApplicationConstants {
 	public static final String TOKEN_VIEW_EDIT_REG = "viewEditReg";
 	public static final String TOKEN_VIEW_REG = "viewRegistration";
 	public static final String TOKEN_JAVA_BEAN_EDITOR = "javaBeanEditor";
-	
+	public static final String TOKEN_ASSIGN_EDITORS = "assignEditor";
+	public static final String TOKEN_UPLOAD_COMPONENTS = "uploadComponents";
 
 
 	
@@ -77,7 +80,30 @@ public class ApplicationConstants {
 	public static final String ENTER_BEANNAME = "Enter Bean Name";
 	public static final String SELECT_PACKAGE = "Select Package";
 	public static final String SAVE = "Save";
-	public static final String PROPERTY_NAME = "Enter Property Name";
-
+	public static final String PROPERTY_NAME = "Property Name";
+	public static final String PACKAGE_NOT_SELECTED = "please select a valid package";
+	public static final String BEANNAME_REQUIRED = "please enter a valid Bean name";
+	public static final String UPDATE = "Update";
+	public static final String ADDOBJECT = "Add Data Object";
+	public static final String DEFAULT_PACKAGE = "com.helloworld.shared.";
+	public static final String UPLOADED_VIEWS_PACKAGE = "com.helloworld.client.view.widgets.UploadedComponents";
+	public static final String SELECT_FOR_REFLECTION = "Select Bean for reflection";
+	public static final String FIELD_NAME_NOT_AVAILABLE = "";
+	public static final String CLASS_LEVEL_ANNOTATIONS = "Class level Annotations";
+	public static final String FIELD_LEVEL_ANNOTATIONS = "Field level Annotations";
+	public static final String ANNOTATIONS_HIBERNATE = "org.hibernate";
+	public static final String ANNOTATIONS_JPA = "javax.persistence";
+	public static final String ANNOTATIONS_SPRING = "org.springframework";
+	public static final String ANNOTATIONS_CDI = "javax.enterprise";
+	public static final String IMPORT_NOT_AVAILABLE = "Annotation not available in provided List, You still want to continue with Adding this Annotation";
+	public static final String ENTER_ANNOTAION_TEXT = "Annotation Text";
+	public static final String EDIT = "Edit";
+	public static final String SELECT_BEAN = "Select Bean";
+	public static final String FIELD_EDITORS_CREATION = "Field Editor Creation";
+	public static final String UPLOADED_VIEWS_NAME = "UploadedClass";
+	public static final String INVALID_UIXML_FILE = "Please select a valid GWT Designer's ui.xml File";
+	public static final String INVALID_UIJAVA_FILE = "Please select a valid corresponsing java File";
+	public static final String INVALID_UIXML_AND_JAVA_FILE = "Please select a valid ui.xml and corresponding java Files";
+	
 	
 }

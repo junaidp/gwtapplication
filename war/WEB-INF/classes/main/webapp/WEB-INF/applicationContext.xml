@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.0.xsd"
+	default-lazy-init="true">
+
+	<!-- Datasource for LOCAL database connection -->
+    <bean class="org.gwtwidgets.server.spring.GWTHandler">
+    <property name="mappings">
+      <map>
+        <entry key="/greet" value-ref="RPCTest" />
+    </map>
+    </property>
+	</bean>	
+
+  <bean id="RPCTest" class="com.helloworld.server.HelloServiceImpl" />  
+
+  <bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost/gwtapp" />
+		<property name="username" value="root" />
+		<property name="password" value="ovis123" />
+
+	</bean>
+	
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="annotatedClasses">
+			<list>
+				<value>com.helloworld.shared.entity.UserEntity</value>
+				<value>com.helloworld.shared.entity.MyAccountPreferencesEntity</value>
+				<value>com.helloworld.shared.entity.GlobalPreferencesEntity</value>
+				<value>com.helloworld.shared.entity.MyAccountEntity</value>
+				
+			
+			</list>
+		</property>
+	</bean>
+	<bean id="ManagerApp" class="com.helloworld.database.MyRdbHelper">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+</beans>
+

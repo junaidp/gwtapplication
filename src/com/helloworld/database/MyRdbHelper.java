@@ -581,21 +581,7 @@ public class MyRdbHelper {
 	}
 
 
-	public String fetchBeanJSON(String className) throws Exception {
-		String jsonInString = "";
-		try{
-		new DynamicCompilation(className, "BeanSet");
-    
-		Class myClass = Class.forName(className);
-		Object obj = myClass.newInstance();
-		ObjectMapper mapper = new ObjectMapper();
-		jsonInString = mapper.writeValueAsString(obj);
-		}catch(Exception ex){
-			throw new Exception( "Exception occured in Reflection"+ ex);
-		}
-		return jsonInString;
-
-	}
+	
 	
 
 }

@@ -35,8 +35,11 @@ public class Attachment extends VerticalPanel {
 		panel.add(defaultUploader);
 		HorizontalPanel hpnl = new HorizontalPanel();
 		hpnl.add(panel);
+		form = new FormPanel();
 		hpnl.setSpacing(10);
-		add(hpnl);
+		add(form);
+		form.setWidget(hpnl);
+		form.setAction("uploadServlet");
 		vpnlFileNames.clear();
 		displayUploadedFiles();
 		defaultUploader.addOnFinishUploadHandler(onFinishUploaderHandler);

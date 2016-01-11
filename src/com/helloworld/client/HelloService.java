@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
-import com.helloworld.shared.AddedBeanDTO;
+import com.helloworld.shared.dto.AddedBeanDTO;
+import com.helloworld.shared.dto.AnnotationsDTO;
 import com.helloworld.shared.entity.GlobalPreferencesEntity;
 import com.helloworld.shared.entity.MyAccountEntity;
 import com.helloworld.shared.entity.UserEntity;
@@ -37,9 +38,12 @@ public interface HelloService extends RemoteService {
 	ArrayList<UserEntity>fetchAllUsers()throws Exception;
 	String updateUserAccount(UserEntity user)throws Exception;
 	String closeAccount(UserEntity user) throws Exception;
-	String fetchBeanJSON(String className) throws Exception;
+	String fetchBeanJSON(String className, String reflectionName, String action) throws Exception;
 	String generateBean(AddedBeanDTO addedBeanDTO)throws Exception;
 	ArrayList<String> fetchPackages()throws Exception;
-	
+	ArrayList<String> fetchClassesOfAllPackages()throws Exception;
+	ArrayList<String> fetchStringClassesOfAllPackages()throws Exception;
+	ArrayList<AnnotationsDTO>fetchAnnotations()throws Exception;
+	String loadUploadedClass (String className)throws Exception;
 	
 }

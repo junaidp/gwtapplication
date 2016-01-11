@@ -1,7 +1,13 @@
 package com.helloworld.server;
 
 import java.io.File;
+import java.lang.annotation.Annotation;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
@@ -11,18 +17,23 @@ import com.helloworld.client.HelloService;
 import com.helloworld.client.view.ApplicationConstants;
 import com.helloworld.client.view.ReadGlobalPreferencesXml;
 import com.helloworld.database.MyRdbHelper;
-import com.helloworld.shared.AddedBeanDTO;
+import com.helloworld.shared.dto.AddedBeanDTO;
+import com.helloworld.shared.dto.AnnotationsDTO;
 import com.helloworld.shared.entity.GlobalPreferencesEntity;
 import com.helloworld.shared.entity.MyAccountEntity;
 import com.helloworld.shared.entity.UserEntity;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.UIObject;
+import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import net.tanesha.recaptcha.ReCaptcha;
 import net.tanesha.recaptcha.ReCaptchaFactory;
 
+import org.hibernate.Hibernate;
+import org.reflections.Reflections;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 /**
  * The server-side implementation of the RPC service.
  */
@@ -35,13 +46,10 @@ HelloService {
 		return "";
 	}
 
-		ApplicationContext ctx = new ClassPathXmlApplicationContext(
+	ApplicationContext ctx = new ClassPathXmlApplicationContext(
 			"applicationContext.xml");
-	//	ApplicationContext ctx = WebApplicationContextUtils
-	//				.getWebApplicationContext(getServletContext());
-							
-		MyRdbHelper rdbHelper = (MyRdbHelper) ctx.getBean("ManagerApp");
-		HttpSession session ;
+	MyRdbHelper rdbHelper = (MyRdbHelper) ctx.getBean("ManagerApp");
+	HttpSession session ;
 
 	@Override
 	public String addUser(UserEntity user) throws Exception {
@@ -98,13 +106,6 @@ HelloService {
 		return rdbHelper.addUser(user);
 	}
 
-	public String getServletName() {
-    // Override as GenericServlet does config.getServletName() which NPEs
-    // as config is null. This causes NPEs when the log(...) methods are
-    // invoked.
-    return "HelloServiceImpl";
-	}
-
 	public ArrayList<String> readUploadedFiles(){
 		String root = getServletContext().getRealPath("/");
 		ArrayList<String> fileNames = new ArrayList<String>();
@@ -136,7 +137,7 @@ HelloService {
 	public GlobalPreferencesEntity fetchGlobalPreferences() throws Exception {
 		return rdbHelper.fetchGlobalPreferences();
 	}
-	
+
 	@Override
 	public String updateGlobalPreferences(
 			GlobalPreferencesEntity globalPreferencesEntity) throws Exception {
@@ -209,8 +210,9 @@ HelloService {
 	}
 
 	@Override
-	public String fetchBeanJSON(String className) throws Exception {
-		String json =  rdbHelper.fetchBeanJSON(className);
+	public String fetchBeanJSON(String className, String reflectionName, String action) throws Exception {
+		FilesCreationHelper filesCreationHelper = new FilesCreationHelper();
+		String json =  filesCreationHelper.fetchBeanJSON(className, reflectionName, action);
 		session=getThreadLocalRequest().getSession(true);
 		session.setAttribute("json", json);
 		return json;
@@ -225,13 +227,222 @@ HelloService {
 	@Override
 	public ArrayList<String> fetchPackages() throws Exception {
 		Package[] packageslist = Package.getPackages();
+
 		ArrayList<String> packagesList = new ArrayList<String>();
 		for(int i=0; i< packageslist.length; i++){
-			packagesList.add(packageslist[i].getName());
+						if(packageslist[i].getName().startsWith(ApplicationConstants.DEFAULT_PACKAGE)){
+//			if(packageslist[i].getName().startsWith("com.helloworld.client")){
+				packagesList.add(packageslist[i].getName());
+			}
 		}
 		return packagesList	;
 	}
 
-	
 
+	//	Reflections reflections = new Reflections(packageslist[i].getName());
+	//
+	//	 Set<Class<? extends Object>> allClasses = 
+	//	     reflections.getSubTypesOf(Object.class);
+	//	Class[] allClasses = getClasses(packageslist[i].getName());
+	//	 System.out.println(allClasses);
+
+	private static Class[] getClasses(String packageName)
+			throws Exception {
+		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+		assert classLoader != null;
+		String path = packageName.replace('.', '/');
+		Enumeration<URL> resources = classLoader.getResources(path);
+		List<File> dirs = new ArrayList<File>();
+		while (resources.hasMoreElements()) {
+			URL resource = resources.nextElement();
+			dirs.add(new File(resource.getFile()));
+		}
+		ArrayList<Class> classes = new ArrayList<Class>();
+		for (File directory : dirs) {
+			classes.addAll(findClasses(directory, packageName));
+		}
+		return classes.toArray(new Class[classes.size()]);
+	}
+
+	private static ArrayList<String> getClassesString(String packageName)
+			throws Exception {
+		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+		assert classLoader != null;
+		String path = packageName.replace('.', '/');
+		Enumeration<URL> resources = classLoader.getResources(path);
+		List<File> dirs = new ArrayList<File>();
+		while (resources.hasMoreElements()) {
+			URL resource = resources.nextElement();
+			dirs.add(new File(resource.getFile()));
+		}
+		ArrayList<String> classes = new ArrayList<String>();
+		for (File directory : dirs) {
+			classes.addAll(findClassesString(directory, packageName));
+		}
+		return classes;
+	}
+
+
+	private static List<Class> findClasses(File directory, String packageName) throws Exception {
+
+		List<Class> classes = new ArrayList<Class>();
+
+		if (!directory.exists()) {
+			return classes;
+		}
+		File[] files = directory.listFiles();
+		for (File file : files) {
+			if (file.isDirectory()) {
+				assert !file.getName().contains(".");
+				classes.addAll(findClasses(file, packageName + "." + file.getName()));
+			} else if (file.getName().endsWith(".class")) {
+				try{
+						
+					classes.add(Class.forName(packageName + '.' + file.getName().substring(0, file.getName().length() - 6)));
+				
+				}catch(Exception ex){
+					System.out.println(ex);
+					throw new Exception(ex); 
+				}
+			}
+
+		}
+
+		return classes;
+
+	}
+
+	private static List<String> findClassesString(File directory, String packageName) throws Exception {
+
+		List<String> classes = new ArrayList<String>();
+
+		if (!directory.exists()) {
+			return classes;
+		}
+		File[] files = directory.listFiles();
+		for (File file : files) {
+			if (file.isDirectory()) {
+				assert !file.getName().contains(".");
+				classes.addAll(findClassesString(file, packageName + "." + file.getName()));
+			} else if (file.getName().endsWith(".class")) {
+				try{
+					classes.add(packageName + '.' + file.getName().substring(0, file.getName().length() - 6));
+				}catch(Exception ex){
+					System.out.println(ex);
+					throw new Exception(ex);
+				}
+			}
+
+		}
+
+		return classes;
+
+	}
+
+	@Override
+	public ArrayList<String> fetchStringClassesOfAllPackages() throws Exception {
+		ArrayList<String> allPackages = fetchPackages();
+		ArrayList<String> allClasses = new ArrayList<String>();
+		for(int i=0;i< allPackages.size(); i++){
+			//			Class[] packageClasses = getClasses(allPackages.get(i));
+			ArrayList<String> packageClasses = getClassesString(allPackages.get(i));
+			for(int j=0; j< packageClasses.size(); j++){
+				if(! allClasses.contains(packageClasses.get(j))){
+					allClasses.add(packageClasses.get(j));
+				}
+			}
+		}
+
+		return allClasses;
+	}
+
+	@Override
+	public ArrayList<String> fetchClassesOfAllPackages() throws Exception {
+		ArrayList<String> allPackages = fetchPackages();
+		ArrayList<String> allClasses = new ArrayList<String>();
+		for(int i=0;i< allPackages.size(); i++){
+			//		Class[] packageClasses = getClasses(allPackages.get(i));
+			Class[] packageClasses = getClasses(allPackages.get(i));
+			for(int j=0; j< packageClasses.length; j++){
+				if(! allClasses.contains(packageClasses[j].getName()+"::"+ packageClasses[j].getSimpleName())){
+					allClasses.add(packageClasses[j].getName()+"::"+ packageClasses[j].getSimpleName());
+				}
+			}
+		}
+
+		return allClasses;
+	}
+
+	public ArrayList<AnnotationsDTO> fetchAnnotations() throws Exception{
+		Reflections reflectionsHibernate = new Reflections("org.hibernate.annotations");
+		Reflections reflectionsJPA = new Reflections("javax.persistence");
+		Reflections reflectionsSpring = new Reflections("org.springframework");
+		Reflections reflectionsCDI = new Reflections("javax.enterprise");
+		Reflections reflectionsLang = new Reflections("java.lang");
+
+		//		Reflections reflectionsWidget = new Reflections("com.google.gwt.widget");
+		//		Set<Class<? extends UIObject>> annotationsWidget = 
+		//				reflectionsWidget.get
+
+		ArrayList<AnnotationsDTO> listAnnotationsDTO = new ArrayList<AnnotationsDTO>();
+		Set<Class<? extends Annotation>> annotationsHibernate = 
+				reflectionsHibernate.getSubTypesOf(Annotation.class);
+
+		Set<Class<? extends Annotation>> annotationsJPA = 
+				reflectionsJPA.getSubTypesOf(Annotation.class);
+
+		Set<Class<? extends Annotation>> annotationsSpring = 
+				reflectionsSpring.getSubTypesOf(Annotation.class);
+
+		Set<Class<? extends Annotation>> annotationsCDI = 
+				reflectionsCDI.getSubTypesOf(Annotation.class);
+
+		Set<Class<? extends Annotation>> annotationsLang = 
+				reflectionsLang.getSubTypesOf(Annotation.class);
+
+
+		Iterator iterLang = annotationsLang.iterator();
+		while (iterLang.hasNext()) {
+			addAnnotation(listAnnotationsDTO, iterLang);
+		}
+
+		Iterator iterHib = annotationsHibernate.iterator();
+		while (iterHib.hasNext()) {
+			addAnnotation(listAnnotationsDTO, iterHib);
+		}
+		Iterator iter = annotationsHibernate.iterator();
+		while (iter.hasNext()) {
+			addAnnotation(listAnnotationsDTO, iter);
+		}
+		Iterator iterJPA = annotationsJPA.iterator();
+		while (iterJPA.hasNext()) {
+			addAnnotation(listAnnotationsDTO, iterJPA);
+		}
+		Iterator iterSpring = annotationsSpring.iterator();
+		while (iterSpring.hasNext()) {
+			addAnnotation(listAnnotationsDTO, iterSpring);
+		}
+		Iterator iterCDI = annotationsCDI.iterator();
+		while (iterCDI.hasNext()) {
+			addAnnotation(listAnnotationsDTO, iterCDI);
+		}
+		return listAnnotationsDTO;
+	}
+
+	private void addAnnotation(ArrayList<AnnotationsDTO> listAnnotationsDTO,
+			Iterator iter) {
+		Class anot  = (Class) iter.next();
+		String annotation = anot.getSimpleName();
+		String annotationImport = anot.getName();
+		AnnotationsDTO hibAnnotationsDTO = new AnnotationsDTO();
+		hibAnnotationsDTO.setName(annotation);
+		hibAnnotationsDTO.setImportClass(annotationImport);
+		listAnnotationsDTO.add(hibAnnotationsDTO);
+	}
+
+	@Override
+	public String loadUploadedClass(String className) throws Exception {
+		 Class.forName("com.helloworld.server.LogoUploadServlet").newInstance();
+		return "";
+	}
 }

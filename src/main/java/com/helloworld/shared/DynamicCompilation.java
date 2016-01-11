@@ -5,8 +5,12 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Enumeration;
+import java.util.List;
 
 import javax.tools.JavaCompiler;
 import javax.tools.StandardJavaFileManager;
@@ -17,29 +21,48 @@ import org.codehaus.jackson.map.util.ClassUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.ClassUtils;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.dev.asm.Type;
+import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.user.client.ui.Widget;
+import com.helloworld.client.view.ApplicationConstants;
 
 public class DynamicCompilation {
 
-	public DynamicCompilation(String className, String reflectedClassName) throws Exception {
+	public DynamicCompilation(String className, String reflectedClassName, String action) throws Exception {
 		// create the source
-		File sourceFile   = new File("C:\\Users\\Junaid\\git\\gwtapp\\HelloWorldGWT\\src\\com\\helloworld\\shared\\beans\\"+reflectedClassName+".java");
+		//		File sourceFile   = new File("C:\\Users\\Junaid\\git\\gwtapplication\\src\\com\\helloworld\\shared\\beans"+reflectedClassName+".java");
+		int indClass = className.lastIndexOf(".");
+		String myPath = className.substring(0,indClass);
+		String dir = System.getProperty("user.dir");
+		int index = dir.lastIndexOf("\\");
+		dir = dir.substring(0, index);
+		String packageDir = myPath.replace(".","\\");
+		dir = dir+"\\src\\"+packageDir+"\\"+reflectedClassName+".java";
+		File sourceFile   = new File(dir);
 		FileWriter writer = new FileWriter(sourceFile);
-
-		//		Class myClass = MyFirstBean.class;
 		Class myClass = Class.forName(className);
+//		Class myClass = Class.forName("com.helloworld.client.myy.My");
 		Class[] listofImplements = myClass.getInterfaces();
 		myClass.getSimpleName();
-		
+
 		Method[] method = myClass.getDeclaredMethods();
 		Field[] field = myClass.getDeclaredFields();
 		myClass.getModifiers();
 
 		//////////////Crate Package and class/////////////////
 		StringBuffer sb = new StringBuffer("");
-		sb.append("package com.helloworld.shared.beans; \n \n");
+		//		sb.append("package com.helloworld.shared.beans; \n \n");
+		sb.append("package "+ myPath+"; \n \n");
 		sb.append("import java.util.*; \n");
+//		if(action.equals(ApplicationConstants.FIELD_EDITORS_CREATION)){
+//			sb.append("import com.google.gwt.uibinder.client.UiBinder; \n");
+//			sb.append("import com.google.gwt.user.client.ui.Composite; \n");
+//			sb.append("import com.google.gwt.user.client.ui.Widget; \n");
+//			sb.append("import com.google.gwt.core.client.GWT; \n");
+//		}
 		sb.append("public class "+reflectedClassName );
+//		if(action.equals(ApplicationConstants.FIELD_EDITORS_CREATION))sb.append(" extends Composite ");
 		if(listofImplements.length>0){
 			sb.append(" implements ");
 		}
@@ -53,6 +76,13 @@ public class DynamicCompilation {
 		}
 		sb.append("{ \n");
 		sb.append("\n");
+
+//		if(action.equals(ApplicationConstants.FIELD_EDITORS_CREATION)){
+//
+//			sb.append("private static "+reflectedClassName+"UiBinder uiBinder = GWT.create("+reflectedClassName+"UiBinder.class); \n");
+//			sb.append("interface "+ reflectedClassName+"UiBinder extends UiBinder<Widget," +reflectedClassName +" > { \n "
+//					+ "} \n \n");
+//		}
 
 		//////////////Create Constructor//////////////////////
 		Constructor[] constructors = myClass.getConstructors();
@@ -73,6 +103,9 @@ public class DynamicCompilation {
 			sb.append(") {");
 			sb.append("\n");
 			sb.append("\n");
+//			if(action.equals(ApplicationConstants.FIELD_EDITORS_CREATION) && i==0){
+//				sb.append("initWidget(uiBinder.createAndBindUi(this)); \n");
+//			}
 			sb.append("}");
 			sb.append("\n");
 
@@ -96,20 +129,24 @@ public class DynamicCompilation {
 
 			}
 
+
 			sb.append(";");
 			sb.append("\n");
 
 			////////////////CHECK if its a Declared bean and then add its imports and create childs///////
-
-			if(! field[i].getType().getName().startsWith("java.") && implementsSerializable( field[i].getType().getInterfaces())
-					&& allFieldsPrivate(field[i].getType())){//Check if its a custom bean.
-				int ind = sb.indexOf("public");
-				sb.insert(ind, "\n");
-				sb.insert(ind, "import "+ field[i].getType().getName()+";");
-				sb.append("\n");
-				reflectedClassName = reflectedClassName+"Child"+i;
-				new DynamicCompilation(field[i].getType().getName(), reflectedClassName);
-			}
+				if(! field[i].getType().getName().startsWith("java.") && implementsSerializable( field[i].getType().getInterfaces())
+						&& allFieldsPrivate(field[i].getType())){//Check if its a custom bean.
+					int ind = sb.indexOf("public");
+					sb.insert(ind, "\n");
+					sb.insert(ind, "import "+ field[i].getType().getName()+";");
+					sb.append("\n");
+					if(!action.equals(ApplicationConstants.FIELD_EDITORS_CREATION)){
+						
+					reflectedClassName = reflectedClassName+"Child"+i;
+					new DynamicCompilation(field[i].getType().getName(), reflectedClassName, action);
+					}
+				}
+			
 		}
 
 		sb.append("\n");
@@ -121,17 +158,14 @@ public class DynamicCompilation {
 
 			sb.append(getModifer(method[i].getModifiers())+"  "+ 
 					method[i].getReturnType().getSimpleName() +" "+ method[i].getName()+"(");
-
-			String argName = "arg";		
-			String [] paramNames = new String [parametersType.length];
 			for(int j=0; j<parametersType.length; j++){
 				if(j>0){
-					sb.append(", "+parametersType[j].getSimpleName()+" "+ argName + i + j);
+					sb.append(", "+parametersType[j].getSimpleName()+" "+method[i].getParameters()[j].getName());
 				}else{
-					sb.append(parametersType[j].getSimpleName()+" "+ argName + i + j);
-				}
-					paramNames[j] = argName + i + j;
+					sb.append(parametersType[j].getSimpleName()+" "+method[i].getParameters()[j].getName());
 
+
+				}
 			}
 			sb.append(")"+   "{ \n" );
 			/////////Writing method bodies ONLY FOR GETTERS/SETTERS.///////////////
@@ -141,7 +175,7 @@ public class DynamicCompilation {
 				fieldName = Character.toLowerCase(fieldName.charAt(0)) + fieldName.substring(1); 
 
 				if(method[i].getReturnType().getSimpleName().equals("void")){
-					sb.append("this."+fieldName +" = "+ paramNames[0] +";");
+					sb.append("this."+fieldName +" = "+ method[i].getParameters()[0].getName()+";");
 				}else{
 					sb.append("return "+ fieldName+";");
 				}
@@ -152,23 +186,41 @@ public class DynamicCompilation {
 
 		writer.write(sb+"");
 		writer.close();
+	}
 
-		JavaCompiler compiler    = ToolProvider.getSystemJavaCompiler();
-		StandardJavaFileManager fileManager =
-				compiler.getStandardFileManager(null, null, null);
+	//		JavaCompiler compiler    = ToolProvider.getSystemJavaCompiler();
+	//		StandardJavaFileManager fileManager =
+	//				compiler.getStandardFileManager(null, null, null);
+	//
+	//		fileManager.setLocation(StandardLocation.CLASS_OUTPUT,
+	//				Arrays.asList(new File("/temp")));
+	//		// Compile the file
+	//		compiler.getTask(null,
+	//				fileManager,
+	//				null,
+	//				null,
+	//				null,
+	//				fileManager.getJavaFileObjectsFromFiles(Arrays.asList(sourceFile)))
+	//		.call();
+	//		fileManager.close();
 
-		fileManager.setLocation(StandardLocation.CLASS_OUTPUT,
-				Arrays.asList(new File("/temp")));
-		// Compile the file
-		compiler.getTask(null,
-				fileManager,
-				null,
-				null,
-				null,
-				fileManager.getJavaFileObjectsFromFiles(Arrays.asList(sourceFile)))
-		.call();
-		fileManager.close();
 
+
+	private String generateBeanChildName(String reflectedClassName)
+			throws Exception {
+		Class[] packageClasses = getClasses("com.helloworld.shared.beans");
+		ArrayList<String> listClasses = new ArrayList<String>(); 
+		for(int j=0; j< packageClasses.length; j++){
+
+			listClasses.add(packageClasses[j].getName());
+		}
+
+		int random = 0;
+		String childName = reflectedClassName+"Child";
+		while(listClasses.contains(childName)){
+			childName = childName+""+random+1;
+		}
+		return childName;
 	}
 
 	private boolean implementsSerializable(Class<?>[] listofImplements){
@@ -268,4 +320,51 @@ public class DynamicCompilation {
 	//			e.printStackTrace();
 	//		}
 	//	}
+
+	private static Class[] getClasses(String packageName)
+			throws Exception {
+		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+		assert classLoader != null;
+		String path = packageName.replace('.', '/');
+		Enumeration<URL> resources = classLoader.getResources(path);
+		List<File> dirs = new ArrayList<File>();
+		while (resources.hasMoreElements()) {
+			URL resource = resources.nextElement();
+			dirs.add(new File(resource.getFile()));
+		}
+		ArrayList<Class> classes = new ArrayList<Class>();
+		for (File directory : dirs) {
+			classes.addAll(findClasses(directory, packageName));
+		}
+		return classes.toArray(new Class[classes.size()]);
+	}
+
+
+	private static List<Class> findClasses(File directory, String packageName) throws ClassNotFoundException {
+		List<Class> classes = new ArrayList<Class>();
+		if (!directory.exists()) {
+			return classes;
+		}
+		File[] files = directory.listFiles();
+		for (File file : files) {
+			if (file.isDirectory()) {
+				assert !file.getName().contains(".");
+				classes.addAll(findClasses(file, packageName + "." + file.getName()));
+			} else if (file.getName().endsWith(".class")) {
+				classes.add(Class.forName(packageName + '.' + file.getName().substring(0, file.getName().length() - 6)));
+			}
+		}
+		return classes;
+	}
+	private File createFilePath(String myPath) {
+
+		String dir = System.getProperty("user.dir");
+		int slashIndex = dir.lastIndexOf("\\");
+		dir = dir.substring(0, slashIndex+1);
+		String packageDir = myPath.replace(".","\\");
+		dir =dir +"src\\"+ packageDir;
+		File myPackage    = new File(dir);
+		return myPackage;
+	}
+
 }

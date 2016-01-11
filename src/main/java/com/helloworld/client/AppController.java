@@ -1,4 +1,4 @@
-package com.helloworld.client;
+package main.java.com.helloworld.client;
 
 
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
@@ -10,6 +10,8 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.helloworld.client.event.AdminEvent;
 import com.helloworld.client.event.AdminEventHandler;
+import com.helloworld.client.event.AssignEditorsEvent;
+import com.helloworld.client.event.AssignEditorsEventHandler;
 import com.helloworld.client.event.DashboardAccordionEvent;
 import com.helloworld.client.event.DashboardAccordionEventHandler;
 import com.helloworld.client.event.DashboardEvent;
@@ -35,6 +37,8 @@ import com.helloworld.client.event.ViewEditRegistrationEventHandler;
 import com.helloworld.client.event.ViewPlanEvent;
 import com.helloworld.client.event.ViewPlanEventHandler;
 import com.helloworld.client.presenter.AdminPresenter;
+import com.helloworld.client.presenter.AssignEditorsPresenter;
+import com.helloworld.client.presenter.BeanFieldsEditorPresenter;
 import com.helloworld.client.presenter.CreatePasswordPresenter;
 import com.helloworld.client.presenter.DashboardAccordionPresenter;
 import com.helloworld.client.presenter.DashboardPortalPresenter;
@@ -58,6 +62,8 @@ import com.helloworld.client.presenter.ViewPlanPresenter;
 import com.helloworld.client.presenter.ViewRegistrationPresenter;
 import com.helloworld.client.view.AdminView;
 import com.helloworld.client.view.ApplicationConstants;
+import com.helloworld.client.view.AssignEditorsView;
+import com.helloworld.client.view.BeanFieldsEditorView;
 import com.helloworld.client.view.CreatePasswordView;
 import com.helloworld.client.view.FileUploadView;
 import com.helloworld.client.view.FooterView;
@@ -78,7 +84,6 @@ import com.helloworld.client.view.CenterPanels.SearchDataView;
 import com.helloworld.client.view.MyDashboard.MyAccountViews.MyAccountView;
 import com.helloworld.client.view.MyDashboard.MyAccountViews.ViewPlanView;
 import com.helloworld.client.view.MyDashboard.MyAccountViews.ViewRegistrationView;
-import com.helloworld.server.GlobalPreferencesXmlView;
 import com.helloworld.shared.entity.GlobalPreferencesEntity;
 import com.helloworld.shared.entity.UserEntity;
 
@@ -94,6 +99,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 	private HeaderPresenter headerPresenter;
 	private GlobalPreferencesEntity globalPreferencesEntity;
 	private String createPasswordtoken ="";
+	private String beanJson ;
 	
 	Presenter presenter = null;
 
@@ -123,6 +129,14 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 			public void onEditUser(EditUserEvent event) {
 				loggedInUser = event.getUser();
 				History.newItem(ApplicationConstants.TOKEN_EDIT_USER);
+			}
+		}); 
+		
+		eventBus.addHandler(AssignEditorsEvent.TYPE,
+				new AssignEditorsEventHandler() {
+			public void onAssignEditors(AssignEditorsEvent event) {
+				beanJson = event.getJson();
+				History.newItem(ApplicationConstants.TOKEN_ASSIGN_EDITORS);
 			}
 		}); 
 		
@@ -388,6 +402,22 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 			
 			if (token.equals(ApplicationConstants.TOKEN_JAVA_BEAN_EDITOR)) {
 				presenter = new JavaBeanEditorPresenter(rpcService, eventBus, new JavaBeanEditorView());
+				
+				if (presenter != null) {
+					presenter.go(container);
+				}
+			}
+			
+			if (token.equals(ApplicationConstants.TOKEN_UPLOAD_COMPONENTS)) {
+				presenter = new BeanFieldsEditorPresenter(rpcService, eventBus, new BeanFieldsEditorView());
+				
+				if (presenter != null) {
+					presenter.go(container);
+				}
+			}
+			
+			if (token.equals(ApplicationConstants.TOKEN_ASSIGN_EDITORS)) {
+				presenter = new AssignEditorsPresenter(rpcService, eventBus, new AssignEditorsView(beanJson));
 				
 				if (presenter != null) {
 					presenter.go(container);

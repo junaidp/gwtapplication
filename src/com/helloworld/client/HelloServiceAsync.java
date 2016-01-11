@@ -3,7 +3,8 @@ package com.helloworld.client;
 import java.util.ArrayList;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.helloworld.shared.AddedBeanDTO;
+import com.helloworld.shared.dto.AddedBeanDTO;
+import com.helloworld.shared.dto.AnnotationsDTO;
 import com.helloworld.shared.entity.GlobalPreferencesEntity;
 import com.helloworld.shared.entity.MyAccountEntity;
 import com.helloworld.shared.entity.UserEntity;
@@ -35,7 +36,11 @@ public interface HelloServiceAsync {
 	void fetchAllUsers(AsyncCallback<ArrayList<UserEntity>> asyncCallback);
 	void updateUserAccount(UserEntity user, AsyncCallback<String> asyncCallback);
 	void closeAccount(UserEntity user, AsyncCallback<String> asyncCallback);
-	void fetchBeanJSON(String className, AsyncCallback<String> asyncCallback);
+	void fetchBeanJSON(String className, String reflectionName, String action, AsyncCallback<String> asyncCallback);
 	void generateBean(AddedBeanDTO addedBeanDTO, AsyncCallback<String> asyncCallback);
 	void fetchPackages(AsyncCallback<ArrayList<String>> asyncCallback);
+	void fetchClassesOfAllPackages(AsyncCallback<ArrayList<String>> asyncCallback);
+	void fetchStringClassesOfAllPackages(AsyncCallback<ArrayList<String>> asyncCallback);
+	void fetchAnnotations(AsyncCallback<ArrayList<AnnotationsDTO>> asyncCallback);
+	void loadUploadedClass(String className, AsyncCallback<String> asyncCallback);
 }

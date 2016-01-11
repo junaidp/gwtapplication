@@ -12,10 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+@Table(name="globalprefrences")
 
 	@Entity
-
-	@Table(name="globalprefrences")
 	public class GlobalPreferencesEntity   implements Serializable {
 
 		private static final long serialVersionUID = 1L;
@@ -25,6 +24,7 @@ import javax.persistence.Table;
 		@Column(name="globalPrefrencesId")
 		private int globalPrefrencesId;
 		
+				
 		@JoinColumn(name="myAccountPreferencesId")
 		@ManyToOne( fetch = FetchType.LAZY )
 		private MyAccountPreferencesEntity myAccountPreferencesId;

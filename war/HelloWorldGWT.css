@@ -27,6 +27,7 @@ html, body {
 
 .dialogVPanel {
 	margin: 5px;
+	
 }
 
 .serverResponseLabelError {
@@ -557,25 +558,23 @@ div.metro-tile:hover > #content {
 
 
 /******** + Sticky Footer including Header ********/
+
 #bodyContainer {
-    min-height: 100%;
-    margin-bottom: -50px; /* Equivalent to footer's height */
-    margin-top: 0px;
+    margin-bottom:50px;
 }
-
-#headerContainer {
-    position: fixed;
-    top: 0;
-    left: 0; right: 0; /* Make it fill the whole horizontal space */
-}
-
-.headerContainer-spacer, #headerContainer { height: 50px; }
-.footerContainer-spacer, #footerContainer { height: 0px; }
 
 #footerContainer {
-    position: relative;
-    z-index: 1;
+    position:fixed;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    height:50px;
+    margin-bottom:0px;
 }
+#footer-spacer{
+margin: 20px 20px;	
+}
+
 /*************** - Sticky Footer End ******************/
 .shadowDiv{
  	background-color: #FEFEFE;
@@ -596,3 +595,22 @@ div.metro-tile:hover > #content {
 	background-repeat:no-repeat;
 	padding-left:30px;
 }
+.coloredDiv{
+	background-color: #E8E8E8 ;
+    box-shadow: 2px 2px 3px #C8C8C8 ;
+    float: left;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    border:
+	
+}
+.imageButton{
+	background:url(images/close.jpg);
+background-repeat: no-repeat;
+}
+.gwt-DisclosurePanel{
+	height: 10px !important;
+	width: 10px !important;
+}
+
