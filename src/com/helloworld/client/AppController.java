@@ -99,7 +99,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 	private HeaderPresenter headerPresenter;
 	private GlobalPreferencesEntity globalPreferencesEntity;
 	private String createPasswordtoken ="";
-	private String beanJson ;
+	private String beanName ;
 	
 	Presenter presenter = null;
 
@@ -135,7 +135,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 		eventBus.addHandler(AssignEditorsEvent.TYPE,
 				new AssignEditorsEventHandler() {
 			public void onAssignEditors(AssignEditorsEvent event) {
-				beanJson = event.getJson();
+				beanName = event.getJson();
 				History.newItem(ApplicationConstants.TOKEN_ASSIGN_EDITORS);
 			}
 		}); 
@@ -417,7 +417,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 			}
 			
 			if (token.equals(ApplicationConstants.TOKEN_ASSIGN_EDITORS)) {
-				presenter = new AssignEditorsPresenter(rpcService, eventBus, new AssignEditorsView(beanJson));
+				presenter = new AssignEditorsPresenter(rpcService, eventBus, new AssignEditorsView(), beanName);
 				
 				if (presenter != null) {
 					presenter.go(container);

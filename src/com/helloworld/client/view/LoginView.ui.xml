@@ -23,7 +23,8 @@
 
 				<div class="shadowDiv">
 				
-					<div style="padding-left:35px">
+					<div style="paddi
+					ng-left:35px">
 						<h4 class="text-light blue">Sign In</h4>
 						<form>
 

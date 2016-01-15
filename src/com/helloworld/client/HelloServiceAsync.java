@@ -1,5 +1,6 @@
 package com.helloworld.client;
 
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -43,4 +44,5 @@ public interface HelloServiceAsync {
 	void fetchStringClassesOfAllPackages(AsyncCallback<ArrayList<String>> asyncCallback);
 	void fetchAnnotations(AsyncCallback<ArrayList<AnnotationsDTO>> asyncCallback);
 	void loadUploadedClass(String className, AsyncCallback<String> asyncCallback);
+//	void editBeanOnPropertyChange(String beanName, PropertyChangeSupport propertyChangeSupport, AsyncCallback<String> asyncCallback);
 }

@@ -614,3 +614,9 @@ background-repeat: no-repeat;
 	width: 10px !important;
 }
 
+.gwt-DisclosurePanel .header{
+	font-size: 10px !important;
+	width: 10px !important;
+	height: 10px !important;
+}
+

@@ -1,5 +1,6 @@
 package com.helloworld.client;
 
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -45,5 +46,6 @@ public interface HelloService extends RemoteService {
 	ArrayList<String> fetchStringClassesOfAllPackages()throws Exception;
 	ArrayList<AnnotationsDTO>fetchAnnotations()throws Exception;
 	String loadUploadedClass (String className)throws Exception;
+//	String editBeanOnPropertyChange(String beanName, PropertyChangeSupport propertyChangeSupport) throws Exception;
 	
 }

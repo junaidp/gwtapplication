@@ -1,5 +1,6 @@
 package com.helloworld.server;
 
+import java.beans.PropertyChangeSupport;
 import java.io.File;
 import java.lang.annotation.Annotation;
 import java.net.URL;
@@ -441,4 +442,13 @@ HelloService {
 		 Class.forName("com.helloworld.server.LogoUploadServlet").newInstance();
 		return "";
 	}
+
+//	@Override
+//	public String editBeanOnPropertyChange(String beanName,
+//			PropertyChangeSupport propertyChangeSupport) throws Exception {
+//		
+//		FilesCreationHelper filesCreationHelper = new FilesCreationHelper();
+//		return filesCreationHelper.editBeanOnPropertyChange(beanName, propertyChangeSupport);
+//		 
+//	}
 }

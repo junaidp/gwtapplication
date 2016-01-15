@@ -2,20 +2,13 @@ package com.helloworld.server;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.util.List;
-import java.util.Set;
-
 import org.codehaus.jackson.map.ObjectMapper;
-import org.reflections.Reflections;
-
 import com.helloworld.shared.DynamicCompilation;
 import com.helloworld.shared.dto.AddedBeanDTO;
 
 public class FilesCreationHelper {
+	
+	private Class selectedBean = null;
 
 	public String generateBean(AddedBeanDTO addedBeanDTO) throws Exception{
 		try{
@@ -146,6 +139,46 @@ public class FilesCreationHelper {
 //		return "";
 	}
 
-
-
+//	public String editBeanOnPropertyChange(String beanName,
+//			PropertyChangeSupport pcs)throws Exception {
+//		
+//		final Method[] methods = selectedBean.getMethods();
+//
+//		 try {
+//			 selectedBean = Class.forName(beanName);
+////			 Object obj = myClass.newInstance();
+////			
+//			
+//		} catch (Exception e) {
+//			
+//		}
+//		
+//		
+//		pcs.addPropertyChangeListener(new PropertyChangeListener() {
+//			
+//			@Override
+//			public void propertyChange(PropertyChangeEvent evt) {
+//				try {
+////					Field field = selectedBean.getField(evt.getPropertyName());
+//					
+//					 for(Method method : methods){
+//						 
+//						 if(method.getName().equalsIgnoreCase("set"+evt.getPropertyName())){
+//							 
+//							 	method.invoke(selectedBean, evt.getNewValue());
+//						 }
+//					 }
+//				
+//					
+//				} catch (Exception e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				} 
+//			}
+//		});
+//		
+//		return "";
+//		
+//	}
+	
 }

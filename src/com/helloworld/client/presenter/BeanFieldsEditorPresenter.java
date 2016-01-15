@@ -154,23 +154,25 @@ public class BeanFieldsEditorPresenter implements Presenter
 	}
 
 	private void createFieldEditors() {
+		
 		String className = display.getListBeans().getValue(display.getListBeans().getSelectedIndex());
 		int ind = className.lastIndexOf(".");
 		String beanName = className.substring(ind+1);
-		String action = ApplicationConstants.FIELD_EDITORS_CREATION;
-		rpcService.fetchBeanJSON(className, beanName, action, new AsyncCallback<String>() {
-
-			@Override
-			public void onFailure(Throwable caught) {
-
-			}
-
-			@Override
-			public void onSuccess(String json) {
-				eventBus.fireEvent(new AssignEditorsEvent(json));
-
-			}
-		});
+		eventBus.fireEvent(new AssignEditorsEvent(beanName));
+//		String action = ApplicationConstants.FIELD_EDITORS_CREATION;
+//		rpcService.fetchBeanJSON(className, beanName, action, new AsyncCallback<String>() {
+//
+//			@Override
+//			public void onFailure(Throwable caught) {
+//
+//			}
+//
+//			@Override
+//			public void onSuccess(String json) {
+//				eventBus.fireEvent(new AssignEditorsEvent(json));
+//
+//			}
+//		});
 	}
 
 	private void loadUploadedClass() {

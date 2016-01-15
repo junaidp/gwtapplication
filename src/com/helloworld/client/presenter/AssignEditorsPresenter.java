@@ -1,32 +1,16 @@
 package com.helloworld.client.presenter;
 
 
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
+import java.beans.PropertyChangeSupport;
+
 import com.google.gwt.event.shared.HandlerManager;
-import com.google.gwt.safehtml.shared.SafeHtmlUtils;
-import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Anchor;
-import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HasWidgets;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.PasswordTextBox;
-import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.helloworld.client.HelloServiceAsync;
-import com.helloworld.client.event.AdminEvent;
-import com.helloworld.client.event.MainEvent;
-import com.helloworld.client.event.RegistrationEvent;
-import com.helloworld.client.view.ApplicationConstants;
-import com.helloworld.client.view.FooterView;
-import com.helloworld.client.view.HeaderView;
-import com.helloworld.client.view.CenterPanels.DashboardAccordion;
-import com.helloworld.client.view.widgets.LoadingPopup;
-import com.helloworld.shared.entity.GlobalPreferencesEntity;
-import com.helloworld.shared.entity.UserEntity;
+import com.helloworld.client.view.widgets.UploadedComponents.UploadedClass;
 
 public class AssignEditorsPresenter implements Presenter 
 
@@ -34,19 +18,22 @@ public class AssignEditorsPresenter implements Presenter
 	private final HelloServiceAsync rpcService;
 	private final HandlerManager eventBus;
 	private final Display display;
+	private String selectedBeanName;
 
 	
 	public interface Display 
 	{
 		Widget asWidget();
+		HTMLPanel getLeftContainer();
 		
 	}  
 
-	public AssignEditorsPresenter(HelloServiceAsync rpcService, HandlerManager eventBus, Display view) 
+	public AssignEditorsPresenter(HelloServiceAsync rpcService, HandlerManager eventBus, Display view, String beanName) 
 	{
 		this.rpcService = rpcService;
 		this.eventBus = eventBus;
 		this.display = view;
+		this.selectedBeanName = beanName;
 		
 	}
 
@@ -60,7 +47,33 @@ public class AssignEditorsPresenter implements Presenter
 	private void bind() {
 		
 		setHandlers();
+		uploadLayout();
 	}
+
+	private void uploadLayout() {
+		
+		UploadedClass uploadedClass = new UploadedClass();
+		display.getLeftContainer().add(uploadedClass);
+//		editBeanOnPropertyChange(uploadedClass.getPcs());
+		
+		
+	}
+
+//	private void editBeanOnPropertyChange(PropertyChangeSupport propertyChangeSupport) {
+//			rpcService.editBeanOnPropertyChange(selectedBeanName, propertyChangeSupport, new AsyncCallback<String>() {
+//
+//				@Override
+//				public void onFailure(Throwable caught) {
+//					Window.alert("fail editBeanOnPropertyChange"+ caught.getLocalizedMessage());
+//				}
+//
+//				@Override
+//				public void onSuccess(String result) {
+//					Window.alert(result);
+//				}
+//		});
+//		
+//	}
 
 	@Override
 	public void setHandlers() {

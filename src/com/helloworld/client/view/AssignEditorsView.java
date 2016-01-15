@@ -30,28 +30,27 @@ public class AssignEditorsView extends Composite implements Display {
 	@UiField HTMLPanel leftContainer;
 	@UiField HTMLPanel rightContainer;
 	
-	public AssignEditorsView(String beanJson) {
+	public AssignEditorsView() {
 		initWidget(uiBinder.createAndBindUi(this));
 		
-		JSONValue jsonValue = JSONParser.parse(beanJson);
-		JSONObject object = jsonValue.isObject();
-		Set<String> keys =  object.keySet();
+//		JSONValue jsonValue = JSONParser.parse(beanJson);
+//		JSONObject object = jsonValue.isObject();
+//		Set<String> keys =  object.keySet();
 		
 
-		VerticalPanel vpnl = new VerticalPanel();
-		for (String s : keys) {
-		   Label lbl = new Label(s);
-		   vpnl.add(lbl);
-		}
+//		VerticalPanel vpnl = new VerticalPanel();
+//		for (String s : keys) {
+//		   Label lbl = new Label(s);
+//		   vpnl.add(lbl);
+//		}
 		
-		leftContainer.add(vpnl);
+//		leftContainer.add(vpnl);
 		
-		UploadedClass uploadedClass = new UploadedClass();
-		rightContainer.add(uploadedClass);
-	
+		
+	}
 
-		
-		
+	public HTMLPanel getLeftContainer() {
+		return leftContainer;
 	}
 
 }

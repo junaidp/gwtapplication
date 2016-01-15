@@ -9,11 +9,11 @@
 	<g:HTMLPanel>
 		<g:HorizontalPanel>
 			<g:Label text="Id" width="80px"/>
-			<g:ListBox visibleItemCount="1" ui:field="listIds" />
+			<g:ListBox visibleItemCount="1" ui:field="listIds" name="id" />
 		</g:HorizontalPanel>
 		<g:HorizontalPanel>
 			<g:Label text="Name" width="80px"/>
-			<g:TextBox/>
+			<g:TextBox ui:field="textBoxName" name="name"/>
 		</g:HorizontalPanel>
 		<g:HorizontalPanel>
 			<g:Label text="Password" width="81px"/>

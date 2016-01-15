@@ -49,6 +49,8 @@ public class DynamicCompilation {
 		Method[] method = myClass.getDeclaredMethods();
 		Field[] field = myClass.getDeclaredFields();
 		myClass.getModifiers();
+		
+
 
 		//////////////Crate Package and class/////////////////
 		StringBuffer sb = new StringBuffer("");
