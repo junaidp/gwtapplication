@@ -2,19 +2,29 @@ package com.helloworld.server;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
 import org.codehaus.jackson.map.ObjectMapper;
+
+import com.google.gwt.core.client.GWT;
 import com.helloworld.shared.DynamicCompilation;
 import com.helloworld.shared.dto.AddedBeanDTO;
+import com.helloworld.shared.dto.InvokedObjectDTO;
 
 public class FilesCreationHelper {
-	
+
 	private Class selectedBean = null;
 
 	public String generateBean(AddedBeanDTO addedBeanDTO) throws Exception{
 		try{
-			
-//			if(addedBeanDTO.)
-			
+
+			//			if(addedBeanDTO.)
+
 			String dir = System.getProperty("user.dir");
 			int slashIndex = dir.lastIndexOf("\\");
 			dir = dir.substring(0, slashIndex+1);
@@ -24,9 +34,9 @@ public class FilesCreationHelper {
 			myPackage.mkdir();
 			File sourceFile   = new File(dir+"\\"+addedBeanDTO.getBeanName()+".java");
 			FileWriter writer = new FileWriter(sourceFile);
-			
-			
-			
+
+
+
 			//////////////Crate Package and class/////////////////
 			StringBuffer sb = new StringBuffer("");
 			sb.append("package "+ addedBeanDTO.getPackageName()+"; \n \n");
@@ -35,25 +45,25 @@ public class FilesCreationHelper {
 			for(int i=0; i< addedBeanDTO.getListImports().size(); i++){
 				sb.append("import "+ addedBeanDTO.getListImports().get(i)+"; \n");
 			}
-			
+
 			sb.append("\n");
 			//Annotaion....
 			for(int i=0; i< addedBeanDTO.getListAnnotationsDTO().size(); i++){
-			sb.append(addedBeanDTO.getListAnnotationsDTO().get(i).getName()+addedBeanDTO.getListAnnotationsDTO().get(i).getAnnotationText()+  "\n" );
+				sb.append(addedBeanDTO.getListAnnotationsDTO().get(i).getName()+addedBeanDTO.getListAnnotationsDTO().get(i).getAnnotationText()+  "\n" );
 			}
 			sb.append("\n");
 			//End Annotation...
-			
+
 			sb.append("public class "+addedBeanDTO.getBeanName()+" implements Serializable { \n \n");
 			sb.append("public "+ addedBeanDTO.getBeanName()+"() { \n");
 			sb.append("} \n \n");
 			//////////ADD Fields///////////
 			for(int i=0; i< addedBeanDTO.getListProperties().size(); i++){
-				
+
 				//Field Annotaion....
 				for(int j=0; j< addedBeanDTO.getListProperties().get(i).getListAnnotationsDTO().size(); j++){
-				sb.append(addedBeanDTO.getListProperties().get(i).getListAnnotationsDTO().get(j).getName()+ 
-						addedBeanDTO.getListProperties().get(i).getListAnnotationsDTO().get(j).getAnnotationText()+ "\n" );
+					sb.append(addedBeanDTO.getListProperties().get(i).getListAnnotationsDTO().get(j).getName()+ 
+							addedBeanDTO.getListProperties().get(i).getListAnnotationsDTO().get(j).getAnnotationText()+ "\n" );
 				}
 				sb.append(addedBeanDTO.getListProperties().get(i).getModifier()+" "+addedBeanDTO.getListProperties().get(i).getDataType()+" "+ addedBeanDTO.getListProperties().get(i).getName()+";");
 				sb.append("\n");
@@ -91,7 +101,7 @@ public class FilesCreationHelper {
 					sb.append("} \n");
 					sb.append("\n");
 				}
-				
+
 			}
 			sb.append("\n }");
 			writer.write(sb+"");
@@ -110,75 +120,120 @@ public class FilesCreationHelper {
 		}
 		return -1;
 	}
-	
+
 	public String fetchBeanJSON(String className, String reflectionName, String action) throws Exception {
 		String jsonInString = "";
 		try{
-//			Reflections reflections = new Reflections("org.hibernate");
-//
-//			Set<Class<? extends Annotation>> allClasses = 
-//			    reflections.getSubTypesOf(Annotation.class);
-//			
-			
-		new DynamicCompilation(className, reflectionName, action);
-    
-		
-		int ind = className.lastIndexOf(".");
-		String reflectedClass = className.substring(0, ind+1);
-		reflectedClass = reflectedClass+reflectionName;
-		
-		Class myClass = Class.forName(className);
-//		Class myClass = Class.forName(reflectedClass);
-		Object obj = myClass.newInstance();
-		ObjectMapper mapper = new ObjectMapper();
-		jsonInString = mapper.writeValueAsString(obj);
+			//			Reflections reflections = new Reflections("org.hibernate");
+			//
+			//			Set<Class<? extends Annotation>> allClasses = 
+			//			    reflections.getSubTypesOf(Annotation.class);
+			//			
+
+			new DynamicCompilation(className, reflectionName, action);
+
+
+			int ind = className.lastIndexOf(".");
+			String reflectedClass = className.substring(0, ind+1);
+			reflectedClass = reflectedClass+reflectionName;
+
+			Class myClass = Class.forName(className);
+			//		Class myClass = Class.forName(reflectedClass);
+			Object obj = myClass.newInstance();
+			ObjectMapper mapper = new ObjectMapper();
+			jsonInString = mapper.writeValueAsString(obj);
 		}catch(Exception ex){
 			throw new Exception( "Exception occured in Reflection"+ ex);
 		}
 		return jsonInString;
-//		return "";
+		//		return "";
 	}
 
-//	public String editBeanOnPropertyChange(String beanName,
-//			PropertyChangeSupport pcs)throws Exception {
-//		
-//		final Method[] methods = selectedBean.getMethods();
-//
-//		 try {
-//			 selectedBean = Class.forName(beanName);
-////			 Object obj = myClass.newInstance();
-////			
-//			
-//		} catch (Exception e) {
-//			
-//		}
-//		
-//		
-//		pcs.addPropertyChangeListener(new PropertyChangeListener() {
-//			
-//			@Override
-//			public void propertyChange(PropertyChangeEvent evt) {
-//				try {
-////					Field field = selectedBean.getField(evt.getPropertyName());
-//					
-//					 for(Method method : methods){
-//						 
-//						 if(method.getName().equalsIgnoreCase("set"+evt.getPropertyName())){
-//							 
-//							 	method.invoke(selectedBean, evt.getNewValue());
-//						 }
-//					 }
-//				
-//					
-//				} catch (Exception e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				} 
-//			}
-//		});
-//		
-//		return "";
-//		
-//	}
+
+	public String editBeanOnPropertyChange(String selectedBeanName,
+			HashMap beanPropertiesMap) {
+		Object beanObject = null;
+		Set set = beanPropertiesMap.entrySet();
+		Iterator i = set.iterator();
+		try{
+			selectedBean = Class.forName(selectedBeanName);
+			beanObject = selectedBean.newInstance();
+		}catch(Exception ex){
+
+		}
+		while(i.hasNext()) {
+			Map.Entry me = (Map.Entry)i.next();
+			editBean(beanObject, me); 
+		}
 	
+		return "pass";
+	}
+
+	private void editBean(Object beanObject, Entry me) {
+		try {
+
+			final Method[] methods = selectedBean.getMethods();
+
+			for(Method method : methods){
+
+				if(method.getName().equalsIgnoreCase("set"+me.getKey())){
+					
+					method.invoke(beanObject, me.getValue());
+					break;
+				}
+			}
+
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+
+
+
+
+	//	public String editBeanOnPropertyChange(String beanName,
+	//			PropertyChangeSupport pcs)throws Exception {
+	//		
+	//		final Method[] methods = selectedBean.getMethods();
+	//
+	//		 try {
+	//			 selectedBean = Class.forName(beanName);
+	////			 Object obj = myClass.newInstance();
+	////			
+	//			
+	//		} catch (Exception e) {
+	//			
+	//		}
+	//		
+	//		
+	//		pcs.addPropertyChangeListener(new PropertyChangeListener() {
+	//			
+	//			@Override
+	//			public void propertyChange(PropertyChangeEvent evt) {
+	//				try {
+	////					Field field = selectedBean.getField(evt.getPropertyName());
+	//					
+	//					 for(Method method : methods){
+	//						 
+	//						 if(method.getName().equalsIgnoreCase("set"+evt.getPropertyName())){
+	//							 
+	//							 	method.invoke(selectedBean, evt.getNewValue());
+	//						 }
+	//					 }
+	//				
+	//					
+	//				} catch (Exception e) {
+	//					// TODO Auto-generated catch block
+	//					e.printStackTrace();
+	//				} 
+	//			}
+	//		});
+	//		
+	//		return "";
+	//		
+	//	}
+
 }

@@ -2,10 +2,12 @@ package com.helloworld.client;
 
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.helloworld.shared.dto.AddedBeanDTO;
 import com.helloworld.shared.dto.AnnotationsDTO;
+import com.helloworld.shared.dto.InvokedObjectDTO;
 import com.helloworld.shared.entity.GlobalPreferencesEntity;
 import com.helloworld.shared.entity.MyAccountEntity;
 import com.helloworld.shared.entity.UserEntity;
@@ -44,5 +46,6 @@ public interface HelloServiceAsync {
 	void fetchStringClassesOfAllPackages(AsyncCallback<ArrayList<String>> asyncCallback);
 	void fetchAnnotations(AsyncCallback<ArrayList<AnnotationsDTO>> asyncCallback);
 	void loadUploadedClass(String className, AsyncCallback<String> asyncCallback);
-//	void editBeanOnPropertyChange(String beanName, PropertyChangeSupport propertyChangeSupport, AsyncCallback<String> asyncCallback);
+	void editBeanOnPropertyChange(String selectedBeanName, HashMap beanPropertiesMap, AsyncCallback<String> asyncCallback);
+	
 }

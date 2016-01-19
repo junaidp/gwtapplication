@@ -8,6 +8,8 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.event.dom.client.BlurEvent;
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
 
 public class UploadedClass extends ApplicationBean{
 
@@ -29,13 +31,13 @@ public class UploadedClass extends ApplicationBean{
 		listIds.addItem("1");
 		listIds.addItem("2");
 		
-//		pcs.addPropertyChangeListener(new PropertyChangeListener() {
-//			
-//			@Override
-//			public void propertyChange(PropertyChangeEvent evt) {
-//				System.out.println("Name      = " + evt.getPropertyName()+";"+ evt.getNewValue());
-//			}
-//		});
+		listIds.addChangeHandler(new ChangeHandler(){
+
+			@Override
+			public void onChange(ChangeEvent event) {
+				pcs.firePropertyChange(listIds.getName(), "", listIds.getItemText(listIds.getSelectedIndex()));
+			}});
+		
 	}
 
 
@@ -43,6 +45,10 @@ public class UploadedClass extends ApplicationBean{
 	void onTextBoxBlur(BlurEvent event) {
 		pcs.firePropertyChange(textBoxName.getName(), "", textBoxName.getText());
 	}
+	
+	
+	
+	
 	
 	
 }

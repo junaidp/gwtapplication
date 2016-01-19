@@ -156,9 +156,9 @@ public class BeanFieldsEditorPresenter implements Presenter
 	private void createFieldEditors() {
 		
 		String className = display.getListBeans().getValue(display.getListBeans().getSelectedIndex());
-		int ind = className.lastIndexOf(".");
-		String beanName = className.substring(ind+1);
-		eventBus.fireEvent(new AssignEditorsEvent(beanName));
+//		int ind = className.lastIndexOf(".");
+//		String beanName = className.substring(ind+1);
+		eventBus.fireEvent(new AssignEditorsEvent(className));
 //		String action = ApplicationConstants.FIELD_EDITORS_CREATION;
 //		rpcService.fetchBeanJSON(className, beanName, action, new AsyncCallback<String>() {
 //

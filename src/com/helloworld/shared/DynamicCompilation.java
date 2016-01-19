@@ -162,9 +162,12 @@ public class DynamicCompilation {
 					method[i].getReturnType().getSimpleName() +" "+ method[i].getName()+"(");
 			for(int j=0; j<parametersType.length; j++){
 				if(j>0){
-					sb.append(", "+parametersType[j].getSimpleName()+" "+method[i].getParameters()[j].getName());
+//					sb.append(", "+parametersType[j].getSimpleName()+" "+method[i].get.getName());JAVA 8
+//				}else{
+//					sb.append(parametersType[j].getSimpleName()+" "+method[i].getParameters()[j].getName());JAVA 8
+					sb.append(", "+parametersType[j].getSimpleName()+" "+parametersType[j].getName());
 				}else{
-					sb.append(parametersType[j].getSimpleName()+" "+method[i].getParameters()[j].getName());
+					sb.append(parametersType[j].getSimpleName()+" "+parametersType[j].getName());
 
 
 				}
@@ -177,7 +180,8 @@ public class DynamicCompilation {
 				fieldName = Character.toLowerCase(fieldName.charAt(0)) + fieldName.substring(1); 
 
 				if(method[i].getReturnType().getSimpleName().equals("void")){
-					sb.append("this."+fieldName +" = "+ method[i].getParameters()[0].getName()+";");
+//					sb.append("this."+fieldName +" = "+ method[i].getParameters()[0].getName()+";");JAVA 8
+					sb.append("this."+fieldName +" = "+ parametersType[0].getName()+";");
 				}else{
 					sb.append("return "+ fieldName+";");
 				}

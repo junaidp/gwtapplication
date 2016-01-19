@@ -6,6 +6,7 @@ import java.lang.annotation.Annotation;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -20,6 +21,7 @@ import com.helloworld.client.view.ReadGlobalPreferencesXml;
 import com.helloworld.database.MyRdbHelper;
 import com.helloworld.shared.dto.AddedBeanDTO;
 import com.helloworld.shared.dto.AnnotationsDTO;
+import com.helloworld.shared.dto.InvokedObjectDTO;
 import com.helloworld.shared.entity.GlobalPreferencesEntity;
 import com.helloworld.shared.entity.MyAccountEntity;
 import com.helloworld.shared.entity.UserEntity;
@@ -443,12 +445,11 @@ HelloService {
 		return "";
 	}
 
-//	@Override
-//	public String editBeanOnPropertyChange(String beanName,
-//			PropertyChangeSupport propertyChangeSupport) throws Exception {
-//		
-//		FilesCreationHelper filesCreationHelper = new FilesCreationHelper();
-//		return filesCreationHelper.editBeanOnPropertyChange(beanName, propertyChangeSupport);
-//		 
-//	}
+	@Override
+	public String editBeanOnPropertyChange(String selectedBeanName, HashMap beanPropertiesMap) throws Exception {
+		
+		FilesCreationHelper filesCreationHelper = new FilesCreationHelper();
+		return filesCreationHelper.editBeanOnPropertyChange(selectedBeanName, beanPropertiesMap);
+		 
+	}
 }
