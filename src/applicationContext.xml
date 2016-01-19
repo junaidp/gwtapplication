@@ -26,6 +26,7 @@ http://www.springframework.org/schema/beans/spring-beans-2.0.xsd"
 				<value>com.helloworld.shared.entity.MyAccountPreferencesEntity</value>
 				<value>com.helloworld.shared.entity.GlobalPreferencesEntity</value>
 				<value>com.helloworld.shared.entity.MyAccountEntity</value>
+				<value>com.helloworld.shared.entity.BeanObjects</value>
 				
 			
 			</list>

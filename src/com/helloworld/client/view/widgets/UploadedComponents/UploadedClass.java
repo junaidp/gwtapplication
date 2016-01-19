@@ -35,7 +35,7 @@ public class UploadedClass extends ApplicationBean{
 
 			@Override
 			public void onChange(ChangeEvent event) {
-				pcs.firePropertyChange(listIds.getName(), "", listIds.getItemText(listIds.getSelectedIndex()));
+				pcs.firePropertyChange(listIds.getName(), "", Integer.parseInt(listIds.getItemText(listIds.getSelectedIndex())));
 			}});
 		
 	}

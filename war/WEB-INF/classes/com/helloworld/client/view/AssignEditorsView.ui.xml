@@ -8,14 +8,14 @@
 		<div style="padding-left:40%; padding-top:1%">
 			<g:Label styleName="blue heading">Assign Editors</g:Label>
 		</div>
-		<div style="padding:5px; float:left">
-			<g:Label styleName="blue"> Bean Fields </g:Label>
+		<div style="padding:5px">
+			<g:Label styleName="blue"> Uploaded Widget </g:Label>
 			<g:HTMLPanel ui:field="leftContainer"></g:HTMLPanel>
 		</div>
 
-		<div style="padding:5px; float:left; padding-left:50px">
-			<g:Label styleName="blue"> Uploaded Widget </g:Label>
-			<g:HTMLPanel ui:field="rightContainer"></g:HTMLPanel>
+		<div style="padding:5px">
+			<g:Button styleName="button primary" ui:field="btnSubmit"
+									>Save As Blob</g:Button>
 		</div>
 	</g:HTMLPanel>
 </ui:UiBinder> 

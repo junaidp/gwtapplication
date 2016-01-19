@@ -1,6 +1,5 @@
 package com.helloworld.server;
 
-import java.beans.PropertyChangeSupport;
 import java.io.File;
 import java.lang.annotation.Annotation;
 import java.net.URL;
@@ -17,23 +16,17 @@ import javax.servlet.http.HttpSession;
 
 import com.helloworld.client.HelloService;
 import com.helloworld.client.view.ApplicationConstants;
-import com.helloworld.client.view.ReadGlobalPreferencesXml;
 import com.helloworld.database.MyRdbHelper;
 import com.helloworld.shared.dto.AddedBeanDTO;
 import com.helloworld.shared.dto.AnnotationsDTO;
-import com.helloworld.shared.dto.InvokedObjectDTO;
 import com.helloworld.shared.entity.GlobalPreferencesEntity;
 import com.helloworld.shared.entity.MyAccountEntity;
 import com.helloworld.shared.entity.UserEntity;
-import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.UIObject;
-import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import net.tanesha.recaptcha.ReCaptcha;
 import net.tanesha.recaptcha.ReCaptchaFactory;
 
-import org.hibernate.Hibernate;
 import org.reflections.Reflections;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -451,5 +444,11 @@ HelloService {
 		FilesCreationHelper filesCreationHelper = new FilesCreationHelper();
 		return filesCreationHelper.editBeanOnPropertyChange(selectedBeanName, beanPropertiesMap);
 		 
+	}
+
+	@Override
+	public String fetchBeanObject(String beanName) throws Exception {
+		return rdbHelper.fetchBeanObject(beanName);
+		
 	}
 }

@@ -7,7 +7,6 @@ import java.util.HashMap;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.helloworld.shared.dto.AddedBeanDTO;
 import com.helloworld.shared.dto.AnnotationsDTO;
-import com.helloworld.shared.dto.InvokedObjectDTO;
 import com.helloworld.shared.entity.GlobalPreferencesEntity;
 import com.helloworld.shared.entity.MyAccountEntity;
 import com.helloworld.shared.entity.UserEntity;
@@ -47,5 +46,6 @@ public interface HelloServiceAsync {
 	void fetchAnnotations(AsyncCallback<ArrayList<AnnotationsDTO>> asyncCallback);
 	void loadUploadedClass(String className, AsyncCallback<String> asyncCallback);
 	void editBeanOnPropertyChange(String selectedBeanName, HashMap beanPropertiesMap, AsyncCallback<String> asyncCallback);
+	void fetchBeanObject(String beanName, AsyncCallback<String> asyncCallback);
 	
 }

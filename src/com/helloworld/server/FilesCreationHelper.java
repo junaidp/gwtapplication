@@ -2,6 +2,7 @@ package com.helloworld.server;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -10,11 +11,13 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import org.codehaus.jackson.map.ObjectMapper;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.google.gwt.core.client.GWT;
+import com.helloworld.database.MyRdbHelper;
 import com.helloworld.shared.DynamicCompilation;
 import com.helloworld.shared.dto.AddedBeanDTO;
-import com.helloworld.shared.dto.InvokedObjectDTO;
 
 public class FilesCreationHelper {
 
@@ -138,7 +141,6 @@ public class FilesCreationHelper {
 			reflectedClass = reflectedClass+reflectionName;
 
 			Class myClass = Class.forName(className);
-			//		Class myClass = Class.forName(reflectedClass);
 			Object obj = myClass.newInstance();
 			ObjectMapper mapper = new ObjectMapper();
 			jsonInString = mapper.writeValueAsString(obj);
@@ -151,33 +153,41 @@ public class FilesCreationHelper {
 
 
 	public String editBeanOnPropertyChange(String selectedBeanName,
-			HashMap beanPropertiesMap) {
+			HashMap beanPropertiesMap) throws Exception {
 		Object beanObject = null;
 		Set set = beanPropertiesMap.entrySet();
 		Iterator i = set.iterator();
 		try{
 			selectedBean = Class.forName(selectedBeanName);
+			
 			beanObject = selectedBean.newInstance();
 		}catch(Exception ex){
-
+			
 		}
 		while(i.hasNext()) {
 			Map.Entry me = (Map.Entry)i.next();
 			editBean(beanObject, me); 
 		}
-	
+		
+		saveBeanObjectIntoDataBase(beanObject, selectedBeanName);
 		return "pass";
+	}
+
+	private void saveBeanObjectIntoDataBase(Object beanObject, String selectedBeanName) throws Exception {
+		ApplicationContext ctx = new ClassPathXmlApplicationContext(
+				"applicationContext.xml");
+		MyRdbHelper rdbHelper = (MyRdbHelper) ctx.getBean("ManagerApp");
+		rdbHelper.saveBeanObjectIntoDataBase(beanObject, selectedBeanName);
+		
 	}
 
 	private void editBean(Object beanObject, Entry me) {
 		try {
-
+			
 			final Method[] methods = selectedBean.getMethods();
-
 			for(Method method : methods){
 
 				if(method.getName().equalsIgnoreCase("set"+me.getKey())){
-					
 					method.invoke(beanObject, me.getValue());
 					break;
 				}
@@ -185,10 +195,18 @@ public class FilesCreationHelper {
 
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+
+//	private <T> T getCastedValue(Entry me) throws NoSuchFieldException {
+//		Field field = selectedBean.getDeclaredField(me.getKey().toString());
+//		field.getType().getSimpleName();
+//		int x =0;
+//		boolean f = true;
+//		return f;
+//		
+//	}
 
 
 

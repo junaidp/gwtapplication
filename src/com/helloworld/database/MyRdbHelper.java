@@ -1,5 +1,11 @@
 package com.helloworld.database;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
@@ -10,9 +16,11 @@ import javax.mail.PasswordAuthentication;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -20,8 +28,10 @@ import org.hibernate.criterion.Restrictions;
 import org.joda.time.DateTime;
 import org.joda.time.Minutes;
 import org.mindrot.BCrypt;
+
 import com.helloworld.client.view.ApplicationConstants;
 import com.helloworld.shared.DynamicCompilation;
+import com.helloworld.shared.entity.BeanObjects;
 //import com.helloworld.shared.beans.BeanSet;
 import com.helloworld.shared.entity.GlobalPreferencesEntity;
 import com.helloworld.shared.entity.MyAccountEntity;
@@ -48,7 +58,7 @@ public class MyRdbHelper {
 			if(user.getUserId()== 0){
 				existingUser = false;
 			}
-			
+
 			if(userNameAlreadyExist(session, user.getUserName(), user.getUserId())){
 				return ApplicationConstants.USERNAME_NOT_AVAILABLE;
 			}
@@ -333,7 +343,7 @@ public class MyRdbHelper {
 		}
 		else{
 			return sendActivationEmailForgotPassword(username, email);
-			
+
 		}
 	}
 
@@ -395,10 +405,10 @@ public class MyRdbHelper {
 					//					+" Your password must be at least 8 charcters long, should have atleast 1 digit(0-9) and should have an uppercase letter.<br></br>"
 					//					+" You secret question must be at least  8 characters long and should have an uppercase letter, You will need to answer the secret question if you ever forget your password.<br></br>"
 					+" To activate your account, please click on the link below.<br></br> <br></br>"
-//					+" <a href= http://localhost:8080/tie/#"+ user.getToken()+">"+"Activate Account</a>","text/html" );
-//					+" <a href= http://127.0.0.1:8888/HelloWorldGWT.html?gwt.codesvr=127.0.0.1:9997#!"+ user.getToken()+">"+"Activate Account</a>","text/html" );
+					//					+" <a href= http://localhost:8080/tie/#"+ user.getToken()+">"+"Activate Account</a>","text/html" );
+					//					+" <a href= http://127.0.0.1:8888/HelloWorldGWT.html?gwt.codesvr=127.0.0.1:9997#!"+ user.getToken()+">"+"Activate Account</a>","text/html" );
 					+" <a href= abilite.ddns.net/gwtapp/#!"+ user.getToken()+">"+"Activate Account</a>","text/html" );
-				
+
 
 
 			Transport.send(message);
@@ -410,7 +420,7 @@ public class MyRdbHelper {
 		}
 
 	}
-	
+
 	public UserEntity fetchNewUser(String token)throws Exception {
 		Session session = null;
 		UserEntity user = null;
@@ -420,7 +430,7 @@ public class MyRdbHelper {
 			crit.add(Restrictions.eq("token", token));
 			crit.createAlias("myAccountId", "myAccount");
 
-		
+
 			if(crit.list().size()>0){
 				user =(UserEntity) crit.list().get(0);
 			}
@@ -432,9 +442,9 @@ public class MyRdbHelper {
 		finally{
 			session.close();
 		}
-		
+
 	}
-	
+
 	public Boolean isLoggedInWithin20Mins(UserEntity user) throws Exception {
 
 		DateTime passwordGenerateDate = new DateTime(user.getTokenGeneratedDate()); 
@@ -452,9 +462,9 @@ public class MyRdbHelper {
 	public String updatePassword(UserEntity user)throws Exception {
 		Session session = null;
 		try{
-		String password = createBCrypt(user.getPassword());
-		user.setPassword(password);
-	
+			String password = createBCrypt(user.getPassword());
+			user.setPassword(password);
+
 			session = sessionFactory.openSession();
 			session.update(user);
 			session.flush();
@@ -463,7 +473,7 @@ public class MyRdbHelper {
 			logger.warn(String.format("Exception occured in updatePassword", ex.getMessage()), ex);
 			throw new Exception("Exception occured in updatePassword");
 		}
-		
+
 	}
 
 
@@ -471,7 +481,7 @@ public class MyRdbHelper {
 		Session session = null;
 		String userName;
 		try{
-			
+
 			session = sessionFactory.openSession();
 			Criteria crit = session.createCriteria(UserEntity.class);
 			crit.add(Restrictions.eq("email", email));
@@ -483,12 +493,12 @@ public class MyRdbHelper {
 			}else{
 				return ApplicationConstants.EMAIL_NOT_VALID;
 			}
-			
+
 		}catch(Exception ex){
 			logger.warn(String.format("Exception occured in updatePassword", ex.getMessage()), ex);
 			throw new Exception("Exception occured in updatePassword");
 		}
-		
+
 	}
 
 
@@ -522,7 +532,7 @@ public class MyRdbHelper {
 					+ "Username: <b> "+user.getUserName()+"</b>"+" <br></br> <br></br>"
 					+ "Thank You <br></br>"
 					+ "","text/html" );
-					
+
 			Transport.send(message);
 
 			System.out.println("email sent forgot username");
@@ -549,7 +559,7 @@ public class MyRdbHelper {
 			logger.warn(String.format("Exception occured in fetchAllUsers", ex.getMessage()), ex);
 			throw new Exception("Exception occured in fetchAllUsers");
 		}
-		
+
 	}
 
 
@@ -581,8 +591,99 @@ public class MyRdbHelper {
 	}
 
 
-	
-	
+	public String saveBeanObjectIntoDataBase(Object beanObjectToSavedInDb,
+			String selectedBeanName)throws Exception {
+
+		Session session = null;
+		BeanObjects beanObjectEntity = null;
+		try{
+			session = sessionFactory.openSession();
+			beanObjectEntity = fetchBeanAlreadySaved(selectedBeanName);
+			if(beanObjectEntity == null){
+			beanObjectEntity = new BeanObjects();
+			}
+
+			beanObjectEntity.setBeanName(selectedBeanName);
+			Blob blob = Hibernate.createBlob(serialize(beanObjectToSavedInDb));
+			beanObjectEntity.setBeanObject(blob);
+			session.saveOrUpdate(beanObjectEntity);
+			session.flush();
+			return "bean saved in database";
+		}catch(Exception ex){
+			logger.warn(String.format("Exception occured in saveBeanObjectIntoDataBase", ex.getMessage()), ex);
+			throw new Exception("Exception occured in saveBeanObjectIntoDataBase");
+		}
+	}
+
+	public BeanObjects fetchBeanAlreadySaved(String beanName)throws Exception{
+		Session session = null;
+		BeanObjects beanObjects = null;
+		try{
+			session = sessionFactory.openSession();
+			Criteria crit = session.createCriteria(BeanObjects.class);
+			crit.add(Restrictions.eq("beanName", beanName));
+			if(crit.list().size() > 0){
+				beanObjects = (BeanObjects) crit.list().get(0);
+
+			}
+			return beanObjects;
+		}catch(Exception ex){
+			logger.warn(String.format("Exception occured in isBeanNameAlreadySaved", ex.getMessage()), ex);
+			throw new Exception("Exception occured in isBeanNameAlreadySaved");
+		}
+	}
+
+	public String fetchBeanObject(String beanName)throws Exception{
+		Session session = null;
+		String beanJson = "";
+		try{
+			session = sessionFactory.openSession();
+			Criteria crit = session.createCriteria(BeanObjects.class);
+			crit.add(Restrictions.eq("beanName", beanName));
+			if(crit.list().size() > 0){
+				BeanObjects beanObjects = (BeanObjects) crit.list().get(0);
+				ObjectMapper mapper = new ObjectMapper();
+				byte[] bdata = beanObjects.getBeanObject().getBytes(1, (int) beanObjects.getBeanObject().length());
+				beanJson = mapper.writeValueAsString(toObject(bdata));
+			}
+			return beanJson;
+		}catch(Exception ex){
+			logger.warn(String.format("Exception occured in fetchBeanObject", ex.getMessage()), ex);
+			throw new Exception("Exception occured in fetchBeanObject");
+		}
+
+	}
+
+
+	public static byte[] serialize(Object obj) throws IOException {
+		ByteArrayOutputStream b = new ByteArrayOutputStream();
+		ObjectOutputStream o = new ObjectOutputStream(b);
+		o.writeObject(obj);
+		return b.toByteArray();
+	}
+
+	public static Object toObject(byte[] bytes) throws IOException, ClassNotFoundException {
+		Object obj = null;
+		ByteArrayInputStream bis = null;
+		ObjectInputStream ois = null;
+		try {
+			bis = new ByteArrayInputStream(bytes);
+			ois = new ObjectInputStream(bis);
+			obj = ois.readObject();
+		} finally {
+			if (bis != null) {
+				bis.close();
+			}
+			if (ois != null) {
+				ois.close();
+			}
+		}
+		return obj;
+	}
+
+
+
+
 
 }
 

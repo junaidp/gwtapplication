@@ -8,6 +8,7 @@ import com.google.gwt.json.client.JSONParser;
 import com.google.gwt.json.client.JSONValue;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -28,7 +29,7 @@ public class AssignEditorsView extends Composite implements Display {
 	}
 	
 	@UiField HTMLPanel leftContainer;
-	@UiField HTMLPanel rightContainer;
+	@UiField Button btnSubmit;
 	
 	public AssignEditorsView() {
 		initWidget(uiBinder.createAndBindUi(this));
@@ -51,6 +52,14 @@ public class AssignEditorsView extends Composite implements Display {
 
 	public HTMLPanel getLeftContainer() {
 		return leftContainer;
+	}
+
+	public Button getBtnSubmit() {
+		return btnSubmit;
+	}
+
+	public void setBtnSubmit(Button btnSubmit) {
+		this.btnSubmit = btnSubmit;
 	}
 
 }

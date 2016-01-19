@@ -1,15 +1,13 @@
 package com.helloworld.client;
 
-import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import com.helloworld.shared.dto.AddedBeanDTO;
 import com.helloworld.shared.dto.AnnotationsDTO;
-import com.helloworld.shared.dto.InvokedObjectDTO;
+
 import com.helloworld.shared.entity.GlobalPreferencesEntity;
 import com.helloworld.shared.entity.MyAccountEntity;
 import com.helloworld.shared.entity.UserEntity;
@@ -49,5 +47,6 @@ public interface HelloService extends RemoteService {
 	ArrayList<AnnotationsDTO>fetchAnnotations()throws Exception;
 	String loadUploadedClass (String className)throws Exception;
 	String editBeanOnPropertyChange(String selectedBeanName, HashMap beanPropertiesMap) throws Exception;
+	String fetchBeanObject(String beanName)throws Exception;
 	
 }
