@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeMap;
 
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
@@ -439,7 +440,7 @@ HelloService {
 	}
 
 	@Override
-	public String editBeanOnPropertyChange(String selectedBeanName, HashMap beanPropertiesMap) throws Exception {
+	public String editBeanOnPropertyChange(String selectedBeanName, TreeMap beanPropertiesMap) throws Exception {
 		
 		FilesCreationHelper filesCreationHelper = new FilesCreationHelper();
 		return filesCreationHelper.editBeanOnPropertyChange(selectedBeanName, beanPropertiesMap);

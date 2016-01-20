@@ -6,6 +6,8 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.lang.reflect.Method;
 import java.util.HashMap;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -29,7 +31,7 @@ public class AssignEditorsPresenter implements Presenter
 	private final Display display;
 	private String selectedBeanName;
 	private Class selectedBean = null;
-	private HashMap beanPropertiesMap = new HashMap();
+	private TreeMap beanPropertiesMap = new TreeMap();
 	
 	public interface Display 
 	{

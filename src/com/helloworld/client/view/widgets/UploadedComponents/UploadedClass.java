@@ -22,6 +22,7 @@ public class UploadedClass extends ApplicationBean{
 	@UiField 
 	ListBox listIds;
 	@UiField TextBox textBoxName;
+	@UiField TextBox textBoxUser_Name;
 	
 	
 
@@ -41,10 +42,15 @@ public class UploadedClass extends ApplicationBean{
 	}
 
 
-	@UiHandler("textBoxName")
-	void onTextBoxBlur(BlurEvent event) {
-		pcs.firePropertyChange(textBoxName.getName(), "", textBoxName.getText());
-	}
+		@UiHandler("textBoxName")
+		void onTextBoxBlur(BlurEvent event) {
+			pcs.firePropertyChange(textBoxName.getName(),  "", textBoxName.getText());
+		}
+		
+		@UiHandler("textBoxUser_Name")
+		void onTextBoxUserBlur(BlurEvent event) {
+			pcs.firePropertyChange(textBoxUser_Name.getName(), "", textBoxUser_Name.getText());
+		}
 	
 	
 	

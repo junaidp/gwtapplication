@@ -9,12 +9,14 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.TreeMap;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.google.gwt.core.client.GWT;
+import com.helloworld.client.view.ApplicationConstants;
 import com.helloworld.database.MyRdbHelper;
 import com.helloworld.shared.DynamicCompilation;
 import com.helloworld.shared.dto.AddedBeanDTO;
@@ -152,25 +154,98 @@ public class FilesCreationHelper {
 	}
 
 
+//	public String editBeanOnPropertyChange(String selectedBeanName,
+//			TreeMap beanPropertiesMap) throws Exception {
+//		
+//		Object beanObject = null;
+//		try{
+//			selectedBean = Class.forName(selectedBeanName);
+//			beanObject = selectedBean.newInstance();
+//		}catch(Exception ex){
+//			
+//		}
+//		
+//		
+//		Set set = beanPropertiesMap.entrySet();
+//		Iterator i = set.iterator();
+//		
+//		while(i.hasNext()) {
+//			Map.Entry me = (Map.Entry)i.next();
+//			
+//			editBean(beanObject, me.getKey(), me.getValue()); 
+//		}
+//		
+//		saveBeanObjectIntoDataBase(beanObject, selectedBeanName);
+//		return "pass";
+//	}
+	
 	public String editBeanOnPropertyChange(String selectedBeanName,
-			HashMap beanPropertiesMap) throws Exception {
+			TreeMap beanPropertiesMap) throws Exception {
+		
 		Object beanObject = null;
-		Set set = beanPropertiesMap.entrySet();
-		Iterator i = set.iterator();
 		try{
 			selectedBean = Class.forName(selectedBeanName);
-			
 			beanObject = selectedBean.newInstance();
+			
+			final Method[] methods = selectedBean.getMethods();
+			for(Method method : methods){
+				Class<?>[] parameter = method.getParameterTypes();
+				String packageName = parameter[0].getPackage().getName();
+				if(packageName.startsWith(ApplicationConstants.DEFAULT_PACKAGE)){
+					
+				}
+			}
+			
 		}catch(Exception ex){
 			
 		}
+		
+		
+		Set set = beanPropertiesMap.entrySet();
+		Iterator i = set.iterator();
+		
 		while(i.hasNext()) {
 			Map.Entry me = (Map.Entry)i.next();
-			editBean(beanObject, me); 
+			
+			editBean(beanObject, me.getKey(), me.getValue()); 
 		}
 		
 		saveBeanObjectIntoDataBase(beanObject, selectedBeanName);
 		return "pass";
+	}
+	
+	private void editBean(Object beanObject, Object key, Object value) {
+		try {
+			boolean matchFound = false;
+			final Method[] methods = selectedBean.getMethods();
+			for(Method method : methods){
+
+				if(method.getName().equalsIgnoreCase("set"+key)){
+					Class<?>[] parameter = method.getParameterTypes();
+					String packageName = parameter[0].getPackage().getName();
+					if(packageName.startsWith(ApplicationConstants.DEFAULT_PACKAGE)){
+						selectedBean = Class.forName(packageName);
+//					beanObject = selectedBean.newInstance();
+					}
+					method.invoke(beanObject, value);
+					matchFound = true;
+					break;
+				}
+			}
+//			String propertyName = key.toString();
+//			if(!matchFound && propertyName.contains("_")){  // considering the BeanName it self does not contain any _
+//				int ind_ = propertyName.indexOf("_");
+//				String beanChildName = propertyName.substring(0, ind_);
+////				selectedBean = Class.forName(beanChildName.toString());
+////				beanObject = selectedBean.newInstance();
+//				
+//				editBean(beanObject, beanChildName, value);
+//			}
+
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void saveBeanObjectIntoDataBase(Object beanObject, String selectedBeanName) throws Exception {
@@ -181,23 +256,41 @@ public class FilesCreationHelper {
 		
 	}
 
-	private void editBean(Object beanObject, Entry me) {
-		try {
-			
-			final Method[] methods = selectedBean.getMethods();
-			for(Method method : methods){
-
-				if(method.getName().equalsIgnoreCase("set"+me.getKey())){
-					method.invoke(beanObject, me.getValue());
-					break;
-				}
-			}
-
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	private void editBean(Object beanObject, Object key, Object value) {
+//		try {
+//			boolean matchFound = false;
+//			final Method[] methods = selectedBean.getMethods();
+//			for(Method method : methods){
+//
+//				if(method.getName().equalsIgnoreCase("set"+key)){
+//					Class<?>[] parameter = method.getParameterTypes();
+//					String packageName = parameter[0].getPackage().getName();
+//					if(packageName.startsWith(ApplicationConstants.DEFAULT_PACKAGE)){
+//						selectedBean = Class.forName(packageName);
+////					beanObject = selectedBean.newInstance();
+//					}
+//					method.invoke(beanObject, value);
+//					matchFound = true;
+//					break;
+//				}
+//			}
+////			String propertyName = key.toString();
+////			if(!matchFound && propertyName.contains("_")){  // considering the BeanName it self does not contain any _
+////				int ind_ = propertyName.indexOf("_");
+////				String beanChildName = propertyName.substring(0, ind_);
+//////				selectedBean = Class.forName(beanChildName.toString());
+//////				beanObject = selectedBean.newInstance();
+////				
+////				editBean(beanObject, beanChildName, value);
+////			}
+//
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
+	
+	
 
 //	private <T> T getCastedValue(Entry me) throws NoSuchFieldException {
 //		Field field = selectedBean.getDeclaredField(me.getKey().toString());

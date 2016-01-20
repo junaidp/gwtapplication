@@ -7,18 +7,25 @@
 	}
 	</ui:style>
 	<g:HTMLPanel>
-		<g:HorizontalPanel>
-			<g:Label text="Id" width="80px"/>
-			<g:ListBox visibleItemCount="1" ui:field="listIds" name="id" />
-		</g:HorizontalPanel>
-		<g:HorizontalPanel>
-			<g:Label text="Name" width="80px"/>
-			<g:TextBox ui:field="textBoxName" name="name"/>
-		</g:HorizontalPanel>
-		<g:HorizontalPanel>
-			<g:Label text="Password" width="81px"/>
-			<g:PasswordTextBox width="162px"/>
-		</g:HorizontalPanel>
+		<div style="padding:5px">
+			<g:HorizontalPanel>
+				<g:Label text="Id" width="80px" />
+				<g:ListBox visibleItemCount="1" ui:field="listIds" name="id" />
+			</g:HorizontalPanel>
+			<g:HorizontalPanel>
+				<g:Label text="Name" width="80px" />
+				<g:TextBox ui:field="textBoxName" name="name" />
+			</g:HorizontalPanel>
 
+			<g:HorizontalPanel>
+				<g:Label text="User_Name" width="80px" />
+				<g:TextBox ui:field="textBoxUser_Name" name="user_name" />
+			</g:HorizontalPanel>
+
+			<g:HorizontalPanel>
+				<g:Label text="Password" width="81px" />
+				<g:PasswordTextBox width="162px" />
+			</g:HorizontalPanel>
+		</div>
 	</g:HTMLPanel>
 </ui:UiBinder> 
