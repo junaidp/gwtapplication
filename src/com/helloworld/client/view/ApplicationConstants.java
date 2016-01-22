@@ -86,6 +86,7 @@ public class ApplicationConstants {
 	public static final String UPDATE = "Update";
 	public static final String ADDOBJECT = "Add Data Object";
 	public static final String DEFAULT_PACKAGE = "com.helloworld.shared.";
+	public static final String DEFAULT_PACKAGE_START = "com.helloworld.";
 	public static final String UPLOADED_VIEWS_PACKAGE = "com.helloworld.client.view.widgets.UploadedComponents";
 	public static final String SELECT_FOR_REFLECTION = "Select Bean for reflection";
 	public static final String FIELD_NAME_NOT_AVAILABLE = "";
