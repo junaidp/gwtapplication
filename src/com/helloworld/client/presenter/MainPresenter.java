@@ -43,6 +43,7 @@ public class MainPresenter implements Presenter
 		Anchor getFileUpload();
 		Anchor getAncJavaBeanEditor();
 		Anchor getAncGlobalPreferences();
+		Anchor getAncDownloadJson();
 
 	}  
 
@@ -123,6 +124,14 @@ public class MainPresenter implements Presenter
 			@Override
 			public void onClick(ClickEvent event) {
 				eventBus.fireEvent(new GlobalPreferencesEvent());
+			}
+		});	
+		
+		display.getAncDownloadJson().addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				History.newItem(ApplicationConstants.TOKEN_DOWNLOAD_JSON);
 			}
 		});	
 		

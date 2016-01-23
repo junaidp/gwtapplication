@@ -610,13 +610,13 @@ margin: 20px 20px;
 background-repeat: no-repeat;
 }
 .gwt-DisclosurePanel{
-	height: 10px !important;
-	width: 10px !important;
+	height: 20px !important;
+	width: 20px !important;
 }
 
 .gwt-DisclosurePanel .header{
-	font-size: 10px !important;
-	width: 10px !important;
-	height: 10px !important;
+	font-size: 20px !important;
+	width: 20px !important;
+	height: 20px !important;
 }
 

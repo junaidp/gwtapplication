@@ -47,5 +47,6 @@ public interface HelloServiceAsync {
 	void loadUploadedClass(String className, AsyncCallback<String> asyncCallback);
 	void editBeanOnPropertyChange(String selectedBeanName, TreeMap beanPropertiesMap, AsyncCallback<String> asyncCallback);
 	void fetchBeanObject(String beanName, AsyncCallback<String> asyncCallback);
+	void fetchBeanStructureJson(String beanName, AsyncCallback<String> asyncCallback);
 	
 }

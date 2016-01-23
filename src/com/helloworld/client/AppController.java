@@ -43,6 +43,7 @@ import com.helloworld.client.presenter.CreatePasswordPresenter;
 import com.helloworld.client.presenter.DashboardAccordionPresenter;
 import com.helloworld.client.presenter.DashboardPortalPresenter;
 import com.helloworld.client.presenter.DashboardPresenter;
+import com.helloworld.client.presenter.DownloadJsonPresenter;
 import com.helloworld.client.presenter.FileUploadPresenter;
 import com.helloworld.client.presenter.FooterPresenter;
 import com.helloworld.client.presenter.ForgotPasswordPresenter;
@@ -65,6 +66,7 @@ import com.helloworld.client.view.ApplicationConstants;
 import com.helloworld.client.view.AssignEditorsView;
 import com.helloworld.client.view.BeanFieldsEditorView;
 import com.helloworld.client.view.CreatePasswordView;
+import com.helloworld.client.view.DownloadJsonView;
 import com.helloworld.client.view.FileUploadView;
 import com.helloworld.client.view.FooterView;
 import com.helloworld.client.view.ForgotPasswordView;
@@ -418,6 +420,14 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 			
 			if (token.equals(ApplicationConstants.TOKEN_ASSIGN_EDITORS)) {
 				presenter = new AssignEditorsPresenter(rpcService, eventBus, new AssignEditorsView(), beanName);
+				
+				if (presenter != null) {
+					presenter.go(container);
+				}
+			}
+			
+			if (token.equals(ApplicationConstants.TOKEN_DOWNLOAD_JSON)) {
+				presenter = new DownloadJsonPresenter(rpcService, eventBus, new DownloadJsonView());
 				
 				if (presenter != null) {
 					presenter.go(container);

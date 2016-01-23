@@ -48,5 +48,6 @@ public interface HelloService extends RemoteService {
 	String loadUploadedClass (String className)throws Exception;
 	String editBeanOnPropertyChange(String selectedBeanName, TreeMap beanPropertiesMap) throws Exception;
 	String fetchBeanObject(String beanName)throws Exception;
+	String fetchBeanStructureJson(String beanName) throws Exception;
 	
 }

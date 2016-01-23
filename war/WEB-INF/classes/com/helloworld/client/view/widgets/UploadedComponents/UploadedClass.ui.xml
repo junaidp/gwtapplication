@@ -44,7 +44,7 @@
 			
 			<g:HorizontalPanel>
 				<g:Label text="User_password" width="200px" />
-				<g:TextBox ui:field="textBoxUser_password" name="userEntity_password" />
+				<g:PasswordTextBox ui:field="textBoxUser_password" name="userEntity_password" />
 			</g:HorizontalPanel>
 			
 			<g:HorizontalPanel>
@@ -59,7 +59,7 @@
 
 			<g:HorizontalPanel>
 				<g:Label text="Address" width="200px"  />
-				<g:PasswordTextBox width="162px" ui:field="txtAddress" name = "address"/>
+				<g:TextBox width="162px" ui:field="txtAddress" name = "address"/>
 			</g:HorizontalPanel>
 		</div>
 	</g:HTMLPanel>

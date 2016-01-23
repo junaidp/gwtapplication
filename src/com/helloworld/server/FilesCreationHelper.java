@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -12,6 +13,7 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import org.codehaus.jackson.map.ObjectMapper;
+import org.json.JSONObject;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -20,6 +22,7 @@ import com.helloworld.client.view.ApplicationConstants;
 import com.helloworld.database.MyRdbHelper;
 import com.helloworld.shared.DynamicCompilation;
 import com.helloworld.shared.dto.AddedBeanDTO;
+import com.helloworld.shared.dto.BeanExceptionDTO;
 
 public class FilesCreationHelper {
 
@@ -133,15 +136,8 @@ public class FilesCreationHelper {
 	public String fetchBeanJSON(String className, String reflectionName, String action) throws Exception {
 		String jsonInString = "";
 		try{
-			//			Reflections reflections = new Reflections("org.hibernate");
-			//
-			//			Set<Class<? extends Annotation>> allClasses = 
-			//			    reflections.getSubTypesOf(Annotation.class);
-			//			
 
 			new DynamicCompilation(className, reflectionName, action);
-
-
 			int ind = className.lastIndexOf(".");
 			String reflectedClass = className.substring(0, ind+1);
 			reflectedClass = reflectedClass+reflectionName;
@@ -158,57 +154,27 @@ public class FilesCreationHelper {
 	}
 
 
-	//	public String editBeanOnPropertyChange(String selectedBeanName,
-	//			TreeMap beanPropertiesMap) throws Exception {
-	//		
-	//		Object beanObject = null;
-	//		try{
-	//			selectedBean = Class.forName(selectedBeanName);
-	//			beanObject = selectedBean.newInstance();
-	//		}catch(Exception ex){
-	//			
-	//		}
-	//		
-	//		
-	//		Set set = beanPropertiesMap.entrySet();
-	//		Iterator i = set.iterator();
-	//		
-	//		while(i.hasNext()) {
-	//			Map.Entry me = (Map.Entry)i.next();
-	//			
-	//			editBean(beanObject, me.getKey(), me.getValue()); 
-	//		}
-	//		
-	//		saveBeanObjectIntoDataBase(beanObject, selectedBeanName);
-	//		return "pass";
-	//	}
-
 	public static boolean isSetter(Method method){
 		if(!method.getName().startsWith("set")) return false;
 		if(method.getParameterTypes().length != 1) return false;
 		return true;
 	}
-	
+
 
 	public String editBeanOnPropertyChange(String selectedBeanName,
 			TreeMap beanPropertiesMap) throws Exception {
-		
+
 		try{
 			Class bean = Class.forName(selectedBeanName);
 			baseBeanName = selectedBeanName;
-//			baseObject = bean.newInstance();
-//			parentobject = baseObject;
 			parentobject = bean.newInstance();
-			
+
 			return editBeanOnChange(selectedBeanName, beanPropertiesMap);
 		}catch(Exception ex){
 			throw ex;
 		}
-		
-		
-		
 	}
-	
+
 
 	public String editBeanOnChange(String selectedBeanName,
 			TreeMap beanPropertiesMap) throws Exception {
@@ -218,14 +184,14 @@ public class FilesCreationHelper {
 			Class bean = Class.forName(selectedBeanName);
 			Object object = bean.newInstance();
 			if(parentMethod!=null){
-			parentMethod.invoke(parentobject, object);
+				parentMethod.invoke(parentobject, object);
 			}
 			parentobject = object;
 			if(baseObject == null){
 				baseObject = parentobject;
 			}
-			/////Setting parentObject into baseObject into 
 
+			// Iterate on methods of current Bean and invoking all methods (other than sub entities)
 			final Method[] methods = bean.getMethods();
 			for(Method method : methods){
 				if(isSetter(method)){
@@ -236,7 +202,7 @@ public class FilesCreationHelper {
 					}
 				}	
 			}
-
+			// Iterate on methods of current Bean and invoking all methods (Only sub entities)
 			for(Method method : methods){
 				if(isSetter(method)){
 					Class<?>[] parameter = method.getParameterTypes();
@@ -258,7 +224,7 @@ public class FilesCreationHelper {
 								String beanChildName = propertyName1.substring(0, ind_);
 
 								if(entityName.equalsIgnoreCase(beanChildName)){
-									
+
 									beanPropertiesChildMap.put(propertyName1.substring(ind_+1), me.getValue());
 								}
 
@@ -266,85 +232,48 @@ public class FilesCreationHelper {
 							}
 						}
 						if(beanPropertiesChildMap.size() > 0){
-						editBeanOnChange(propertyName, beanPropertiesChildMap);
+							editBeanOnChange(propertyName, beanPropertiesChildMap);
 						}
-						
+
 					}
 
-
-
-
-					//						Class childBean = Class.forName(propertyName);
-					//						Object childObject = childBean.newInstance();
-					//						final Method[] childMethods = childBean.getMethods();
-					//						for(Method childMethod : childMethods){
-					//							editChildBean(childObject, beanPropertiesMap, childMethod);
-					//						}
-					//						editBeanOnPropertyChange(propertyName, beanPropertiesMap);
-					//					}else{
-					//						editBean(baseObject, beanPropertiesMap, method);
-					//					}
 				}
 			}
 			saveBeanObjectIntoDataBase(baseObject, baseBeanName);
+			return "";
 		}catch(Exception ex){
-			System.out.println("ex: "+ ex);
+			throw new Exception("Exception : "+ ex.getLocalizedMessage());
 		}
-
-
-
-
-
-		return "pass";
 	}
 
-	private void editBean(Object beanObject, TreeMap beanPropertiesMap, Method method) {
+
+	private void editBean(Object beanObject, TreeMap beanPropertiesMap, Method method)throws Exception {
 		Map.Entry me = null;
 		try {
 			Set set = beanPropertiesMap.entrySet();
 			Iterator i = set.iterator();
 
 			while(i.hasNext()) {
-				 me = (Map.Entry)i.next();
+				me = (Map.Entry)i.next();
 				if(method.getName().equalsIgnoreCase("set"+me.getKey())){
 					method.invoke(beanObject, me.getValue());
 					break;
 				}
 			}
 
-
-
 		} catch (Exception e) {
-			System.out.println("exception on "+me.getKey()+" "+ e.getLocalizedMessage()+":"+e.getCause());
-		}
-	}
+			int ind = beanObject.toString().indexOf("@");
+			ObjectMapper mapper = new ObjectMapper();
+			BeanExceptionDTO beanExceptionDTO = new BeanExceptionDTO();
+			beanExceptionDTO.setBean(beanObject.toString().substring(0, ind));
+			beanExceptionDTO.setExpecting(method.getParameterTypes()[0].getSimpleName());
+			beanExceptionDTO.setField(me.getKey().toString());
+			beanExceptionDTO.setReceiving(me.getValue().getClass().getSimpleName());
 
-	private void editChildBean(Object beanObject, TreeMap beanPropertiesMap, Method method) {
-		try {
-			Set set = beanPropertiesMap.entrySet();
-			Iterator i = set.iterator();
-
-			while(i.hasNext()) {
-				Map.Entry me = (Map.Entry)i.next();
-				String propertyName = me.getKey().toString();
-				if(propertyName.contains("_")){
-					int ind_ = propertyName.indexOf("_");
-					String beanChildName = propertyName.substring(0, ind_);
-
-					if(beanObject.getClass().getSimpleName().equalsIgnoreCase(beanChildName)){
-						if(method.getName().equalsIgnoreCase("set"+me.getValue())){
-							method.invoke(beanObject, me.getValue());
-						}
-					}
-
-
-				}
-			}
-
-
-
-		} catch (Exception e) {
-			e.printStackTrace();
+			String jsonInString = mapper.writeValueAsString(beanExceptionDTO);
+			throw new Exception(jsonInString);
+			//			throw new Exception("Exception on field '"+me.getKey()+"' of bean: " + beanObject.toString().substring(0, ind) +" Expecting: "+ 
+			//			method.getParameterTypes()[0].getSimpleName() +" Receiving: " +me.getValue().getClass().getSimpleName()  + " ( "+ e.getLocalizedMessage()+" ) ");
 		}
 	}
 
@@ -356,95 +285,38 @@ public class FilesCreationHelper {
 
 	}
 
-	//	private void editBean(Object beanObject, Object key, Object value) {
-	//		try {
-	//			boolean matchFound = false;
-	//			final Method[] methods = selectedBean.getMethods();
-	//			for(Method method : methods){
-	//
-	//				if(method.getName().equalsIgnoreCase("set"+key)){
-	//					Class<?>[] parameter = method.getParameterTypes();
-	//					String packageName = parameter[0].getPackage().getName();
-	//					if(packageName.startsWith(ApplicationConstants.DEFAULT_PACKAGE)){
-	//						selectedBean = Class.forName(packageName);
-	////					beanObject = selectedBean.newInstance();
-	//					}
-	//					method.invoke(beanObject, value);
-	//					matchFound = true;
-	//					break;
-	//				}
-	//			}
-	////			String propertyName = key.toString();
-	////			if(!matchFound && propertyName.contains("_")){  // considering the BeanName it self does not contain any _
-	////				int ind_ = propertyName.indexOf("_");
-	////				String beanChildName = propertyName.substring(0, ind_);
-	//////				selectedBean = Class.forName(beanChildName.toString());
-	//////				beanObject = selectedBean.newInstance();
-	////				
-	////				editBean(beanObject, beanChildName, value);
-	////			}
-	//
-	//
-	//		} catch (Exception e) {
-	//			e.printStackTrace();
-	//		}
-	//	}
+	public String fetchBeanStructureJson(String beanName)throws Exception {
+		Class myClass = Class.forName(beanName);
+		//		Method method = myClass.getDeclaredMethods()[0];
+		Field[] field = myClass.getDeclaredFields();
 
+		field[0].getName();
 
+		ArrayList<String> paramters = new ArrayList<String>();
+		ArrayList<String> returnTypes = new ArrayList<String>();
 
-	//	private <T> T getCastedValue(Entry me) throws NoSuchFieldException {
-	//		Field field = selectedBean.getDeclaredField(me.getKey().toString());
-	//		field.getType().getSimpleName();
-	//		int x =0;
-	//		boolean f = true;
-	//		return f;
-	//		
-	//	}
+		//		for(int i=0; i< myClass.getDeclaredMethods().length; i++ ){
+		//			Method method = myClass.getDeclaredMethods()[i];
+		//			if(isSetter(method)){
+		//				String parameter = method.getParameterTypes()[0].getSimpleName();
+		//				paramters.add(parameter);
+		//			}else{
+		//				String returnType = method.getReturnType().getSimpleName();
+		//				returnTypes.add(returnType);
+		//			}
+		//		}
+		JSONObject obj = new JSONObject();
+		for(int i=0; i< field.length ; i++){
+			obj.put(field[i].getName(), "("+field[i].getType().getSimpleName()+")");
+		}
+		String dir = System.getProperty("user.dir");
+		File folder = new File(dir+"/"+ApplicationConstants.DOWNLOADED_BEAN_STRUCTURE_JSON);
+		FileWriter file = new FileWriter(folder);
+		file.write(obj.toString());
+		file.flush();
+		file.close();
+		return null;
+	}
 
-
-
-
-
-	//	public String editBeanOnPropertyChange(String beanName,
-	//			PropertyChangeSupport pcs)throws Exception {
-	//		
-	//		final Method[] methods = selectedBean.getMethods();
-	//
-	//		 try {
-	//			 selectedBean = Class.forName(beanName);
-	////			 Object obj = myClass.newInstance();
-	////			
-	//			
-	//		} catch (Exception e) {
-	//			
-	//		}
-	//		
-	//		
-	//		pcs.addPropertyChangeListener(new PropertyChangeListener() {
-	//			
-	//			@Override
-	//			public void propertyChange(PropertyChangeEvent evt) {
-	//				try {
-	////					Field field = selectedBean.getField(evt.getPropertyName());
-	//					
-	//					 for(Method method : methods){
-	//						 
-	//						 if(method.getName().equalsIgnoreCase("set"+evt.getPropertyName())){
-	//							 
-	//							 	method.invoke(selectedBean, evt.getNewValue());
-	//						 }
-	//					 }
-	//				
-	//					
-	//				} catch (Exception e) {
-	//					// TODO Auto-generated catch block
-	//					e.printStackTrace();
-	//				} 
-	//			}
-	//		});
-	//		
-	//		return "";
-	//		
-	//	}
 
 }

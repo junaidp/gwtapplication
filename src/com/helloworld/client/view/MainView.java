@@ -36,6 +36,7 @@ public class MainView extends Composite implements Display{
 	@UiField Anchor ancFileUpload;
 	@UiField Anchor ancJavaBeanEditor;
 	@UiField Anchor ancGlobalPreferences;
+	@UiField Anchor ancDownloadJson;
 
 	public MainView(UserEntity loggedInUser) {
 		initWidget(uiBinder.createAndBindUi(this));
@@ -76,6 +77,14 @@ public class MainView extends Composite implements Display{
 
 	public Anchor getAncGlobalPreferences() {
 		return ancGlobalPreferences;
+	}
+
+	public Anchor getAncDownloadJson() {
+		return ancDownloadJson;
+	}
+
+	public void setAncDownloadJson(Anchor ancDownloadJson) {
+		this.ancDownloadJson = ancDownloadJson;
 	}
 
 

@@ -33,6 +33,7 @@ public class ApplicationConstants {
 	public static final String TOKEN_JAVA_BEAN_EDITOR = "javaBeanEditor";
 	public static final String TOKEN_ASSIGN_EDITORS = "assignEditor";
 	public static final String TOKEN_UPLOAD_COMPONENTS = "uploadComponents";
+	public static final String TOKEN_DOWNLOAD_JSON = "downloadJson";
 
 
 	
@@ -105,6 +106,8 @@ public class ApplicationConstants {
 	public static final String INVALID_UIXML_FILE = "Please select a valid GWT Designer's ui.xml File";
 	public static final String INVALID_UIJAVA_FILE = "Please select a valid corresponsing java File";
 	public static final String INVALID_UIXML_AND_JAVA_FILE = "Please select a valid ui.xml and corresponding java Files";
+	public static final String DOWNLOADED_BEAN_STRUCTURE_JSON = "downloadedJson";
+	
 	
 	
 }

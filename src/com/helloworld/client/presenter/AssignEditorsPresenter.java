@@ -5,7 +5,10 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -13,13 +16,20 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerManager;
+import com.google.gwt.json.client.JSONObject;
+import com.google.gwt.json.client.JSONParser;
+import com.google.gwt.json.client.JSONValue;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HasWidgets;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.helloworld.client.HelloServiceAsync;
+import com.helloworld.client.view.PopupsView;
 import com.helloworld.client.view.widgets.UploadedComponents.UploadedClass;
 
 
@@ -110,8 +120,28 @@ public class AssignEditorsPresenter implements Presenter
 		rpcService.editBeanOnPropertyChange(selectedBeanName, beanPropertiesMap, new AsyncCallback<String>() {
 
 			@Override
-			public void onFailure(Throwable caught) {
-				Window.alert("fail editBeanOnPropertyChange"+ caught.getLocalizedMessage());
+			public void onFailure(Throwable exceptionJson) {
+				display.getBtnSubmit().removeStyleName("loading-pulse");
+				display.getBtnSubmit().removeStyleName("loading-pulse");
+				int ind = exceptionJson.getMessage().indexOf("{");
+				JSONValue jsonValue = JSONParser.parse(exceptionJson.getMessage().substring(ind));
+				JSONObject object = jsonValue.isObject();
+				Set<String> keys =  object.keySet();
+				
+				
+				
+				FlexTable flex = new FlexTable();
+				Object[] keyArray = keys.toArray();
+//				for (String s : keys) {
+				for(int i=0; i< keyArray.length; i++){
+				   Label lbl = new Label((String) keyArray[i]);
+				   JSONValue s = object.get(keyArray[i].toString());
+				   s.toString();
+				   
+				   flex.setWidget(i, 0, lbl);
+				   flex.setWidget(i, 1, new Label(s.toString()));
+				}
+				new PopupsView(flex);
 				display.getBtnSubmit().removeStyleName("loading-pulse");
 			}
 
@@ -120,8 +150,6 @@ public class AssignEditorsPresenter implements Presenter
 
 				fetchBeanObject(selectedBeanName);
 			}
-
-			
 		});
 	}
 	
@@ -131,20 +159,17 @@ public class AssignEditorsPresenter implements Presenter
 			
 			@Override
 			public void onSuccess(String result) {
-				Window.alert(result);
-				display.getBtnSubmit().removeStyleName("loading-pulse");
+				
+				new PopupsView(new Label(result));
 			}
 			
 			@Override
-			public void onFailure(Throwable caught) {
-				Window.alert(caught.getLocalizedMessage());
-				display.getBtnSubmit().removeStyleName("loading-pulse");
+			public void onFailure(Throwable exceptionJson) {
+				
 			}
 		});
 		
 	}
-
-
 }
 
 

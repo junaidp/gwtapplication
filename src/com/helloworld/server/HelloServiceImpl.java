@@ -452,4 +452,10 @@ HelloService {
 		return rdbHelper.fetchBeanObject(beanName);
 		
 	}
+
+	@Override
+	public String fetchBeanStructureJson(String beanName) throws Exception {
+		FilesCreationHelper filesCreationHelper = new FilesCreationHelper();
+		return filesCreationHelper.fetchBeanStructureJson(beanName);
+	}
 }
