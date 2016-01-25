@@ -1,19 +1,13 @@
 package com.helloworld.client.view.MyDashboard.MyAccountViews;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.Anchor;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.helloworld.client.presenter.ViewRegistrationPresenter.Display;
-import com.helloworld.shared.entity.MyAccountEntity;
 import com.helloworld.shared.entity.MyAccountPreferencesEntity;
 import com.helloworld.shared.entity.UserEntity;
 

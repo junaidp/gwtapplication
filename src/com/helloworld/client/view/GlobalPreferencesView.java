@@ -8,14 +8,13 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HorizontalSplitPanel;
-import com.google.gwt.user.client.ui.TabPanel;
 import com.google.gwt.user.client.ui.Tree;
 import com.google.gwt.user.client.ui.TreeItem;
 import com.google.gwt.user.client.ui.Widget;
 import com.helloworld.client.presenter.GlobalPreferencesPresenter.Display;
 
+@SuppressWarnings("deprecation")
 public class GlobalPreferencesView extends Composite implements Display {
 
 	private static GlobalPreferencesViewUiBinder uiBinder = GWT

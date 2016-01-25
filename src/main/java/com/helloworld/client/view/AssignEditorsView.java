@@ -15,7 +15,7 @@ import com.google.gwt.user.client.ui.HorizontalSplitPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.helloworld.client.presenter.AssignEditorsPresenter.Display;
+import com.helloworld.client.presenter.AssignDataToBeanPresenter.Display;
 import com.helloworld.client.view.widgets.UploadedComponents.UploadedClass;
 
 public class AssignEditorsView extends Composite implements Display {

@@ -37,7 +37,7 @@ import com.helloworld.client.event.ViewEditRegistrationEventHandler;
 import com.helloworld.client.event.ViewPlanEvent;
 import com.helloworld.client.event.ViewPlanEventHandler;
 import com.helloworld.client.presenter.AdminPresenter;
-import com.helloworld.client.presenter.AssignEditorsPresenter;
+import com.helloworld.client.presenter.AssignDataToBeanPresenter;
 import com.helloworld.client.presenter.BeanFieldsEditorPresenter;
 import com.helloworld.client.presenter.CreatePasswordPresenter;
 import com.helloworld.client.presenter.DashboardAccordionPresenter;
@@ -62,7 +62,7 @@ import com.helloworld.client.presenter.ViewPlanPresenter;
 import com.helloworld.client.presenter.ViewRegistrationPresenter;
 import com.helloworld.client.view.AdminView;
 import com.helloworld.client.view.ApplicationConstants;
-import com.helloworld.client.view.AssignEditorsView;
+import com.helloworld.client.view.AssignDataToBeanView;
 import com.helloworld.client.view.BeanFieldsEditorView;
 import com.helloworld.client.view.CreatePasswordView;
 import com.helloworld.client.view.FileUploadView;
@@ -417,7 +417,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 			}
 			
 			if (token.equals(ApplicationConstants.TOKEN_ASSIGN_EDITORS)) {
-				presenter = new AssignEditorsPresenter(rpcService, eventBus, new AssignEditorsView(beanJson));
+				presenter = new AssignDataToBeanPresenter(rpcService, eventBus, new AssignDataToBeanView(beanJson));
 				
 				if (presenter != null) {
 					presenter.go(container);

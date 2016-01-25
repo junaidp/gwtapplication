@@ -6,11 +6,8 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FocusPanel;
 import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.MenuBar;
-import com.google.gwt.user.client.ui.MenuItem;
 import com.google.gwt.user.client.ui.Widget;
 import com.helloworld.client.presenter.HeaderPresenter.Display;
-import com.helloworld.shared.entity.UserEntity;
 
 public class HeaderView extends Composite implements Display {
 

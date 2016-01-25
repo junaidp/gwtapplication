@@ -5,18 +5,14 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
-import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasWidgets;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.helloworld.client.HelloServiceAsync;
 import com.helloworld.client.view.ApplicationConstants;
-import com.helloworld.client.view.widgets.DisplayAlert;
 
 public class ForgotPasswordPresenter implements Presenter 
 
@@ -24,9 +20,7 @@ public class ForgotPasswordPresenter implements Presenter
 	
 	private final Display display;
 	private final HelloServiceAsync rpcService;
-	private final HandlerManager eventBus;
 	
-
 	public interface Display 
 	{
 		Widget asWidget();
@@ -39,7 +33,6 @@ public class ForgotPasswordPresenter implements Presenter
 	public ForgotPasswordPresenter(HelloServiceAsync rpcService, HandlerManager eventBus, Display view) 
 	{
 		this.display = view;
-		this.eventBus = eventBus;
 		this.rpcService = rpcService;
 	}
 

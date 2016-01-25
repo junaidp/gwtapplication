@@ -4,20 +4,14 @@ import java.io.File;
 import java.io.FileWriter;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
-
 import org.codehaus.jackson.map.ObjectMapper;
 import org.json.JSONObject;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import com.google.gwt.core.client.GWT;
 import com.helloworld.client.view.ApplicationConstants;
 import com.helloworld.database.MyRdbHelper;
 import com.helloworld.shared.DynamicCompilation;
@@ -26,10 +20,10 @@ import com.helloworld.shared.dto.BeanExceptionDTO;
 
 public class FilesCreationHelper {
 
-	String baseBeanName= "";
-	Object parentobject = null;
-	Object baseObject = null;
-	Method parentMethod = null;
+	private String baseBeanName= "";
+	private Object parentobject = null;
+	private Object baseObject = null;
+	private Method parentMethod = null;
 
 
 	public String generateBean(AddedBeanDTO addedBeanDTO) throws Exception{
@@ -227,8 +221,6 @@ public class FilesCreationHelper {
 
 									beanPropertiesChildMap.put(propertyName1.substring(ind_+1), me.getValue());
 								}
-
-
 							}
 						}
 						if(beanPropertiesChildMap.size() > 0){
@@ -262,6 +254,7 @@ public class FilesCreationHelper {
 			}
 
 		} catch (Exception e) {
+			
 			int ind = beanObject.toString().indexOf("@");
 			ObjectMapper mapper = new ObjectMapper();
 			BeanExceptionDTO beanExceptionDTO = new BeanExceptionDTO();
@@ -287,30 +280,16 @@ public class FilesCreationHelper {
 
 	public String fetchBeanStructureJson(String beanName)throws Exception {
 		Class myClass = Class.forName(beanName);
-		//		Method method = myClass.getDeclaredMethods()[0];
 		Field[] field = myClass.getDeclaredFields();
 
 		field[0].getName();
 
-		ArrayList<String> paramters = new ArrayList<String>();
-		ArrayList<String> returnTypes = new ArrayList<String>();
-
-		//		for(int i=0; i< myClass.getDeclaredMethods().length; i++ ){
-		//			Method method = myClass.getDeclaredMethods()[i];
-		//			if(isSetter(method)){
-		//				String parameter = method.getParameterTypes()[0].getSimpleName();
-		//				paramters.add(parameter);
-		//			}else{
-		//				String returnType = method.getReturnType().getSimpleName();
-		//				returnTypes.add(returnType);
-		//			}
-		//		}
 		JSONObject obj = new JSONObject();
 		for(int i=0; i< field.length ; i++){
 			obj.put(field[i].getName(), "("+field[i].getType().getSimpleName()+")");
 		}
 		String dir = System.getProperty("user.dir");
-		File folder = new File(dir+"/"+ApplicationConstants.DOWNLOADED_BEAN_STRUCTURE_JSON);
+		File folder = new File(dir+"/"+ApplicationConstants.DOWNLOADED_BEAN_FIELDS_JSON);
 		FileWriter file = new FileWriter(folder);
 		file.write(obj.toString());
 		file.flush();

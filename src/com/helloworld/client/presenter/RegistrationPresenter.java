@@ -3,7 +3,6 @@ package com.helloworld.client.presenter;
 import com.claudiushauptmann.gwt.recaptcha.client.RecaptchaWidget;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
@@ -27,7 +26,6 @@ public class RegistrationPresenter implements Presenter
 
 	private final Display display;
 	private final HelloServiceAsync rpcService;
-	private final HandlerManager eventBus;
 
 	public interface Display 
 	{
@@ -57,7 +55,6 @@ public class RegistrationPresenter implements Presenter
 	{
 		this.display = view;
 		this.rpcService = rpcService;
-		this.eventBus = eventBus;
 	}
 
 	public void go(HasWidgets container) 

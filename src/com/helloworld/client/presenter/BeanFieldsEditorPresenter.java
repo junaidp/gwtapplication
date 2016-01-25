@@ -2,17 +2,14 @@ package com.helloworld.client.presenter;
 
 import java.util.ArrayList;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerManager;
-import com.google.gwt.thirdparty.guava.common.reflect.Reflection;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.DecoratedPopupPanel;
 import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteEvent;
 import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteHandler;
 import com.google.gwt.user.client.ui.HasWidgets;
@@ -21,10 +18,8 @@ import com.google.gwt.user.client.ui.Widget;
 import com.helloworld.client.HelloServiceAsync;
 import com.helloworld.client.event.AssignEditorsEvent;
 import com.helloworld.client.view.ApplicationConstants;
-import com.helloworld.client.view.widgets.DisplayAlert;
 import com.helloworld.client.view.widgets.JavaComponentAttachment;
 import com.helloworld.client.view.widgets.XmlComponentAttachment;
-import com.helloworld.client.view.widgets.UploadedComponents.UploadedClass;
 import com.smartgwt.client.util.SC;
 
 
@@ -90,8 +85,6 @@ public class BeanFieldsEditorPresenter implements Presenter
 		});
 	}
 
-
-
 	@Override
 	public void setHandlers() {
 
@@ -156,40 +149,7 @@ public class BeanFieldsEditorPresenter implements Presenter
 	private void createFieldEditors() {
 		
 		String className = display.getListBeans().getValue(display.getListBeans().getSelectedIndex());
-//		int ind = className.lastIndexOf(".");
-//		String beanName = className.substring(ind+1);
 		eventBus.fireEvent(new AssignEditorsEvent(className));
-//		String action = ApplicationConstants.FIELD_EDITORS_CREATION;
-//		rpcService.fetchBeanJSON(className, beanName, action, new AsyncCallback<String>() {
-//
-//			@Override
-//			public void onFailure(Throwable caught) {
-//
-//			}
-//
-//			@Override
-//			public void onSuccess(String json) {
-//				eventBus.fireEvent(new AssignEditorsEvent(json));
-//
-//			}
-//		});
+
 	}
-
-	private void loadUploadedClass() {
-		rpcService.loadUploadedClass("com.helloworld.client.view.widgets.UploadedComponents.AdminView", new AsyncCallback<String>() {
-
-			@Override
-			public void onSuccess(String result) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
-
-			}
-		});
-	}
-
 }

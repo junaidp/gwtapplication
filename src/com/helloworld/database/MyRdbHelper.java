@@ -30,7 +30,6 @@ import org.joda.time.Minutes;
 import org.mindrot.BCrypt;
 
 import com.helloworld.client.view.ApplicationConstants;
-import com.helloworld.shared.DynamicCompilation;
 import com.helloworld.shared.entity.BeanObjects;
 //import com.helloworld.shared.beans.BeanSet;
 import com.helloworld.shared.entity.GlobalPreferencesEntity;
@@ -479,7 +478,7 @@ public class MyRdbHelper {
 
 	public String emailUserName(String email)throws Exception {
 		Session session = null;
-		String userName;
+		
 		try{
 
 			session = sessionFactory.openSession();
@@ -487,7 +486,6 @@ public class MyRdbHelper {
 			crit.add(Restrictions.eq("email", email));
 			if(crit.list().size()>0){
 				UserEntity user = (UserEntity) crit.list().get(0);
-				userName = user.getUserName();
 				emailUserNameToUser(user);
 				return ApplicationConstants.USERNAME_EMAIL_SENT;
 			}else{

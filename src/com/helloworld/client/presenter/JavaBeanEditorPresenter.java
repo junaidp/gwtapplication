@@ -3,7 +3,6 @@ package com.helloworld.client.presenter;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.Map.Entry;
 
 import com.google.gwt.cell.client.FieldUpdater;
@@ -19,7 +18,6 @@ import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -28,15 +26,11 @@ import com.helloworld.client.view.ApplicationConstants;
 import com.helloworld.client.view.widgets.AddAnnotationsWidget;
 import com.helloworld.client.view.widgets.AddBeanProportyWidget;
 import com.helloworld.client.view.widgets.AnnotationWidget;
-import com.helloworld.client.view.widgets.Attachment;
-import com.helloworld.client.view.widgets.DataObjectAnchor;
 import com.helloworld.client.view.widgets.DataObjectWidget;
 import com.helloworld.client.view.widgets.DisplayAlert;
-import com.helloworld.client.view.widgets.XmlComponentAttachment;
 import com.helloworld.shared.dto.AddedBeanDTO;
 import com.helloworld.shared.dto.AddedBeanPropertyDTO;
 import com.helloworld.shared.dto.AnnotationsDTO;
-import com.smartgwt.client.data.RecordList;
 import com.smartgwt.client.util.BooleanCallback;
 import com.smartgwt.client.util.SC;
 import com.smartgwt.client.widgets.form.fields.ComboBoxItem;
@@ -865,8 +859,6 @@ public class JavaBeanEditorPresenter implements Presenter
 			public void onSuccess(String json) {
 				new DisplayAlert("Reflection generated: Json retrieved");
 				display.getBtnGenerate().removeStyleName("loading-pulse");
-				//					 JSONValue jsonValue = JSONParser.parse(json);
-				//			         JSONObject object = jsonValue.isObject();
 			}
 
 			@Override

@@ -7,13 +7,11 @@ import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerManager;
-import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.HasWidgets;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.helloworld.client.HelloServiceAsync;
@@ -27,7 +25,6 @@ public class ManageUserPresenter implements Presenter
 	
 	private final Display display;
 	private final HelloServiceAsync rpcService;
-	private final HandlerManager eventBus;
 	private ArrayList<UserEntity> users;
 	private UserEntity selectedUser;
 	
@@ -43,7 +40,6 @@ public class ManageUserPresenter implements Presenter
 	public ManageUserPresenter(HelloServiceAsync rpcService, HandlerManager eventBus, Display view) 
 	{
 		this.display = view;
-		this.eventBus = eventBus;
 		this.rpcService = rpcService;
 	}
 
@@ -113,6 +109,7 @@ public class ManageUserPresenter implements Presenter
 		});
 	}
 	
+	@SuppressWarnings("deprecation")
 	private void updateUserValues(int i) {
 		if(users.get(i).getStatus()== ApplicationConstants.ACTIVE){
 			display.getCheckActive().setChecked(true);
@@ -122,6 +119,7 @@ public class ManageUserPresenter implements Presenter
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	private void updateUser() {
 		if(display.getCheckActive().isChecked()){
 			selectedUser.setStatus(1);

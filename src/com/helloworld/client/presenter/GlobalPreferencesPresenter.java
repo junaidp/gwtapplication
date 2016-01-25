@@ -6,14 +6,12 @@ import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.event.shared.HandlerManager;
-import com.google.gwt.rpc.client.RpcService;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.HorizontalSplitPanel;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Tree;
 import com.google.gwt.user.client.ui.TreeItem;
 import com.google.gwt.user.client.ui.Widget;
@@ -26,6 +24,7 @@ import com.helloworld.client.view.widgets.DisplayAlert;
 import com.helloworld.shared.entity.GlobalPreferencesEntity;
 import com.helloworld.shared.entity.MyAccountPreferencesEntity;
 
+@SuppressWarnings("deprecation")
 public class GlobalPreferencesPresenter implements Presenter 
 
 {
@@ -90,7 +89,6 @@ public class GlobalPreferencesPresenter implements Presenter
 
 		display.getTreePreferences().addSelectionHandler(new SelectionHandler<TreeItem>() {
 
-			@SuppressWarnings("deprecation")
 			@Override
 			public void onSelection(SelectionEvent<TreeItem> event) {
 				TreeItem item = event.getSelectedItem();
@@ -141,7 +139,6 @@ public class GlobalPreferencesPresenter implements Presenter
 
 	}
 
-	@SuppressWarnings("deprecation")
 	private void saveGlobalPreferences(GlobalPreferencesEntity globalPreferencesEntity) {
 		if(viewPlan!=null){
 			globalPreferencesEntity.getMyAccountPreferencesId().setShowPaymentDetails(viewPlan.getPaymentDetails().isChecked());

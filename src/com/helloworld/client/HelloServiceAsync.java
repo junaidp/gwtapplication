@@ -1,7 +1,6 @@
 package com.helloworld.client;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.TreeMap;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -47,6 +46,6 @@ public interface HelloServiceAsync {
 	void loadUploadedClass(String className, AsyncCallback<String> asyncCallback);
 	void editBeanOnPropertyChange(String selectedBeanName, TreeMap beanPropertiesMap, AsyncCallback<String> asyncCallback);
 	void fetchBeanObject(String beanName, AsyncCallback<String> asyncCallback);
-	void fetchBeanStructureJson(String beanName, AsyncCallback<String> asyncCallback);
+	void downloadBeanFieldsJson(String beanName, AsyncCallback<String> asyncCallback);
 	
 }

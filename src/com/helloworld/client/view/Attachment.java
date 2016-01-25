@@ -46,7 +46,8 @@ public class Attachment extends VerticalPanel {
 
 	  // Load the image in the document and in the case of success attach it to the viewer
 	  private IUploader.OnFinishUploaderHandler onFinishUploaderHandler = new IUploader.OnFinishUploaderHandler() {
-	    public void onFinish(IUploader uploader) {
+	    @SuppressWarnings("deprecation")
+		public void onFinish(IUploader uploader) {
 	      if (uploader.getStatus() == Status.SUCCESS) {
 
 	        new PreloadedImage(uploader.fileUrl(), showImage);

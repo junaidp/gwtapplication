@@ -4,8 +4,6 @@ package com.helloworld.client.presenter;
 import java.util.ArrayList;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ChangeEvent;
-import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerManager;
@@ -24,7 +22,6 @@ public class DownloadJsonPresenter implements Presenter
 
 {
 	private final HelloServiceAsync rpcService;
-	private final HandlerManager eventBus;
 	private final Display display;
 
 	public interface Display 
@@ -38,7 +35,6 @@ public class DownloadJsonPresenter implements Presenter
 	public DownloadJsonPresenter(HelloServiceAsync rpcService, HandlerManager eventBus, Display view) 
 	{
 		this.rpcService = rpcService;
-		this.eventBus = eventBus;
 		this.display = view;
 		
 	}
@@ -88,7 +84,7 @@ public class DownloadJsonPresenter implements Presenter
 			@Override
 			public void onClick(ClickEvent event) {
 		
-				rpcService.fetchBeanStructureJson(display.getListBeans().getValue(display.getListBeans().getSelectedIndex()), new AsyncCallback<String>() {
+				rpcService.downloadBeanFieldsJson(display.getListBeans().getValue(display.getListBeans().getSelectedIndex()), new AsyncCallback<String>() {
 
 					@Override
 					public void onFailure(Throwable caught) {
@@ -98,7 +94,7 @@ public class DownloadJsonPresenter implements Presenter
 					@Override
 					public void onSuccess(String result) {
 //						Window.open("/downloadedJson", "_blank", "", "enabled");
-						Window.open(GWT.getHostPageBaseURL() + ApplicationConstants.DOWNLOADED_BEAN_STRUCTURE_JSON, "_blank", "");
+						Window.open(GWT.getHostPageBaseURL() + ApplicationConstants.DOWNLOADED_BEAN_FIELDS_JSON, "_blank", "enabled");
 				    
 					}
 				});

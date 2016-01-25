@@ -1,17 +1,13 @@
 package com.helloworld.client.presenter;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.History;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.FocusPanel;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Widget;
-import com.helloworld.client.HelloService;
 import com.helloworld.client.HelloServiceAsync;
 import com.helloworld.client.event.MainEvent;
 import com.helloworld.client.view.ApplicationConstants;
@@ -58,24 +54,23 @@ public class HeaderPresenter implements Presenter
 
 	}
 
-	private void fetchUsersLogo() {
-		HelloServiceAsync rpcService = GWT.create(HelloService.class);
-		rpcService.fetchLogo(new AsyncCallback<String>() {
-			
-			@Override
-			public void onSuccess(String logoUrl) {
-				display.getImgLogo().setUrl(logoUrl);
-				
-			}
-			
-			@Override
-			public void onFailure(Throwable caught) {
-				Window.alert("Fail fetchUsersLogo"+ caught.getLocalizedMessage());
-			}
-		});
-	}
+//	private void fetchUsersLogo() {
+//		HelloServiceAsync rpcService = GWT.create(HelloService.class);
+//		rpcService.fetchLogo(new AsyncCallback<String>() {
+//			
+//			@Override
+//			public void onSuccess(String logoUrl) {
+//				display.getImgLogo().setUrl(logoUrl);
+//				
+//			}
+//			
+//			@Override
+//			public void onFailure(Throwable caught) {
+//				Window.alert("Fail fetchUsersLogo"+ caught.getLocalizedMessage());
+//			}
+//		});
+//	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void setHandlers() {
 		

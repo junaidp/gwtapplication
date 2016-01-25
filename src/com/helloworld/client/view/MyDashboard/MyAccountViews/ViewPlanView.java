@@ -74,6 +74,7 @@ public class ViewPlanView extends Composite implements Display {
 	}
 	
 	//Update Entity for saving in db as per user selection in UI
+	@SuppressWarnings("deprecation")
 	@Override
 	public void updateMyAccount(MyAccountEntity myAccountEntity){
 		myAccountEntity.setMonthlyPaymentPlan(radioMonthlyPayments.isChecked());

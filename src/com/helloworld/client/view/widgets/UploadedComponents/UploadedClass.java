@@ -11,7 +11,6 @@ import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.datepicker.client.DateBox;
-import com.google.gwt.user.datepicker.client.DatePicker;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.ChangeEvent;
@@ -98,8 +97,9 @@ public class UploadedClass extends ApplicationBean{
 
 
 		@UiHandler("textBoxName")
-		void onTextBoxBlur(BlurEvent event) {
+		void onTextBoxBlur(BlurEvent event) { 
 			pcs.firePropertyChange(textBoxName.getName(),  "", textBoxName.getText());
+			
 		}
 		
 		@UiHandler("txtAddress")
@@ -127,13 +127,4 @@ public class UploadedClass extends ApplicationBean{
 			pcs.firePropertyChange(user_MyAccountEntity_myAccountId.getName(), "", Integer.parseInt(user_MyAccountEntity_myAccountId.getText()));
 		}
 		
-	
-		
-		
-	
-	
-	
-	
-	
-	
 }

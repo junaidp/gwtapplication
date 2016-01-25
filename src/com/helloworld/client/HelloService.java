@@ -1,7 +1,6 @@
 package com.helloworld.client;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.TreeMap;
 
 import com.google.gwt.user.client.rpc.RemoteService;
@@ -48,6 +47,6 @@ public interface HelloService extends RemoteService {
 	String loadUploadedClass (String className)throws Exception;
 	String editBeanOnPropertyChange(String selectedBeanName, TreeMap beanPropertiesMap) throws Exception;
 	String fetchBeanObject(String beanName)throws Exception;
-	String fetchBeanStructureJson(String beanName) throws Exception;
+	String downloadBeanFieldsJson(String beanName) throws Exception;
 	
 }

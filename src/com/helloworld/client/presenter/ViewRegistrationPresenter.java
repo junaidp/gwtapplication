@@ -5,7 +5,6 @@ import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
 import com.helloworld.client.HelloServiceAsync;
 import com.helloworld.shared.entity.GlobalPreferencesEntity;
-import com.helloworld.shared.entity.MyAccountEntity;
 import com.helloworld.shared.entity.MyAccountPreferencesEntity;
 import com.helloworld.shared.entity.UserEntity;
 

@@ -6,25 +6,17 @@ import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.HasWidgets;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.helloworld.client.HelloServiceAsync;
-import com.helloworld.client.event.AdminEvent;
 import com.helloworld.client.event.DashboardAccordionEvent;
 import com.helloworld.client.event.DashboardEvent;
-import com.helloworld.client.event.EditUserEvent;
 import com.helloworld.client.event.GlobalPreferencesEvent;
 import com.helloworld.client.event.IntelligencePackEvent;
 import com.helloworld.client.event.JavaBeanEditorEvent;
-import com.helloworld.client.event.RegistrationEvent;
 import com.helloworld.client.event.SearchDataEvent;
 import com.helloworld.client.view.ApplicationConstants;
 import com.helloworld.client.view.ControlPanels.ControlPanelsContainer;
-import com.helloworld.client.view.ControlPanels.DashboardAccordionPanelView;
-import com.helloworld.client.view.widgets.Attachment;
-import com.helloworld.client.view.widgets.DisplayAlert;
-import com.helloworld.client.view.widgets.PopupsView;
 import com.helloworld.shared.entity.UserEntity;
 
 public class MainPresenter implements Presenter 

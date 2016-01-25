@@ -21,8 +21,7 @@ public class ForgotUserNamePresenter implements Presenter
 
 	private final Display display;
 	private final HelloServiceAsync rpcService;
-	private final HandlerManager eventBus;
-
+	
 	public interface Display 
 	{
 		Widget asWidget();
@@ -34,7 +33,6 @@ public class ForgotUserNamePresenter implements Presenter
 	public ForgotUserNamePresenter(HelloServiceAsync rpcService, HandlerManager eventBus, Display view) 
 	{
 		this.display = view;
-		this.eventBus = eventBus;
 		this.rpcService = rpcService;
 	}
 

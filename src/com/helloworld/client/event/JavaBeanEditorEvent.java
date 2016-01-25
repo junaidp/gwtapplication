@@ -1,30 +1,25 @@
 package com.helloworld.client.event;
 
 import com.google.gwt.event.shared.GwtEvent;
-import com.google.gwt.user.client.ui.VerticalPanel;
 
-		public class JavaBeanEditorEvent extends GwtEvent<JavaBeanEditorEventHandler> {
-			
-		public static Type<JavaBeanEditorEventHandler> TYPE = new Type<JavaBeanEditorEventHandler>();
-		
-		
-		
-		public JavaBeanEditorEvent(){
-			
-		}
+public class JavaBeanEditorEvent extends GwtEvent<JavaBeanEditorEventHandler> {
 
-		@Override
-		public com.google.gwt.event.shared.GwtEvent.Type<JavaBeanEditorEventHandler> getAssociatedType() {
-		    return TYPE;
-		}
+	public static Type<JavaBeanEditorEventHandler> TYPE = new Type<JavaBeanEditorEventHandler>();
 
-		@Override
-		protected void dispatch(JavaBeanEditorEventHandler handler) {
-		    handler.onJavaBeanEditor(this);
-			
-		}
-
+	public JavaBeanEditorEvent(){
 
 	}
+
+	@Override
+	public com.google.gwt.event.shared.GwtEvent.Type<JavaBeanEditorEventHandler> getAssociatedType() {
+		return TYPE;
+	}
+
+	@Override
+	protected void dispatch(JavaBeanEditorEventHandler handler) {
+		handler.onJavaBeanEditor(this);
+
+	}
+}
 
 

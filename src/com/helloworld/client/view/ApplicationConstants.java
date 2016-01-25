@@ -1,7 +1,5 @@
 package com.helloworld.client.view;
 
-import com.google.gwt.i18n.client.HasDirection.Direction;
-
 public class ApplicationConstants {
 	
 	///LAYOUT HEADINGS///
@@ -106,7 +104,7 @@ public class ApplicationConstants {
 	public static final String INVALID_UIXML_FILE = "Please select a valid GWT Designer's ui.xml File";
 	public static final String INVALID_UIJAVA_FILE = "Please select a valid corresponsing java File";
 	public static final String INVALID_UIXML_AND_JAVA_FILE = "Please select a valid ui.xml and corresponding java Files";
-	public static final String DOWNLOADED_BEAN_STRUCTURE_JSON = "downloadedJson";
+	public static final String DOWNLOADED_BEAN_FIELDS_JSON = "downloadedJson";
 	
 	
 	

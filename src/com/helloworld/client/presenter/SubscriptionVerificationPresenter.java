@@ -3,7 +3,6 @@ package com.helloworld.client.presenter;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
@@ -16,12 +15,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.helloworld.client.HelloServiceAsync;
 import com.helloworld.client.event.RegistrationEvent;
-import com.helloworld.client.event.SubscriptionVerificationEvent;
 import com.helloworld.client.view.ApplicationConstants;
-import com.helloworld.client.view.FooterView;
-import com.helloworld.client.view.HeaderView;
-import com.helloworld.client.view.widgets.LoadingPopup;
-import com.helloworld.shared.entity.UserEntity;
 
 public class SubscriptionVerificationPresenter implements Presenter 
 

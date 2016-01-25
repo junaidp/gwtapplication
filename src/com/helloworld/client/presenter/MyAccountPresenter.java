@@ -3,15 +3,11 @@ package com.helloworld.client.presenter;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerManager;
-import com.google.gwt.user.client.History;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.FocusPanel;
 import com.google.gwt.user.client.ui.HasWidgets;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.helloworld.client.HelloServiceAsync;
 import com.helloworld.client.event.EditUserEvent;
-import com.helloworld.client.event.RegistrationEvent;
 import com.helloworld.client.event.ViewEditRegistrationEvent;
 import com.helloworld.client.event.ViewPlanEvent;
 import com.helloworld.shared.entity.GlobalPreferencesEntity;
@@ -23,7 +19,6 @@ public class MyAccountPresenter implements Presenter
 	
 	private final Display display;
 	private final HandlerManager eventBus;
-	private final HelloServiceAsync rpcService;
 	private UserEntity loggedInUser;
 	private GlobalPreferencesEntity globalPreferencesEntity;
 
@@ -40,7 +35,6 @@ public class MyAccountPresenter implements Presenter
 		this.display = view;
 		this.eventBus = eventBus;
 		this.loggedInUser = user;
-		this.rpcService = rpcService;
 		this.globalPreferencesEntity = globalPreferencesEntity;
 	}
 

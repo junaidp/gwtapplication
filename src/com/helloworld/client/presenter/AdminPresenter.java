@@ -6,10 +6,10 @@ import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.HasWidgets;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.helloworld.client.HelloServiceAsync;
 import com.helloworld.client.event.GlobalPreferencesEvent;
+import com.helloworld.client.view.AdminView;
 import com.helloworld.client.view.ApplicationConstants;
 
 public class AdminPresenter implements Presenter 
@@ -17,7 +17,6 @@ public class AdminPresenter implements Presenter
 {
 	
 	private final Display display;
-	private final HelloServiceAsync rpcService;
 	private final HandlerManager eventBus;
 
 	public interface Display 
@@ -31,7 +30,7 @@ public class AdminPresenter implements Presenter
 	{
 		this.display = view;
 		this.eventBus = eventBus;
-		this.rpcService = rpcService;
+		
 	}
 
 	public void go(HasWidgets container) 
@@ -40,6 +39,7 @@ public class AdminPresenter implements Presenter
 		container.add(display.asWidget());
 		bind();
 		setHandlers();
+		
 	}
 
 	private void bind() {

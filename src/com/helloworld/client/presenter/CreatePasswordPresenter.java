@@ -16,16 +16,14 @@ import com.helloworld.client.view.ApplicationConstants;
 import com.helloworld.client.view.widgets.DisplayAlert;
 import com.helloworld.shared.entity.UserEntity;
 import com.helloworld.shared.utility.CreatePasswordFieldVerifier;
-import com.helloworld.shared.utility.RegistratonFieldVerifier;
 
 
 public class CreatePasswordPresenter implements Presenter 
 
 {
-	
+
 	private final Display display;
 	private final HelloServiceAsync rpcService;
-	private final HandlerManager eventBus;
 	private UserEntity user;
 
 	public interface Display 
@@ -38,13 +36,12 @@ public class CreatePasswordPresenter implements Presenter
 		Label getLblError();
 		Label getConfirmPasswordError();
 		Label getNewPasswordError();
-		
+
 	}  
 
 	public CreatePasswordPresenter(HelloServiceAsync rpcService, HandlerManager eventBus, Display view) 
 	{
 		this.display = view;
-		this.eventBus = eventBus;
 		this.rpcService = rpcService;
 	}
 
@@ -56,14 +53,14 @@ public class CreatePasswordPresenter implements Presenter
 		setHandlers();
 		fetchUser();
 	}
-	
+
 	public void fetchUser(){
-		
+
 		rpcService.fetchNewUser(display.getCreatePasswordToken(), new AsyncCallback<UserEntity>(){
 
 			@Override
 			public void onFailure(Throwable caught) {
-			
+
 			}
 
 			@Override
@@ -72,15 +69,15 @@ public class CreatePasswordPresenter implements Presenter
 				isLoggedInWithIn20Mins();
 			}
 
-			});
+		});
 	}
-	
+
 	private void isLoggedInWithIn20Mins() {
 		rpcService.isLoggedInWithin20Mins(user, new AsyncCallback<Boolean>(){
 
 			@Override
 			public void onFailure(Throwable caught) {
-				
+
 			}
 
 			@Override
@@ -91,7 +88,7 @@ public class CreatePasswordPresenter implements Presenter
 				}
 			}});
 	}
-	
+
 
 	private void bind() {
 
@@ -100,22 +97,22 @@ public class CreatePasswordPresenter implements Presenter
 
 	@Override
 	public void setHandlers() {
-		
+
 		display.getBtnSubmit().addClickHandler(new ClickHandler(){
 
 			@Override
 			public void onClick(ClickEvent event) {
-				
-					CreatePasswordFieldVerifier fieldVerifier = new CreatePasswordFieldVerifier();
+
+				CreatePasswordFieldVerifier fieldVerifier = new CreatePasswordFieldVerifier();
 				if(fieldVerifier.registratonFieldsVerifid(display)){
 					user.setPassword(display.getTxtNewPassword().getText());
 					updatePassword();
 				}
-				
+
 			}});
-		
+
 	}
-	
+
 	public void updatePassword(){
 		display.getBtnSubmit().addStyleName("loading-pulse");
 		rpcService.updatePassword(user, new AsyncCallback<String>() {
@@ -133,7 +130,7 @@ public class CreatePasswordPresenter implements Presenter
 				History.newItem(ApplicationConstants.TOKEN_LOGIN);
 			}
 		});
-	
+
 	}
-	
+
 }

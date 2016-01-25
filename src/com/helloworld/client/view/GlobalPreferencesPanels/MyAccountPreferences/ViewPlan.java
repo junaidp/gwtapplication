@@ -97,6 +97,7 @@ public class ViewPlan extends Composite implements GlobalPreferencesPanels {
 		return checkBoxYearly;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void disableAllFields() {
 		paymentDetails.setChecked(false);
@@ -112,6 +113,7 @@ public class ViewPlan extends Composite implements GlobalPreferencesPanels {
 		
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void enableAllFields() {
 		paymentDetails.setChecked(true);
@@ -126,6 +128,7 @@ public class ViewPlan extends Composite implements GlobalPreferencesPanels {
 		checkBoxYearly.setEnabled(true);
 	}
 	
+	@SuppressWarnings("deprecation")
 	private void disablePaymentFields() {
 		
 		checkBoxMonthly.setChecked(false);
@@ -136,6 +139,7 @@ public class ViewPlan extends Composite implements GlobalPreferencesPanels {
 		checkBoxYearly.setEnabled(false);
 	}
 
+	@SuppressWarnings("deprecation")
 	private void enablePaymentFields() {
 		checkBoxMonthly.setChecked(true);
 		checkBoxMonthly.setEnabled(true);
