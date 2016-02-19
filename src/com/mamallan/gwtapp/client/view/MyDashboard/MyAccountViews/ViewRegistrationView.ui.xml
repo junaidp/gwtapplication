@@ -1,0 +1,50 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	
+	</ui:style>
+	<g:HTMLPanel>
+	
+		<div style="padding-left:40%">
+			<h4 class="text-light blue">View Registration</h4>
+			<g:HTMLPanel ui:field="panelName">
+				<div style="padding-top:5px">
+					<g:Label styleName="text-light blue inLine" text="Name: "></g:Label>
+					<g:Label styleName="text-light inLine" ui:field="lblName" ></g:Label>
+				</div>
+			</g:HTMLPanel>
+
+			<g:HTMLPanel ui:field="panelUserName">
+				<div style="padding-top:5px">
+					<g:Label styleName="text-light blue inLine" text="User Name: "></g:Label>
+					<g:Label styleName="text-light inLine" ui:field="lblUserName" ></g:Label>
+				</div>
+			</g:HTMLPanel>
+			
+			<g:HTMLPanel ui:field="panelEmail">
+				<div style="padding-top:5px">
+					<g:Label styleName="text-light blue inLine" text="Email: "></g:Label>
+					<g:Label styleName="text-light inLine inLine" ui:field="lblEmail" ></g:Label>
+				</div>
+			</g:HTMLPanel>
+
+			<g:HTMLPanel ui:field="panelRegisteredTo">
+				<div style="padding-top:5px">
+					<g:Label styleName="text-light blue inLine" text="Registered to: "></g:Label>
+					<g:Label styleName="text-light inLine" ui:field="lblRegisteredTo" ></g:Label>
+				</div>
+			</g:HTMLPanel>
+
+			<g:HTMLPanel ui:field="panelLastEdited">
+				<div style="padding-top:5px">
+					<g:Label styleName="text-light blue inLine" text="Last Edited: "></g:Label>
+					<g:Label styleName="text-light inLine" ui:field="lblLastEdited" ></g:Label>
+				</div>
+			</g:HTMLPanel>
+
+		</div>
+
+
+	</g:HTMLPanel>
+</ui:UiBinder> 

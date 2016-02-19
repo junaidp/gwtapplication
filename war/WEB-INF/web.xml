@@ -8,7 +8,7 @@
   <!-- Servlets -->
   <servlet>
     <servlet-name>greetServlet</servlet-name>
-    <servlet-class>com.helloworld.server.HelloServiceImpl</servlet-class>
+    <servlet-class>com.mamallan.gwtapp.server.HelloServiceImpl</servlet-class>
   </servlet>
   
   <servlet-mapping>
@@ -38,7 +38,7 @@
   
    <servlet>
     <servlet-name>uploadServlet</servlet-name>
-    <servlet-class>com.helloworld.server.FileUploadServlet</servlet-class>
+    <servlet-class>com.mamallan.gwtapp.server.FileUploadServlet</servlet-class>
   </servlet>
   
   <servlet-mapping>
@@ -48,7 +48,7 @@
   
    <servlet>
     <servlet-name>logoUploadServlet</servlet-name>
-    <servlet-class>com.helloworld.server.LogoUploadServlet</servlet-class>
+    <servlet-class>com.mamallan.gwtapp.server.LogoUploadServlet</servlet-class>
   </servlet>
   
   <servlet-mapping>

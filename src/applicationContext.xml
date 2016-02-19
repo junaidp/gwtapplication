@@ -6,35 +6,62 @@
 http://www.springframework.org/schema/beans/spring-beans-2.0.xsd"
 	default-lazy-init="true">
 
+
+
 	<!-- Datasource for LOCAL database connection -->
-      
-   	<bean id="dataSource"
+	
+	<bean id="transactionManager"
+    class="org.springframework.orm.jpa.JpaTransactionManager">
+    <property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+	
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="persistenceUnitName" value="data5PU" />
+		<property name="dataSource" ref="dataSource" />
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+			
+				<property name="showSql" value="false" />
+				<property name="generateDdl" value="true" />
+				<property name="databasePlatform" value="org.hibernate.dialect.MySQL5Dialect" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost/gwtapp" />
 		<property name="username" value="root" />
 		<property name="password" value="" />
-
+		
 	</bean>
-	
+
 	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+	
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="annotatedClasses">
+
 			<list>
-				<value>com.helloworld.shared.entity.UserEntity</value>
-				<value>com.helloworld.shared.entity.MyAccountPreferencesEntity</value>
-				<value>com.helloworld.shared.entity.GlobalPreferencesEntity</value>
-				<value>com.helloworld.shared.entity.MyAccountEntity</value>
-				<value>com.helloworld.shared.entity.BeanObjects</value>
-				
-			
+				<value>com.mamallan.gwtapp.shared.entity.UserEntity</value>
+				<value>com.mamallan.gwtapp.shared.entity.MyAccountPreferencesEntity
+				</value>
+				<value>com.mamallan.gwtapp.shared.entity.GlobalPreferencesEntity
+				</value>
+				<value>com.mamallan.gwtapp.shared.entity.MyAccountEntity</value>
+				<value>com.mamallan.gwtapp.shared.entity.BeanObjects</value>
+
+
 			</list>
 		</property>
 	</bean>
-	<bean id="ManagerApp" class="com.helloworld.database.MyRdbHelper">
+	
+	<bean id="ManagerApp" class="com.mamallan.gwtapp.database.MyRdbHelper">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
+	
 </beans>
 

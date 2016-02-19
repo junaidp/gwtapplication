@@ -309,6 +309,43 @@ http://maven.apache.org/maven-v4_0_0.xsd">
 			<version>2.7.2</version>
 		</dependency>
 		
+		
+		<!-- SPRING 4 DEPENDENCIES 
+		
+		Home >> Spring Framework >> Spring 4.0 Environment Setup
+Spring 4.0 Environment Setup
+November 22, 2013 by Krishna Srinivasan Leave a Comment
+
+6
+5
+9
+6
+This tutorial explains how to setup your environment for working with the Spring 4.0 examples. Instead of explaining this process in every article, I would write it here so that this tutorial will be linked from the all Spring 4.0 tutorials for the setup reference.
+
+Spring 4.0 Maven Dependency
+
+
+
+ 
+<dependencies>
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        <version>4.0.0.RC1</version>
+    </dependency>
+</dependencies>
+<repositories>
+    <repository>
+        <id>spring-milestones</id>
+        <name>Spring Milestones</name>
+        <url>http://repo.spring.io/milestone</url>
+        <snapshots>
+            <enabled>false</enabled>
+        </snapshots>
+    </repository>
+</repositories>
+		
+		-->
     </dependencies>
 
 	<repositories>
@@ -408,7 +445,7 @@ http://maven.apache.org/maven-v4_0_0.xsd">
 			  <!-- Additional arguments like -style DETAILED or -logLevel DEBUG -->
 			  <!-- <arg line="-optimize 0"  /> -->
 			  <!-- <arg line="-style PRETTY"/> -->
-			  <arg value="com.helloworld.HelloWorldGWT"/>
+			  <arg value="com.mamallan.gwtapp.HelloWorldGWT"/>
 			</java>
 
               </tasks>
