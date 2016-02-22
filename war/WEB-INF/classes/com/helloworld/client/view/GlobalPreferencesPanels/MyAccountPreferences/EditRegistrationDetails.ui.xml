@@ -1,0 +1,35 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	
+	</ui:style>
+	<g:HTMLPanel>
+		<div style="padding-left:40%">
+		<h4 class="text-light blue">Edit Registration</h4>
+		
+			<g:CheckBox ui:field="checkShowThisPanel">Show this panel</g:CheckBox>
+		</div>
+		<div style="padding-left:5px; padding-top:5px">
+			<g:CheckBox ui:field="checkName">Name</g:CheckBox>
+		</div>
+		<div style="padding-left:5px; padding-top:5px">
+			<g:CheckBox ui:field="checkEmail">Email</g:CheckBox>
+		</div>
+		<div style="padding-left:5px; padding-top:5px">
+			<g:CheckBox ui:field="checkRegisteredTo">Registered to</g:CheckBox>
+		</div>
+		<div style="padding-left:5px; padding-top:5px">
+			<g:CheckBox ui:field="checkUserName">User Name</g:CheckBox>
+		</div>
+
+		<div style="padding-left:5px; padding-top:5px">
+			<g:CheckBox ui:field="checkPassword">Password</g:CheckBox>
+		</div>
+		
+		<div style="padding-left:5px; padding-top:5px">
+			<g:CheckBox ui:field="checkCloseAccount">Close Account</g:CheckBox>
+		</div>
+
+	</g:HTMLPanel>
+</ui:UiBinder> 
