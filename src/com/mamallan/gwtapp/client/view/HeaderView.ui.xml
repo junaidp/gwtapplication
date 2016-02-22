@@ -1,0 +1,72 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	
+	</ui:style>
+	<g:HTMLPanel>
+		<head>
+			<link href="Metro-UI-CSS-master/build/css/metro.css" rel="stylesheet" />
+			<link href="Metro-UI-CSS-master/build/css/metro.min.css" rel="stylesheet" />
+			<link href="Metro-UI-CSS-master/build/css/metro.responsive" rel="stylesheet" />
+			<link href="Metro-UI-CSS-master/build/css/metro.schemes" rel="stylesheet" />
+			<script src="jquery.js"></script>
+			<script src="Metro-UI-CSS-master/build/js/metro.js"></script>
+		</head>
+		<body class="metro">
+			<div class="app-bar">
+				<a class="app-bar-element">
+					<g:Image url="intelligence.png" ui:field="imgLogo"></g:Image>
+				</a>
+				<span class="app-bar-divider"></span>
+				<ul class="app-bar-menu">
+					<li>
+						<g:HTMLPanel>
+							<g:FocusPanel ui:field="menuHome">
+								<g:HTMLPanel>
+									<div style="padding-left:20px; padding-right:20px">
+										Home
+									</div>
+								</g:HTMLPanel>
+							</g:FocusPanel>
+						</g:HTMLPanel>
+
+					</li>
+					<li>
+						<div style="padding-left:20px; padding-right:20px">
+							<div class="dropdown-toggle">Products</div>
+						</div>
+						<ul class="d-menu" data-role="dropdown">
+							<li>Windows 10</li>
+							<li>Spartan</li>
+							<li>Outlook</li>
+							<li>Office 2015</li>
+							<li class="divider"></li>
+							<li>
+								<a href="" class="dropdown-toggle">Other Products</a>
+								<ul class="d-menu" data-role="dropdown">
+									<li>
+										<a href="">Internet Explorer 10</a>
+									</li>
+									<li>
+										<a href="">Skype</a>
+									</li>
+									<li>
+										<a href="">Surface</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+
+				</ul>
+			</div>
+
+		</body>
+
+
+
+
+
+	</g:HTMLPanel>
+</ui:UiBinder> 

@@ -1,0 +1,31 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:v="urn:import:com.mamallan.gwtapp.client.view">
+	<ui:style>
+	
+	</ui:style>
+
+
+	<g:HTMLPanel>
+		<head>
+			<link href="Metro-UI-CSS-master/build/css/metro.css" rel="stylesheet" />
+			<script src="jquery.js"></script>
+			<script src="Metro-UI-CSS-master/build/js/metro.js"></script>
+		</head>
+
+		<div style="padding-left:500px; padding-top:10%">
+
+			<div style="padding:5px; padding-top:5px">
+				<g:TextBox styleName="input-control text" ui:field="email" text="admin@email.com">
+				</g:TextBox>
+				<g:Button ui:field="submit" styleName="button primary">Verify</g:Button>
+				<div style="padding:25px">
+					<g:Anchor styleName="hover" ui:field="registerAccount">Register new account</g:Anchor>
+
+				</div>
+
+			</div>
+		</div>
+
+	</g:HTMLPanel>
+</ui:UiBinder> 

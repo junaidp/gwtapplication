@@ -1,0 +1,29 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:M="urn:import:com.mamallan.gwtapp.client.view.MyDashboard">
+	<ui:style>
+	
+	</ui:style>
+	<g:HTMLPanel>
+	<div>
+			<div style="overflow: hidden">
+				<div style="float: left; padding:2px">
+					<M:ConfigurationView></M:ConfigurationView>
+
+				</div>
+				<div style=" float: left; padding:2px">
+					<M:RunTimeView></M:RunTimeView>
+				</div>
+				<div style="float: left; padding:2px">
+					<M:MyAccountPanel ui:field="myAccount"></M:MyAccountPanel>
+				</div>
+				<div style="float: left; padding:2px">
+					<M:ReportsView></M:ReportsView>
+				</div>
+			</div>
+			</div>
+	
+
+
+	</g:HTMLPanel>
+</ui:UiBinder> 
