@@ -1,7 +1,5 @@
 package com.mamallan.gwtapp.client.view.widgets.UploadedComponents;
-
 import java.util.Date;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -17,12 +15,9 @@ import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
-
 public class UploadedClass extends ApplicationBean{
-
 	private static UploadedClassUiBinder uiBinder = GWT
 			.create(UploadedClassUiBinder.class);
-
 	interface UploadedClassUiBinder extends UiBinder<Widget, UploadedClass> {
 	}
 	
@@ -41,7 +36,6 @@ public class UploadedClass extends ApplicationBean{
 		
 	
 	
-
 	public UploadedClass() {
 		initWidget(uiBinder.createAndBindUi(this));
 		listIds.addItem("0");
@@ -49,7 +43,6 @@ public class UploadedClass extends ApplicationBean{
 		listIds.addItem("2");
 		
 		listIds.addChangeHandler(new ChangeHandler(){
-
 			@Override
 			public void onChange(ChangeEvent event) {
 				pcs.firePropertyChange(listIds.getName(), "", Integer.parseInt(listIds.getItemText(listIds.getSelectedIndex())));
@@ -78,7 +71,6 @@ public class UploadedClass extends ApplicationBean{
 		});
 		
 		checkReceiveNotifications.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
-
 			@Override
 			public void onValueChange(ValueChangeEvent<Boolean> event) {
 				pcs.firePropertyChange(checkReceiveNotifications.getName(), "", event.getValue());
@@ -86,7 +78,6 @@ public class UploadedClass extends ApplicationBean{
 		});
 		
 		user_MyAccountEntity_lastEdited.addValueChangeHandler(new ValueChangeHandler<Date>() {
-
 			@Override
 			public void onValueChange(ValueChangeEvent<Date> event) {
 				pcs.firePropertyChange("userEntity_MyAccountEntity_lastEdited", "", event.getValue());
@@ -94,8 +85,6 @@ public class UploadedClass extends ApplicationBean{
 		});
 		
 	}
-
-
 		@UiHandler("textBoxName")
 		void onTextBoxBlur(BlurEvent event) { 
 			pcs.firePropertyChange(textBoxName.getName(),  "", textBoxName.getText());

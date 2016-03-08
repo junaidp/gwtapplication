@@ -41,6 +41,16 @@
     <servlet-class>com.mamallan.gwtapp.server.FileUploadServlet</servlet-class>
   </servlet>
   
+  <servlet>
+    <servlet-name>javaUploadServlet</servlet-name>
+    <servlet-class>com.mamallan.gwtapp.server.ComponentJavaUploadServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>xmlUploadServlet</servlet-name>
+    <servlet-class>com.mamallan.gwtapp.server.ComponentXmlUploadServlet</servlet-class>
+  </servlet>
+  
   <servlet-mapping>
     <servlet-name>uploadServlet</servlet-name>
     <url-pattern>*.gupld</url-pattern>
@@ -54,6 +64,16 @@
   <servlet-mapping>
     <servlet-name>logoUploadServlet</servlet-name>
     <url-pattern>*.gupld1</url-pattern>
+  </servlet-mapping>
+  
+   <servlet-mapping>
+    <servlet-name>javaUploadServlet</servlet-name>
+    <url-pattern>/javaUpload</url-pattern>
+  </servlet-mapping>
+  
+   <servlet-mapping>
+    <servlet-name>xmlUploadServlet</servlet-name>
+    <url-pattern>/xmlUpload</url-pattern>
   </servlet-mapping>
   
   <!-- Default page to serve -->

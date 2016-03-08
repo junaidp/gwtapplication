@@ -29,7 +29,8 @@ public class JavaComponentAttachment extends VerticalPanel {
 		form.setEncoding(FormPanel.ENCODING_MULTIPART);
 		form.setMethod(FormPanel.METHOD_POST);
 //		form.setAction("xmlUploadServlet");
-		form.setAction(GWT.getModuleBaseURL()+"javaUpload");
+//		form.setAction(GWT.getModuleBaseURL()+"javaUpload");
+		form.setAction("javaUpload");
 		hpnl.setSpacing(10);
 		add(form);
   }

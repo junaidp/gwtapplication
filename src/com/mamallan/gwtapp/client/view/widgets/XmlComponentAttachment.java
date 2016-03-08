@@ -29,7 +29,7 @@ public class XmlComponentAttachment extends VerticalPanel {
 		form.setEncoding(FormPanel.ENCODING_MULTIPART);
 		form.setMethod(FormPanel.METHOD_POST);
 //		form.setAction("xmlUploadServlet");
-		form.setAction(GWT.getModuleBaseURL()+"xmlUpload");
+		form.setAction("xmlUpload");
 		hpnl.setSpacing(10);
 		add(form);
 		

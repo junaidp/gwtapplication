@@ -1,4 +1,4 @@
-package com.mamallan.gwtapp.client.event;
+package main.java.com.mamallan.gwtapp.client.event;
 
 import com.google.gwt.event.shared.GwtEvent;
 
