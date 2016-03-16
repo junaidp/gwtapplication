@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Table(name="beanobjects")
 
@@ -32,6 +33,9 @@ public class BeanObjects   implements Serializable {
 	
 	@Column(name="beanType")
 	private char beanType;
+	
+	@Transient
+	private String beanJson;
 
 	public int getBeanId() {
 		return beanId;
@@ -63,6 +67,14 @@ public class BeanObjects   implements Serializable {
 
 	public void setBeanType(char beanType) {
 		this.beanType = beanType;
+	}
+
+	public String getBeanJson() {
+		return beanJson;
+	}
+
+	public void setBeanJson(String beanJson) {
+		this.beanJson = beanJson;
 	}
 
 	

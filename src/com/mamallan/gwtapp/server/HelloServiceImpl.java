@@ -23,6 +23,7 @@ import com.mamallan.gwtapp.database.MyRdbHelper;
 import com.mamallan.gwtapp.org.hibernate.DynHelper;
 import com.mamallan.gwtapp.shared.dto.AddedBeanDTO;
 import com.mamallan.gwtapp.shared.dto.AnnotationsDTO;
+import com.mamallan.gwtapp.shared.entity.BeanObjects;
 import com.mamallan.gwtapp.shared.entity.GlobalPreferencesEntity;
 import com.mamallan.gwtapp.shared.entity.MyAccountEntity;
 import com.mamallan.gwtapp.shared.entity.UserEntity;
@@ -488,5 +489,10 @@ HelloService {
 	@Override
 	public String loadBeansJsonAndCreateDynamicBeans() throws Exception {
 		return rdbHelper.loadBeansJsonAndCreateDynamicBeans();
+	}
+
+	@Override
+	public ArrayList<BeanObjects> fetchAllBeansInDb() throws Exception {
+		return fetchAllBeansInDb();
 	}
 }

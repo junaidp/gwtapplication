@@ -690,6 +690,33 @@ public class MyRdbHelper {
 		}
 
 	}
+	
+	public ArrayList<BeanObjects> fetchAllBeansInDb()throws Exception{
+		Session session = null;
+		ArrayList<BeanObjects> beanObjects = new ArrayList<BeanObjects>();
+		try{
+			session = sessionFactory.openSession();
+			Criteria crit = session.createCriteria(BeanObjects.class);
+			if(crit.list().size() > 0){
+				for(int i=0; i< crit.list().size(); i++){
+					BeanObjects beanObject = (BeanObjects) crit.list().get(i);
+				ObjectMapper mapper = new ObjectMapper();
+				byte[] bdata = beanObject.getBeanObject().getBytes(1, (int) beanObject.getBeanObject().length());
+				mapper.setSerializationInclusion(Inclusion.NON_NULL);
+				String beanJson = mapper.writeValueAsString(toObject(bdata));
+				beanObject.setBeanJson(beanJson);
+				beanObjects.add(beanObject);
+				}
+				
+			
+			}
+			return beanObjects;
+		}catch(Exception ex){
+			logger.warn(String.format("Exception occured in fetchAllBeansInDb", ex.getMessage()), ex);
+			throw new Exception("Exception occured in fetchAllBeansInDb");
+		}
+
+	}
 
 
 	public static byte[] serialize(Object obj) throws IOException {

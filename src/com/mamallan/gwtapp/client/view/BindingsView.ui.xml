@@ -5,7 +5,9 @@
 	
 	</ui:style>
 	<g:HTMLPanel>
-	<g:Button styleName="button primary" ui:field="btnAddBinding">Add Bindin</g:Button>
-	<c:CellTable ui:field="tableBindings"></c:CellTable>
+	<div style="padding-left:45%; padding-top:1%">
+	<g:Button styleName="button primary" ui:field="btnAddBinding">Add Binding</g:Button>
+	<c:CellTable ui:field="tableBindings" width="100%" height="300px"></c:CellTable>
+	</div>
 	</g:HTMLPanel>
 </ui:UiBinder> 

@@ -15,6 +15,7 @@ import com.mamallan.gwtapp.client.HelloServiceAsync;
 import com.mamallan.gwtapp.client.view.ApplicationConstants;
 import com.mamallan.gwtapp.client.view.PopupsView;
 import com.mamallan.gwtapp.client.view.widgets.AddBindingWidget;
+import com.mamallan.gwtapp.shared.entity.BeanObjects;
 import com.smartgwt.client.util.SC;
 
 public class BindingsPresenter implements Presenter 
@@ -53,27 +54,28 @@ public class BindingsPresenter implements Presenter
 
 			final LinkedHashMap<String, String> valueMapBindingsList = new LinkedHashMap<String, String>();  
 
-			rpcService.fetchPackages(new AsyncCallback<ArrayList<String>>() {
-
+			rpcService.fetchAllBeansInDb(new AsyncCallback<ArrayList<BeanObjects>>() {
+				
 				@Override
-				public void onFailure(Throwable caught) {
-					SC.warn("fetchPackages failed : "+ caught.getLocalizedMessage());
-				}
-
-				@Override
-				public void onSuccess(ArrayList<String> result) {
+				public void onSuccess(ArrayList<BeanObjects> result) {
 					addBindingWidget.getListBindings().clearValue();
 
 					for(int i=0; i< result.size(); i++){
-						if(result.get(i).startsWith(ApplicationConstants.DEFAULT_PACKAGE)){
-							valueMapBindingsList.put(result.get(i), result.get(i));
-						}
+						
+							valueMapBindingsList.put(result.get(i).getBeanName(), result.get(i).getBeanId()+"");
+						
 					}
 					addBindingWidget.getListBindings().setValueMap(valueMapBindingsList);
 					addBindingWidget.getListBindings().setDefaultValue("Select Binding");
-
+				}
+				
+				@Override
+				public void onFailure(Throwable caught) {
+					SC.warn("fetch beans failed : "+ caught.getLocalizedMessage());
 				}
 			});
+
+				
 
 		}
 

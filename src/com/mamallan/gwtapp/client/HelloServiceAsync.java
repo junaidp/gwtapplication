@@ -6,6 +6,7 @@ import java.util.TreeMap;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.mamallan.gwtapp.shared.dto.AddedBeanDTO;
 import com.mamallan.gwtapp.shared.dto.AnnotationsDTO;
+import com.mamallan.gwtapp.shared.entity.BeanObjects;
 import com.mamallan.gwtapp.shared.entity.GlobalPreferencesEntity;
 import com.mamallan.gwtapp.shared.entity.MyAccountEntity;
 import com.mamallan.gwtapp.shared.entity.UserEntity;
@@ -50,4 +51,5 @@ public interface HelloServiceAsync {
 	void fetchBeanObject(String beanName, AsyncCallback<String> asyncCallback);
 	void downloadBeanFieldsJson(String beanName, AsyncCallback<String> asyncCallback);
 	void loadBeansJsonAndCreateDynamicBeans(AsyncCallback<String> asyncCallback);
+	void fetchAllBeansInDb(AsyncCallback<ArrayList<BeanObjects>> asyncCallback);
 }
