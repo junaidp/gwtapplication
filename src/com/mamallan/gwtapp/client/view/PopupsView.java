@@ -27,7 +27,7 @@ public class PopupsView {
 	public PopupsView(Widget widget) {
 		HorizontalPanel hpnlClose = new HorizontalPanel();
 		hpnlSPace = new HorizontalPanel();
-		hpnlSPace.setWidth("800px");
+		hpnlSPace.setWidth("500px");
 		hpnlClose.add(hpnlSPace);
 		hpnlClose.add(close);
 		close.setStyleName("hover");
@@ -35,10 +35,10 @@ public class PopupsView {
 		vpnlMain = new VerticalPanel();
 		vpnlMain.add(hpnlClose);
 		vpnlMain.add(widget);
-		vpnlMain.setSize("800px","425px");
+//		vpnlMain.setSize("800px","425px");
 		//vpnlMain.
 		popup.setWidget(vpnlMain);
-		
+		popup.setStyleName("whitebg");
 		popup.setGlassEnabled(true);
 		popup.center();
 		

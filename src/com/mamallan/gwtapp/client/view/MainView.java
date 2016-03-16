@@ -35,6 +35,7 @@ public class MainView extends Composite implements Display{
 	@UiField Anchor ancBeanData;
 	@UiField Anchor ancDynamicBeanEditor;
 	@UiField Anchor ancDynamicBeanData;
+	@UiField Anchor ancBindings;
 
 	public MainView(UserEntity loggedInUser) {
 		initWidget(uiBinder.createAndBindUi(this));
@@ -95,6 +96,10 @@ public class MainView extends Composite implements Display{
 
 	public Anchor getAncDynamicBeanData() {
 		return ancDynamicBeanData;
+	}
+
+	public Anchor getAncBindings() {
+		return ancBindings;
 	}
 
 

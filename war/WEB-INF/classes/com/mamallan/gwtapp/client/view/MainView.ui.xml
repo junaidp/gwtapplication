@@ -20,6 +20,7 @@
 				<g:Anchor ui:field="ancDynamicBeanData" styleName=" hover" wordWrap="false"> DynBean Data Screen</g:Anchor>
 				<g:Anchor ui:field="ancDownloadJson" styleName=" hover" wordWrap="false"> Download Json </g:Anchor>
 				<g:Anchor ui:field="ancGlobalPreferences" styleName=" hover" wordWrap="false"> Global Preferences</g:Anchor>
+				<g:Anchor ui:field="ancBindings" styleName=" hover" wordWrap="false"> Bindings </g:Anchor>
 				
 				
 				</g:VerticalPanel>

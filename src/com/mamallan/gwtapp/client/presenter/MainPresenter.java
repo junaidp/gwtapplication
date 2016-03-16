@@ -40,6 +40,7 @@ public class MainPresenter implements Presenter
 		Anchor getAncBeanData();
 		Anchor getAncDynamicBeanEditor();
 		Anchor getAncDynamicBeanData();
+		Anchor getAncBindings();
 	}  
 
 	public MainPresenter(HelloServiceAsync rpcService, HandlerManager eventBus, Display view) 
@@ -152,6 +153,14 @@ public class MainPresenter implements Presenter
 			@Override
 			public void onClick(ClickEvent event) {
 				eventBus.fireEvent(new DynamicBeanEditorEvent());
+			}
+		});
+		
+		display.getAncBindings().addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				History.newItem(ApplicationConstants.TOKEN_BINDINGS);
 			}
 		});
 		

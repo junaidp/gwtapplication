@@ -1,4 +1,4 @@
-package com.mamallan.gwtapp.client.view.widgets.UploadedComponents;
+package main.java.com.mamallan.gwtapp.client.view.widgets.UploadedComponents;
 
 import java.util.Date;
 

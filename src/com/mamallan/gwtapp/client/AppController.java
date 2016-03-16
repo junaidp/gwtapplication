@@ -40,6 +40,7 @@ import com.mamallan.gwtapp.client.event.ViewPlanEventHandler;
 import com.mamallan.gwtapp.client.presenter.AdminPresenter;
 import com.mamallan.gwtapp.client.presenter.AssignDataToBeanPresenter;
 import com.mamallan.gwtapp.client.presenter.BeanFieldsEditorPresenter;
+import com.mamallan.gwtapp.client.presenter.BindingsPresenter;
 import com.mamallan.gwtapp.client.presenter.CreatePasswordPresenter;
 import com.mamallan.gwtapp.client.presenter.DashboardAccordionPresenter;
 import com.mamallan.gwtapp.client.presenter.DashboardPresenter;
@@ -63,6 +64,7 @@ import com.mamallan.gwtapp.client.view.AdminView;
 import com.mamallan.gwtapp.client.view.ApplicationConstants;
 import com.mamallan.gwtapp.client.view.AssignDataToBeanView;
 import com.mamallan.gwtapp.client.view.BeanFieldsEditorView;
+import com.mamallan.gwtapp.client.view.BindingsView;
 import com.mamallan.gwtapp.client.view.CreatePasswordView;
 import com.mamallan.gwtapp.client.view.DownloadJsonView;
 import com.mamallan.gwtapp.client.view.FileUploadView;
@@ -448,6 +450,14 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 
 			if (token.equals(ApplicationConstants.TOKEN_DOWNLOAD_JSON)) {
 				presenter = new DownloadJsonPresenter(rpcService, eventBus, new DownloadJsonView());
+
+				if (presenter != null) {
+					presenter.go(container);
+				}
+			}
+			
+			if (token.equals(ApplicationConstants.TOKEN_BINDINGS)) {
+				presenter = new BindingsPresenter(rpcService, eventBus, new BindingsView());
 
 				if (presenter != null) {
 					presenter.go(container);

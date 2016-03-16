@@ -1,0 +1,27 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	
+	</ui:style>
+	<g:HTMLPanel>
+
+		<div
+			style="float:left; padding:5px;background-color: #E8E8E8;box-shadow: 2px 2px 3px #C8C8C8;margin:10px;border-radius:5px;width:550px">
+			  <div style="padding-left:96%">
+			  <g:Image ui:field="imgClose" url="images/close.jpg " styleName="hover"></g:Image>
+			  </div>
+			<div
+				style="border:groove;border-color:white;padding:10px;border-radius:5px">
+				<div style="padding-bottom:5px;padding-left:40%">
+					<g:Label styleName="blue"> Add Binding </g:Label>
+				</div>
+				<div>
+					<g:HTMLPanel ui:field="panelDynamicForm"></g:HTMLPanel>
+				</div>
+			</div>
+
+		</div>
+
+	</g:HTMLPanel>
+</ui:UiBinder> 

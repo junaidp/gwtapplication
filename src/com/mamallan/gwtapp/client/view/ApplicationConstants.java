@@ -34,6 +34,7 @@ public class ApplicationConstants {
 	public static final String TOKEN_UPLOAD_COMPONENTS = "uploadComponents";
 	public static final String TOKEN_UPLOAD_COMPONENTS_DYNAMICBEAN = "uploadComponentsDynamicBean";
 	public static final String TOKEN_DOWNLOAD_JSON = "downloadJson";
+	public static final String TOKEN_BINDINGS = "bindings";
 	
 
 
