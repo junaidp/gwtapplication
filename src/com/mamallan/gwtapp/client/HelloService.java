@@ -7,7 +7,9 @@ import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import com.mamallan.gwtapp.shared.dto.AddedBeanDTO;
 import com.mamallan.gwtapp.shared.dto.AnnotationsDTO;
+import com.mamallan.gwtapp.shared.dto.BeanObjectDTO;
 import com.mamallan.gwtapp.shared.entity.BeanObjects;
+import com.mamallan.gwtapp.shared.entity.BindingsEntity;
 import com.mamallan.gwtapp.shared.entity.GlobalPreferencesEntity;
 import com.mamallan.gwtapp.shared.entity.MyAccountEntity;
 import com.mamallan.gwtapp.shared.entity.UserEntity;
@@ -52,6 +54,9 @@ public interface HelloService extends RemoteService {
 	String fetchBeanObject(String beanName)throws Exception;
 	String downloadBeanFieldsJson(String beanName) throws Exception;
 	String loadBeansJsonAndCreateDynamicBeans()throws Exception;
-	ArrayList<BeanObjects> fetchAllBeansInDb()throws Exception;
+	ArrayList<BeanObjectDTO> fetchAllBeansInDb()throws Exception;
+	ArrayList<BindingsEntity> fetchAllBindings()throws Exception;
+	String saveBinding(BindingsEntity binding) throws Exception;
+	String deleteBinding(int bindingId) throws Exception;
 	
 }

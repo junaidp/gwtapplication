@@ -112,6 +112,8 @@ public class ApplicationConstants {
 	public static final String DYNAMIC_BEANS_FOLDER = "dynamicBeans";
 	public static final String DYNAMIC_BEAN = "dynamicBean";
 	public static final String JAVA_BEAN = "javaBean";
+	public static final String ENTER_BINDING_NAME = "Enter Binding Name";
+	public static final String ENTER_BINDING_VALUE = "Enter Binding Value";
 	
 	
 	

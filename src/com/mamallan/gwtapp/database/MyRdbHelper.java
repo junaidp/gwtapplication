@@ -57,10 +57,17 @@ import org.mindrot.BCrypt;
 
 
 
+
+
+
+
+
 //import com.helloworld.shared.beans.BeanSet;
 import com.mamallan.gwtapp.client.view.ApplicationConstants;
 import com.mamallan.gwtapp.org.hibernate.DynHelper;
+import com.mamallan.gwtapp.shared.dto.BeanObjectDTO;
 import com.mamallan.gwtapp.shared.entity.BeanObjects;
+import com.mamallan.gwtapp.shared.entity.BindingsEntity;
 import com.mamallan.gwtapp.shared.entity.GlobalPreferencesEntity;
 import com.mamallan.gwtapp.shared.entity.MyAccountEntity;
 import com.mamallan.gwtapp.shared.entity.UserEntity;
@@ -631,12 +638,12 @@ public class MyRdbHelper {
 			}
 
 			beanObjectEntity.setBeanName(selectedBeanName);
-			
-//			ByteArrayOutputStream out = new ByteArrayOutputStream();
-//		    ObjectOutputStream os = new ObjectOutputStream(out);
-//		    os.writeObject(beanObjectToSavedInDb);
-//		    byte[] serializedObject = out.toByteArray();
-			
+
+			//			ByteArrayOutputStream out = new ByteArrayOutputStream();
+			//		    ObjectOutputStream os = new ObjectOutputStream(out);
+			//		    os.writeObject(beanObjectToSavedInDb);
+			//		    byte[] serializedObject = out.toByteArray();
+
 			Blob blob = Hibernate.getLobCreator(session).createBlob(serialize(beanObjectToSavedInDb));
 			//			Blob blob = Hibernate.createBlob(serialize(beanObjectToSavedInDb));
 			beanObjectEntity.setBeanObject(blob);
@@ -681,7 +688,7 @@ public class MyRdbHelper {
 				byte[] bdata = beanObjects.getBeanObject().getBytes(1, (int) beanObjects.getBeanObject().length());
 				mapper.setSerializationInclusion(Inclusion.NON_NULL);
 				beanJson = mapper.writeValueAsString(toObject(bdata));
-			
+
 			}
 			return beanJson;
 		}catch(Exception ex){
@@ -690,27 +697,31 @@ public class MyRdbHelper {
 		}
 
 	}
-	
-	public ArrayList<BeanObjects> fetchAllBeansInDb()throws Exception{
+
+	public ArrayList<BeanObjectDTO> fetchAllBeansInDb()throws Exception{
 		Session session = null;
-		ArrayList<BeanObjects> beanObjects = new ArrayList<BeanObjects>();
+		ArrayList<BeanObjectDTO> beanObjectsDTO = new ArrayList<BeanObjectDTO>();
 		try{
 			session = sessionFactory.openSession();
 			Criteria crit = session.createCriteria(BeanObjects.class);
 			if(crit.list().size() > 0){
 				for(int i=0; i< crit.list().size(); i++){
 					BeanObjects beanObject = (BeanObjects) crit.list().get(i);
-				ObjectMapper mapper = new ObjectMapper();
-				byte[] bdata = beanObject.getBeanObject().getBytes(1, (int) beanObject.getBeanObject().length());
-				mapper.setSerializationInclusion(Inclusion.NON_NULL);
-				String beanJson = mapper.writeValueAsString(toObject(bdata));
-				beanObject.setBeanJson(beanJson);
-				beanObjects.add(beanObject);
+					BeanObjectDTO beanObjectDTO = new BeanObjectDTO();
+					beanObjectDTO.setBeanId(beanObject.getBeanId());
+					beanObjectDTO.setBeanName(beanObject.getBeanName());
+					ObjectMapper mapper = new ObjectMapper();
+					byte[] bdata = beanObject.getBeanObject().getBytes(1, (int) beanObject.getBeanObject().length());
+					mapper.setSerializationInclusion(Inclusion.NON_NULL);
+					String beanJson = mapper.writeValueAsString(toObject(bdata));
+					beanObject.setBeanJson(beanJson);
+					beanObjectDTO.setBeanJson(beanJson);
+					beanObjectsDTO.add(beanObjectDTO);
 				}
-				
-			
+
+
 			}
-			return beanObjects;
+			return beanObjectsDTO;
 		}catch(Exception ex){
 			logger.warn(String.format("Exception occured in fetchAllBeansInDb", ex.getMessage()), ex);
 			throw new Exception("Exception occured in fetchAllBeansInDb");
@@ -748,7 +759,7 @@ public class MyRdbHelper {
 
 	public String loadBeansJsonAndCreateDynamicBeans() throws Exception {
 
-		
+
 		return loadBeansJson();
 	}
 
@@ -761,7 +772,7 @@ public class MyRdbHelper {
 			String dir = System.getProperty("user.dir");
 			File folder = new File(dir+"\\"+ApplicationConstants.DYNAMIC_BEANS_FOLDER);
 			File[] listOfFiles = folder.listFiles();
-			
+
 			for (File file : listOfFiles) {
 				if (file.isFile()) {
 					Object obj = parser.parse(new FileReader(file));
@@ -770,8 +781,8 @@ public class MyRdbHelper {
 					int dashInd = file.getName().indexOf("-");
 					String beanName= file.getName().substring(dashInd+1, id);
 					fetchBeanTable(file.getName().substring(dashInd+1, id), jsonObject);
-//					DynHelper dyn = new DynHelper();
-//					dyn.createDynamicBeanFromOnModule(jsonObject, beanName);
+					//					DynHelper dyn = new DynHelper();
+					//					dyn.createDynamicBeanFromOnModule(jsonObject, beanName);
 				}
 			}
 
@@ -780,18 +791,64 @@ public class MyRdbHelper {
 		}
 		return "bena's json and table loaded";
 	}
-	
-	
+
+
 	public void fetchBeanTable(String beanName, JSONObject jsonObject) throws Exception{
 		try{
-		Session session = sessionFactory.openSession();
-		String sql = "SELECT * FROM "+beanName;
-		SQLQuery query = session.createSQLQuery(sql);
-		query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-		List dbData = query.list();
-		System.out.println(dbData);
-		DynHelper dyn = new DynHelper();
-		dyn.createDynamicBeanFromOnModule(dbData, jsonObject, beanName);
+			Session session = sessionFactory.openSession();
+			String sql = "SELECT * FROM "+beanName;
+			SQLQuery query = session.createSQLQuery(sql);
+			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+			List dbData = query.list();
+			System.out.println(dbData);
+			DynHelper dyn = new DynHelper();
+			dyn.createDynamicBeanFromOnModule(dbData, jsonObject, beanName);
+		}catch(Exception ex){
+			throw new Exception(ex);
+		}
+	}
+
+
+	public ArrayList<BindingsEntity> fetchAllBindings() throws Exception{
+
+		Session session = null;
+		ArrayList<BindingsEntity> listBindingsEntity = new ArrayList<BindingsEntity>();
+		try{
+			session = sessionFactory.openSession();
+			Criteria crit = session.createCriteria(BindingsEntity.class);
+			for(int i=0; i< crit.list().size(); i++){
+				BindingsEntity bindingsEntity = (BindingsEntity) crit.list().get(i);
+				listBindingsEntity.add(bindingsEntity);
+			}
+			return listBindingsEntity;
+		}catch(Exception ex){
+			throw new Exception(ex);
+		}
+	}
+
+
+	public String saveBinding(BindingsEntity binding) throws Exception {
+		Session session = null;
+		try{
+			session = sessionFactory.openSession();
+			session.save(binding);
+			session.flush();
+			return "binding saved";
+		}catch(Exception ex){
+			throw new Exception(ex);
+		}
+		
+	}
+
+
+	public String deleteBinding(int bindingId)throws Exception {
+		Session session = null;
+		try{
+			session = sessionFactory.openSession();
+			BindingsEntity bindingEntity = (BindingsEntity) session.get(BindingsEntity.class, bindingId);
+			session.delete(bindingEntity);
+			session.flush();
+			return "Binding Deleted";
 		}catch(Exception ex){
 			throw new Exception(ex);
 		}

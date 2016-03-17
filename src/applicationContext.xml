@@ -52,6 +52,7 @@ http://www.springframework.org/schema/beans/spring-beans-2.0.xsd"
 				</value>
 				<value>com.mamallan.gwtapp.shared.entity.MyAccountEntity</value>
 				<value>com.mamallan.gwtapp.shared.entity.BeanObjects</value>
+				<value>com.mamallan.gwtapp.shared.entity.BindingsEntity</value>
 
 
 			</list>

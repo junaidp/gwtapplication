@@ -1,0 +1,2 @@
+serviceClass: com.mamallan.gwtapp.client.HelloService
+path: C44C935647AB3E46799354EE5A5C775D.gwt.rpc
