@@ -32,6 +32,8 @@ public class BindingsPresenter implements Presenter
 	private final HelloServiceAsync rpcService;
 	private final HandlerManager eventBus;
 	private LinkedHashMap<String, String> valueMapBindingsList = new LinkedHashMap<String, String>();  
+	private BindingsEntity selectedBindingsEntity; // For Editing
+	private ArrayList<Integer> selectedBindings = new ArrayList<Integer>(); // For deletion
 
 	public interface Display 
 	{
@@ -40,7 +42,8 @@ public class BindingsPresenter implements Presenter
 		void popuplateTable(ArrayList<BindingsEntity> bindings);
 		Column<BindingsEntity, String> getEditColumn();
 		Column<BindingsEntity, String> getRemoveColumn();
-
+		Column<BindingsEntity, Boolean> getCbColumn();
+		Button getBtnDeleteBindings();
 	}  
 
 	public BindingsPresenter(HelloServiceAsync rpcService, HandlerManager eventBus, Display view) 
@@ -89,7 +92,13 @@ public class BindingsPresenter implements Presenter
 
 				}
 				addBindingWidget.getListBindings().setValueMap(valueMapBindingsList);
-				addBindingWidget.getListBindings().setDefaultValue("Select Binding");
+				addBindingWidget.getListBindings().setDefaultValue("int");
+
+				if(selectedBindingsEntity != null){
+					addBindingWidget.getTxtBindingName().setText(selectedBindingsEntity.getBindingName());
+					addBindingWidget.getTxtBindingValue().setText(selectedBindingsEntity.getBindingValue());
+					addBindingWidget.getListBindings().setValue(selectedBindingsEntity.getBindingType());
+				}
 			}
 
 			@Override
@@ -114,11 +123,47 @@ public class BindingsPresenter implements Presenter
 
 	private void bind() {
 
+		display.getCbColumn().setFieldUpdater(new FieldUpdater<BindingsEntity, Boolean>() {
+
+			@Override
+			public void update(int index, BindingsEntity object, Boolean value) {
+				if(value == true){
+					selectedBindings.add(object.getBindingId());
+				}else{
+					if(selectedBindings.contains(object.getBindingId())){
+						selectedBindings.remove(selectedBindings.indexOf(object.getBindingId()));
+					}
+				}
+				if(selectedBindings.size()>0){
+					display.getBtnDeleteBindings().setEnabled(true);
+				}else{
+					display.getBtnDeleteBindings().setEnabled(false);
+				}
+			}
+		});
+		
+		
+		display.getBtnDeleteBindings().addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				SC.ask("Are you sure to delete the selected Bindings " , new BooleanCallback() {  
+					public void execute(Boolean value) {  
+						if (value != null && value) {
+							deleteBindigs();
+
+						}
+					}
+			});
+			}
+		});
+
 		display.getEditColumn().setFieldUpdater(new FieldUpdater<BindingsEntity, String>() {
 
 			@Override
 			public void update(int index, BindingsEntity bindingsEntity, String value) {
-				editBinding(bindingsEntity);
+				selectedBindingsEntity = bindingsEntity;
+				editBinding();
 
 			}
 		});
@@ -129,7 +174,7 @@ public class BindingsPresenter implements Presenter
 			public void update(int index, BindingsEntity bindingsEntity, String value) {
 
 				final int bindingId = bindingsEntity.getBindingId();
-				SC.ask("binding named " + bindingsEntity.getBindingName()+ " will be deleted ", new BooleanCallback() {  
+				SC.ask("Are you sure to delete binding named " + bindingsEntity.getBindingName(), new BooleanCallback() {  
 					public void execute(Boolean value) {  
 						if (value != null && value) {
 							deleteBinding(bindingId);
@@ -146,42 +191,44 @@ public class BindingsPresenter implements Presenter
 
 			@Override
 			public void onClick(ClickEvent event) {
+				selectedBindingsEntity = null;
 				openAddBindingWidget();
 			}
 
-			
+
 
 		});
 	}
 
-	private void editBinding(BindingsEntity bindingsEntity) {
+	private void editBinding() {
 
-		openAddBindingWidget(bindingsEntity);
+		openAddBindingWidget();
 
 	}
 	
-	private void openAddBindingWidget(BindingsEntity bindingsEntity) {
-		AddBindingWidget addBindingWidget = new AddBindingWidget();
-		addBindingWidget.getTxtBindingName().setText(bindingsEntity.getBindingName());
-		addBindingWidget.getTxtBindingValue().setText(bindingsEntity.getBindingValue());
-//		addBindingWidget.getListBindings().
-		final PopupPanel popup = new PopupPanel();
-		popup.setWidget(addBindingWidget);
-		popup.center();
+	
 
-		addBindingWidget.getImgClose().addClickHandler(new ClickHandler() {
-
+	private void deleteBindigs() {
+		rpcService.deleteMultipleBindings(selectedBindings, new AsyncCallback<String>() {
+			
 			@Override
-			public void onClick(ClickEvent event) {
-				popup.removeFromParent();
+			public void onSuccess(String result) {
+				new DisplayAlert(result);
+				fetchBindings();
+				display.getBtnDeleteBindings().setEnabled(false);
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert(caught.getLocalizedMessage());
 			}
 		});
-		populateAddBindingWidget(addBindingWidget);
-		setAddBindingHandlers(addBindingWidget, popup);
+		
 	}
-	
+
 	private void openAddBindingWidget() {
 		AddBindingWidget addBindingWidget = new AddBindingWidget();
+
 		final PopupPanel popup = new PopupPanel();
 		popup.setWidget(addBindingWidget);
 		popup.center();
@@ -241,7 +288,12 @@ public class BindingsPresenter implements Presenter
 
 	private void saveBinding(final AddBindingWidget addBindingWidget, final PopupPanel popup) {
 
-		BindingsEntity bindingsEntity = new BindingsEntity();
+		BindingsEntity bindingsEntity = null;
+		if(selectedBindingsEntity == null){
+			bindingsEntity = new BindingsEntity();
+		}else{
+			bindingsEntity = selectedBindingsEntity;	
+		}
 		bindingsEntity.setBindingName(addBindingWidget.getTxtBindingName().getText());
 		bindingsEntity.setBindingType( addBindingWidget.getListBindings().getDisplayValue());
 		bindingsEntity.setBindingValue(addBindingWidget.getTxtBindingValue().getText());

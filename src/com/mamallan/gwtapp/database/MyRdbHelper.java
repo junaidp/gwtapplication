@@ -62,6 +62,7 @@ import org.mindrot.BCrypt;
 
 
 
+
 //import com.helloworld.shared.beans.BeanSet;
 import com.mamallan.gwtapp.client.view.ApplicationConstants;
 import com.mamallan.gwtapp.org.hibernate.DynHelper;
@@ -831,7 +832,7 @@ public class MyRdbHelper {
 		Session session = null;
 		try{
 			session = sessionFactory.openSession();
-			session.save(binding);
+			session.saveOrUpdate(binding);
 			session.flush();
 			return "binding saved";
 		}catch(Exception ex){
@@ -852,6 +853,14 @@ public class MyRdbHelper {
 		}catch(Exception ex){
 			throw new Exception(ex);
 		}
+	}
+
+
+	public String deleteMultipleBindings(ArrayList<Integer> bindingIds) throws Exception{
+		for(int i=0; i< bindingIds.size(); i++){
+			deleteBinding(bindingIds.get(i));
+		}
+		return "Bindings Deleted";
 	}
 }
 

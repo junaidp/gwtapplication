@@ -512,4 +512,10 @@ HelloService {
 	public String deleteBinding(int bindingId) throws Exception {
 		return rdbHelper.deleteBinding(bindingId);
 	}
+
+	@Override
+	public String deleteMultipleBindings(ArrayList<Integer> bndingIds)
+			throws Exception {
+		return rdbHelper.deleteMultipleBindings(bndingIds);
+	}
 }

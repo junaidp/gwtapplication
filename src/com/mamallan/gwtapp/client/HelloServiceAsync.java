@@ -57,4 +57,5 @@ public interface HelloServiceAsync {
 	void fetchAllBindings(AsyncCallback<ArrayList<BindingsEntity>> asyncCallback);
 	void saveBinding(BindingsEntity binding, AsyncCallback<String> asyncCallback);
 	void deleteBinding(int bindingId,  AsyncCallback<String> asyncCallback);
+	void deleteMultipleBindings(ArrayList<Integer> bindingIds, AsyncCallback<String> asyncCallback);
 }

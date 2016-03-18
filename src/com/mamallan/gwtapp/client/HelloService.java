@@ -58,5 +58,6 @@ public interface HelloService extends RemoteService {
 	ArrayList<BindingsEntity> fetchAllBindings()throws Exception;
 	String saveBinding(BindingsEntity binding) throws Exception;
 	String deleteBinding(int bindingId) throws Exception;
+	String deleteMultipleBindings(ArrayList<Integer> bndingIds) throws Exception;
 	
 }
