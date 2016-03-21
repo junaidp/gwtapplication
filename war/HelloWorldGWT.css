@@ -362,7 +362,7 @@ TextBox {
 }
 
 .bluebg {
-	background-color: blue;
+	background-color: #98AFC7 !important;
 }
 
 .bold {

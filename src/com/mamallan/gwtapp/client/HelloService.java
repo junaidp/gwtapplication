@@ -55,7 +55,7 @@ public interface HelloService extends RemoteService {
 	String downloadBeanFieldsJson(String beanName) throws Exception;
 	String loadBeansJsonAndCreateDynamicBeans()throws Exception;
 	ArrayList<BeanObjectDTO> fetchAllBeansInDb()throws Exception;
-	ArrayList<BindingsEntity> fetchAllBindings()throws Exception;
+	ArrayList<BindingsEntity> fetchAllBindings(String keyword)throws Exception;
 	String saveBinding(BindingsEntity binding) throws Exception;
 	String deleteBinding(int bindingId) throws Exception;
 	String deleteMultipleBindings(ArrayList<Integer> bndingIds) throws Exception;

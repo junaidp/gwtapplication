@@ -54,7 +54,7 @@ public interface HelloServiceAsync {
 	void downloadBeanFieldsJson(String beanName, AsyncCallback<String> asyncCallback);
 	void loadBeansJsonAndCreateDynamicBeans(AsyncCallback<String> asyncCallback);
 	void fetchAllBeansInDb(AsyncCallback<ArrayList<BeanObjectDTO>> asyncCallback);
-	void fetchAllBindings(AsyncCallback<ArrayList<BindingsEntity>> asyncCallback);
+	void fetchAllBindings(String keyword, AsyncCallback<ArrayList<BindingsEntity>> asyncCallback);
 	void saveBinding(BindingsEntity binding, AsyncCallback<String> asyncCallback);
 	void deleteBinding(int bindingId,  AsyncCallback<String> asyncCallback);
 	void deleteMultipleBindings(ArrayList<Integer> bindingIds, AsyncCallback<String> asyncCallback);

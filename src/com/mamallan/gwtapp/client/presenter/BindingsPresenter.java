@@ -6,8 +6,12 @@ import java.util.LinkedHashMap;
 import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.KeyUpEvent;
+import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.event.shared.HandlerManager;
+import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
+import com.google.gwt.user.cellview.client.RowStyles;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
@@ -44,6 +48,8 @@ public class BindingsPresenter implements Presenter
 		Column<BindingsEntity, String> getRemoveColumn();
 		Column<BindingsEntity, Boolean> getCbColumn();
 		Button getBtnDeleteBindings();
+		CellTable<BindingsEntity> getTableBindings();
+		TextBox getTxtSearch();
 	}  
 
 	public BindingsPresenter(HelloServiceAsync rpcService, HandlerManager eventBus, Display view) 
@@ -60,11 +66,11 @@ public class BindingsPresenter implements Presenter
 		bind();
 		setHandlers();
 		addPremetiveTypes();
-		fetchBindings();
+		fetchBindings("");
 	}
 
-	private void fetchBindings() {
-		rpcService.fetchAllBindings(new AsyncCallback<ArrayList<BindingsEntity>>() {
+	private void fetchBindings(String keyword) {
+		rpcService.fetchAllBindings(keyword, new AsyncCallback<ArrayList<BindingsEntity>>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
@@ -122,6 +128,14 @@ public class BindingsPresenter implements Presenter
 	}
 
 	private void bind() {
+		
+		display.getTxtSearch().addKeyUpHandler(new KeyUpHandler() {
+			
+			@Override
+			public void onKeyUp(KeyUpEvent event) {
+				fetchBindings(display.getTxtSearch().getText());
+			}
+		});
 
 		display.getCbColumn().setFieldUpdater(new FieldUpdater<BindingsEntity, Boolean>() {
 
@@ -129,9 +143,13 @@ public class BindingsPresenter implements Presenter
 			public void update(int index, BindingsEntity object, Boolean value) {
 				if(value == true){
 					selectedBindings.add(object.getBindingId());
+					
+					 display.getTableBindings().getRowElement(index).addClassName("bluebg");
+					
 				}else{
 					if(selectedBindings.contains(object.getBindingId())){
 						selectedBindings.remove(selectedBindings.indexOf(object.getBindingId()));
+						 display.getTableBindings().getRowElement(index).removeClassName("bluebg");
 					}
 				}
 				if(selectedBindings.size()>0){
@@ -214,7 +232,7 @@ public class BindingsPresenter implements Presenter
 			@Override
 			public void onSuccess(String result) {
 				new DisplayAlert(result);
-				fetchBindings();
+				fetchBindings("");
 				display.getBtnDeleteBindings().setEnabled(false);
 			}
 			
@@ -256,7 +274,7 @@ public class BindingsPresenter implements Presenter
 			@Override
 			public void onSuccess(String result) {
 				new DisplayAlert(result);
-				fetchBindings();
+				fetchBindings("");
 
 			}
 		});
@@ -270,6 +288,16 @@ public class BindingsPresenter implements Presenter
 			public void onClick(ClickEvent event) {
 				saveBinding(addBindingWidget, popup);
 			}});
+		
+		addBindingWidget.getTxtBindingValue().addKeyUpHandler(new KeyUpHandler() {
+			
+			@Override
+			public void onKeyUp(KeyUpEvent event) {
+				if(event.getNativeKeyCode() == 13){
+					saveBinding(addBindingWidget, popup);
+				}
+			}
+		});
 
 
 	}
@@ -306,9 +334,13 @@ public class BindingsPresenter implements Presenter
 
 			@Override
 			public void onSuccess(String result) {
+				if(result.equals("binding saved")){
 				new DisplayAlert(result);
-				fetchBindings();
+				fetchBindings("");
 				popup.removeFromParent();
+				}else{
+					SC.warn(result);
+				}
 			}
 		});
 

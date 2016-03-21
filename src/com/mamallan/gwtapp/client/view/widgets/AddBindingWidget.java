@@ -3,6 +3,10 @@ package com.mamallan.gwtapp.client.view.widgets;
 import java.util.LinkedHashMap;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.BlurEvent;
+import com.google.gwt.event.dom.client.BlurHandler;
+import com.google.gwt.event.dom.client.KeyUpEvent;
+import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
@@ -49,6 +53,24 @@ public class AddBindingWidget extends Composite {
 		listBindings.setPickerIconHeight(40);
 		listBindings.setWidth(226);
 	
+		txtBindingName.addBlurHandler(new BlurHandler() {
+			
+			@Override
+			public void onBlur(BlurEvent event) {
+				listBindings.focusInItem();
+			}
+		});
+		
+		listBindings.addBlurHandler(new com.smartgwt.client.widgets.form.fields.events.BlurHandler() {
+			
+			@Override
+			public void onBlur(
+					com.smartgwt.client.widgets.form.fields.events.BlurEvent event) {
+				txtBindingValue.setFocus(true);
+			}
+		});
+		
+		
 	}
 
 	public ComboBoxItem getListBindings() {

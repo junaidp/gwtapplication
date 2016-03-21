@@ -31,6 +31,7 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import org.joda.time.DateTime;
 import org.joda.time.Minutes;
@@ -39,6 +40,9 @@ import org.json.simple.JSONObject;
 //import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.mindrot.BCrypt;
+
+
+
 
 
 
@@ -810,13 +814,14 @@ public class MyRdbHelper {
 	}
 
 
-	public ArrayList<BindingsEntity> fetchAllBindings() throws Exception{
+	public ArrayList<BindingsEntity> fetchAllBindings(String keyword) throws Exception{
 
 		Session session = null;
 		ArrayList<BindingsEntity> listBindingsEntity = new ArrayList<BindingsEntity>();
 		try{
 			session = sessionFactory.openSession();
 			Criteria crit = session.createCriteria(BindingsEntity.class);
+			crit.add(Restrictions.like("bindingName", keyword, MatchMode.START));
 			for(int i=0; i< crit.list().size(); i++){
 				BindingsEntity bindingsEntity = (BindingsEntity) crit.list().get(i);
 				listBindingsEntity.add(bindingsEntity);
@@ -831,14 +836,34 @@ public class MyRdbHelper {
 	public String saveBinding(BindingsEntity binding) throws Exception {
 		Session session = null;
 		try{
+			if(bindingNameAvailable(binding.getBindingName())){
 			session = sessionFactory.openSession();
 			session.saveOrUpdate(binding);
 			session.flush();
 			return "binding saved";
+			}else{
+				return "Binding Name not available, Please try another name for your binding";
+			}
 		}catch(Exception ex){
 			throw new Exception(ex);
 		}
 		
+	}
+	
+	public boolean bindingNameAvailable(String name)throws Exception{
+		Session session = null;
+		try{
+			session = sessionFactory.openSession();
+			Criteria crit =session.createCriteria(BindingsEntity.class);
+			crit.add(Restrictions.eq("bindingName", name));
+			if(crit.list().size()> 0){
+				return false;
+			}else{
+				return true;
+			}
+		}catch(Exception ex){
+			throw new Exception(ex);
+		}
 	}
 
 

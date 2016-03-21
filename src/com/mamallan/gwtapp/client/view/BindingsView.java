@@ -17,6 +17,7 @@ import com.google.gwt.user.cellview.client.ColumnSortEvent.ListHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.ListDataProvider;
@@ -36,18 +37,20 @@ public class BindingsView extends Composite implements Display{
 	Button btnAddBinding;
 	@UiField
 	Button btnDeleteBindings;
+	private CellTable.Resources tableRes = GWT.create(TableRes.class);
 	@UiField
-	CellTable<BindingsEntity> tableBindings;
+	VerticalPanel cellContainer;
+	private CellTable<BindingsEntity> tableBindings = new CellTable<BindingsEntity>(10, tableRes);
 	@UiField
 	SimplePager pager;
+	@UiField
+	TextBox txtSearch;
 	private Column<BindingsEntity, String> columnName;
 	private Column<BindingsEntity, String> columnType;
 	private Column<BindingsEntity, String> columnValue;
 	private Column<BindingsEntity, String> editColumn;
 	private Column<BindingsEntity, String> removeColumn;
 	private Column<BindingsEntity, Boolean> cbColumn;
-	
-//	private CellTable<BindingsEntity> tableBindings = new CellTable<BindingsEntity>();
 	
 
 	public BindingsView() {
@@ -56,9 +59,12 @@ public class BindingsView extends Composite implements Display{
 	}
 	
 	public void tableLayout(){
-		
+		cellContainer.add(tableBindings);
+	
+		tableBindings.setWidth("100%");
 		tableBindings.setEmptyTableWidget(new HTML("No Record found"));
 		tableBindings.setRowCount(0);
+		txtSearch.getElement().setPropertyString("placeholder", "search");
 		
 		final CheckboxCell cbCell = new CheckboxCell();
 		cbColumn = new Column<BindingsEntity, Boolean>(cbCell) {
@@ -68,7 +74,7 @@ public class BindingsView extends Composite implements Display{
 		        return false;
 		    }
 		};
-		tableBindings.addColumn(cbColumn,"Select");
+		tableBindings.addColumn(cbColumn,"");
 
 		columnName = new Column<BindingsEntity, String>(new TextCell()) {
 			@Override
@@ -114,6 +120,11 @@ public class BindingsView extends Composite implements Display{
 		columnName.setSortable(true);
 		columnType.setSortable(true);
 		columnValue.setSortable(true);
+		
+		tableBindings.setColumnWidth(0, "10px");
+		tableBindings.setColumnWidth(4, "10px");
+		tableBindings.setColumnWidth(5, "10px");
+		
 		
 	}
 	
@@ -220,6 +231,14 @@ public class BindingsView extends Composite implements Display{
 
 	public Button getBtnDeleteBindings() {
 		return btnDeleteBindings;
+	}
+
+	public CellTable<BindingsEntity> getTableBindings() {
+		return tableBindings;
+	}
+
+	public TextBox getTxtSearch() {
+		return txtSearch;
 	}
 
 }

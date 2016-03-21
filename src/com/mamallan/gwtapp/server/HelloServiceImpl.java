@@ -499,8 +499,8 @@ HelloService {
 	}
 
 	@Override
-	public ArrayList<BindingsEntity> fetchAllBindings() throws Exception {
-		return rdbHelper.fetchAllBindings();
+	public ArrayList<BindingsEntity> fetchAllBindings(String keyword) throws Exception {
+		return rdbHelper.fetchAllBindings(keyword);
 	}
 
 	@Override

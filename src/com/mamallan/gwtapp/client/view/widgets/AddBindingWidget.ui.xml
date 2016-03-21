@@ -19,7 +19,7 @@
 				</div>
 
 				<div>
-					<g:TextBox ui:field="txtBindingName" styleName="inLine" width="200px"></g:TextBox>
+					<g:TextBox ui:field="txtBindingName" styleName="inLine" width="200px" focus="true"></g:TextBox>
 				</div>
 				<div>
 					<g:HTMLPanel ui:field="panelBindingType"></g:HTMLPanel>

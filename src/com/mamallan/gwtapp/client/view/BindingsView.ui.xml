@@ -6,23 +6,35 @@
 	
 	</ui:style>
 	<g:HTMLPanel>
-	<div style="padding-left:35%; padding-top:1%">
-	<g:Button styleName="button primary" ui:field="btnAddBinding">Add Binding</g:Button>
-	</div>
-	<div style="padding-left:35%; padding:5px">
-	
-	<div style="width:100%">
-					<cellview:CellTable width='100%' pageSize='20'
-						ui:field='tableBindings' styleName="cellTable" />
-					<cellview:SimplePager ui:field="pager"
-						location='CENTER' addStyleNames="pagerPanel">
-					</cellview:SimplePager>
-				</div>
-	
-	
-	<div style="padding-left:50%">
-	 <g:Button ui:field="btnDeleteBindings" enabled="false"> Delete </g:Button>
-	</div>
-	</div>
+		<div style="padding-left:45%; padding-top:1%">
+			<g:Button styleName="button primary" ui:field="btnAddBinding">Add Binding</g:Button>
+		</div>
+		<div style="padding-left:28%">
+
+			<!-- <div style="width:100%"> <cellview:CellTable width='100%' pageSize='20' 
+				ui:field='tableBindings' styleName="cellTable" /> <cellview:SimplePager ui:field="pager" 
+				location='CENTER' addStyleNames="pagerPanel"> </cellview:SimplePager> </div> -->
+			<g:DecoratorPanel>
+				<g:VerticalPanel>
+				<g:HTMLPanel>
+					<g:TextBox ui:field="txtSearch"></g:TextBox>
+					<g:VerticalPanel ui:field="cellContainer" width="600px">
+					</g:VerticalPanel>
+					
+						<div style="padding-left:35%">
+							<cellview:SimplePager ui:field="pager"
+								location='CENTER' addStyleNames="pagerPanel">
+							</cellview:SimplePager>
+						</div>
+						<div style="padding-left:87%">
+							<g:Button ui:field="btnDeleteBindings" enabled="false" styleName="button danger" height="20px"> Delete </g:Button>
+						</div>
+					</g:HTMLPanel>
+				</g:VerticalPanel>
+			</g:DecoratorPanel>
+
+
+
+		</div>
 	</g:HTMLPanel>
 </ui:UiBinder> 
