@@ -114,7 +114,7 @@ public class ApplicationConstants {
 	public static final String JAVA_BEAN = "javaBean";
 	public static final String ENTER_BINDING_NAME = "Enter Binding Name";
 	public static final String ENTER_BINDING_VALUE = "Enter Binding Value";
-	
+	public static final String ENTER_NAME_SPACE = "Enter Name Space";
 	
 	
 	

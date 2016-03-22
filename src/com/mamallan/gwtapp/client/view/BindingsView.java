@@ -48,6 +48,7 @@ public class BindingsView extends Composite implements Display{
 	private Column<BindingsEntity, String> columnName;
 	private Column<BindingsEntity, String> columnType;
 	private Column<BindingsEntity, String> columnValue;
+	private Column<BindingsEntity, String> columnNameSpace;
 	private Column<BindingsEntity, String> editColumn;
 	private Column<BindingsEntity, String> removeColumn;
 	private Column<BindingsEntity, Boolean> cbColumn;
@@ -99,6 +100,14 @@ public class BindingsView extends Composite implements Display{
 			}
 		};
 		tableBindings.addColumn(columnValue,"Value");
+
+		columnNameSpace = new Column<BindingsEntity, String>(new TextCell()) {
+			@Override
+			public String getValue(BindingsEntity object) {
+				return object.getNameSpaceId().getNameSpaceName();
+			}
+		};
+		tableBindings.addColumn(columnNameSpace,"Name Space");
 		
 		removeColumn = new Column<BindingsEntity, String>(new ButtonImageCell()) {
 			@Override
@@ -120,6 +129,7 @@ public class BindingsView extends Composite implements Display{
 		columnName.setSortable(true);
 		columnType.setSortable(true);
 		columnValue.setSortable(true);
+		columnNameSpace.setSortable(true);
 		
 		tableBindings.setColumnWidth(0, "10px");
 		tableBindings.setColumnWidth(4, "10px");
@@ -195,11 +205,28 @@ public class BindingsView extends Composite implements Display{
 			}
 			});
 		
+		columnSortHandler.setComparator(columnNameSpace,new Comparator<BindingsEntity>() {
+
+			public int compare(BindingsEntity o1,BindingsEntity o2) {
+			if (o1 == o2) {
+			return 0;
+			}
+
+			// Compare the value columns.
+			if (o1 != null) {
+
+			return (o2 != null) ? o1.getNameSpaceId().getNameSpaceName().compareTo(o2.getNameSpaceId().getNameSpaceName()) : 1;
+			}
+			return -1;
+			}
+			});
+		
 		
 		
 				
 		
 		tableBindings.addColumnSortHandler(columnSortHandler);
+		tableBindings.getColumnSortList().push(columnNameSpace);
 		tableBindings.getColumnSortList().push(columnValue);
 		tableBindings.getColumnSortList().push(columnName);
 		tableBindings.getColumnSortList().push(columnType);

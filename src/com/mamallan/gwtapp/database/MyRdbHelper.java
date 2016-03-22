@@ -67,6 +67,7 @@ import org.mindrot.BCrypt;
 
 
 
+
 //import com.helloworld.shared.beans.BeanSet;
 import com.mamallan.gwtapp.client.view.ApplicationConstants;
 import com.mamallan.gwtapp.org.hibernate.DynHelper;
@@ -75,6 +76,7 @@ import com.mamallan.gwtapp.shared.entity.BeanObjects;
 import com.mamallan.gwtapp.shared.entity.BindingsEntity;
 import com.mamallan.gwtapp.shared.entity.GlobalPreferencesEntity;
 import com.mamallan.gwtapp.shared.entity.MyAccountEntity;
+import com.mamallan.gwtapp.shared.entity.NameSpaceEntity;
 import com.mamallan.gwtapp.shared.entity.UserEntity;
 
 
@@ -821,6 +823,7 @@ public class MyRdbHelper {
 		try{
 			session = sessionFactory.openSession();
 			Criteria crit = session.createCriteria(BindingsEntity.class);
+			crit.createAlias("nameSpaceId", "nameSpace");
 			crit.add(Restrictions.like("bindingName", keyword, MatchMode.START));
 			for(int i=0; i< crit.list().size(); i++){
 				BindingsEntity bindingsEntity = (BindingsEntity) crit.list().get(i);
@@ -886,6 +889,23 @@ public class MyRdbHelper {
 			deleteBinding(bindingIds.get(i));
 		}
 		return "Bindings Deleted";
+	}
+
+
+	public ArrayList<NameSpaceEntity> fetchNameSpaces()throws Exception {
+		Session session = null;
+		ArrayList<NameSpaceEntity> nameSpaceList = new ArrayList<NameSpaceEntity>();
+		try{
+			session = sessionFactory.openSession();
+			Criteria crit = session.createCriteria(NameSpaceEntity.class);
+			for(int i=0; i< crit.list().size(); i++){
+				NameSpaceEntity nameSpaceEntity = (NameSpaceEntity) crit.list().get(i);
+				nameSpaceList.add(nameSpaceEntity);
+			}
+			return nameSpaceList;
+		}catch(Exception ex){
+			throw new Exception(ex);
+		}
 	}
 }
 

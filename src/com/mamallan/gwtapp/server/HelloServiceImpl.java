@@ -28,6 +28,7 @@ import com.mamallan.gwtapp.shared.entity.BeanObjects;
 import com.mamallan.gwtapp.shared.entity.BindingsEntity;
 import com.mamallan.gwtapp.shared.entity.GlobalPreferencesEntity;
 import com.mamallan.gwtapp.shared.entity.MyAccountEntity;
+import com.mamallan.gwtapp.shared.entity.NameSpaceEntity;
 import com.mamallan.gwtapp.shared.entity.UserEntity;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
@@ -517,5 +518,10 @@ HelloService {
 	public String deleteMultipleBindings(ArrayList<Integer> bndingIds)
 			throws Exception {
 		return rdbHelper.deleteMultipleBindings(bndingIds);
+	}
+
+	@Override
+	public ArrayList<NameSpaceEntity> fetchNameSpaces() throws Exception {
+		return rdbHelper.fetchNameSpaces();
 	}
 }

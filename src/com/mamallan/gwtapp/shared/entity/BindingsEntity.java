@@ -4,9 +4,12 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Table(name="bindings")
@@ -29,6 +32,10 @@ public class BindingsEntity   implements Serializable {
 	
 	@Column(name="bindingValue")
 	private String bindingValue;
+	
+	@JoinColumn(name="nameSpaceId")
+	@ManyToOne( fetch = FetchType.LAZY )
+	private NameSpaceEntity nameSpaceId;
 	
 	
 
@@ -62,6 +69,14 @@ public class BindingsEntity   implements Serializable {
 
 	public void setBindingValue(String bindingValue) {
 		this.bindingValue = bindingValue;
+	}
+
+	public NameSpaceEntity getNameSpaceId() {
+		return nameSpaceId;
+	}
+
+	public void setNameSpaceId(NameSpaceEntity nameSpaceId) {
+		this.nameSpaceId = nameSpaceId;
 	}
 	
 

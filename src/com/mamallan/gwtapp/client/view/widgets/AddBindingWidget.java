@@ -30,6 +30,7 @@ public class AddBindingWidget extends Composite {
 	@UiField
 	HTMLPanel panelBindingType;
 	private ComboBoxItem listBindings = new ComboBoxItem();
+	private ComboBoxItem listNameSpace = new ComboBoxItem();
 	@UiField
 	Image imgClose;
 	@UiField 
@@ -45,13 +46,19 @@ public class AddBindingWidget extends Composite {
 		initWidget(uiBinder.createAndBindUi(this));
 		txtBindingName.getElement().setPropertyString("placeholder", ApplicationConstants.ENTER_BINDING_NAME);
 		txtBindingValue.getElement().setPropertyString("placeholder", ApplicationConstants.ENTER_BINDING_VALUE);
+		txtBindingValue.getElement().setPropertyString("placeholder", ApplicationConstants.ENTER_BINDING_VALUE);
+		
 		DynamicForm formPackages= new DynamicForm();
 		panelBindingType.add(formPackages);
-		formPackages.setItems(listBindings);
+		formPackages.setItems(listBindings, listNameSpace);
 		listBindings.setShowTitle(false);
 		listBindings.setHeight(20);
 		listBindings.setPickerIconHeight(40);
 		listBindings.setWidth(226);
+		listNameSpace.setShowTitle(false);
+		listNameSpace.setHeight(20);
+		listNameSpace.setPickerIconHeight(40);
+		listNameSpace.setWidth(226);
 	
 		txtBindingName.addBlurHandler(new BlurHandler() {
 			
@@ -62,6 +69,14 @@ public class AddBindingWidget extends Composite {
 		});
 		
 		listBindings.addBlurHandler(new com.smartgwt.client.widgets.form.fields.events.BlurHandler() {
+			
+			@Override
+			public void onBlur(
+					com.smartgwt.client.widgets.form.fields.events.BlurEvent event) {
+				listNameSpace.focusInItem();
+			}
+		});
+		listNameSpace.addBlurHandler(new com.smartgwt.client.widgets.form.fields.events.BlurHandler() {
 			
 			@Override
 			public void onBlur(
@@ -95,6 +110,10 @@ public class AddBindingWidget extends Composite {
 
 	public Button getBtnSave() {
 		return btnSave;
+	}
+
+	public ComboBoxItem getListNameSpace() {
+		return listNameSpace;
 	}
 
 }

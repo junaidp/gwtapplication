@@ -25,6 +25,7 @@ import com.mamallan.gwtapp.client.view.widgets.AddBindingWidget;
 import com.mamallan.gwtapp.client.view.widgets.DisplayAlert;
 import com.mamallan.gwtapp.shared.dto.BeanObjectDTO;
 import com.mamallan.gwtapp.shared.entity.BindingsEntity;
+import com.mamallan.gwtapp.shared.entity.NameSpaceEntity;
 import com.smartgwt.client.util.BooleanCallback;
 import com.smartgwt.client.util.SC;
 
@@ -35,7 +36,8 @@ public class BindingsPresenter implements Presenter
 	private final Display display;
 	private final HelloServiceAsync rpcService;
 	private final HandlerManager eventBus;
-	private LinkedHashMap<String, String> valueMapBindingsList = new LinkedHashMap<String, String>();  
+	private LinkedHashMap<String, String> valueMapBindingsList = new LinkedHashMap<String, String>();
+	private LinkedHashMap<String, String> valueMapNameSpaceList = new LinkedHashMap<String, String>();
 	private BindingsEntity selectedBindingsEntity; // For Editing
 	private ArrayList<Integer> selectedBindings = new ArrayList<Integer>(); // For deletion
 
@@ -67,6 +69,7 @@ public class BindingsPresenter implements Presenter
 		setHandlers();
 		addPremetiveTypes();
 		fetchBindings("");
+		
 	}
 
 	private void fetchBindings(String keyword) {
@@ -80,6 +83,37 @@ public class BindingsPresenter implements Presenter
 			@Override
 			public void onSuccess(ArrayList<BindingsEntity> result) {
 				display.popuplateTable(result);
+			}
+		});
+
+	}
+	
+	private void fetchNameSpaces(final AddBindingWidget addBindingWidget) {
+		rpcService.fetchNameSpaces(new AsyncCallback<ArrayList<NameSpaceEntity>>() {
+
+			@Override
+			public void onSuccess(ArrayList<NameSpaceEntity> result) {
+				addBindingWidget.getListBindings().clearValue();
+
+				for(int i=0; i< result.size(); i++){
+
+					valueMapNameSpaceList.put(result.get(i).getNameSpaceId()+"", result.get(i).getNameSpaceName());
+
+				}
+				addBindingWidget.getListNameSpace().setValueMap(valueMapNameSpaceList);
+//				addBindingWidget.getListBindings().setDefaultValue("int");
+
+				if(selectedBindingsEntity != null){
+					addBindingWidget.getTxtBindingName().setText(selectedBindingsEntity.getBindingName());
+					addBindingWidget.getTxtBindingValue().setText(selectedBindingsEntity.getBindingValue());
+					addBindingWidget.getListBindings().setValue(selectedBindingsEntity.getBindingType());
+					addBindingWidget.getListNameSpace().setValue(selectedBindingsEntity.getNameSpaceId().getNameSpaceName());
+				}
+			}
+
+			@Override
+			public void onFailure(Throwable caught) {
+				SC.warn("fetch namespaces failed : "+ caught.getLocalizedMessage());
 			}
 		});
 
@@ -249,6 +283,7 @@ public class BindingsPresenter implements Presenter
 
 		final PopupPanel popup = new PopupPanel();
 		popup.setWidget(addBindingWidget);
+		addBindingWidget.getTxtBindingName().setFocus(true);
 		popup.center();
 
 		addBindingWidget.getImgClose().addClickHandler(new ClickHandler() {
@@ -306,6 +341,7 @@ public class BindingsPresenter implements Presenter
 			AddBindingWidget addBindingWidget) {
 
 		fetchBeans(addBindingWidget);
+		fetchNameSpaces(addBindingWidget);
 
 	}
 
@@ -325,6 +361,9 @@ public class BindingsPresenter implements Presenter
 		bindingsEntity.setBindingName(addBindingWidget.getTxtBindingName().getText());
 		bindingsEntity.setBindingType( addBindingWidget.getListBindings().getDisplayValue());
 		bindingsEntity.setBindingValue(addBindingWidget.getTxtBindingValue().getText());
+		NameSpaceEntity nameSpace = new NameSpaceEntity();
+		nameSpace.setNameSpaceId(Integer.parseInt(addBindingWidget.getListBindings().getValueAsString()));
+		bindingsEntity.setNameSpaceId(nameSpace);
 		rpcService.saveBinding(bindingsEntity, new AsyncCallback<String>() {
 
 			@Override

@@ -27,6 +27,7 @@
 				<div>
 					<g:TextBox ui:field="txtBindingValue" styleName="inLine" width="200px"></g:TextBox>
 				</div>
+				
 				<!-- <div>
 					<g:TextBox ui:field="txtBindingNameSpace" styleName="inLine"></g:TextBox>
 				</div>

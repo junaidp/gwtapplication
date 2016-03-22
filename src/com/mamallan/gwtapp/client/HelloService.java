@@ -12,6 +12,7 @@ import com.mamallan.gwtapp.shared.entity.BeanObjects;
 import com.mamallan.gwtapp.shared.entity.BindingsEntity;
 import com.mamallan.gwtapp.shared.entity.GlobalPreferencesEntity;
 import com.mamallan.gwtapp.shared.entity.MyAccountEntity;
+import com.mamallan.gwtapp.shared.entity.NameSpaceEntity;
 import com.mamallan.gwtapp.shared.entity.UserEntity;
 
 /**
@@ -59,5 +60,7 @@ public interface HelloService extends RemoteService {
 	String saveBinding(BindingsEntity binding) throws Exception;
 	String deleteBinding(int bindingId) throws Exception;
 	String deleteMultipleBindings(ArrayList<Integer> bndingIds) throws Exception;
+	ArrayList<NameSpaceEntity>fetchNameSpaces()throws Exception;
+	
 	
 }
