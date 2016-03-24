@@ -840,25 +840,60 @@ public class MyRdbHelper {
 		Session session = null;
 		try{
 			if(bindingNameAvailable(binding.getBindingName())){
-			session = sessionFactory.openSession();
-			session.saveOrUpdate(binding);
-			session.flush();
-			return "binding saved";
+				session = sessionFactory.openSession();
+				if(binding.getNameSpaceId().getNameSpaceId() == 0){
+					if(nameSpaceAvailable(binding.getNameSpaceId().getNameSpaceName())){
+						saveNameSpace(binding.getNameSpaceId(), session);
+					}else{
+						return ApplicationConstants.NAMESPACE_NOT_AVAILABLE;
+					}
+				}
+
+				session.saveOrUpdate(binding);
+				session.flush();
+				return "binding saved";
 			}else{
-				return "Binding Name not available, Please try another name for your binding";
+				return ApplicationConstants.BINDING_NAME_NOT_AVAILABLE;
 			}
 		}catch(Exception ex){
 			throw new Exception(ex);
 		}
-		
+
 	}
-	
+
+	public void saveNameSpace(NameSpaceEntity nameSpaceEntity, Session session)throws Exception{
+		try{
+
+			session.saveOrUpdate(nameSpaceEntity);
+			session.flush();
+
+		}catch(Exception ex){
+			throw new Exception(ex);
+		}
+	}
+
 	public boolean bindingNameAvailable(String name)throws Exception{
 		Session session = null;
 		try{
 			session = sessionFactory.openSession();
 			Criteria crit =session.createCriteria(BindingsEntity.class);
 			crit.add(Restrictions.eq("bindingName", name));
+			if(crit.list().size()> 0){
+				return false;
+			}else{
+				return true;
+			}
+		}catch(Exception ex){
+			throw new Exception(ex);
+		}
+	}
+
+	public boolean nameSpaceAvailable(String name)throws Exception{
+		Session session = null;
+		try{
+			session = sessionFactory.openSession();
+			Criteria crit =session.createCriteria(NameSpaceEntity.class);
+			crit.add(Restrictions.eq("nameSpaceName", name));
 			if(crit.list().size()> 0){
 				return false;
 			}else{

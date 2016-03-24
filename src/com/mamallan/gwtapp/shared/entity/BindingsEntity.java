@@ -1,6 +1,7 @@
 package com.mamallan.gwtapp.shared.entity;
 
 import java.io.Serializable;
+import java.sql.Blob;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -37,7 +39,12 @@ public class BindingsEntity   implements Serializable {
 	@ManyToOne( fetch = FetchType.LAZY )
 	private NameSpaceEntity nameSpaceId;
 	
+	@Column(name="bindingValue_ext")
+	@Lob
+	private Blob bindingValue_ext;
 	
+	@Column(name="type")
+	private char type;
 
 	public int getBindingId() {
 		return bindingId;
@@ -77,6 +84,22 @@ public class BindingsEntity   implements Serializable {
 
 	public void setNameSpaceId(NameSpaceEntity nameSpaceId) {
 		this.nameSpaceId = nameSpaceId;
+	}
+
+	public Blob getBindingValue_ext() {
+		return bindingValue_ext;
+	}
+
+	public void setBindingValue_ext(Blob bindingValue_ext) {
+		this.bindingValue_ext = bindingValue_ext;
+	}
+
+	public char getType() {
+		return type;
+	}
+
+	public void setType(char type) {
+		this.type = type;
 	}
 	
 

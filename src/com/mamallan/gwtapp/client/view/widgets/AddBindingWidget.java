@@ -11,6 +11,7 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.TextBox;
@@ -39,6 +40,8 @@ public class AddBindingWidget extends Composite {
 	TextBox txtBindingValue;
 	@UiField 
 	Button btnSave;
+	@UiField
+	HTMLPanel htmlError;
 	private LinkedHashMap<String, String> valueMapDataType = new LinkedHashMap<String, String>();  
 	
 
@@ -116,4 +119,9 @@ public class AddBindingWidget extends Composite {
 		return listNameSpace;
 	}
 
+	public HTMLPanel getHtmlError() {
+		return htmlError;
+	}
+
+	
 }

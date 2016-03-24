@@ -18,6 +18,10 @@
 					<g:Label styleName="blue"> Add Binding </g:Label>
 				</div>
 
+				<div style="padding:5px">
+				<g:HTMLPanel ui:field="htmlError" styleName="redcolor"></g:HTMLPanel>
+				</div>
+				
 				<div>
 					<g:TextBox ui:field="txtBindingName" styleName="inLine" width="200px" focus="true"></g:TextBox>
 				</div>

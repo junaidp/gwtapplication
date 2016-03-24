@@ -115,6 +115,11 @@ public class ApplicationConstants {
 	public static final String ENTER_BINDING_NAME = "Enter Binding Name";
 	public static final String ENTER_BINDING_VALUE = "Enter Binding Value";
 	public static final String ENTER_NAME_SPACE = "Enter Name Space";
+	public static final String NAMESPACE_NOT_AVAILABLE = "Name Space not available, Please try another name for your namespace";
+	public static final String BINDING_NAME_NOT_AVAILABLE = "Binding Name not available, Please try another name for your binding";
+	public static final String BINDING_NAME_NOT_VALID = "Please select a valid name for your Binding ";
+	public static final String NAMESPACE_NAME_NOT_VALID = "Please select a valid name for your Namespace";
+	
 	
 	
 	

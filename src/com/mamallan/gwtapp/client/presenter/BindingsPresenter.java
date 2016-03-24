@@ -9,12 +9,14 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.event.shared.HandlerManager;
+import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.RowStyles;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.TextBox;
@@ -23,6 +25,7 @@ import com.mamallan.gwtapp.client.HelloServiceAsync;
 import com.mamallan.gwtapp.client.view.ApplicationConstants;
 import com.mamallan.gwtapp.client.view.widgets.AddBindingWidget;
 import com.mamallan.gwtapp.client.view.widgets.DisplayAlert;
+import com.mamallan.gwtapp.shared.BindingsFieldVerifier;
 import com.mamallan.gwtapp.shared.dto.BeanObjectDTO;
 import com.mamallan.gwtapp.shared.entity.BindingsEntity;
 import com.mamallan.gwtapp.shared.entity.NameSpaceEntity;
@@ -69,7 +72,7 @@ public class BindingsPresenter implements Presenter
 		setHandlers();
 		addPremetiveTypes();
 		fetchBindings("");
-		
+
 	}
 
 	private void fetchBindings(String keyword) {
@@ -87,7 +90,7 @@ public class BindingsPresenter implements Presenter
 		});
 
 	}
-	
+
 	private void fetchNameSpaces(final AddBindingWidget addBindingWidget) {
 		rpcService.fetchNameSpaces(new AsyncCallback<ArrayList<NameSpaceEntity>>() {
 
@@ -101,7 +104,7 @@ public class BindingsPresenter implements Presenter
 
 				}
 				addBindingWidget.getListNameSpace().setValueMap(valueMapNameSpaceList);
-//				addBindingWidget.getListBindings().setDefaultValue("int");
+				//				addBindingWidget.getListBindings().setDefaultValue("int");
 
 				if(selectedBindingsEntity != null){
 					addBindingWidget.getTxtBindingName().setText(selectedBindingsEntity.getBindingName());
@@ -162,9 +165,9 @@ public class BindingsPresenter implements Presenter
 	}
 
 	private void bind() {
-		
+
 		display.getTxtSearch().addKeyUpHandler(new KeyUpHandler() {
-			
+
 			@Override
 			public void onKeyUp(KeyUpEvent event) {
 				fetchBindings(display.getTxtSearch().getText());
@@ -177,13 +180,13 @@ public class BindingsPresenter implements Presenter
 			public void update(int index, BindingsEntity object, Boolean value) {
 				if(value == true){
 					selectedBindings.add(object.getBindingId());
-					
-					 display.getTableBindings().getRowElement(index).addClassName("bluebg");
-					
+
+					display.getTableBindings().getRowElement(index).addClassName("bluebg");
+
 				}else{
 					if(selectedBindings.contains(object.getBindingId())){
 						selectedBindings.remove(selectedBindings.indexOf(object.getBindingId()));
-						 display.getTableBindings().getRowElement(index).removeClassName("bluebg");
+						display.getTableBindings().getRowElement(index).removeClassName("bluebg");
 					}
 				}
 				if(selectedBindings.size()>0){
@@ -193,10 +196,10 @@ public class BindingsPresenter implements Presenter
 				}
 			}
 		});
-		
-		
+
+
 		display.getBtnDeleteBindings().addClickHandler(new ClickHandler() {
-			
+
 			@Override
 			public void onClick(ClickEvent event) {
 				SC.ask("Are you sure to delete the selected Bindings " , new BooleanCallback() {  
@@ -206,7 +209,7 @@ public class BindingsPresenter implements Presenter
 
 						}
 					}
-			});
+				});
 			}
 		});
 
@@ -257,25 +260,25 @@ public class BindingsPresenter implements Presenter
 		openAddBindingWidget();
 
 	}
-	
-	
+
+
 
 	private void deleteBindigs() {
 		rpcService.deleteMultipleBindings(selectedBindings, new AsyncCallback<String>() {
-			
+
 			@Override
 			public void onSuccess(String result) {
 				new DisplayAlert(result);
 				fetchBindings("");
 				display.getBtnDeleteBindings().setEnabled(false);
 			}
-			
+
 			@Override
 			public void onFailure(Throwable caught) {
 				Window.alert(caught.getLocalizedMessage());
 			}
 		});
-		
+
 	}
 
 	private void openAddBindingWidget() {
@@ -323,9 +326,9 @@ public class BindingsPresenter implements Presenter
 			public void onClick(ClickEvent event) {
 				saveBinding(addBindingWidget, popup);
 			}});
-		
+
 		addBindingWidget.getTxtBindingValue().addKeyUpHandler(new KeyUpHandler() {
-			
+
 			@Override
 			public void onKeyUp(KeyUpEvent event) {
 				if(event.getNativeKeyCode() == 13){
@@ -352,18 +355,40 @@ public class BindingsPresenter implements Presenter
 
 	private void saveBinding(final AddBindingWidget addBindingWidget, final PopupPanel popup) {
 
-		BindingsEntity bindingsEntity = null;
-		if(selectedBindingsEntity == null){
-			bindingsEntity = new BindingsEntity();
-		}else{
-			bindingsEntity = selectedBindingsEntity;	
+		addBindingWidget.getHtmlError().clear();
+		BindingsFieldVerifier bindingsFieldVerifier = new BindingsFieldVerifier();
+		bindingsFieldVerifier.validate(addBindingWidget);
+
+		if(bindingsFieldVerifier.getErrors().getErrors().size()<=0){
+			BindingsEntity bindingsEntity = null;
+			if(selectedBindingsEntity == null){
+				bindingsEntity = new BindingsEntity();
+			}else{
+				bindingsEntity = selectedBindingsEntity;	
+			}
+			bindingsEntity.setBindingName(addBindingWidget.getTxtBindingName().getText());
+			bindingsEntity.setBindingType( addBindingWidget.getListBindings().getDisplayValue());
+			bindingsEntity.setBindingValue(addBindingWidget.getTxtBindingValue().getText());
+			NameSpaceEntity nameSpace = new NameSpaceEntity();
+			try{
+				int nameSpaceId = Integer.parseInt(addBindingWidget.getListNameSpace().getValueAsString());
+				String name = addBindingWidget.getListNameSpace().getDisplayValue();
+				nameSpace.setNameSpaceId(nameSpaceId);
+				nameSpace.setNameSpaceName(name);
+			}catch(Exception ex){
+				nameSpace.setNameSpaceName(addBindingWidget.getListNameSpace().getValueAsString());
+			}
+
+			bindingsEntity.setNameSpaceId(nameSpace);
+			saveBindingInDb(popup, bindingsEntity);
 		}
-		bindingsEntity.setBindingName(addBindingWidget.getTxtBindingName().getText());
-		bindingsEntity.setBindingType( addBindingWidget.getListBindings().getDisplayValue());
-		bindingsEntity.setBindingValue(addBindingWidget.getTxtBindingValue().getText());
-		NameSpaceEntity nameSpace = new NameSpaceEntity();
-		nameSpace.setNameSpaceId(Integer.parseInt(addBindingWidget.getListBindings().getValueAsString()));
-		bindingsEntity.setNameSpaceId(nameSpace);
+		else{
+			addBindingWidget.getHtmlError().add(new HTML(bindingsFieldVerifier.getErrorMessages()));
+		}
+	}
+
+	private void saveBindingInDb(final PopupPanel popup,
+			BindingsEntity bindingsEntity) {
 		rpcService.saveBinding(bindingsEntity, new AsyncCallback<String>() {
 
 			@Override
@@ -374,15 +399,14 @@ public class BindingsPresenter implements Presenter
 			@Override
 			public void onSuccess(String result) {
 				if(result.equals("binding saved")){
-				new DisplayAlert(result);
-				fetchBindings("");
-				popup.removeFromParent();
+					new DisplayAlert(result);
+					fetchBindings("");
+					popup.removeFromParent();
 				}else{
 					SC.warn(result);
 				}
 			}
 		});
-
 	}
 
 }
