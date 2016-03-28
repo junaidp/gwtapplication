@@ -23,7 +23,8 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.ListDataProvider;
 import com.mamallan.gwtapp.client.presenter.BindingsPresenter.Display;
 import com.mamallan.gwtapp.client.view.widgets.ButtonImageCell;
-import com.mamallan.gwtapp.shared.entity.BindingsEntity;
+import com.mamallan.gwtapp.shared.dto.BindingsDTO;
+
 
 public class BindingsView extends Composite implements Display{
 
@@ -40,18 +41,18 @@ public class BindingsView extends Composite implements Display{
 	private CellTable.Resources tableRes = GWT.create(TableRes.class);
 	@UiField
 	VerticalPanel cellContainer;
-	private CellTable<BindingsEntity> tableBindings = new CellTable<BindingsEntity>(10, tableRes);
+	private CellTable<BindingsDTO> tableBindings = new CellTable<BindingsDTO>(10, tableRes);
 	@UiField
 	SimplePager pager;
 	@UiField
 	TextBox txtSearch;
-	private Column<BindingsEntity, String> columnName;
-	private Column<BindingsEntity, String> columnType;
-	private Column<BindingsEntity, String> columnValue;
-	private Column<BindingsEntity, String> columnNameSpace;
-	private Column<BindingsEntity, String> editColumn;
-	private Column<BindingsEntity, String> removeColumn;
-	private Column<BindingsEntity, Boolean> cbColumn;
+	private Column<BindingsDTO, String> columnName;
+	private Column<BindingsDTO, String> columnType;
+	private Column<BindingsDTO, String> columnValue;
+	private Column<BindingsDTO, String> columnNameSpace;
+	private Column<BindingsDTO, String> editColumn;
+	private Column<BindingsDTO, String> removeColumn;
+	private Column<BindingsDTO, Boolean> cbColumn;
 	
 
 	public BindingsView() {
@@ -68,57 +69,57 @@ public class BindingsView extends Composite implements Display{
 		txtSearch.getElement().setPropertyString("placeholder", "search");
 		
 		final CheckboxCell cbCell = new CheckboxCell();
-		cbColumn = new Column<BindingsEntity, Boolean>(cbCell) {
+		cbColumn = new Column<BindingsDTO, Boolean>(cbCell) {
 		    @Override
-		    public Boolean getValue(BindingsEntity object) {
+		    public Boolean getValue(BindingsDTO object) {
 		        
 		        return false;
 		    }
 		};
 		tableBindings.addColumn(cbColumn,"");
 
-		columnName = new Column<BindingsEntity, String>(new TextCell()) {
+		columnName = new Column<BindingsDTO, String>(new TextCell()) {
 			@Override
-			public String getValue(BindingsEntity object) {
+			public String getValue(BindingsDTO object) {
 				return object.getBindingName();
 			}
 		};
 		tableBindings.addColumn(columnName,"Name");
 		
-		columnType = new Column<BindingsEntity, String>(new TextCell()) {
+		columnType = new Column<BindingsDTO, String>(new TextCell()) {
 			@Override
-			public String getValue(BindingsEntity object) {
+			public String getValue(BindingsDTO object) {
 				return object.getBindingType();
 			}
 		};
 		tableBindings.addColumn(columnType,"Type");
 		
-		columnValue = new Column<BindingsEntity, String>(new TextCell()) {
+		columnValue = new Column<BindingsDTO, String>(new TextCell()) {
 			@Override
-			public String getValue(BindingsEntity object) {
+			public String getValue(BindingsDTO object) {
 				return object.getBindingValue();
 			}
 		};
 		tableBindings.addColumn(columnValue,"Value");
 
-		columnNameSpace = new Column<BindingsEntity, String>(new TextCell()) {
+		columnNameSpace = new Column<BindingsDTO, String>(new TextCell()) {
 			@Override
-			public String getValue(BindingsEntity object) {
+			public String getValue(BindingsDTO object) {
 				return object.getNameSpaceId().getNameSpaceName();
 			}
 		};
 		tableBindings.addColumn(columnNameSpace,"Name Space");
 		
-		removeColumn = new Column<BindingsEntity, String>(new ButtonImageCell()) {
+		removeColumn = new Column<BindingsDTO, String>(new ButtonImageCell()) {
 			@Override
-			public String getValue(BindingsEntity object) {
+			public String getValue(BindingsDTO object) {
 				return "images/delete.png";
 			}
 		};
 		
-		editColumn = new Column<BindingsEntity, String>(new ButtonImageCell()) {
+		editColumn = new Column<BindingsDTO, String>(new ButtonImageCell()) {
 			@Override
-			public String getValue(BindingsEntity object) {
+			public String getValue(BindingsDTO object) {
 				return "images/edit.png";
 			}
 		};
@@ -138,7 +139,7 @@ public class BindingsView extends Composite implements Display{
 		
 	}
 	
-	public void popuplateTable(ArrayList<BindingsEntity> bindings){
+	public void popuplateTable(ArrayList<BindingsDTO> bindings){
 		
 		tableBindings.setRowData(0, bindings);
 		tableBindings.setRowCount(bindings.size());
@@ -146,20 +147,20 @@ public class BindingsView extends Composite implements Display{
 		sortTableGroup(bindings);
 	}
 	
-	private void sortTableGroup(List<BindingsEntity> bindings){
-		ListDataProvider<BindingsEntity> dataProvider = new ListDataProvider<BindingsEntity>();
+	private void sortTableGroup(List<BindingsDTO> bindings){
+		ListDataProvider<BindingsDTO> dataProvider = new ListDataProvider<BindingsDTO>();
 		dataProvider.addDataDisplay(tableBindings);
 
-		List<BindingsEntity> list = dataProvider.getList();
+		List<BindingsDTO> list = dataProvider.getList();
 
-		for (BindingsEntity group : bindings) {
+		for (BindingsDTO group : bindings) {
 		list.add(group);
 		}
-		final ListHandler<BindingsEntity> columnSortHandler = new ListHandler<BindingsEntity>(list);
+		final ListHandler<BindingsDTO> columnSortHandler = new ListHandler<BindingsDTO>(list);
 
-		columnSortHandler.setComparator(columnName,new Comparator<BindingsEntity>() {
+		columnSortHandler.setComparator(columnName,new Comparator<BindingsDTO>() {
 
-		public int compare(BindingsEntity o1,BindingsEntity o2) {
+		public int compare(BindingsDTO o1,BindingsDTO o2) {
 		if (o1 == o2) {
 		return 0;
 		}
@@ -173,9 +174,9 @@ public class BindingsView extends Composite implements Display{
 		}
 		});
 		
-		columnSortHandler.setComparator(columnType,new Comparator<BindingsEntity>() {
+		columnSortHandler.setComparator(columnType,new Comparator<BindingsDTO>() {
 
-			public int compare(BindingsEntity o1,BindingsEntity o2) {
+			public int compare(BindingsDTO o1,BindingsDTO o2) {
 			if (o1 == o2) {
 			return 0;
 			}
@@ -189,9 +190,9 @@ public class BindingsView extends Composite implements Display{
 			}
 			});
 		
-		columnSortHandler.setComparator(columnValue,new Comparator<BindingsEntity>() {
+		columnSortHandler.setComparator(columnValue,new Comparator<BindingsDTO>() {
 
-			public int compare(BindingsEntity o1,BindingsEntity o2) {
+			public int compare(BindingsDTO o1,BindingsDTO o2) {
 			if (o1 == o2) {
 			return 0;
 			}
@@ -205,9 +206,9 @@ public class BindingsView extends Composite implements Display{
 			}
 			});
 		
-		columnSortHandler.setComparator(columnNameSpace,new Comparator<BindingsEntity>() {
+		columnSortHandler.setComparator(columnNameSpace,new Comparator<BindingsDTO>() {
 
-			public int compare(BindingsEntity o1,BindingsEntity o2) {
+			public int compare(BindingsDTO o1,BindingsDTO o2) {
 			if (o1 == o2) {
 			return 0;
 			}
@@ -244,15 +245,15 @@ public class BindingsView extends Composite implements Display{
 		this.btnAddBinding = btnAddBinding;
 	}
 
-	public Column<BindingsEntity, String> getEditColumn() {
+	public Column<BindingsDTO, String> getEditColumn() {
 		return editColumn;
 	}
 
-	public Column<BindingsEntity, String> getRemoveColumn() {
+	public Column<BindingsDTO, String> getRemoveColumn() {
 		return removeColumn;
 	}
 
-	public Column<BindingsEntity, Boolean> getCbColumn() {
+	public Column<BindingsDTO, Boolean> getCbColumn() {
 		return cbColumn;
 	}
 
@@ -260,7 +261,7 @@ public class BindingsView extends Composite implements Display{
 		return btnDeleteBindings;
 	}
 
-	public CellTable<BindingsEntity> getTableBindings() {
+	public CellTable<BindingsDTO> getTableBindings() {
 		return tableBindings;
 	}
 

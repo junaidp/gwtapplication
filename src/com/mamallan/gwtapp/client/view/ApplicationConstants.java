@@ -91,6 +91,7 @@ public class ApplicationConstants {
 	public static final String DEFAULT_PACKAGE = "com.mamallan.gwtapp.shared.";
 	public static final String DEFAULT_PACKAGE_START = "com.mamallan.gwtapp.";
 	public static final String UPLOADED_VIEWS_PACKAGE = "com.mamallan.gwtapp.client.view.widgets.UploadedComponents";
+	
 	public static final String SELECT_FOR_REFLECTION = "Select Bean for reflection";
 	public static final String FIELD_NAME_NOT_AVAILABLE = "";
 	public static final String CLASS_LEVEL_ANNOTATIONS = "Class level Annotations";
@@ -119,6 +120,8 @@ public class ApplicationConstants {
 	public static final String BINDING_NAME_NOT_AVAILABLE = "Binding Name not available, Please try another name for your binding";
 	public static final String BINDING_NAME_NOT_VALID = "Please select a valid name for your Binding ";
 	public static final String NAMESPACE_NAME_NOT_VALID = "Please select a valid name for your Namespace";
+	public static final String BEAN_CREATION_FOR_BINDING = "binding";
+	public static final String BEAN_CREATION_FOR_EDITOR = "editor";
 	
 	
 	

@@ -14,14 +14,17 @@ public class XmlComponentAttachment extends VerticalPanel {
 	private FileUpload defaultUploader;
 
 	public XmlComponentAttachment(){
-		
+				
+  }
+	
+	public void setData(String reqType) {
 		VerticalPanel panel = new VerticalPanel();
 		defaultUploader = new FileUpload();
 		defaultUploader.setName("uploadFormElement");
 		panel.add(defaultUploader);
 		HorizontalPanel hpnl = new HorizontalPanel();
 		hpnl.add(panel);
-		txt.setName("beanName");
+		txt.setName(reqType);
 		txt.setVisible(false);
 		hpnl.add(txt);
 		form = new FormPanel();
@@ -32,9 +35,7 @@ public class XmlComponentAttachment extends VerticalPanel {
 		form.setAction("xmlUpload");
 		hpnl.setSpacing(10);
 		add(form);
-		
-		
-  }
+	}
 
 	public void setBean(String path) {
 		
@@ -73,5 +74,7 @@ public class XmlComponentAttachment extends VerticalPanel {
 	public FileUpload getDefaultUploader() {
 		return defaultUploader;
 	}
+
+	
 	
 }

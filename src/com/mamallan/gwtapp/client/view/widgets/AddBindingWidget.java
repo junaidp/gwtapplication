@@ -9,6 +9,7 @@ import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTML;
@@ -42,6 +43,8 @@ public class AddBindingWidget extends Composite {
 	Button btnSave;
 	@UiField
 	HTMLPanel htmlError;
+	@UiField
+	Anchor ancEditBean;
 	private LinkedHashMap<String, String> valueMapDataType = new LinkedHashMap<String, String>();  
 	
 
@@ -121,6 +124,10 @@ public class AddBindingWidget extends Composite {
 
 	public HTMLPanel getHtmlError() {
 		return htmlError;
+	}
+
+	public Anchor getAncEditBean() {
+		return ancEditBean;
 	}
 
 	

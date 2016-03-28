@@ -13,7 +13,7 @@
 					styleName="hover"></g:Image>
 			</div>
 			<div
-				style="border:groove;border-color:white;padding:10px;border-radius:5px">
+				style="border:groove;border-color:white;padding:10px;border-radius:5px; height:150px">
 				<div style="padding-bottom:5px;padding-left:45%">
 					<g:Label styleName="blue"> Add Binding </g:Label>
 				</div>
@@ -36,8 +36,11 @@
 					<g:TextBox ui:field="txtBindingNameSpace" styleName="inLine"></g:TextBox>
 				</div>
 				-->
-				<div style="padding-left:3px">
+				<div style="padding-left:3px; float:left">
 				<g:Button styleName="button primary" height="25px" width="100px" ui:field="btnSave"> Save </g:Button>
+				</div>
+				<div style="padding-left:30px">
+				<g:Anchor  ui:field="ancEditBean" visible="false"> Edit Bean </g:Anchor>
 				</div>
 			</div>
 

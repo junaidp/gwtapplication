@@ -55,14 +55,27 @@ public class ComponentJavaUploadServlet  extends UploadAction implements javax.s
 			List<FileItem> items = upload.parseRequest(request);
 			String mypath = ApplicationConstants.UPLOADED_VIEWS_PACKAGE;
 			String tmpValue = "";
+			String reqType = "";
 
+			for (FileItem item : items) {
+				if (item.isFormField()) {
+					
+					reqType = item.getFieldName();
+				
+				}
+			}
+			
 			for (FileItem item : items) {
 				if (!item.isFormField()) {
 					int fInd = item.getName().indexOf(".");
 					String fileExtension = item.getName().substring(fInd);
 					int ind = tmpValue.lastIndexOf(".");
 					String beanName = tmpValue.substring(ind+1);
-					String fileName = ApplicationConstants.UPLOADED_VIEWS_NAME+fileExtension;
+					String fileName = item.getName();
+					if(! ApplicationConstants.BEAN_CREATION_FOR_BINDING.equals(reqType)){
+						 fileName = ApplicationConstants.UPLOADED_VIEWS_NAME+fileExtension;
+					}
+					 
 					File path = createFilePath(mypath);
 					if (!path.exists()) {
 						boolean status = path.mkdirs();

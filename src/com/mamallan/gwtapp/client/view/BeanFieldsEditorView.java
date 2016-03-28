@@ -7,6 +7,7 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.mamallan.gwtapp.client.presenter.BeanFieldsEditorPresenter.Display;
@@ -19,9 +20,9 @@ public class BeanFieldsEditorView extends Composite implements Display {
 			.create(BeanFieldsEditorViewUiBinder.class);
 
 	interface BeanFieldsEditorViewUiBinder extends
-			UiBinder<Widget, BeanFieldsEditorView> {
+	UiBinder<Widget, BeanFieldsEditorView> {
 	}
-	
+
 	@UiField 
 	ListBox listBeans;
 	@UiField
@@ -30,11 +31,20 @@ public class BeanFieldsEditorView extends Composite implements Display {
 	XmlComponentAttachment xmlComponentAttachment;
 	@UiField
 	JavaComponentAttachment javaComponentAttachment;
+	@UiField
+	Image imgClose;
 	private String beanType ;
-	
+
 
 	public BeanFieldsEditorView(String beanType) {
 		initWidget(uiBinder.createAndBindUi(this));
+		if(beanType.equals(ApplicationConstants.BEAN_CREATION_FOR_BINDING)){
+			javaComponentAttachment.setData(ApplicationConstants.BEAN_CREATION_FOR_BINDING);
+			xmlComponentAttachment.setData(ApplicationConstants.BEAN_CREATION_FOR_BINDING);
+		}else{
+			javaComponentAttachment.setData(ApplicationConstants.BEAN_CREATION_FOR_EDITOR);
+			xmlComponentAttachment.setData(ApplicationConstants.BEAN_CREATION_FOR_EDITOR);
+		}
 		this.beanType = beanType;
 	}
 
@@ -66,6 +76,11 @@ public class BeanFieldsEditorView extends Composite implements Display {
 
 	public String getBeanType() {
 		return beanType;
+	}
+
+
+	public Image getImgClose() {
+		return imgClose;
 	}
 
 }

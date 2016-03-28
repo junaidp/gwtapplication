@@ -68,10 +68,12 @@ import org.mindrot.BCrypt;
 
 
 
+
 //import com.helloworld.shared.beans.BeanSet;
 import com.mamallan.gwtapp.client.view.ApplicationConstants;
 import com.mamallan.gwtapp.org.hibernate.DynHelper;
 import com.mamallan.gwtapp.shared.dto.BeanObjectDTO;
+import com.mamallan.gwtapp.shared.dto.BindingsDTO;
 import com.mamallan.gwtapp.shared.entity.BeanObjects;
 import com.mamallan.gwtapp.shared.entity.BindingsEntity;
 import com.mamallan.gwtapp.shared.entity.GlobalPreferencesEntity;
@@ -816,10 +818,10 @@ public class MyRdbHelper {
 	}
 
 
-	public ArrayList<BindingsEntity> fetchAllBindings(String keyword) throws Exception{
+	public ArrayList<BindingsDTO> fetchAllBindings(String keyword) throws Exception{
 
 		Session session = null;
-		ArrayList<BindingsEntity> listBindingsEntity = new ArrayList<BindingsEntity>();
+		ArrayList<BindingsDTO> listBindingsDTO = new ArrayList<BindingsDTO>();
 		try{
 			session = sessionFactory.openSession();
 			Criteria crit = session.createCriteria(BindingsEntity.class);
@@ -827,29 +829,52 @@ public class MyRdbHelper {
 			crit.add(Restrictions.like("bindingName", keyword, MatchMode.START));
 			for(int i=0; i< crit.list().size(); i++){
 				BindingsEntity bindingsEntity = (BindingsEntity) crit.list().get(i);
-				listBindingsEntity.add(bindingsEntity);
+				
+				BindingsDTO bindingDTO = new BindingsDTO();
+				bindingDTO.setBindingId(bindingsEntity.getBindingId());
+				bindingDTO.setBindingName(bindingsEntity.getBindingName());
+				bindingDTO.setBindingType(bindingsEntity.getBindingType());
+				bindingDTO.setBindingValue(bindingsEntity.getBindingValue());
+				bindingDTO.setNameSpaceId(bindingsEntity.getNameSpaceId());
+				bindingDTO.setType(bindingsEntity.getType());
+				
+				listBindingsDTO.add(bindingDTO);
 			}
-			return listBindingsEntity;
+			
+			
+			return listBindingsDTO;
 		}catch(Exception ex){
 			throw new Exception(ex);
 		}
 	}
 
 
-	public String saveBinding(BindingsEntity binding) throws Exception {
+	public String saveBinding(BindingsDTO bindingDTO) throws Exception {
 		Session session = null;
 		try{
-			if(bindingNameAvailable(binding.getBindingName())){
+			if(bindingNameAvailable(bindingDTO.getBindingName())){
 				session = sessionFactory.openSession();
-				if(binding.getNameSpaceId().getNameSpaceId() == 0){
-					if(nameSpaceAvailable(binding.getNameSpaceId().getNameSpaceName())){
-						saveNameSpace(binding.getNameSpaceId(), session);
+				if(bindingDTO.getNameSpaceId().getNameSpaceId() == 0){
+					if(nameSpaceAvailable(bindingDTO.getNameSpaceId().getNameSpaceName())){
+						saveNameSpace(bindingDTO.getNameSpaceId(), session);
 					}else{
 						return ApplicationConstants.NAMESPACE_NOT_AVAILABLE;
 					}
 				}
 
-				session.saveOrUpdate(binding);
+				
+				
+				BindingsEntity bindingEntity = new BindingsEntity();
+				bindingEntity.setBindingId(bindingDTO.getBindingId());
+				bindingEntity.setBindingName(bindingDTO.getBindingName());
+				bindingEntity.setBindingType(bindingDTO.getBindingType());
+				bindingEntity.setBindingValue(bindingDTO.getBindingValue());
+				bindingEntity.setNameSpaceId(bindingDTO.getNameSpaceId());
+				bindingEntity.setType(bindingDTO.getType());
+				if(bindingDTO.getType() == 'B'&& bindingDTO.getBeanId() != 0){
+					bindingEntity.setBindingValue_ext(fetchBeansBlob(bindingDTO.getBeanId(), session));
+				}
+				session.saveOrUpdate(bindingEntity);
 				session.flush();
 				return "binding saved";
 			}else{
@@ -860,6 +885,22 @@ public class MyRdbHelper {
 		}
 
 	}
+
+	private Blob fetchBeansBlob(int beanId, Session session) throws Exception{
+		
+		Blob beanBlob = null;
+		try{
+			BeanObjects beanObjects  = (BeanObjects) session.get(BeanObjects.class, beanId);
+			if(beanObjects!= null && beanObjects.getBeanObject() != null){
+				beanBlob = beanObjects.getBeanObject();
+			}
+		
+		return beanBlob;
+		}catch(Exception ex){
+			throw new Exception(ex);
+		}
+	}
+
 
 	public void saveNameSpace(NameSpaceEntity nameSpaceEntity, Session session)throws Exception{
 		try{

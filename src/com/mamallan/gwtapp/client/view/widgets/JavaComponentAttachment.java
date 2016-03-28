@@ -1,6 +1,5 @@
 package com.mamallan.gwtapp.client.view.widgets;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.FileUpload;
 import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -14,6 +13,10 @@ public class JavaComponentAttachment extends VerticalPanel {
 	private FileUpload defaultUploader;
 
 	public JavaComponentAttachment(){
+	
+  }
+	
+	public void setData(String reqType){
 		
 		VerticalPanel panel = new VerticalPanel();
 		defaultUploader = new FileUpload();
@@ -21,7 +24,7 @@ public class JavaComponentAttachment extends VerticalPanel {
 		panel.add(defaultUploader);
 		HorizontalPanel hpnl = new HorizontalPanel();
 		hpnl.add(panel);
-		txt.setName("beanName");
+		txt.setName(reqType);
 		txt.setVisible(false);
 		hpnl.add(txt);
 		form = new FormPanel();
@@ -33,7 +36,7 @@ public class JavaComponentAttachment extends VerticalPanel {
 		form.setAction("javaUpload");
 		hpnl.setSpacing(10);
 		add(form);
-  }
+	}
 
 	public void setBean(String path) {
 		

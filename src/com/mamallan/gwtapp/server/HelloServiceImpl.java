@@ -24,6 +24,7 @@ import com.mamallan.gwtapp.org.hibernate.DynHelper;
 import com.mamallan.gwtapp.shared.dto.AddedBeanDTO;
 import com.mamallan.gwtapp.shared.dto.AnnotationsDTO;
 import com.mamallan.gwtapp.shared.dto.BeanObjectDTO;
+import com.mamallan.gwtapp.shared.dto.BindingsDTO;
 import com.mamallan.gwtapp.shared.entity.BeanObjects;
 import com.mamallan.gwtapp.shared.entity.BindingsEntity;
 import com.mamallan.gwtapp.shared.entity.GlobalPreferencesEntity;
@@ -500,12 +501,12 @@ HelloService {
 	}
 
 	@Override
-	public ArrayList<BindingsEntity> fetchAllBindings(String keyword) throws Exception {
+	public ArrayList<BindingsDTO> fetchAllBindings(String keyword) throws Exception {
 		return rdbHelper.fetchAllBindings(keyword);
 	}
 
 	@Override
-	public String saveBinding(BindingsEntity binding) throws Exception {
+	public String saveBinding(BindingsDTO binding) throws Exception {
 		return rdbHelper.saveBinding(binding);
 	}
 

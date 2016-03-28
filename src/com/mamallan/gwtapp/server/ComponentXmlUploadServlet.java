@@ -53,6 +53,7 @@ public class ComponentXmlUploadServlet  extends UploadAction implements javax.se
 			List<FileItem> items = upload.parseRequest(request);
 			String mypath = ApplicationConstants.UPLOADED_VIEWS_PACKAGE;
 			String tmpValue = "";
+			String reqType = "";
 			String className = ApplicationConstants.UPLOADED_VIEWS_NAME;
 //			for (FileItem item : items) {
 //				if (item.isFormField()) {
@@ -64,6 +65,13 @@ public class ComponentXmlUploadServlet  extends UploadAction implements javax.se
 //					}
 //				}
 //			}
+			for (FileItem item : items) {
+				if (item.isFormField()) {
+					
+					reqType = item.getFieldName();
+				
+				}
+			}
 
 			for (FileItem item : items) {
 				if (!item.isFormField()) {
@@ -72,7 +80,13 @@ public class ComponentXmlUploadServlet  extends UploadAction implements javax.se
 					int ind = tmpValue.lastIndexOf(".");
 //					String beanName = tmpValue.substring(ind+1);
 //					String fileName = beanName+fileExtension;
-					String fileName = className+fileExtension;
+					
+					String fileName = item.getName();
+					if(! ApplicationConstants.BEAN_CREATION_FOR_BINDING.equals(reqType)){
+						 fileName = className+fileExtension;
+					}
+					
+					
 					File path = createFilePath(mypath);
 					if (!path.exists()) {
 						boolean status = path.mkdirs();
