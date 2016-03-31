@@ -3,10 +3,8 @@ package com.mamallan.gwtapp.client;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.HandlerManager;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.mamallan.gwtapp.client.view.ApplicationConstants;
 
 
 /**
@@ -18,6 +16,9 @@ public class HelloWorldGWT implements EntryPoint {
 	
 	public void onModuleLoad() {
 		rpcService = GWT.create(HelloService.class);
+		
+//		GWT.create( Reflection.class );
+		
 		HandlerManager eventBus = new HandlerManager(null);
 		loadBeansJson();
 		AppController appViewer = new AppController(rpcService, eventBus);

@@ -2,6 +2,7 @@ package com.mamallan.gwtapp.client.presenter;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.Set;
 
 import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -9,6 +10,9 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.event.shared.HandlerManager;
+import com.google.gwt.json.client.JSONObject;
+import com.google.gwt.json.client.JSONParser;
+import com.google.gwt.json.client.JSONValue;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.client.Window;
@@ -50,6 +54,7 @@ public class BindingsPresenter implements Presenter
 	private LinkedHashMap<String, String> valueMapNameSpaceList = new LinkedHashMap<String, String>();
 	private BindingsDTO selectedBindingsDTO; // For Editing
 	private ArrayList<Integer> selectedBindings = new ArrayList<Integer>(); // For deletion
+	private ArrayList<BeanObjectDTO> beanObjects = new ArrayList<BeanObjectDTO>();
 
 	public interface Display 
 	{
@@ -134,10 +139,13 @@ public class BindingsPresenter implements Presenter
 
 			@Override
 			public void onSuccess(ArrayList<BeanObjectDTO> result) {
+				
 				addBindingWidget.getListBindings().clearValue();
 
 				for(int i=0; i< result.size(); i++){
-
+					if(! beanObjects.contains(result.get(i))){
+						beanObjects.add(result.get(i));
+					}
 					valueMapBindingsList.put(result.get(i).getBeanId()+"", result.get(i).getBeanName());
 
 				}
@@ -379,75 +387,95 @@ public class BindingsPresenter implements Presenter
 			
 			@Override
 			public void onClick(ClickEvent event) {
-//				final PopupPanel popup = new PopupPanel();
-//				final XmlComponentAttachment xmlComponentAttachment = new XmlComponentAttachment();
-//				xmlComponentAttachment.setData(ApplicationConstants.BEAN_CREATION_FOR_BINDING);
-//				final JavaComponentAttachment javaComponentAttachment = new JavaComponentAttachment();
-//				javaComponentAttachment.setData(ApplicationConstants.BEAN_CREATION_FOR_BINDING);
-//				Button btnSubmit = new Button("Submit");
-//				btnSubmit.addStyleName("button primary");
-//				HorizontalPanel hpnlComponents = new HorizontalPanel();
-//				VerticalPanel vpnlPopup = new VerticalPanel();
-//				vpnlPopup.add(hpnlComponents);
-//				vpnlPopup.add(btnSubmit);
-//				hpnlComponents.add(xmlComponentAttachment);
-//				xmlComponentAttachment.add(javaComponentAttachment);
-//				hpnlComponents.setSpacing(5);
-				final BeanFieldsEditorView beanFieldsEditorView = new BeanFieldsEditorView(ApplicationConstants.BEAN_CREATION_FOR_BINDING);
-				beanFieldsEditorView.getListBeans().setVisible(false);
-				beanFieldsEditorView.getImgClose().setVisible(true);
-				popup.setWidget(beanFieldsEditorView);
-				popup.center();
-				
-				beanFieldsEditorView.getImgClose().addClickHandler(new ClickHandler() {
-					
-					@Override
-					public void onClick(ClickEvent event) {
-						popup.removeFromParent();
-					}
-				});
-				
-				beanFieldsEditorView.getBtnSubmit().addClickHandler(new ClickHandler() {
+				String beansJson = fetchBeansJson(Integer.parseInt(addBindingWidget.getListBindings().getValueAsString()));
+				createBeanLayoutWithJson(beansJson);
+				//				final BeanFieldsEditorView beanFieldsEditorView = new BeanFieldsEditorView(ApplicationConstants.BEAN_CREATION_FOR_BINDING);
+//				beanFieldsEditorView.getListBeans().setVisible(false);
+//				beanFieldsEditorView.getImgClose().setVisible(true);
+//				popup.setWidget(beanFieldsEditorView);
+//				popup.center();
+//				
+//				beanFieldsEditorSetHandlers(popup, beanFieldsEditorView);
+				}
 
-					@Override
-					public void onClick(ClickEvent event) {
-						try{
-							String xmlFileName = beanFieldsEditorView.getXmlComponentAttachment().getDefaultUploader().getFilename();
-							String javaFileName = beanFieldsEditorView.getJavaComponentAttachment().getDefaultUploader().getFilename();
-							int indXml = xmlFileName.indexOf(".");
-							String xmlFileExt = xmlFileName.substring(indXml);
-							int indJava = javaFileName.indexOf(".");
-							String javaFileExt = javaFileName.substring(indJava);
-							if(!xmlFileExt.equals(".ui.xml") && !xmlFileExt.equals("")){
-								SC.warn(ApplicationConstants.INVALID_UIXML_FILE);
-							}
-							else if(!javaFileExt.equals(".java")){
-								SC.warn(ApplicationConstants.INVALID_UIJAVA_FILE);
-							}
-							else{
-								beanFieldsEditorView.getXmlComponentAttachment().getForm().submit();
-								beanFieldsEditorView.getJavaComponentAttachment().getForm().submit();
-							}
-						}catch(Exception ex){
-							SC.warn(ApplicationConstants.INVALID_UIXML_AND_JAVA_FILE);
-						}
-					}
-				});
-				
-				beanFieldsEditorView.getJavaComponentAttachment().getForm().addSubmitCompleteHandler(new SubmitCompleteHandler() {
-					
-					@Override
-					public void onSubmitComplete(SubmitCompleteEvent event) {
-						popup.removeFromParent();
-
-					}
-				});
-				
 			
+		});
+	}
+	
+	private void createBeanLayoutWithJson(String beansJson) {
+		JSONValue value = JSONParser.parse(beansJson);
+		JSONObject productsObj = value.isObject();
+		Set<String> jsonSet = productsObj.keySet();
+		
+		Object[] array = jsonSet.toArray();
+		for(int i=0; i<array.length; i++){
+			   Object o = array[i];
+			   Object b = productsObj.get(array[i].toString());
+		}
+		
+	}
+		
+	public String fetchBeansJson(int beanId){
+		String beansJson = "" ;
+		for(int i=0; i< beanObjects.size(); i++){
+			if(beanObjects.get(i).getBeanId() == beanId){
+				beansJson =  beanObjects.get(i).getBeanJson();
+				break;
+			}
+		}
+		return beansJson;
+	}	
+	
+	private void beanFieldsEditorSetHandlers(final PopupPanel popup,
+			final BeanFieldsEditorView beanFieldsEditorView) {
+		beanFieldsEditorView.getImgClose().addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				popup.removeFromParent();
 			}
 		});
+		
+		beanFieldsEditorView.getBtnSubmit().addClickHandler(new ClickHandler() {
 
+			@Override
+			public void onClick(ClickEvent event) {
+				
+				
+				
+				try{
 
+					
+					String xmlFileName = beanFieldsEditorView.getXmlComponentAttachment().getDefaultUploader().getFilename();
+					String javaFileName = beanFieldsEditorView.getJavaComponentAttachment().getDefaultUploader().getFilename();
+					int indXml = xmlFileName.indexOf(".");
+					String xmlFileExt = xmlFileName.substring(indXml);
+					int indJava = javaFileName.indexOf(".");
+					String javaFileExt = javaFileName.substring(indJava);
+					if(!xmlFileExt.equals(".ui.xml") && !xmlFileExt.equals("")){
+						SC.warn(ApplicationConstants.INVALID_UIXML_FILE);
+					}
+					else if(!javaFileExt.equals(".java")){
+						SC.warn(ApplicationConstants.INVALID_UIJAVA_FILE);
+					}
+					else{
+						beanFieldsEditorView.getXmlComponentAttachment().getForm().submit();
+						beanFieldsEditorView.getJavaComponentAttachment().getForm().submit();
+					}
+				}catch(Exception ex){
+					SC.warn(ApplicationConstants.INVALID_UIXML_AND_JAVA_FILE);
+				}
+			}
+		});
+		
+		beanFieldsEditorView.getJavaComponentAttachment().getForm().addSubmitCompleteHandler(new SubmitCompleteHandler() {
+			
+			@Override
+			public void onSubmitComplete(SubmitCompleteEvent event) {
+				popup.removeFromParent();
+
+			}
+		});
 	}
 
 	private void populateAddBindingWidget(

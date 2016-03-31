@@ -59,4 +59,5 @@ public interface HelloServiceAsync {
 	void deleteBinding(int bindingId,  AsyncCallback<String> asyncCallback);
 	void deleteMultipleBindings(ArrayList<Integer> bindingIds, AsyncCallback<String> asyncCallback);
 	void fetchNameSpaces(AsyncCallback<ArrayList<NameSpaceEntity>> asyncCallback);
+	
 }

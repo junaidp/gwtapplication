@@ -5,6 +5,7 @@
          version="2.5"
          xmlns="http://java.sun.com/xml/ns/javaee">
 
+	 
   <!-- Servlets -->
   <servlet>
     <servlet-name>greetServlet</servlet-name>
@@ -15,6 +16,8 @@
     <servlet-name>greetServlet</servlet-name>
     <url-pattern>/helloworldgwt/greet</url-pattern>
   </servlet-mapping>
+  
+ 
   
   <!--File upload  -->
   
@@ -76,6 +79,10 @@
     <url-pattern>/xmlUpload</url-pattern>
   </servlet-mapping>
   
+  <!-- <generate-with class="com.mamallan.gwtapp.server.ReflectionGenerator">
+      <when-type-assignable class="com.mamallan.gwtapp.client.Reflection" />
+  </generate-with>
+  -->
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>HelloWorldGWT.html</welcome-file>
