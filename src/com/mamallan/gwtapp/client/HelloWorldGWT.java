@@ -17,7 +17,7 @@ public class HelloWorldGWT implements EntryPoint {
 	public void onModuleLoad() {
 		rpcService = GWT.create(HelloService.class);
 		
-//		GWT.create( Reflection.class );
+//		GWT.create( Reflection.class ).;
 		
 		HandlerManager eventBus = new HandlerManager(null);
 		loadBeansJson();

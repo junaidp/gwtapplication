@@ -30,6 +30,7 @@ public class ComponentXmlUploadServlet  extends UploadAction implements javax.se
 	private static final long serialVersionUID = 1L;
 
 	Hashtable<String, String> receivedContentTypes = new Hashtable<String, String>();
+	
 	/**
 	 * Maintain a list with received files and their content types. 
 	 */
@@ -55,6 +56,7 @@ public class ComponentXmlUploadServlet  extends UploadAction implements javax.se
 			String tmpValue = "";
 			String reqType = "";
 			String className = ApplicationConstants.UPLOADED_VIEWS_NAME;
+			int beanId = 0;
 //			for (FileItem item : items) {
 //				if (item.isFormField()) {
 //					String name = item.getFieldName();
@@ -68,8 +70,13 @@ public class ComponentXmlUploadServlet  extends UploadAction implements javax.se
 			for (FileItem item : items) {
 				if (item.isFormField()) {
 					
-					reqType = item.getFieldName();
-				
+					int ind = item.getFieldName().indexOf(":");
+					if(ind !=-1){
+					reqType = item.getFieldName().substring(0, ind);
+					try{
+				    beanId =  Integer.parseInt(item.getFieldName().substring(ind+1));
+					}catch(Exception ex){beanId = 0;}
+					}
 				}
 			}
 
@@ -82,9 +89,17 @@ public class ComponentXmlUploadServlet  extends UploadAction implements javax.se
 //					String fileName = beanName+fileExtension;
 					
 					String fileName = item.getName();
-					if(! ApplicationConstants.BEAN_CREATION_FOR_BINDING.equals(reqType)){
+//					if(! reqType.equals(ApplicationConstants.BEAN_CREATION_FOR_BINDING)){
 						 fileName = className+fileExtension;
-					}
+//					}
+					if(reqType.equals(ApplicationConstants.BEAN_CREATION_FOR_BINDING) && beanId !=0){
+						String root = getServletContext().getRealPath("/");
+			            File folder = new File(root+"/bindingBeans/"+beanId);
+			            folder.mkdirs();
+		                File file = new File(folder, fileName);
+		                
+		                item.write(file);
+					}else{
 					
 					
 					File path = createFilePath(mypath);
@@ -94,11 +109,12 @@ public class ComponentXmlUploadServlet  extends UploadAction implements javax.se
 
 					File file = new File(path + "/" + fileName);
 					item.write(file);
-
+					
 					receivedFiles.put(item.getFieldName(), file);
+					}
 					receivedContentTypes.put(item.getFieldName(), item.getContentType());
 					PrintWriter responseHtml = resp.getWriter();
-					responseHtml.write(fileName);
+					responseHtml.write(""+beanId);
 //					resp += "File saved as " + file.getAbsolutePath();
 				}
 			}

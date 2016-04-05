@@ -60,6 +60,7 @@ public interface HelloService extends RemoteService {
 	String deleteBinding(int bindingId) throws Exception;
 	String deleteMultipleBindings(ArrayList<Integer> bndingIds) throws Exception;
 	ArrayList<NameSpaceEntity>fetchNameSpaces()throws Exception;
+	String overriteBeansLayoutClass(int beanId)throws Exception;
 	
 	
 }

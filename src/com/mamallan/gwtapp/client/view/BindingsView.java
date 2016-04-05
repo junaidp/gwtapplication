@@ -12,6 +12,7 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
+import com.google.gwt.user.cellview.client.ColumnSortEvent;
 import com.google.gwt.user.cellview.client.SimplePager;
 import com.google.gwt.user.cellview.client.ColumnSortEvent.ListHandler;
 import com.google.gwt.user.client.ui.Button;
@@ -135,6 +136,8 @@ public class BindingsView extends Composite implements Display{
 		tableBindings.setColumnWidth(0, "10px");
 		tableBindings.setColumnWidth(4, "10px");
 		tableBindings.setColumnWidth(5, "10px");
+		
+		
 		
 		
 	}

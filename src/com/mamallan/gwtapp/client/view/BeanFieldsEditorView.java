@@ -38,13 +38,9 @@ public class BeanFieldsEditorView extends Composite implements Display {
 
 	public BeanFieldsEditorView(String beanType) {
 		initWidget(uiBinder.createAndBindUi(this));
-		if(beanType.equals(ApplicationConstants.BEAN_CREATION_FOR_BINDING)){
-			javaComponentAttachment.setData(ApplicationConstants.BEAN_CREATION_FOR_BINDING);
-			xmlComponentAttachment.setData(ApplicationConstants.BEAN_CREATION_FOR_BINDING);
-		}else{
-			javaComponentAttachment.setData(ApplicationConstants.BEAN_CREATION_FOR_EDITOR);
-			xmlComponentAttachment.setData(ApplicationConstants.BEAN_CREATION_FOR_EDITOR);
-		}
+
+		javaComponentAttachment.setData(beanType);
+		xmlComponentAttachment.setData(beanType);
 		this.beanType = beanType;
 	}
 

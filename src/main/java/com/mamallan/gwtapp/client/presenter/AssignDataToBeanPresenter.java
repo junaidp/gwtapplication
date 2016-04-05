@@ -22,7 +22,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.mamallan.gwtapp.client.HelloServiceAsync;
 import com.mamallan.gwtapp.client.view.widgets.ErrorPanelWidget;
-import com.mamallan.gwtapp.client.view.widgets.UploadedComponents.UploadedClass;
+import com.mamallan.gwtapp.client.view.widgets.UploadedClass;
 import com.smartgwt.client.util.SC;
 
 

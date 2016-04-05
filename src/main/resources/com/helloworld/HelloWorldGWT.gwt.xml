@@ -33,7 +33,7 @@
 
 
   <!-- Specify the app entry point class.                         -->
-  <entry-point class='com.helloworld.client.HelloWorldGWT'/>
+  <entry-point class='com.mamallan.gwtapp.client.HelloWorldGWT'/>
 
 <set-configuration-property name='xsiframe.failIfScriptTag' value='FALSE'/>
   <!-- Specify the paths for translatable code                    -->

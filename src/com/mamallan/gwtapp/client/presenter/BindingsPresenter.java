@@ -21,10 +21,8 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteHandler;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasWidgets;
-import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteEvent;
 import com.mamallan.gwtapp.client.HelloServiceAsync;
@@ -32,8 +30,7 @@ import com.mamallan.gwtapp.client.view.ApplicationConstants;
 import com.mamallan.gwtapp.client.view.BeanFieldsEditorView;
 import com.mamallan.gwtapp.client.view.widgets.AddBindingWidget;
 import com.mamallan.gwtapp.client.view.widgets.DisplayAlert;
-import com.mamallan.gwtapp.client.view.widgets.JavaComponentAttachment;
-import com.mamallan.gwtapp.client.view.widgets.XmlComponentAttachment;
+import com.mamallan.gwtapp.client.view.widgets.UploadedComponents.UploadedClass;
 import com.mamallan.gwtapp.shared.BindingsFieldVerifier;
 import com.mamallan.gwtapp.shared.dto.BeanObjectDTO;
 import com.mamallan.gwtapp.shared.dto.BindingsDTO;
@@ -389,13 +386,14 @@ public class BindingsPresenter implements Presenter
 			public void onClick(ClickEvent event) {
 				String beansJson = fetchBeansJson(Integer.parseInt(addBindingWidget.getListBindings().getValueAsString()));
 				createBeanLayoutWithJson(beansJson);
-				//				final BeanFieldsEditorView beanFieldsEditorView = new BeanFieldsEditorView(ApplicationConstants.BEAN_CREATION_FOR_BINDING);
-//				beanFieldsEditorView.getListBeans().setVisible(false);
-//				beanFieldsEditorView.getImgClose().setVisible(true);
-//				popup.setWidget(beanFieldsEditorView);
-//				popup.center();
-//				
-//				beanFieldsEditorSetHandlers(popup, beanFieldsEditorView);
+				int beanId = Integer.parseInt(addBindingWidget.getListBindings().getValueAsString());
+				final BeanFieldsEditorView beanFieldsEditorView = new BeanFieldsEditorView(ApplicationConstants.BEAN_CREATION_FOR_BINDING+":"+beanId);
+				beanFieldsEditorView.getListBeans().setVisible(false);
+				beanFieldsEditorView.getImgClose().setVisible(true);
+				popup.setWidget(beanFieldsEditorView);
+				popup.center();
+				
+				beanFieldsEditorSetHandlers(popup, beanFieldsEditorView);
 				}
 
 			
@@ -472,10 +470,35 @@ public class BindingsPresenter implements Presenter
 			
 			@Override
 			public void onSubmitComplete(SubmitCompleteEvent event) {
+				int startInd = event.getResults().indexOf(">");
+				int endInd = event.getResults().lastIndexOf("<");
+				String bean = event.getResults().substring(startInd+2, endInd);
+				
+				int beanId = Integer.parseInt(bean);
 				popup.removeFromParent();
+				overriteBeansLayoutClass(beanId, popup);
 
 			}
+
+			
 		});
+	}
+	
+	private void overriteBeansLayoutClass(int beanId, final PopupPanel popup) {
+		rpcService.overriteBeansLayoutClass(beanId, new AsyncCallback<String>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				SC.warn(caught.getLocalizedMessage());
+			}
+
+			@Override
+			public void onSuccess(String result) {
+				UploadedClass uploaded = new UploadedClass();
+				popup.setWidget(uploaded);
+			}
+		});
+		
 	}
 
 	private void populateAddBindingWidget(

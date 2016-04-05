@@ -3,6 +3,9 @@ package com.mamallan.gwtapp.server;
 import java.io.File;
 import java.lang.annotation.Annotation;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -524,5 +527,52 @@ HelloService {
 	@Override
 	public ArrayList<NameSpaceEntity> fetchNameSpaces() throws Exception {
 		return rdbHelper.fetchNameSpaces();
+	}
+
+	@Override
+	public String overriteBeansLayoutClass(int beanId) throws Exception {
+		try{
+			String root = getServletContext().getRealPath("/");
+            File xmlFile = new File(root+"/bindingBeans/"+beanId+"/"+ApplicationConstants.UPLOADED_VIEWS_NAME+".ui.xml");
+            File javaFile = new File(root+"/bindingBeans/"+beanId+"/"+ApplicationConstants.UPLOADED_VIEWS_NAME+".java");
+//	    	   File afile =new File("C:\\folderA\\Afile.txt");
+            	File path = createFilePath(ApplicationConstants.UPLOADED_VIEWS_PACKAGE);
+            	
+//            	File previousXmlfile = new File(path+"\\"+ApplicationConstants.UPLOADED_VIEWS_NAME+ ".ui.xml");
+//               	boolean xmlDeleted=previousXmlfile.delete();
+//            	File previousJavafile = new File(path+"\\"+ApplicationConstants.UPLOADED_VIEWS_NAME+ ".java");
+//            	boolean javaDeleted=previousJavafile.delete();
+        	
+            	
+//	    	  Files.move(source, newdir.resolve(source.getFileName()), REPLACE_EXISTING);
+            	Files.move(Paths.get(xmlFile.toString()), Paths.get(path+"/"+xmlFile.getName()), StandardCopyOption.REPLACE_EXISTING);
+            	Files.move(Paths.get(javaFile.toString()), Paths.get(path+"/"+javaFile.getName()), StandardCopyOption.REPLACE_EXISTING);
+//	    	   if(javaFile.renameTo(new File(path+"\\"+"My.java"))){
+//		    		System.out.println("File is moved successful!");
+//		    	   }else{
+//		    		System.out.println("File is failed to move!");
+//		    	   }
+	    	   
+//	    	   if(xmlFile.renameTo(new File(path+"/"+xmlFile.getName()))){
+//		    		System.out.println("File is moved successful!");
+//		    	   }else{
+//		    		System.out.println("File is failed to move!");
+//		    	   }
+	    	    return "file overrite successfully";
+	    	}catch(Exception e){
+	    		e.printStackTrace();
+	    		return "failed";
+	    	}
+	}
+	
+	private File createFilePath(String myPath) {
+
+		String dir = System.getProperty("user.dir");
+		int slashIndex = dir.lastIndexOf("\\");
+		dir = dir.substring(0, slashIndex+1);
+		String packageDir = myPath.replace(".","\\");
+		dir =dir +"src\\"+ packageDir;
+		File myPackage    = new File(dir);
+		return myPackage;
 	}
 }

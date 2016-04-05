@@ -56,15 +56,22 @@ public class ComponentJavaUploadServlet  extends UploadAction implements javax.s
 			String mypath = ApplicationConstants.UPLOADED_VIEWS_PACKAGE;
 			String tmpValue = "";
 			String reqType = "";
+			int beanId = 0;
 
 			for (FileItem item : items) {
 				if (item.isFormField()) {
-					
-					reqType = item.getFieldName();
-				
+
+					int ind = item.getFieldName().indexOf(":");
+					if(ind !=-1){
+						reqType = item.getFieldName().substring(0, ind);
+						try{
+							beanId =  Integer.parseInt(item.getFieldName().substring(ind+1));
+						}catch(Exception ex){beanId = 0;}
+					}
+
 				}
 			}
-			
+
 			for (FileItem item : items) {
 				if (!item.isFormField()) {
 					int fInd = item.getName().indexOf(".");
@@ -72,10 +79,20 @@ public class ComponentJavaUploadServlet  extends UploadAction implements javax.s
 					int ind = tmpValue.lastIndexOf(".");
 					String beanName = tmpValue.substring(ind+1);
 					String fileName = item.getName();
-					if(! ApplicationConstants.BEAN_CREATION_FOR_BINDING.equals(reqType)){
-						 fileName = ApplicationConstants.UPLOADED_VIEWS_NAME+fileExtension;
-					}
-					 
+//					if(! ApplicationConstants.BEAN_CREATION_FOR_BINDING.equals(reqType)){
+						fileName = ApplicationConstants.UPLOADED_VIEWS_NAME+fileExtension;
+//					}
+					 if(reqType.equals(ApplicationConstants.BEAN_CREATION_FOR_BINDING) && beanId !=0){
+						String root = getServletContext().getRealPath("/");
+						File folder = new File(root+"/bindingBeans/"+beanId);
+						folder.mkdirs();
+						File file = new File(folder, fileName);
+
+						item.write(file);
+						editFile(file, fileName, item.getName().substring(0, fInd));
+					}else{
+
+
 					File path = createFilePath(mypath);
 					if (!path.exists()) {
 						boolean status = path.mkdirs();
@@ -86,10 +103,12 @@ public class ComponentJavaUploadServlet  extends UploadAction implements javax.s
 					editFile(file, fileName, item.getName().substring(0, fInd));
 
 					receivedFiles.put(item.getFieldName(), file);
+					}
 					receivedContentTypes.put(item.getFieldName(), item.getContentType());
 					PrintWriter responseHtml = resp.getWriter();
-					responseHtml.write(fileName);
-//					resp += "File saved as " + file.getAbsolutePath();
+					//					responseHtml.write(fileName);
+					responseHtml.write(" "+beanId);
+					//					resp += "File saved as " + file.getAbsolutePath();
 				}
 			}
 
@@ -140,50 +159,70 @@ public class ComponentJavaUploadServlet  extends UploadAction implements javax.s
 			file.delete();
 		}
 	}
-	
+
 	public void editFile(File file1, String fileName, String beanName) throws IOException{
 		try{
-			 // Open the file that is the first
-            // command line parameter
-            FileInputStream fstream = new FileInputStream(file1.toString());
-            BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
-            String strLine;
-            int fInd = fileName.indexOf(".");
-            String className = fileName.substring(0, fInd); 
-            StringBuilder fileContent = new StringBuilder();
-            //Read File Line By Line
-            while ((strLine = br.readLine()) != null) {
-               
-               
-                if (strLine.length() > 0) {
-                    if (strLine.contains(beanName)) {
-                    	String newLine = strLine.replaceAll(beanName, className);
-                    	fileContent.append(newLine);
-                        fileContent.append("\n");
-                    } 
-                    else if(strLine.contains("package")){
-                    	String newLine = "package "+ ApplicationConstants.UPLOADED_VIEWS_PACKAGE +";";
-                    	fileContent.append(newLine);
-                        fileContent.append("\n");
-                    }
-                   
-                    else {
-                        // update content as it is
-                        fileContent.append(strLine);
-                        fileContent.append("\n");
-                    }
-                }
-            }
-//            Object newObject = Class.forName("com.helloworld.server.FilesCreationHelper").newInstance();
-            // Now fileContent will have updated content , which you can override into file
-            FileWriter fstreamWrite = new FileWriter(file1.toString());
-            BufferedWriter out = new BufferedWriter(fstreamWrite);
-            out.write(fileContent.toString());
-            out.close();
-            //Close the input stream
-//            in.close();
-        } catch (Exception e) {//Catch exception if any
-            System.err.println("Error: " + e.getMessage());
-        }
+			// Open the file that is the first
+			// command line parameter
+			FileInputStream fstream = new FileInputStream(file1.toString());
+			BufferedReader br1 = new BufferedReader(new InputStreamReader(fstream));
+			String strLine = null;
+			int fInd = fileName.indexOf(".");
+			String className = fileName.substring(0, fInd); 
+			StringBuilder fileContent = new StringBuilder();
+			//Read File Line By Line
+			String strLineCopy = strLine;
+			while ((strLineCopy = br1.readLine()) != null) {
+				if(strLineCopy.contains("class ")){
+					int ind = strLineCopy.indexOf("class ");
+					int ind1 = strLineCopy.lastIndexOf(" ", ind+5);
+					beanName = strLineCopy.substring(ind1, strLineCopy.indexOf(" ", ind1+1)).trim();
+					
+//					strLine.trim().
+//					strLine.substring(ind, endIndex);
+				}
+			}
+			FileInputStream fstream1 = new FileInputStream(file1.toString());
+			BufferedReader br = new BufferedReader(new InputStreamReader(fstream1));
+			
+			while ((strLine = br.readLine()) != null) {
+
+
+				if (strLine.length() > 0) {
+					if (strLine.contains(beanName)) {
+						String newLine = strLine.replaceAll(beanName, className);
+						fileContent.append(newLine);
+						fileContent.append("\n");
+					} 
+					else if(strLine.contains("package")){
+						String newLine = "package "+ ApplicationConstants.UPLOADED_VIEWS_PACKAGE +";";
+						fileContent.append(newLine);
+						fileContent.append("\n");
+					}
+
+					else {
+						// update content as it is
+						fileContent.append(strLine);
+						fileContent.append("\n");
+					}
+				}
+			}
+			//            Object newObject = Class.forName("com.helloworld.server.FilesCreationHelper").newInstance();
+			// Now fileContent will have updated content , which you can override into file
+			FileWriter fstreamWrite = new FileWriter(file1.toString());
+			BufferedWriter out = new BufferedWriter(fstreamWrite);
+			out.write(fileContent.toString());
+			out.close();
+			fstream.close();
+			fstream1.close();
+			br.close();
+			br1.close();
+			
+			
+			//Close the input stream
+//			            in.close();
+		} catch (Exception e) {//Catch exception if any
+			System.err.println("Error: " + e.getMessage());
+		}
 	}
 }
