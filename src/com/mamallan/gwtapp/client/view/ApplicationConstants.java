@@ -122,6 +122,9 @@ public class ApplicationConstants {
 	public static final String NAMESPACE_NAME_NOT_VALID = "Please select a valid name for your Namespace";
 	public static final String BEAN_CREATION_FOR_BINDING = "binding";
 	public static final String BEAN_CREATION_FOR_EDITOR = "editor";
+	public static final String UPLOADED_VIEWS__BINDING_NAME = "UploadedBindingClass";
+	public static final String NO_UI_CLASS_FOUND = "No layout available for this bean";
+	
 	
 	
 	

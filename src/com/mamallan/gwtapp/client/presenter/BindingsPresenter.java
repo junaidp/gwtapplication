@@ -30,6 +30,7 @@ import com.mamallan.gwtapp.client.view.ApplicationConstants;
 import com.mamallan.gwtapp.client.view.BeanFieldsEditorView;
 import com.mamallan.gwtapp.client.view.widgets.AddBindingWidget;
 import com.mamallan.gwtapp.client.view.widgets.DisplayAlert;
+import com.mamallan.gwtapp.client.view.widgets.PopupsView;
 import com.mamallan.gwtapp.client.view.widgets.UploadedComponents.UploadedClass;
 import com.mamallan.gwtapp.shared.BindingsFieldVerifier;
 import com.mamallan.gwtapp.shared.dto.BeanObjectDTO;
@@ -384,34 +385,37 @@ public class BindingsPresenter implements Presenter
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				String beansJson = fetchBeansJson(Integer.parseInt(addBindingWidget.getListBindings().getValueAsString()));
-				createBeanLayoutWithJson(beansJson);
+//				String beansJson = fetchBeansJson(Integer.parseInt(addBindingWidget.getListBindings().getValueAsString()));
+//				createBeanLayoutWithJson(beansJson);
 				int beanId = Integer.parseInt(addBindingWidget.getListBindings().getValueAsString());
-				final BeanFieldsEditorView beanFieldsEditorView = new BeanFieldsEditorView(ApplicationConstants.BEAN_CREATION_FOR_BINDING+":"+beanId);
-				beanFieldsEditorView.getListBeans().setVisible(false);
-				beanFieldsEditorView.getImgClose().setVisible(true);
-				popup.setWidget(beanFieldsEditorView);
-				popup.center();
 				
-				beanFieldsEditorSetHandlers(popup, beanFieldsEditorView);
+				overriteBeansLayoutClassWithAlreadyAvailableUI(beanId, popup);
 				}
-
-			
 		});
 	}
 	
-	private void createBeanLayoutWithJson(String beansJson) {
-		JSONValue value = JSONParser.parse(beansJson);
-		JSONObject productsObj = value.isObject();
-		Set<String> jsonSet = productsObj.keySet();
+	private void uploadNewBeanUi(final PopupPanel popup, int beanId) {
+		final BeanFieldsEditorView beanFieldsEditorView = new BeanFieldsEditorView(ApplicationConstants.BEAN_CREATION_FOR_BINDING+":"+beanId);
+		beanFieldsEditorView.getListBeans().setVisible(false);
+		beanFieldsEditorView.getImgClose().setVisible(true);
+		popup.setWidget(beanFieldsEditorView);
+		popup.center();
 		
-		Object[] array = jsonSet.toArray();
-		for(int i=0; i<array.length; i++){
-			   Object o = array[i];
-			   Object b = productsObj.get(array[i].toString());
-		}
-		
+		beanFieldsEditorSetHandlers(popup, beanFieldsEditorView);
 	}
+	
+//	private void createBeanLayoutWithJson(String beansJson) {
+//		JSONValue value = JSONParser.parse(beansJson);
+//		JSONObject productsObj = value.isObject();
+//		Set<String> jsonSet = productsObj.keySet();
+//		
+//		Object[] array = jsonSet.toArray();
+//		for(int i=0; i<array.length; i++){
+//			   Object o = array[i];
+//			   Object b = productsObj.get(array[i].toString());
+//		}
+//		
+//	}
 		
 	public String fetchBeansJson(int beanId){
 		String beansJson = "" ;
@@ -438,12 +442,7 @@ public class BindingsPresenter implements Presenter
 
 			@Override
 			public void onClick(ClickEvent event) {
-				
-				
-				
 				try{
-
-					
 					String xmlFileName = beanFieldsEditorView.getXmlComponentAttachment().getDefaultUploader().getFilename();
 					String javaFileName = beanFieldsEditorView.getJavaComponentAttachment().getDefaultUploader().getFilename();
 					int indXml = xmlFileName.indexOf(".");
@@ -490,12 +489,37 @@ public class BindingsPresenter implements Presenter
 			@Override
 			public void onFailure(Throwable caught) {
 				SC.warn(caught.getLocalizedMessage());
+				
 			}
 
 			@Override
 			public void onSuccess(String result) {
 				UploadedClass uploaded = new UploadedClass();
-				popup.setWidget(uploaded);
+				new PopupsView(uploaded);
+				
+			}
+		});
+		
+	}
+	
+	private void overriteBeansLayoutClassWithAlreadyAvailableUI(final int beanId, final PopupPanel popup) {
+		rpcService.overriteBeansLayoutClass(beanId, new AsyncCallback<String>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				if(caught.getLocalizedMessage().equals(ApplicationConstants.NO_UI_CLASS_FOUND)){
+					uploadNewBeanUi(popup, beanId);
+				}else{
+				SC.warn(caught.getLocalizedMessage());
+				}
+			}
+
+			@Override
+			public void onSuccess(String result) {
+				popup.removeFromParent();
+				UploadedClass uploaded = new UploadedClass();
+				new PopupsView(uploaded);
+				
 			}
 		});
 		

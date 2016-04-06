@@ -55,7 +55,7 @@ public class ComponentXmlUploadServlet  extends UploadAction implements javax.se
 			String mypath = ApplicationConstants.UPLOADED_VIEWS_PACKAGE;
 			String tmpValue = "";
 			String reqType = "";
-			String className = ApplicationConstants.UPLOADED_VIEWS_NAME;
+			String className = ApplicationConstants.UPLOADED_VIEWS__BINDING_NAME;
 			int beanId = 0;
 //			for (FileItem item : items) {
 //				if (item.isFormField()) {

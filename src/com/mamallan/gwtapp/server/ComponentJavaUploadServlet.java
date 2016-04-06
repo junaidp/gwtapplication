@@ -83,6 +83,8 @@ public class ComponentJavaUploadServlet  extends UploadAction implements javax.s
 						fileName = ApplicationConstants.UPLOADED_VIEWS_NAME+fileExtension;
 //					}
 					 if(reqType.equals(ApplicationConstants.BEAN_CREATION_FOR_BINDING) && beanId !=0){
+						 fileName = ApplicationConstants.UPLOADED_VIEWS__BINDING_NAME+fileExtension;
+						 
 						String root = getServletContext().getRealPath("/");
 						File folder = new File(root+"/bindingBeans/"+beanId);
 						folder.mkdirs();
