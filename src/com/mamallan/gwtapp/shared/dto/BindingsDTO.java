@@ -1,6 +1,7 @@
 package com.mamallan.gwtapp.shared.dto;
 
 import java.io.Serializable;
+import java.util.TreeMap;
 
 import com.mamallan.gwtapp.shared.entity.NameSpaceEntity;
 
@@ -15,6 +16,7 @@ public class BindingsDTO implements Serializable{
 	private String bindingValue_ext;
 	private char type;
 	private int beanId;
+	private TreeMap beanPropertiesMap;
 	
 	public int getBindingId() {
 		return bindingId;
@@ -63,6 +65,12 @@ public class BindingsDTO implements Serializable{
 	}
 	public void setBeanId(int beanId) {
 		this.beanId = beanId;
+	}
+	public TreeMap getBeanPropertiesMap() {
+		return beanPropertiesMap;
+	}
+	public void setBeanPropertiesMap(TreeMap beanPropertiesMap) {
+		this.beanPropertiesMap = beanPropertiesMap;
 	}
 	
 }

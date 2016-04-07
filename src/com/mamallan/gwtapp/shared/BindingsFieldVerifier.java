@@ -33,7 +33,7 @@ public class BindingsFieldVerifier  {
 	}
 	
 	private void validateNameSpace(String input) {
-		if(Character.isDigit(input.charAt(0)) || input.trim().length()<=0 || input.contains(" ")){
+		if(input.trim().length()<=0 || Character.isDigit(input.charAt(0)) || input.contains(" ")){
 			errors.add(new UIFieldsError(ApplicationConstants.NAMESPACE_NAME_NOT_VALID));
 		}
 		

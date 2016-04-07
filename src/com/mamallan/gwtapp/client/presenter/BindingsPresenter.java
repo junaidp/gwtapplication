@@ -1,8 +1,12 @@
 package com.mamallan.gwtapp.client.presenter;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Set;
+import java.util.TreeMap;
 
 import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -18,11 +22,13 @@ import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteHandler;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteEvent;
 import com.mamallan.gwtapp.client.HelloServiceAsync;
@@ -31,6 +37,7 @@ import com.mamallan.gwtapp.client.view.BeanFieldsEditorView;
 import com.mamallan.gwtapp.client.view.widgets.AddBindingWidget;
 import com.mamallan.gwtapp.client.view.widgets.DisplayAlert;
 import com.mamallan.gwtapp.client.view.widgets.PopupsView;
+import com.mamallan.gwtapp.client.view.widgets.UploadedComponents.UploadedBindingClass;
 import com.mamallan.gwtapp.client.view.widgets.UploadedComponents.UploadedClass;
 import com.mamallan.gwtapp.shared.BindingsFieldVerifier;
 import com.mamallan.gwtapp.shared.dto.BeanObjectDTO;
@@ -53,6 +60,7 @@ public class BindingsPresenter implements Presenter
 	private BindingsDTO selectedBindingsDTO; // For Editing
 	private ArrayList<Integer> selectedBindings = new ArrayList<Integer>(); // For deletion
 	private ArrayList<BeanObjectDTO> beanObjects = new ArrayList<BeanObjectDTO>();
+	private TreeMap beanPropertiesMap = new TreeMap();
 
 	public interface Display 
 	{
@@ -117,10 +125,17 @@ public class BindingsPresenter implements Presenter
 				//				addBindingWidget.getListBindings().setDefaultValue("int");
 
 				if(selectedBindingsDTO != null){
+//					addBindingWidget.getTxtBindingName().setText(selectedBindingsDTO.getBindingName());
+//					addBindingWidget.getTxtBindingValue().setText(selectedBindingsDTO.getBindingValue());
+//					addBindingWidget.getListBindings().setValue(selectedBindingsDTO.getBindingType());
+//					addBindingWidget.getListNameSpace().setValue(selectedBindingsDTO.getNameSpaceId().getNameSpaceId());
+					
 					addBindingWidget.getTxtBindingName().setText(selectedBindingsDTO.getBindingName());
 					addBindingWidget.getTxtBindingValue().setText(selectedBindingsDTO.getBindingValue());
-					addBindingWidget.getListBindings().setValue(selectedBindingsDTO.getBindingType());
-					addBindingWidget.getListNameSpace().setValue(selectedBindingsDTO.getNameSpaceId().getNameSpaceName());
+					addBindingWidget.getListBindings().setValue(selectedBindingsDTO.getBeanId()+"");
+					addBindingWidget.getListBindings().setDisplayField(selectedBindingsDTO.getBindingType());
+					addBindingWidget.getListNameSpace().setValue(selectedBindingsDTO.getNameSpaceId().getNameSpaceId());
+					addBindingWidget.getListNameSpace().setDisplayField(selectedBindingsDTO.getNameSpaceId().getNameSpaceName());
 				}
 			}
 
@@ -137,7 +152,7 @@ public class BindingsPresenter implements Presenter
 
 			@Override
 			public void onSuccess(ArrayList<BeanObjectDTO> result) {
-				
+
 				addBindingWidget.getListBindings().clearValue();
 
 				for(int i=0; i< result.size(); i++){
@@ -151,9 +166,11 @@ public class BindingsPresenter implements Presenter
 				addBindingWidget.getListBindings().setDefaultValue("int");
 
 				if(selectedBindingsDTO != null){
-					addBindingWidget.getTxtBindingName().setText(selectedBindingsDTO.getBindingName());
-					addBindingWidget.getTxtBindingValue().setText(selectedBindingsDTO.getBindingValue());
-					addBindingWidget.getListBindings().setValue(selectedBindingsDTO.getBindingType());
+//					addBindingWidget.getTxtBindingName().setText(selectedBindingsDTO.getBindingName());
+//					addBindingWidget.getTxtBindingValue().setText(selectedBindingsDTO.getBindingValue());
+//					addBindingWidget.getListBindings().setValue(selectedBindingsDTO.getBeanId()+"");
+//					addBindingWidget.getListBindings().setDisplayField(selectedBindingsDTO.getBindingType());
+					//here	
 				}
 			}
 
@@ -176,11 +193,11 @@ public class BindingsPresenter implements Presenter
 		valueMapBindingsList.put("byte"    , "byte");
 		valueMapBindingsList.put("date"    , "date");
 	}
-	
+
 	private boolean isPremetiveType(String input){
-		
+
 		if(input.equals("int")|| input.equals("short")|| input.equals("long")|| input.equals("float")
-				|| input.equals("double") || input.equals("boolean") || input.equals("char") || input.equals("string")
+				|| input.equals("double") || input.equals("boolean") || input.equals("char") || input.equals("String")
 				|| input.equals("byte") || input.equals("date")){
 			return true;
 		}
@@ -188,8 +205,8 @@ public class BindingsPresenter implements Presenter
 	}
 
 	private void bind() {
-		
-		
+
+
 
 		display.getTxtSearch().addKeyUpHandler(new KeyUpHandler() {
 
@@ -314,12 +331,12 @@ public class BindingsPresenter implements Presenter
 		}else{
 			addBindingWidget.getAncEditBean().setVisible(false);
 		}
-		
+
 		final PopupPanel popup = new PopupPanel();
 		popup.setWidget(addBindingWidget);
 		popup.center();
 		addBindingWidget.getTxtBindingName().setFocus(true);
-		
+
 
 		addBindingWidget.getImgClose().addClickHandler(new ClickHandler() {
 
@@ -368,9 +385,9 @@ public class BindingsPresenter implements Presenter
 				}
 			}
 		});
-		
+
 		addBindingWidget.getListBindings().addChangedHandler(new ChangedHandler() {
-			
+
 			@Override
 			public void onChanged(ChangedEvent event) {
 				if(isPremetiveType(addBindingWidget.getListBindings().getDisplayValue())){
@@ -380,43 +397,45 @@ public class BindingsPresenter implements Presenter
 				}
 			}
 		});
-		
+
 		addBindingWidget.getAncEditBean().addClickHandler(new ClickHandler() {
-			
+
 			@Override
 			public void onClick(ClickEvent event) {
-//				String beansJson = fetchBeansJson(Integer.parseInt(addBindingWidget.getListBindings().getValueAsString()));
-//				createBeanLayoutWithJson(beansJson);
+				//				String beansJson = fetchBeansJson(Integer.parseInt(addBindingWidget.getListBindings().getValueAsString()));
+				//				createBeanLayoutWithJson(beansJson);
+//				System.out.println(addBindingWidget.getListBindings().getValueAsString());
+//				int beanId = selectedBindingsDTO.getBeanId();
 				int beanId = Integer.parseInt(addBindingWidget.getListBindings().getValueAsString());
 				
 				overriteBeansLayoutClassWithAlreadyAvailableUI(beanId, popup);
-				}
+			}
 		});
 	}
-	
+
 	private void uploadNewBeanUi(final PopupPanel popup, int beanId) {
 		final BeanFieldsEditorView beanFieldsEditorView = new BeanFieldsEditorView(ApplicationConstants.BEAN_CREATION_FOR_BINDING+":"+beanId);
 		beanFieldsEditorView.getListBeans().setVisible(false);
 		beanFieldsEditorView.getImgClose().setVisible(true);
 		popup.setWidget(beanFieldsEditorView);
 		popup.center();
-		
+
 		beanFieldsEditorSetHandlers(popup, beanFieldsEditorView);
 	}
-	
-//	private void createBeanLayoutWithJson(String beansJson) {
-//		JSONValue value = JSONParser.parse(beansJson);
-//		JSONObject productsObj = value.isObject();
-//		Set<String> jsonSet = productsObj.keySet();
-//		
-//		Object[] array = jsonSet.toArray();
-//		for(int i=0; i<array.length; i++){
-//			   Object o = array[i];
-//			   Object b = productsObj.get(array[i].toString());
-//		}
-//		
-//	}
-		
+
+	//	private void createBeanLayoutWithJson(String beansJson) {
+	//		JSONValue value = JSONParser.parse(beansJson);
+	//		JSONObject productsObj = value.isObject();
+	//		Set<String> jsonSet = productsObj.keySet();
+	//		
+	//		Object[] array = jsonSet.toArray();
+	//		for(int i=0; i<array.length; i++){
+	//			   Object o = array[i];
+	//			   Object b = productsObj.get(array[i].toString());
+	//		}
+	//		
+	//	}
+
 	public String fetchBeansJson(int beanId){
 		String beansJson = "" ;
 		for(int i=0; i< beanObjects.size(); i++){
@@ -427,17 +446,17 @@ public class BindingsPresenter implements Presenter
 		}
 		return beansJson;
 	}	
-	
+
 	private void beanFieldsEditorSetHandlers(final PopupPanel popup,
 			final BeanFieldsEditorView beanFieldsEditorView) {
 		beanFieldsEditorView.getImgClose().addClickHandler(new ClickHandler() {
-			
+
 			@Override
 			public void onClick(ClickEvent event) {
 				popup.removeFromParent();
 			}
 		});
-		
+
 		beanFieldsEditorView.getBtnSubmit().addClickHandler(new ClickHandler() {
 
 			@Override
@@ -464,66 +483,114 @@ public class BindingsPresenter implements Presenter
 				}
 			}
 		});
-		
+
 		beanFieldsEditorView.getJavaComponentAttachment().getForm().addSubmitCompleteHandler(new SubmitCompleteHandler() {
-			
+
 			@Override
 			public void onSubmitComplete(SubmitCompleteEvent event) {
 				int startInd = event.getResults().indexOf(">");
 				int endInd = event.getResults().lastIndexOf("<");
 				String bean = event.getResults().substring(startInd+2, endInd);
-				
+
 				int beanId = Integer.parseInt(bean);
 				popup.removeFromParent();
 				overriteBeansLayoutClass(beanId, popup);
 
 			}
 
-			
+
 		});
 	}
-	
-	private void overriteBeansLayoutClass(int beanId, final PopupPanel popup) {
+
+	private void overriteBeansLayoutClass(final int beanId, final PopupPanel popupBinding) {
 		rpcService.overriteBeansLayoutClass(beanId, new AsyncCallback<String>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
 				SC.warn(caught.getLocalizedMessage());
-				
+
 			}
 
 			@Override
 			public void onSuccess(String result) {
-				UploadedClass uploaded = new UploadedClass();
-				new PopupsView(uploaded);
-				
+//				UploadedClass uploaded = new UploadedClass();
+//				new PopupsView(uploaded);
+				displayLoadedUI(beanId, popupBinding);
+
 			}
 		});
-		
+
 	}
-	
-	private void overriteBeansLayoutClassWithAlreadyAvailableUI(final int beanId, final PopupPanel popup) {
+
+	private void overriteBeansLayoutClassWithAlreadyAvailableUI(final int beanId, final PopupPanel popupBinding) {
 		rpcService.overriteBeansLayoutClass(beanId, new AsyncCallback<String>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
 				if(caught.getLocalizedMessage().equals(ApplicationConstants.NO_UI_CLASS_FOUND)){
-					uploadNewBeanUi(popup, beanId);
+					uploadNewBeanUi(popupBinding, beanId);
 				}else{
-				SC.warn(caught.getLocalizedMessage());
+					SC.warn(caught.getLocalizedMessage());
 				}
 			}
 
 			@Override
 			public void onSuccess(String result) {
-				popup.removeFromParent();
-				UploadedClass uploaded = new UploadedClass();
-				new PopupsView(uploaded);
-				
+				displayLoadedUI(beanId, popupBinding);
+
+			}
+
+			
+		});
+
+	}
+	
+	private void displayLoadedUI(final int beanId,
+			final PopupPanel popupBinding) {
+		popupBinding.hide();
+		UploadedBindingClass uploadedClass = new UploadedBindingClass();
+		String json = fetchBeansJson(beanId);
+		VerticalPanel vpnlPopup = new VerticalPanel();
+		Button btnSave = new Button("Save");
+		btnSave.addStyleName("primary button");
+		vpnlPopup.add(uploadedClass);
+		vpnlPopup.add(btnSave);
+		final PopupsView popupBean = new PopupsView(vpnlPopup);
+
+		btnSave.addClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent event) {
+				popupBean.getPopup().removeFromParent();
+				popupBinding.center();
 			}
 		});
-		
+
+		uploadedClass.pcs.addPropertyChangeListener(new PropertyChangeListener() {
+
+			@Override
+			public void propertyChange(PropertyChangeEvent evt) {
+				editBeanOnPropertyChange(selectedBindingsDTO.getBindingType(), evt.getPropertyName(), evt.getNewValue());
+			}
+
+
+		});
 	}
+
+	private void editBeanOnPropertyChange(String selectedBeanName,
+			String propertyName, Object object) {
+
+		beanPropertiesMap.put(propertyName, object);
+	}
+
+//	Widget getFirstChild(Widget parent) {
+//		if (parent.asWidget() instanceof HasWidgets) {
+//			Iterator<Widget> iter = ((HasWidgets) parent).iterator();
+//			return (iter != null && iter.hasNext()) ? iter.next() : null;
+//		}
+//
+//		return null;
+//	}
 
 	private void populateAddBindingWidget(
 			AddBindingWidget addBindingWidget) {
@@ -561,7 +628,7 @@ public class BindingsPresenter implements Presenter
 				char type = 'B';
 				bindingsDTO.setType(type);
 				bindingsDTO.setBeanId(Integer.parseInt(addBindingWidget.getListBindings().getValueAsString()));
-				
+
 			}
 			NameSpaceEntity nameSpace = new NameSpaceEntity();
 			try{
@@ -572,7 +639,7 @@ public class BindingsPresenter implements Presenter
 			}catch(Exception ex){
 				nameSpace.setNameSpaceName(addBindingWidget.getListNameSpace().getValueAsString());
 			}
-
+			bindingsDTO.setBeanPropertiesMap(beanPropertiesMap);
 			bindingsDTO.setNameSpaceId(nameSpace);
 			saveBindingInDb(popup, bindingsDTO);
 		}

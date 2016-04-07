@@ -155,9 +155,11 @@ public class FilesCreationHelper {
 		if(method.getParameterTypes().length != 1) return false;
 		return true;
 	}
+	
+	
 
 
-	public String editBeanOnPropertyChange(String selectedBeanName,
+	public Object editBeanOnPropertyChange(String selectedBeanName,
 			TreeMap beanPropertiesMap) throws Exception {
 
 		try{
@@ -170,9 +172,23 @@ public class FilesCreationHelper {
 			throw ex;
 		}
 	}
+	
+//	public String editBindingsBean(String selectedBeanName,
+//			TreeMap beanPropertiesMap) throws Exception {
+//
+//		try{
+//			Class bean = Class.forName(selectedBeanName);
+//			baseBeanName = selectedBeanName;
+//			parentobject = bean.newInstance();
+//
+//			return editBeanOnChange(selectedBeanName, beanPropertiesMap);
+//		}catch(Exception ex){
+//			throw ex;
+//		}
+//	}
 
 
-	public String editBeanOnChange(String selectedBeanName,
+	public Object editBeanOnChange(String selectedBeanName,
 			TreeMap beanPropertiesMap) throws Exception {
 
 
@@ -234,12 +250,111 @@ public class FilesCreationHelper {
 				}
 			}
 			saveBeanObjectIntoDataBase(baseObject, baseBeanName);
-			return "";
+			return baseObject;
 		}catch(Exception ex){
 			throw new Exception("Exception : "+ ex.getLocalizedMessage());
 		}
 	}
 
+	
+	//////////////////////////BEAN EDITING FOR BINDING/////////////////////
+//	public String editBindingBeanOnPropertyChange(String selectedBeanName,
+//			TreeMap beanPropertiesMap) throws Exception {
+//
+//		try{
+//			Class bean = Class.forName(selectedBeanName);
+//			baseBeanName = selectedBeanName;
+//			parentobject = bean.newInstance();
+//
+//			return editBeanOnChange(selectedBeanName, beanPropertiesMap);
+//		}catch(Exception ex){
+//			throw ex;
+//		}
+//	}
+//	
+//	public String editBindingBindingsBean(String selectedBeanName,
+//			TreeMap beanPropertiesMap) throws Exception {
+//
+//		try{
+//			Class bean = Class.forName(selectedBeanName);
+//			baseBeanName = selectedBeanName;
+//			parentobject = bean.newInstance();
+//
+//			return editBeanOnChange(selectedBeanName, beanPropertiesMap);
+//		}catch(Exception ex){
+//			throw ex;
+//		}
+//	}
+//
+//
+//	public String editBindingBeanOnChange(String selectedBeanName,
+//			TreeMap beanPropertiesMap) throws Exception {
+//
+//
+//		try{
+//			Class bean = Class.forName(selectedBeanName);
+//			Object object = bean.newInstance();
+//			if(parentMethod!=null){
+//				parentMethod.invoke(parentobject, object);
+//			}
+//			parentobject = object;
+//			if(baseObject == null){
+//				baseObject = parentobject;
+//			}
+//
+//			// Iterate on methods of current Bean and invoking all methods (other than sub entities)
+//			final Method[] methods = bean.getMethods();
+//			for(Method method : methods){
+//				if(isSetter(method)){
+//					Class<?>[] parameter = method.getParameterTypes();
+//					String propertyName = parameter[0].getName();
+//					if(!propertyName.startsWith(ApplicationConstants.DEFAULT_PACKAGE_START)){
+//						editBean(object, beanPropertiesMap, method);
+//					}
+//				}	
+//			}
+//			// Iterate on methods of current Bean and invoking all methods (Only sub entities)
+//			for(Method method : methods){
+//				if(isSetter(method)){
+//					Class<?>[] parameter = method.getParameterTypes();
+//					String propertyName = parameter[0].getName();
+//					String entityName = parameter[0].getSimpleName();
+//
+//					if(propertyName.startsWith(ApplicationConstants.DEFAULT_PACKAGE_START)){
+//
+//
+//						Set set = beanPropertiesMap.entrySet();
+//						Iterator i = set.iterator();
+//						TreeMap beanPropertiesChildMap = new TreeMap();
+//						parentMethod = method;
+//						while(i.hasNext()) {
+//							Map.Entry me = (Map.Entry)i.next();
+//							String propertyName1 = me.getKey().toString();
+//							if(propertyName1.contains("_")){
+//								int ind_ = propertyName1.indexOf("_");
+//								String beanChildName = propertyName1.substring(0, ind_);
+//
+//								if(entityName.equalsIgnoreCase(beanChildName)){
+//
+//									beanPropertiesChildMap.put(propertyName1.substring(ind_+1), me.getValue());
+//								}
+//							}
+//						}
+//						if(beanPropertiesChildMap.size() > 0){
+//							editBeanOnChange(propertyName, beanPropertiesChildMap);
+//						}
+//
+//					}
+//
+//				}
+//			}
+//			saveBindingBeanObjectIntoDataBase(baseObject, baseBeanName);
+//			return "";
+//		}catch(Exception ex){
+//			throw new Exception("Exception : "+ ex.getLocalizedMessage());
+//		}
+//	}
+//	/////////////////////////FOR BINDING END//////////////////
 
 	private void editBean(Object beanObject, TreeMap beanPropertiesMap, Method method)throws Exception {
 		Map.Entry me = null;
@@ -276,10 +391,12 @@ public class FilesCreationHelper {
 		ApplicationContext ctx = new ClassPathXmlApplicationContext(
 				"applicationContext.xml");
 		MyRdbHelper rdbHelper = (MyRdbHelper) ctx.getBean("ManagerApp");
+		
 		rdbHelper.saveBeanObjectIntoDataBase(beanObject, selectedBeanName);
+		
 
 	}
-
+	
 	public String fetchBeanStructureJson(String beanName)throws Exception {
 		Class myClass = Class.forName(beanName);
 		Field[] field = myClass.getDeclaredFields();

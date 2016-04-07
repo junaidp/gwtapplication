@@ -62,5 +62,4 @@ public interface HelloService extends RemoteService {
 	ArrayList<NameSpaceEntity>fetchNameSpaces()throws Exception;
 	String overriteBeansLayoutClass(int beanId)throws Exception;
 	
-	
 }

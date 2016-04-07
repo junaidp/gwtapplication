@@ -45,6 +45,9 @@ public class BindingsEntity   implements Serializable {
 	
 	@Column(name="type")
 	private char type;
+	
+	@Column(name="beanId")
+	private int beanId;
 
 	public int getBindingId() {
 		return bindingId;
@@ -100,6 +103,14 @@ public class BindingsEntity   implements Serializable {
 
 	public void setType(char type) {
 		this.type = type;
+	}
+
+	public int getBeanId() {
+		return beanId;
+	}
+
+	public void setBeanId(int beanId) {
+		this.beanId = beanId;
 	}
 	
 

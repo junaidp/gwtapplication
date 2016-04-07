@@ -37,6 +37,7 @@ public class UploadedClass extends ApplicationBean{
 	
 	
 	public UploadedClass() {
+		
 		initWidget(uiBinder.createAndBindUi(this));
 		listIds.addItem("0");
 		listIds.addItem("1");

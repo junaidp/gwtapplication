@@ -66,9 +66,11 @@ import org.mindrot.BCrypt;
 
 
 
+
 //import com.helloworld.shared.beans.BeanSet;
 import com.mamallan.gwtapp.client.view.ApplicationConstants;
 import com.mamallan.gwtapp.org.hibernate.DynHelper;
+import com.mamallan.gwtapp.server.FilesCreationHelper;
 import com.mamallan.gwtapp.shared.dto.BeanObjectDTO;
 import com.mamallan.gwtapp.shared.dto.BindingsDTO;
 import com.mamallan.gwtapp.shared.entity.BeanObjects;
@@ -662,6 +664,36 @@ public class MyRdbHelper {
 			throw new Exception("Exception occured in saveBeanObjectIntoDataBase");
 		}
 	}
+	
+//	public String saveBindingsBeanObjectIntoDataBase(Object beanObjectToSavedInDb,
+//			String selectedBeanName, int beanId)throws Exception {
+//
+//		Session session = null;
+//		BeanObjects beanObjectEntity = null;
+//		try{
+//			session = sessionFactory.openSession();
+//			Criteria crit = session.createCriteria(BindingsEntity.class);
+//			crit.add(Restrictions.eq("beanId", beanId));
+//			BindingsEntity bindingsEntity = crit.list().get(0);
+//			beanObjectEntity = fetchBeanAlreadySaved(selectedBeanName);
+//			if(beanObjectEntity == null){
+//				beanObjectEntity = new BeanObjects();
+//			}
+//
+//			beanObjectEntity.setBeanName(selectedBeanName);
+//
+//			Blob blob = Hibernate.getLobCreator(session).createBlob(serialize(beanObjectToSavedInDb));
+//			//			Blob blob = Hibernate.createBlob(serialize(beanObjectToSavedInDb));
+//			beanObjectEntity.setBeanObject(blob);
+//			beanObjectEntity.setBeanType('S');
+//			session.saveOrUpdate(beanObjectEntity);
+//			session.flush();
+//			return "bean saved in database";
+//		}catch(Exception ex){
+//			logger.warn(String.format("Exception occured in saveBeanObjectIntoDataBase", ex.getMessage()), ex);
+//			throw new Exception("Exception occured in saveBeanObjectIntoDataBase");
+//		}
+//	}
 
 	public BeanObjects fetchBeanAlreadySaved(String beanName)throws Exception{
 		Session session = null;
@@ -834,6 +866,7 @@ public class MyRdbHelper {
 				bindingDTO.setBindingValue(bindingsEntity.getBindingValue());
 				bindingDTO.setNameSpaceId(bindingsEntity.getNameSpaceId());
 				bindingDTO.setType(bindingsEntity.getType());
+				bindingDTO.setBeanId(bindingsEntity.getBeanId());
 				
 				listBindingsDTO.add(bindingDTO);
 			}
@@ -849,17 +882,15 @@ public class MyRdbHelper {
 	public String saveBinding(BindingsDTO bindingDTO) throws Exception {
 		Session session = null;
 		try{
-			if(bindingNameAvailable(bindingDTO.getBindingName())){
+			if(bindingNameAvailable(bindingDTO.getBindingName(), bindingDTO.getBindingId())){
 				session = sessionFactory.openSession();
 				if(bindingDTO.getNameSpaceId().getNameSpaceId() == 0){
-					if(nameSpaceAvailable(bindingDTO.getNameSpaceId().getNameSpaceName())){
+					if(nameSpaceAvailable(bindingDTO.getNameSpaceId().getNameSpaceName(), bindingDTO.getNameSpaceId().getNameSpaceId())){
 						saveNameSpace(bindingDTO.getNameSpaceId(), session);
 					}else{
 						return ApplicationConstants.NAMESPACE_NOT_AVAILABLE;
 					}
 				}
-
-				
 				
 				BindingsEntity bindingEntity = new BindingsEntity();
 				bindingEntity.setBindingId(bindingDTO.getBindingId());
@@ -867,9 +898,16 @@ public class MyRdbHelper {
 				bindingEntity.setBindingType(bindingDTO.getBindingType());
 				bindingEntity.setBindingValue(bindingDTO.getBindingValue());
 				bindingEntity.setNameSpaceId(bindingDTO.getNameSpaceId());
+				bindingEntity.setBeanId(bindingDTO.getBeanId());
 				bindingEntity.setType(bindingDTO.getType());
 				if(bindingDTO.getType() == 'B'&& bindingDTO.getBeanId() != 0){
-					bindingEntity.setBindingValue_ext(fetchBeansBlob(bindingDTO.getBeanId(), session));
+					if(bindingDTO.getBeanPropertiesMap().size() > 0){
+						FilesCreationHelper filesCreationHelper = new FilesCreationHelper();
+						Object beanObjectToSavedInDb =  filesCreationHelper.editBeanOnPropertyChange(bindingDTO.getBindingType(), bindingDTO.getBeanPropertiesMap());
+						Blob blob = Hibernate.getLobCreator(session).createBlob(serialize(beanObjectToSavedInDb));
+						bindingEntity.setBindingValue_ext(blob);
+					}
+//					bindingEntity.setBindingValue_ext(fetchBeansBlob(bindingDTO.getBeanId(), session));
 				}
 				session.saveOrUpdate(bindingEntity);
 				session.flush();
@@ -910,9 +948,12 @@ public class MyRdbHelper {
 		}
 	}
 
-	public boolean bindingNameAvailable(String name)throws Exception{
+	public boolean bindingNameAvailable(String name, int bindingId)throws Exception{
 		Session session = null;
 		try{
+			if(bindingId !=0){
+				return true;
+			}
 			session = sessionFactory.openSession();
 			Criteria crit =session.createCriteria(BindingsEntity.class);
 			crit.add(Restrictions.eq("bindingName", name));
@@ -926,9 +967,12 @@ public class MyRdbHelper {
 		}
 	}
 
-	public boolean nameSpaceAvailable(String name)throws Exception{
+	public boolean nameSpaceAvailable(String name, int nameSpaceId)throws Exception{
 		Session session = null;
 		try{
+			if(nameSpaceId!=0){
+				return true;
+			}
 			session = sessionFactory.openSession();
 			Criteria crit =session.createCriteria(NameSpaceEntity.class);
 			crit.add(Restrictions.eq("nameSpaceName", name));

@@ -60,5 +60,5 @@ public interface HelloServiceAsync {
 	void deleteMultipleBindings(ArrayList<Integer> bindingIds, AsyncCallback<String> asyncCallback);
 	void fetchNameSpaces(AsyncCallback<ArrayList<NameSpaceEntity>> asyncCallback);
 	void overriteBeansLayoutClass(int beanId, AsyncCallback<String> asyncCallback);
-	
+		
 }

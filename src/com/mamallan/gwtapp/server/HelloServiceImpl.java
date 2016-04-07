@@ -469,8 +469,9 @@ HelloService {
 	public String editBeanOnPropertyChange(String selectedBeanName, TreeMap beanPropertiesMap) throws Exception {
 		
 		FilesCreationHelper filesCreationHelper = new FilesCreationHelper();
-		return filesCreationHelper.editBeanOnPropertyChange(selectedBeanName, beanPropertiesMap);
-		 
+//		return filesCreationHelper.editBeanOnPropertyChange(selectedBeanName, beanPropertiesMap);
+		Object obj =  filesCreationHelper.editBeanOnPropertyChange(selectedBeanName, beanPropertiesMap);
+		 return obj.toString();
 	}
 	
 	@Override
@@ -559,4 +560,6 @@ HelloService {
 		File myPackage    = new File(dir);
 		return myPackage;
 	}
+
+	
 }
