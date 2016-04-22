@@ -29,6 +29,7 @@ public class SubscriptionVerificationView extends Composite implements Display {
 		email.getElement().setPropertyString("placeholder", ApplicationConstants.ENTER_REGISTERED_EMAIL);
 		RootPanel.get("headerContainer").clear();
 		RootPanel.get("footerContainer").clear();
+
 	}
 
 	public TextBox getEmail() {

@@ -35,7 +35,7 @@ public class PopupsView {
 		vpnlMain = new VerticalPanel();
 		vpnlMain.add(hpnlClose);
 		vpnlMain.add(widget);
-		vpnlMain.setSize("200px","400px");
+//		vpnlMain.setSize("200px","400px");
 		//vpnlMain.
 		popup.setWidget(vpnlMain);
 		

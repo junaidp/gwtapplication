@@ -3,9 +3,7 @@ package com.mamallan.gwtapp.client.presenter;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
-import java.util.Set;
 import java.util.TreeMap;
 
 import com.google.gwt.cell.client.FieldUpdater;
@@ -14,15 +12,12 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.event.shared.HandlerManager;
-import com.google.gwt.json.client.JSONObject;
-import com.google.gwt.json.client.JSONParser;
-import com.google.gwt.json.client.JSONValue;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.DecoratedPopupPanel;
 import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteHandler;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasWidgets;
@@ -38,7 +33,6 @@ import com.mamallan.gwtapp.client.view.widgets.AddBindingWidget;
 import com.mamallan.gwtapp.client.view.widgets.DisplayAlert;
 import com.mamallan.gwtapp.client.view.widgets.PopupsView;
 import com.mamallan.gwtapp.client.view.widgets.UploadedComponents.UploadedBindingClass;
-import com.mamallan.gwtapp.client.view.widgets.UploadedComponents.UploadedClass;
 import com.mamallan.gwtapp.shared.BindingsFieldVerifier;
 import com.mamallan.gwtapp.shared.dto.BeanObjectDTO;
 import com.mamallan.gwtapp.shared.dto.BindingsDTO;
@@ -61,6 +55,7 @@ public class BindingsPresenter implements Presenter
 	private ArrayList<Integer> selectedBindings = new ArrayList<Integer>(); // For deletion
 	private ArrayList<BeanObjectDTO> beanObjects = new ArrayList<BeanObjectDTO>();
 	private TreeMap beanPropertiesMap = new TreeMap();
+	private AddBindingWidget addBindingWidget;
 
 	public interface Display 
 	{
@@ -109,7 +104,7 @@ public class BindingsPresenter implements Presenter
 
 	}
 
-	private void fetchNameSpaces(final AddBindingWidget addBindingWidget) {
+	private void fetchNameSpaces() {
 		rpcService.fetchNameSpaces(new AsyncCallback<ArrayList<NameSpaceEntity>>() {
 
 			@Override
@@ -147,7 +142,7 @@ public class BindingsPresenter implements Presenter
 
 	}
 
-	private void fetchBeans(final AddBindingWidget addBindingWidget) {
+	private void fetchBeans() {
 		rpcService.fetchAllBeansInDb(new AsyncCallback<ArrayList<BeanObjectDTO>>() {
 
 			@Override
@@ -172,6 +167,7 @@ public class BindingsPresenter implements Presenter
 //					addBindingWidget.getListBindings().setDisplayField(selectedBindingsDTO.getBindingType());
 					//here	
 				}
+				fetchNameSpaces();
 			}
 
 			@Override
@@ -205,8 +201,6 @@ public class BindingsPresenter implements Presenter
 	}
 
 	private void bind() {
-
-
 
 		display.getTxtSearch().addKeyUpHandler(new KeyUpHandler() {
 
@@ -291,9 +285,6 @@ public class BindingsPresenter implements Presenter
 				selectedBindingsDTO = null;
 				openAddBindingWidget();
 			}
-
-
-
 		});
 	}
 
@@ -302,8 +293,6 @@ public class BindingsPresenter implements Presenter
 		openAddBindingWidget();
 
 	}
-
-
 
 	private void deleteBindigs() {
 		rpcService.deleteMultipleBindings(selectedBindings, new AsyncCallback<String>() {
@@ -324,7 +313,7 @@ public class BindingsPresenter implements Presenter
 	}
 
 	private void openAddBindingWidget() {
-		AddBindingWidget addBindingWidget = new AddBindingWidget();
+		addBindingWidget = new AddBindingWidget();
 
 		if(selectedBindingsDTO!=null  && !isPremetiveType(selectedBindingsDTO.getBindingValue())){
 			addBindingWidget.getAncEditBean().setVisible(true);
@@ -332,7 +321,8 @@ public class BindingsPresenter implements Presenter
 			addBindingWidget.getAncEditBean().setVisible(false);
 		}
 
-		final PopupPanel popup = new PopupPanel();
+		final DecoratedPopupPanel popup = new DecoratedPopupPanel();
+		popup.setStyleName("whitebg");
 		popup.setWidget(addBindingWidget);
 		popup.center();
 		addBindingWidget.getTxtBindingName().setFocus(true);
@@ -345,8 +335,8 @@ public class BindingsPresenter implements Presenter
 				popup.removeFromParent();
 			}
 		});
-		populateAddBindingWidget(addBindingWidget);
-		setAddBindingHandlers(addBindingWidget, popup);
+		populateAddBindingWidget();
+		setAddBindingHandlers(popup);
 	}
 
 	private void deleteBinding(int bindingId) {
@@ -367,7 +357,7 @@ public class BindingsPresenter implements Presenter
 		});
 	}
 
-	private void setAddBindingHandlers(final AddBindingWidget addBindingWidget, final PopupPanel popup) {
+	private void setAddBindingHandlers(final PopupPanel popup) {
 
 		addBindingWidget.getBtnSave().addClickHandler(new ClickHandler() {
 
@@ -402,10 +392,7 @@ public class BindingsPresenter implements Presenter
 
 			@Override
 			public void onClick(ClickEvent event) {
-				//				String beansJson = fetchBeansJson(Integer.parseInt(addBindingWidget.getListBindings().getValueAsString()));
-				//				createBeanLayoutWithJson(beansJson);
-//				System.out.println(addBindingWidget.getListBindings().getValueAsString());
-//				int beanId = selectedBindingsDTO.getBeanId();
+
 				int beanId = Integer.parseInt(addBindingWidget.getListBindings().getValueAsString());
 				
 				overriteBeansLayoutClassWithAlreadyAvailableUI(beanId, popup);
@@ -556,7 +543,7 @@ public class BindingsPresenter implements Presenter
 		vpnlPopup.add(uploadedClass);
 		vpnlPopup.add(btnSave);
 		final PopupsView popupBean = new PopupsView(vpnlPopup);
-
+		popupBinding.setWidget(addBindingWidget);
 		btnSave.addClickHandler(new ClickHandler() {
 
 			@Override
@@ -565,12 +552,20 @@ public class BindingsPresenter implements Presenter
 				popupBinding.center();
 			}
 		});
+		
+		popupBean.getClose().addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				popupBinding.center();
+			}
+		});
 
 		uploadedClass.pcs.addPropertyChangeListener(new PropertyChangeListener() {
 
 			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
-				editBeanOnPropertyChange(selectedBindingsDTO.getBindingType(), evt.getPropertyName(), evt.getNewValue());
+				editBeanOnPropertyChange(addBindingWidget.getListBindings().getValueAsString(), evt.getPropertyName(), evt.getNewValue());
 			}
 
 
@@ -583,21 +578,9 @@ public class BindingsPresenter implements Presenter
 		beanPropertiesMap.put(propertyName, object);
 	}
 
-//	Widget getFirstChild(Widget parent) {
-//		if (parent.asWidget() instanceof HasWidgets) {
-//			Iterator<Widget> iter = ((HasWidgets) parent).iterator();
-//			return (iter != null && iter.hasNext()) ? iter.next() : null;
-//		}
-//
-//		return null;
-//	}
+	private void populateAddBindingWidget() {
 
-	private void populateAddBindingWidget(
-			AddBindingWidget addBindingWidget) {
-
-		fetchBeans(addBindingWidget);
-		fetchNameSpaces(addBindingWidget);
-
+		fetchBeans();
 	}
 
 	@Override

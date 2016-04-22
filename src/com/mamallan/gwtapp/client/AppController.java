@@ -264,7 +264,6 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 
 			if (token.equals(ApplicationConstants.TOKEN_MAIN)) {
 				presenter = new MainPresenter(rpcService, eventBus, new MainView(loggedInUser));
-				//				headerPresenter.setData(loggedInUser, globalPreferencesEntity);
 
 				if (presenter != null) {
 					presenter.go(container);

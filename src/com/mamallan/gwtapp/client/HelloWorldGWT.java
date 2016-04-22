@@ -20,7 +20,7 @@ public class HelloWorldGWT implements EntryPoint {
 //		GWT.create( Reflection.class ).;
 		
 		HandlerManager eventBus = new HandlerManager(null);
-		loadBeansJson();
+//		loadBeansJson();
 		AppController appViewer = new AppController(rpcService, eventBus);
 		appViewer.go(RootPanel.get("bodyContainer"));
 		//	    System.out.println("PASSWORD is:"+ md5("koala"));

@@ -114,6 +114,11 @@ public class FilesCreationHelper {
 			sb.append("\n }");
 			writer.write(sb+"");
 			writer.close();
+			ApplicationContext ctx = new ClassPathXmlApplicationContext(
+					"applicationContext.xml");
+			MyRdbHelper rdbHelper = (MyRdbHelper) ctx.getBean("ManagerApp");
+			rdbHelper.saveBeanInDatabase(addedBeanDTO.getPackageName()+"."+addedBeanDTO.getBeanName());
+			
 			return "Bean Created";
 		}catch(Exception ex){
 			throw new Exception(ex.getCause());

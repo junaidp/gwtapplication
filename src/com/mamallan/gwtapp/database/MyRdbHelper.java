@@ -67,6 +67,7 @@ import org.mindrot.BCrypt;
 
 
 
+
 //import com.helloworld.shared.beans.BeanSet;
 import com.mamallan.gwtapp.client.view.ApplicationConstants;
 import com.mamallan.gwtapp.org.hibernate.DynHelper;
@@ -664,36 +665,36 @@ public class MyRdbHelper {
 			throw new Exception("Exception occured in saveBeanObjectIntoDataBase");
 		}
 	}
-	
-//	public String saveBindingsBeanObjectIntoDataBase(Object beanObjectToSavedInDb,
-//			String selectedBeanName, int beanId)throws Exception {
-//
-//		Session session = null;
-//		BeanObjects beanObjectEntity = null;
-//		try{
-//			session = sessionFactory.openSession();
-//			Criteria crit = session.createCriteria(BindingsEntity.class);
-//			crit.add(Restrictions.eq("beanId", beanId));
-//			BindingsEntity bindingsEntity = crit.list().get(0);
-//			beanObjectEntity = fetchBeanAlreadySaved(selectedBeanName);
-//			if(beanObjectEntity == null){
-//				beanObjectEntity = new BeanObjects();
-//			}
-//
-//			beanObjectEntity.setBeanName(selectedBeanName);
-//
-//			Blob blob = Hibernate.getLobCreator(session).createBlob(serialize(beanObjectToSavedInDb));
-//			//			Blob blob = Hibernate.createBlob(serialize(beanObjectToSavedInDb));
-//			beanObjectEntity.setBeanObject(blob);
-//			beanObjectEntity.setBeanType('S');
-//			session.saveOrUpdate(beanObjectEntity);
-//			session.flush();
-//			return "bean saved in database";
-//		}catch(Exception ex){
-//			logger.warn(String.format("Exception occured in saveBeanObjectIntoDataBase", ex.getMessage()), ex);
-//			throw new Exception("Exception occured in saveBeanObjectIntoDataBase");
-//		}
-//	}
+
+	//	public String saveBindingsBeanObjectIntoDataBase(Object beanObjectToSavedInDb,
+	//			String selectedBeanName, int beanId)throws Exception {
+	//
+	//		Session session = null;
+	//		BeanObjects beanObjectEntity = null;
+	//		try{
+	//			session = sessionFactory.openSession();
+	//			Criteria crit = session.createCriteria(BindingsEntity.class);
+	//			crit.add(Restrictions.eq("beanId", beanId));
+	//			BindingsEntity bindingsEntity = crit.list().get(0);
+	//			beanObjectEntity = fetchBeanAlreadySaved(selectedBeanName);
+	//			if(beanObjectEntity == null){
+	//				beanObjectEntity = new BeanObjects();
+	//			}
+	//
+	//			beanObjectEntity.setBeanName(selectedBeanName);
+	//
+	//			Blob blob = Hibernate.getLobCreator(session).createBlob(serialize(beanObjectToSavedInDb));
+	//			//			Blob blob = Hibernate.createBlob(serialize(beanObjectToSavedInDb));
+	//			beanObjectEntity.setBeanObject(blob);
+	//			beanObjectEntity.setBeanType('S');
+	//			session.saveOrUpdate(beanObjectEntity);
+	//			session.flush();
+	//			return "bean saved in database";
+	//		}catch(Exception ex){
+	//			logger.warn(String.format("Exception occured in saveBeanObjectIntoDataBase", ex.getMessage()), ex);
+	//			throw new Exception("Exception occured in saveBeanObjectIntoDataBase");
+	//		}
+	//	}
 
 	public BeanObjects fetchBeanAlreadySaved(String beanName)throws Exception{
 		Session session = null;
@@ -745,13 +746,16 @@ public class MyRdbHelper {
 			if(crit.list().size() > 0){
 				for(int i=0; i< crit.list().size(); i++){
 					BeanObjects beanObject = (BeanObjects) crit.list().get(i);
+					String beanJson = "";
 					BeanObjectDTO beanObjectDTO = new BeanObjectDTO();
 					beanObjectDTO.setBeanId(beanObject.getBeanId());
 					beanObjectDTO.setBeanName(beanObject.getBeanName());
-					ObjectMapper mapper = new ObjectMapper();
-					byte[] bdata = beanObject.getBeanObject().getBytes(1, (int) beanObject.getBeanObject().length());
-					mapper.setSerializationInclusion(Inclusion.NON_NULL);
-					String beanJson = mapper.writeValueAsString(toObject(bdata));
+					if(beanObject.getBeanObject() != null){
+						ObjectMapper mapper = new ObjectMapper();
+						byte[] bdata = beanObject.getBeanObject().getBytes(1, (int) beanObject.getBeanObject().length());
+						mapper.setSerializationInclusion(Inclusion.NON_NULL);
+						beanJson = mapper.writeValueAsString(toObject(bdata));
+					}
 					beanObject.setBeanJson(beanJson);
 					beanObjectDTO.setBeanJson(beanJson);
 					beanObjectsDTO.add(beanObjectDTO);
@@ -858,7 +862,7 @@ public class MyRdbHelper {
 			crit.add(Restrictions.like("bindingName", keyword, MatchMode.START));
 			for(int i=0; i< crit.list().size(); i++){
 				BindingsEntity bindingsEntity = (BindingsEntity) crit.list().get(i);
-				
+
 				BindingsDTO bindingDTO = new BindingsDTO();
 				bindingDTO.setBindingId(bindingsEntity.getBindingId());
 				bindingDTO.setBindingName(bindingsEntity.getBindingName());
@@ -867,11 +871,11 @@ public class MyRdbHelper {
 				bindingDTO.setNameSpaceId(bindingsEntity.getNameSpaceId());
 				bindingDTO.setType(bindingsEntity.getType());
 				bindingDTO.setBeanId(bindingsEntity.getBeanId());
-				
+
 				listBindingsDTO.add(bindingDTO);
 			}
-			
-			
+
+
 			return listBindingsDTO;
 		}catch(Exception ex){
 			throw new Exception(ex);
@@ -891,7 +895,7 @@ public class MyRdbHelper {
 						return ApplicationConstants.NAMESPACE_NOT_AVAILABLE;
 					}
 				}
-				
+
 				BindingsEntity bindingEntity = new BindingsEntity();
 				bindingEntity.setBindingId(bindingDTO.getBindingId());
 				bindingEntity.setBindingName(bindingDTO.getBindingName());
@@ -907,7 +911,7 @@ public class MyRdbHelper {
 						Blob blob = Hibernate.getLobCreator(session).createBlob(serialize(beanObjectToSavedInDb));
 						bindingEntity.setBindingValue_ext(blob);
 					}
-//					bindingEntity.setBindingValue_ext(fetchBeansBlob(bindingDTO.getBeanId(), session));
+					//					bindingEntity.setBindingValue_ext(fetchBeansBlob(bindingDTO.getBeanId(), session));
 				}
 				session.saveOrUpdate(bindingEntity);
 				session.flush();
@@ -922,15 +926,15 @@ public class MyRdbHelper {
 	}
 
 	private Blob fetchBeansBlob(int beanId, Session session) throws Exception{
-		
+
 		Blob beanBlob = null;
 		try{
 			BeanObjects beanObjects  = (BeanObjects) session.get(BeanObjects.class, beanId);
 			if(beanObjects!= null && beanObjects.getBeanObject() != null){
 				beanBlob = beanObjects.getBeanObject();
 			}
-		
-		return beanBlob;
+
+			return beanBlob;
 		}catch(Exception ex){
 			throw new Exception(ex);
 		}
@@ -1020,6 +1024,21 @@ public class MyRdbHelper {
 				nameSpaceList.add(nameSpaceEntity);
 			}
 			return nameSpaceList;
+		}catch(Exception ex){
+			throw new Exception(ex);
+		}
+	}
+
+
+	public void saveBeanInDatabase(String name)throws Exception {
+		Session session = null;
+		try{
+			session = sessionFactory.openSession();
+			BeanObjects bean = new BeanObjects();
+			bean.setBeanName(name);
+			bean.setBeanType('S');
+			session.saveOrUpdate(bean);
+			session.flush();
 		}catch(Exception ex){
 			throw new Exception(ex);
 		}
