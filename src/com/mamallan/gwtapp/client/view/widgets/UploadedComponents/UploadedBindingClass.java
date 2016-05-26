@@ -21,7 +21,7 @@ public class UploadedBindingClass extends ApplicationBean{
 	interface UploadedBindingClassUiBinder extends UiBinder<Widget, UploadedBindingClass> {
 	}
 	
-	@UiField 
+	@UiField //test
 	ListBox listIds;
 	@UiField TextBox textBoxName;
 	@UiField TextBox textBoxUser_Name;
@@ -41,6 +41,7 @@ public class UploadedBindingClass extends ApplicationBean{
 		listIds.addItem("0");
 		listIds.addItem("1");
 		listIds.addItem("2");
+		System.out.println("testt");
 		
 		listIds.addChangeHandler(new ChangeHandler(){
 			@Override

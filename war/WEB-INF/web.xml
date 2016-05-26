@@ -7,6 +7,25 @@
 
 	 
   <!-- Servlets -->
+  <!-- REST -->
+  <servlet>
+        <servlet-name>MyApplication</servlet-name>
+        <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+        <init-param>
+            <param-name>jersey.config.server.provider.packages</param-name>
+            <param-value>
+               com.mamallan.gwtapp.server
+            </param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MyApplication</servlet-name>
+        <url-pattern>/api/*</url-pattern>
+    </servlet-mapping>
+  
+  <!-- REST END -->
+  
+  
   <servlet>
     <servlet-name>greetServlet</servlet-name>
     <servlet-class>com.mamallan.gwtapp.server.HelloServiceImpl</servlet-class>
