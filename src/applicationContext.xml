@@ -56,7 +56,6 @@ http://www.springframework.org/schema/beans/spring-beans-2.0.xsd"
 				<value>com.mamallan.gwtapp.shared.entity.NameSpaceEntity</value>
 				
 
-
 			</list>
 		</property>
 	</bean>

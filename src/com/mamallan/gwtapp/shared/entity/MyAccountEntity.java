@@ -13,12 +13,18 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 
-	@SuppressWarnings("serial")
 	@Entity
 
 	@Table(name="myaccount")
 	public class MyAccountEntity   implements Serializable {
 
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 5102552410931111137L;
+
+		public MyAccountEntity(){}
+		
 		@Id 
 		@GeneratedValue(strategy=GenerationType.AUTO)
 		@Column(name="myAccountId")

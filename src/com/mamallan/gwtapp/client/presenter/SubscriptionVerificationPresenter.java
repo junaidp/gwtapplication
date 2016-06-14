@@ -24,10 +24,10 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.mamallan.gwtapp.client.HelloServiceAsync;
-import com.mamallan.gwtapp.client.RestClient;
 import com.mamallan.gwtapp.client.event.RegistrationEvent;
+import com.mamallan.gwtapp.client.rest.RestClient;
 import com.mamallan.gwtapp.client.view.ApplicationConstants;
-import com.mamallan.gwtapp.shared.RestEntity;
+import com.mamallan.gwtapp.shared.entity.RestEntity;
 
 public class SubscriptionVerificationPresenter implements Presenter 
 

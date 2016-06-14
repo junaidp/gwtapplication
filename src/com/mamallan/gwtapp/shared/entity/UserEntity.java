@@ -16,14 +16,17 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
-import org.eclipse.persistence.internal.dynamic.DynamicEntityImpl;
-import org.eclipse.persistence.internal.dynamic.DynamicPropertiesManager;
+import org.codehaus.jackson.annotate.JsonCreator;
+import org.codehaus.jackson.annotate.JsonProperty;
 
 
 	@Entity
 
 	@Table(name="user")
 	public class UserEntity implements Serializable {
+		
+		public UserEntity(){}
+		
 
 		private static final long serialVersionUID = 1L;
 

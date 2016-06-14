@@ -41,6 +41,7 @@
 
 <!-- <set-configuration-property name='xsiframe.failIfScriptTag' value='FALSE'/>-->
   <!-- Specify the paths for translatable code                    -->
+  <set-configuration-property name='xsiframe.failIfScriptTag' value='FALSE'/>
   <source path='client'/>
   <source path='shared'/>
 

@@ -1,6 +1,12 @@
 package com.mamallan.gwtapp.client.presenter;
 
 
+import org.fusesource.restygwt.client.Defaults;
+import org.fusesource.restygwt.client.Method;
+import org.fusesource.restygwt.client.MethodCallback;
+import org.glassfish.jersey.client.ClientResponse;
+
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerManager;
@@ -16,6 +22,8 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.mamallan.gwtapp.client.HelloServiceAsync;
 import com.mamallan.gwtapp.client.event.MainEvent;
+import com.mamallan.gwtapp.client.rest.RestClient;
+import com.mamallan.gwtapp.client.rest.SignInClient;
 import com.mamallan.gwtapp.client.view.ApplicationConstants;
 import com.mamallan.gwtapp.client.view.FooterView;
 import com.mamallan.gwtapp.client.view.HeaderView;
@@ -63,6 +71,63 @@ public class LoginPresenter implements Presenter
 		setHandlers();
 	}
 
+//	public void signIn()
+//	{
+//		display.getLblError().setText("");
+//		final String username = display.getTxtUserName().getText();
+//		//		final LoadingPopup loadingPopup = new LoadingPopup();
+//		display.getBtnSubmit().addStyleName("loading-pulse");
+//
+//
+//		//		loadingPopup.display();
+//		rpcService.signIn(username, display.getTxtPassword().getText(), new AsyncCallback<UserEntity>() {
+//
+//			@Override
+//			public void onSuccess(UserEntity user) {
+//				if(user.getStatus() == ApplicationConstants.BLOCK || user.getStatus() == ApplicationConstants.CLOSED ){
+//					String status = user.getStatus() == ApplicationConstants.BLOCK?"Blocked":"Closed";
+//					display.getLblError().setText("Your Account is " + status + " , Please Conatct Adminstrator for activation");
+//				}
+//				else{
+//				if(user!=null && user.getUserFetchStatus().equals(ApplicationConstants.USER_NOT_FOUND)){
+//					display.getLblError().setText(ApplicationConstants.USER_NOT_FOUND);
+//				}
+//				else if(user!=null && user.getUserFetchStatus().equals(ApplicationConstants.USERNAME_PASSWORD_NOT_MATCH)){
+//					if(username.equals(worngPasswordUser)){
+//						worngPasswordCount = worngPasswordCount+1;
+//					}else{
+//						worngPasswordCount = 0;
+//					}
+//
+//					if(username.equals(worngPasswordUser) && worngPasswordCount>=2 ){
+//						inactiveAccount(username);
+//					}
+//					display.getLblError().setText(ApplicationConstants.USERNAME_PASSWORD_NOT_MATCH);
+//					worngPasswordUser = username;
+//				}
+//
+//
+//
+////				else if(user.isAdmin()){
+////					eventBus.fireEvent(new AdminEvent());
+////				}
+//				else{
+//					
+//					fetchGlobalPreferences(user);
+//
+//				}
+//				
+//			}
+//				display.getBtnSubmit().removeStyleName("loading-pulse");
+//			}
+//			@Override
+//			public void onFailure(Throwable caught) {
+//				display.getBtnSubmit().removeStyleName("loading-pulse");
+//			}
+//		});
+//
+//	}
+	
 	public void signIn()
 	{
 		display.getLblError().setText("");
@@ -70,12 +135,14 @@ public class LoginPresenter implements Presenter
 		//		final LoadingPopup loadingPopup = new LoadingPopup();
 		display.getBtnSubmit().addStyleName("loading-pulse");
 
+		
+		Defaults.setServiceRoot(GWT.getHostPageBaseURL());
+		SignInClient client = GWT.create(SignInClient.class);
 
-		//		loadingPopup.display();
-		rpcService.signIn(username, display.getTxtPassword().getText(), new AsyncCallback<UserEntity>() {
-
+		client.signIn(username, display.getTxtPassword().getText(), new MethodCallback<UserEntity>() {
+			
 			@Override
-			public void onSuccess(UserEntity user) {
+			public void onSuccess(Method method, UserEntity user) {
 				if(user.getStatus() == ApplicationConstants.BLOCK || user.getStatus() == ApplicationConstants.CLOSED ){
 					String status = user.getStatus() == ApplicationConstants.BLOCK?"Blocked":"Closed";
 					display.getLblError().setText("Your Account is " + status + " , Please Conatct Adminstrator for activation");
@@ -111,12 +178,19 @@ public class LoginPresenter implements Presenter
 				
 			}
 				display.getBtnSubmit().removeStyleName("loading-pulse");
+			
+			
+				
 			}
+			
 			@Override
-			public void onFailure(Throwable caught) {
+			public void onFailure(Method method, Throwable exception) {
 				display.getBtnSubmit().removeStyleName("loading-pulse");
+				Window.alert(exception.getLocalizedMessage());
+				
 			}
 		});
+		
 
 	}
 	
