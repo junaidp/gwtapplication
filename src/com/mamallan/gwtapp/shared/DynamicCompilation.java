@@ -110,7 +110,8 @@ public class DynamicCompilation {
 				field[i].setAccessible(true);
 				try{
 					if(field[i].get(null)!=null){
-						sb.append("= "+ field[i].get(null));
+//						sb.append("= "+ field[i].get(null));
+						sb.append(" = "+ 1L);  
 					}
 				}catch(Exception ex){
 
@@ -142,6 +143,9 @@ public class DynamicCompilation {
 		////////////////Create methods////////////////////
 		for(int i=0; i< method.length; i++){
 
+			int indexUCL1 =firstIndexOfUCL(method[i].getName());
+			String fieldName1 =method[i].getName().substring(indexUCL1);
+			fieldName1 = Character.toLowerCase(fieldName1.charAt(0)) + fieldName1.substring(1); 
 
 			Class<?>[] parametersType = method[i].getParameterTypes();
 
@@ -152,9 +156,11 @@ public class DynamicCompilation {
 //					sb.append(", "+parametersType[j].getSimpleName()+" "+method[i].get.getName());JAVA 8
 //				}else{
 //					sb.append(parametersType[j].getSimpleName()+" "+method[i].getParameters()[j].getName());JAVA 8
-					sb.append(", "+parametersType[j].getSimpleName()+" "+parametersType[j].getName());
+//					sb.append(", "+parametersType[j].getSimpleName()+" "+parametersType[j].getName());
+					sb.append(", "+parametersType[j].getSimpleName()+" "+fieldName1);
 				}else{
-					sb.append(parametersType[j].getSimpleName()+" "+parametersType[j].getName());
+//					sb.append(parametersType[j].getSimpleName()+" "+parametersType[j].getName());
+					sb.append(parametersType[j].getSimpleName()+" "+fieldName1);
 
 
 				}
@@ -168,7 +174,9 @@ public class DynamicCompilation {
 
 				if(method[i].getReturnType().getSimpleName().equals("void")){
 //					sb.append("this."+fieldName +" = "+ method[i].getParameters()[0].getName()+";");JAVA 8
-					sb.append("this."+fieldName +" = "+ parametersType[0].getName()+";");
+//					sb.append("this."+fieldName +" = "+ parametersType[0].getName()+";");
+					sb.append("this."+fieldName +" = "+ fieldName+";");
+					
 				}else{
 					sb.append("return "+ fieldName+";");
 				}

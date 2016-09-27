@@ -42,7 +42,7 @@ public class DynHelperBk {
 
  	public static String DATABASE_USERNAME = "root";
         public static String DATABASE_PASSWORD = "";
-        public static String DATABASE_URL = "jdbc:mysql://localhost/gwtapp";
+        public static String DATABASE_URL = "jdbc:mysql://localhost/gwtapplication";
         public static String DATABASE_DRIVER = "com.mysql.jdbc.Driver";
  
       

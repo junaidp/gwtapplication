@@ -1,1 +1,1 @@
-{"id":"(int)","notifications":"(boolean)","address":"(String)","name":"(String)","gender":"(String)","user":"(UserEntity)"}
+{"id":"(int)","address":"(String)","name":"(String)","myAccount":"(MyAccountEntity)","user":"(UserEntity)"}

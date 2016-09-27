@@ -101,7 +101,7 @@ public class Attachment extends VerticalPanel {
 						
 						@Override
 						public void onClick(ClickEvent event) {
-							Window.open(GWT.getHostPageBaseURL() + "/fileuploads/"+lbl.getText(), "name", "enabled");
+							Window.open(GWT.getHostPageBaseURL() + "fileuploads/"+lbl.getText(), "_blank", null);
 
 						}
 					});

@@ -88,7 +88,7 @@ public class ApplicationConstants {
 	public static final String BEANNAME_REQUIRED = "please enter a valid Bean name";
 	public static final String UPDATE = "Update";
 	public static final String ADDOBJECT = "Add Data Object";
-	public static final String DEFAULT_PACKAGE = "com.mamallan.gwtapp.shared.";
+	public static final String DEFAULT_PACKAGE = "com.mamallan.gwtapp.shared.beans";
 	public static final String DEFAULT_PACKAGE_START = "com.mamallan.gwtapp.";
 	public static final String UPLOADED_VIEWS_PACKAGE = "com.mamallan.gwtapp.client.view.widgets.UploadedComponents";
 	

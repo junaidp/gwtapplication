@@ -17,32 +17,6 @@ import java.util.HashMap;
 import java.util.Set;
 import java.util.TreeMap;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // EclipseLink imports
 import org.eclipse.persistence.logging.SessionLog;
 import org.eclipse.persistence.sequencing.NativeSequence;
@@ -68,7 +42,7 @@ public class DynHelper {
 
 	public static String DATABASE_USERNAME = "root";
 	public static String DATABASE_PASSWORD = "";
-	public static String DATABASE_URL = "jdbc:mysql://localhost/gwtapp";
+	public static String DATABASE_URL = "jdbc:mysql://localhost/gwtapplication";
 	public static String DATABASE_DRIVER = "com.mysql.jdbc.Driver";
 	private String beanName = "";
 
@@ -85,33 +59,36 @@ public class DynHelper {
 		login.setConnectionString(DATABASE_URL);
 		login.setDriverClassName(DATABASE_DRIVER);
 		project.setDatasourceLogin(login);
-
+		System.out.println("Generating dynamic bean");
 		DatabaseSession session = project.createDatabaseSession();
-
+		
 		session.setLogLevel(SessionLog.FINE);
 
 		session.setProperty(PersistenceUnitProperties.WEAVING, "true");
 		session.login();
 
 		DynamicClassLoader dcl = DynamicClassLoader.lookup(session);
-
+	
 		Map<String, Object> properties = new HashMap<String, Object>();
 
 		properties.put(PersistenceUnitProperties.CLASSLOADER, dcl);
 		properties.put(PersistenceUnitProperties.WEAVING, "dynamic");
 
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("data5PU");
+		
 		em = emf.createEntityManager();
+		
 		String selectedBeanName = addedBeanDTO.getBeanName();
+		
 		int ind = selectedBeanName.toString().lastIndexOf(".");
 		if(ind==-1){
-
+			System.out.println("-1");
 		}else{
 			selectedBeanName = selectedBeanName.toString().substring(ind+1);
 		}
-
+		
 		Class<?> beanClass = dcl.createDynamicClass(selectedBeanName);
-
+	
 
 		JPADynamicTypeBuilder builder = new JPADynamicTypeBuilder(beanClass,
 				null, selectedBeanName);
@@ -131,11 +108,16 @@ public class DynHelper {
 
 		DynamicType empType = builder.getType();
 		DynamicType [] types = new DynamicType [1];
+	
 		types[0] = empType;
 		//		saveJson(obj); only for beans with data are saving in db , hence json for beans with data only , As in onModule , system read jsons and then fetch tables as per that.
 		DynamicEntity l = null;
+	
+		try{
 		l = (DynamicEntity) em.find(empType.getJavaClass(), 10);
-
+		}catch(Exception ex){
+//			System.out.println(ex);
+		}
 		return "Dynamic bean created";
 	}
 
@@ -164,7 +146,7 @@ public class DynHelper {
 		properties.put(PersistenceUnitProperties.CLASSLOADER, dcl);
 		properties.put(PersistenceUnitProperties.WEAVING, "dynamic");
 
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("data5PU");
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("persistenceUnit");
 		em = emf.createEntityManager();
 
 		int ind = selectedBeanName.toString().lastIndexOf(".");
@@ -181,6 +163,7 @@ public class DynHelper {
 				null, beanName);
 
 		// Using Bean Class to get the types of fields. As when we calling this method from JavaBeanEditor when user selecting GWT ui fiels , there user is only sending field name and its value , but not type.
+		System.out.println("here: " + selectedBeanName);
 		Class bean = Class.forName(selectedBeanName);
 		Field[] beanFields = bean.getDeclaredFields();
 
@@ -258,7 +241,9 @@ public class DynHelper {
 		StringWriter out = new StringWriter();
 		obj.write(out);
 		String jsonText = out.toString();
+		System.out.println("here: !");
 		String dir = System.getProperty("user.dir");
+		dir =dir +"\\src\\main\\java\\";
 		File folder = new File(dir+File.separator+ApplicationConstants.DYNAMIC_BEANS_FOLDER+File.separator+"bean-"+beanName+".json");
 		File fold = new File(dir+File.separator+ApplicationConstants.DYNAMIC_BEANS_FOLDER);
 		fold.mkdir();

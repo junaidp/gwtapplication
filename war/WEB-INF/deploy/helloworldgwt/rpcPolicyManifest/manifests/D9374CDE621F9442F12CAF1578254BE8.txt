@@ -1,2 +1,0 @@
-serviceClass: com.helloworld.client.HelloService
-path: A28B1F3F7DBFC5D53CB5A7969232C4C5.gwt.rpc

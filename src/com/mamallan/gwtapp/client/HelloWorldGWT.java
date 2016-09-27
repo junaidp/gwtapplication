@@ -19,7 +19,7 @@ public class HelloWorldGWT implements EntryPoint {
 		Defaults.setDateFormat(null);
 		rpcService = GWT.create(HelloService.class);
 		HandlerManager eventBus = new HandlerManager(null);
-		//		loadBeansJson();
+//				loadBeansJson();
 		AppController appViewer = new AppController(rpcService, eventBus);
 		appViewer.go(RootPanel.get("bodyContainer"));
 
