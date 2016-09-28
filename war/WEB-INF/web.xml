@@ -14,7 +14,7 @@
         <init-param>
             <param-name>jersey.config.server.provider.packages</param-name>
             <param-value>
-               com.mamallan.gwtapp.server
+               com.halcyonpro.gwtapp.server
             </param-value>
         </init-param>
         <init-param>
@@ -36,7 +36,7 @@
   
   <servlet>
     <servlet-name>greetServlet</servlet-name>
-    <servlet-class>com.mamallan.gwtapp.server.HelloServiceImpl</servlet-class>
+    <servlet-class>com.halcyonpro.gwtapp.server.HelloServiceImpl</servlet-class>
   </servlet>
   
   <servlet-mapping>
@@ -68,17 +68,17 @@
   
    <servlet>
     <servlet-name>uploadServlet</servlet-name>
-    <servlet-class>com.mamallan.gwtapp.server.FileUploadServlet</servlet-class>
+    <servlet-class>com.halcyonpro.gwtapp.server.FileUploadServlet</servlet-class>
   </servlet>
   
   <servlet>
     <servlet-name>javaUploadServlet</servlet-name>
-    <servlet-class>com.mamallan.gwtapp.server.ComponentJavaUploadServlet</servlet-class>
+    <servlet-class>com.halcyonpro.gwtapp.server.ComponentJavaUploadServlet</servlet-class>
   </servlet>
   
   <servlet>
     <servlet-name>xmlUploadServlet</servlet-name>
-    <servlet-class>com.mamallan.gwtapp.server.ComponentXmlUploadServlet</servlet-class>
+    <servlet-class>com.halcyonpro.gwtapp.server.ComponentXmlUploadServlet</servlet-class>
   </servlet>
   
   <servlet-mapping>
@@ -88,7 +88,7 @@
   
    <servlet>
     <servlet-name>logoUploadServlet</servlet-name>
-    <servlet-class>com.mamallan.gwtapp.server.LogoUploadServlet</servlet-class>
+    <servlet-class>com.halcyonpro.gwtapp.server.LogoUploadServlet</servlet-class>
   </servlet>
   
   <servlet-mapping>
@@ -106,8 +106,8 @@
     <url-pattern>/xmlUpload</url-pattern>
   </servlet-mapping>
   
-  <!-- <generate-with class="com.mamallan.gwtapp.server.ReflectionGenerator">
-      <when-type-assignable class="com.mamallan.gwtapp.client.Reflection" />
+  <!-- <generate-with class="com.halcyonpro.gwtapp.server.ReflectionGenerator">
+      <when-type-assignable class="com.halcyonpro.gwtapp.client.Reflection" />
   </generate-with>
   -->
   <!-- Default page to serve -->

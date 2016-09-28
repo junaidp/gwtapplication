@@ -37,7 +37,7 @@ CREATE TABLE `beanobjects` (
 
 LOCK TABLES `beanobjects` WRITE;
 /*!40000 ALTER TABLE `beanobjects` DISABLE KEYS */;
-INSERT INTO `beanobjects` VALUES (9,'com.mamallan.gwtapp.shared.dto.DummyBean','??\0sr\0(com.mamallan.gwtapp.shared.dto.DummyBean?pM??P?\0I\0idZ\0\rnotificationsL\0addresst\0Ljava/lang/String;L\0genderq\0~\0L\0nameq\0~\0xp\0\0\0t\0Daat\0Mt\0jjh','S');
+INSERT INTO `beanobjects` VALUES (9,'com.halcyonpro.gwtapp.shared.dto.DummyBean','??\0sr\0(com.halcyonpro.gwtapp.shared.dto.DummyBean?pM??P?\0I\0idZ\0\rnotificationsL\0addresst\0Ljava/lang/String;L\0genderq\0~\0L\0nameq\0~\0xp\0\0\0t\0Daat\0Mt\0jjh','S');
 /*!40000 ALTER TABLE `beanobjects` ENABLE KEYS */;
 UNLOCK TABLES;
 

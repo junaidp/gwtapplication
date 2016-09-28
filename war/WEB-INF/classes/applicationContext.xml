@@ -45,22 +45,22 @@ http://www.springframework.org/schema/beans/spring-beans-2.0.xsd"
 		<property name="annotatedClasses">
 
 			<list>
-				<value>com.mamallan.gwtapp.shared.entity.UserEntity</value>
-				<value>com.mamallan.gwtapp.shared.entity.MyAccountPreferencesEntity
+				<value>com.halcyonpro.gwtapp.shared.entity.UserEntity</value>
+				<value>com.halcyonpro.gwtapp.shared.entity.MyAccountPreferencesEntity
 				</value>
-				<value>com.mamallan.gwtapp.shared.entity.GlobalPreferencesEntity
+				<value>com.halcyonpro.gwtapp.shared.entity.GlobalPreferencesEntity
 				</value>
-				<value>com.mamallan.gwtapp.shared.entity.MyAccountEntity</value>
-				<value>com.mamallan.gwtapp.shared.entity.BeanObjects</value>
-				<value>com.mamallan.gwtapp.shared.entity.BindingsEntity</value>
-				<value>com.mamallan.gwtapp.shared.entity.NameSpaceEntity</value>
+				<value>com.halcyonpro.gwtapp.shared.entity.MyAccountEntity</value>
+				<value>com.halcyonpro.gwtapp.shared.entity.BeanObjects</value>
+				<value>com.halcyonpro.gwtapp.shared.entity.BindingsEntity</value>
+				<value>com.halcyonpro.gwtapp.shared.entity.NameSpaceEntity</value>
 				
 
 			</list>
 		</property>
 	</bean>
 	
-	<bean id="ManagerApp" class="com.mamallan.gwtapp.database.MyRdbHelper">
+	<bean id="ManagerApp" class="com.halcyonpro.gwtapp.database.MyRdbHelper">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
