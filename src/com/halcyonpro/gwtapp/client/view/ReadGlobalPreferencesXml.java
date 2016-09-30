@@ -35,6 +35,7 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+// Just a test for globalPreferences with XML , Not been used anywhere yet
 public class ReadGlobalPreferencesXml {
 
   public ReadGlobalPreferencesXml() {

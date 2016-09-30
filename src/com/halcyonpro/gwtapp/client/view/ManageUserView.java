@@ -37,6 +37,8 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.halcyonpro.gwtapp.client.presenter.ManageUserPresenter.Display;
 
+//This class manages the VIEW for manageUser where user can view their preferences on User profile.
+//like if the user status is active/inactive and can change the status.
 public class ManageUserView extends Composite implements Display {
 
 	private static ManageUserViewUiBinder uiBinder = GWT

@@ -48,6 +48,7 @@ import com.halcyonpro.gwtapp.shared.dto.AnnotationsDTO;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.form.fields.ComboBoxItem;
 
+// This class is a widget for AddAnnotation used in JavaBeanEditor while creating beans , to add annnotations
 public class AddAnnotationsWidget extends Composite {
 
 	private static AddAnnotationsWidgetUiBinder uiBinder = GWT

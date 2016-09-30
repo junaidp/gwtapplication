@@ -36,6 +36,7 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Widget;
 import com.halcyonpro.gwtapp.client.presenter.HeaderPresenter.Display;
 
+//This class manages the VIEW of Application's header.Currently just HOME option for header been implemented.
 public class HeaderView extends Composite implements Display {
 
 	private static HeaderViewUiBinder uiBinder = GWT

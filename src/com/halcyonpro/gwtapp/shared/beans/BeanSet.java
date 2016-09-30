@@ -34,7 +34,7 @@ import com.halcyonpro.gwtapp.shared.entity.MyAccountEntity;
 import com.halcyonpro.gwtapp.shared.entity.UserEntity;
 public class BeanSet implements Serializable
 { 
-
+// This is a Bean which gets generated at run time from javaBean Editor
 public BeanSet() {
 
 }

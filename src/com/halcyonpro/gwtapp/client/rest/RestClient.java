@@ -34,6 +34,7 @@ import javax.ws.rs.PathParam;
 import org.fusesource.restygwt.client.MethodCallback;
 import org.fusesource.restygwt.client.RestService;
 
+// This class used for REST service for VerifySubscription RPC , {the first page of the application where user click Verify to call this rest service} 
 @Path("/api/hellos")
 public interface RestClient extends RestService {
   

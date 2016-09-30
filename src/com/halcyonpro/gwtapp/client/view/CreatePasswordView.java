@@ -38,6 +38,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.halcyonpro.gwtapp.client.presenter.CreatePasswordPresenter.Display;
 import com.halcyonpro.gwtapp.shared.entity.UserEntity;
 
+//This class manages the VIEW for CreatePassword which is use to create password for user, user can create/edit their password 
 public class CreatePasswordView extends Composite implements Display {
 
 	private static CreatePasswordViewUiBinder uiBinder = GWT

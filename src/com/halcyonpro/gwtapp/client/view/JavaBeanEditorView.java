@@ -44,7 +44,9 @@ import com.halcyonpro.gwtapp.client.view.widgets.AddBeanProportyWidget;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.form.fields.ComboBoxItem;
 
-
+//This class manages the VIEW of the javaBeanEditor , where user will be able to create a new Java Bean ,
+//including variables, annotations for the bean and selecting the package where he wants to save the generated bean.
+//Also here user can create a reflection of a selected class.
 public class JavaBeanEditorView extends Composite implements Display {
 
 	private static JavaBeanEditorViewUiBinder uiBinder = GWT.create(JavaBeanEditorViewUiBinder.class);

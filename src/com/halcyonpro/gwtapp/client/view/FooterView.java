@@ -35,6 +35,7 @@ import com.google.gwt.user.client.ui.FocusPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.halcyonpro.gwtapp.client.presenter.FooterPresenter.Display;
 
+//This class manages the Functionality for footer of the application.
 public class FooterView extends Composite implements Display {
 
 	private static FooterViewUiBinder uiBinder = GWT

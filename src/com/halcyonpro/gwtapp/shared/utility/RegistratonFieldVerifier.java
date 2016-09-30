@@ -30,7 +30,7 @@ package com.halcyonpro.gwtapp.shared.utility;
 import com.halcyonpro.gwtapp.client.presenter.RegistrationPresenter.Display;
 import com.halcyonpro.gwtapp.client.view.ApplicationConstants;
 
-
+// Field verifier for Registration
 public class RegistratonFieldVerifier {
 	private boolean verified = true;
 	public boolean registratonFieldsVerifid(Display display){

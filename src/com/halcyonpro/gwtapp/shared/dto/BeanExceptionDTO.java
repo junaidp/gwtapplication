@@ -29,6 +29,7 @@ package com.halcyonpro.gwtapp.shared.dto;
 
 import java.io.Serializable;
 
+// This dto stores information for beans requirements which being created from Reflection
 public class BeanExceptionDTO implements Serializable {
 	
 	private String bean;

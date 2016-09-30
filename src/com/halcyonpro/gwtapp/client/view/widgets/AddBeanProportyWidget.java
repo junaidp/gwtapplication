@@ -56,6 +56,8 @@ import com.smartgwt.client.widgets.form.fields.TextItem;
 import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
 import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
 
+//This class acts as a celltable widget , which is being used in JavaBeanEditor to display all the beans 
+// user is creating at run time.
 public class AddBeanProportyWidget extends Composite {
 
 	private static AddBeanProportyWidgetUiBinder uiBinder = GWT

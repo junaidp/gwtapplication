@@ -29,6 +29,7 @@ package com.halcyonpro.gwtapp.client.view.GlobalPreferencesPanels;
 
 import com.halcyonpro.gwtapp.shared.entity.GlobalPreferencesEntity;
 
+// This Interface is being used across all panels ,related to global preferences.So all panels will have these methods.
 public interface GlobalPreferencesPanels {
 	
 	public void updateFieldsWithAlreadySavedPreferences(GlobalPreferencesEntity alreadySavedGlobalPreferencesEntity);

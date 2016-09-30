@@ -29,6 +29,8 @@ package com.halcyonpro.gwtapp.shared.dto;
 
 import java.io.Serializable;
 
+// This DTO use to store information for Annotations which are getting stored in Java Beans Editor 
+// for creation of bean generation
 public class AnnotationsDTO implements Serializable {
 
 	public AnnotationsDTO(){

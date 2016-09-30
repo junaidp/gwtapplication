@@ -32,7 +32,7 @@ import java.beans.PropertyChangeSupport;
 import com.google.gwt.user.client.ui.Composite;
 
 
-
+// Used to get event change 
 public class ApplicationBean extends Composite{
 	
 	public PropertyChangeSupport pcs = new PropertyChangeSupport(this);

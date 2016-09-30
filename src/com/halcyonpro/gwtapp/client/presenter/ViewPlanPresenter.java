@@ -42,6 +42,7 @@ import com.halcyonpro.gwtapp.shared.entity.MyAccountEntity;
 import com.halcyonpro.gwtapp.shared.entity.MyAccountPreferencesEntity;
 import com.halcyonpro.gwtapp.shared.entity.UserEntity;
 
+// This class manages the Functionality for viewPlan where user can view's their plans and can modify them 
 public class ViewPlanPresenter implements Presenter 
 
 {

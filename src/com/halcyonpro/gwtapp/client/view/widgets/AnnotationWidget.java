@@ -36,6 +36,7 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Widget;
 import com.halcyonpro.gwtapp.shared.dto.AddedBeanPropertyDTO;
 
+//This class used as a widget to display The Annotations user added at run time.
 public class AnnotationWidget extends Composite {
 
 	private static AnnotationWidgetUiBinder uiBinder = GWT

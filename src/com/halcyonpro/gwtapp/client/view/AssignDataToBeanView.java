@@ -37,6 +37,9 @@ import com.google.gwt.user.client.ui.Widget;
 import com.halcyonpro.gwtapp.client.presenter.AssignDataToBeanPresenter.Display;
 import com.halcyonpro.gwtapp.client.view.widgets.ErrorPanelWidget;
 
+//This class manages the VIEW for AssignDataToBean which is used  to Assign data to the bean we created before.
+//user uploads the ui.xml/java class to get the widget , enters the value to edit the bean 
+//This feature not working completely as we couldnt get DynamicBeans to work
 public class AssignDataToBeanView extends Composite implements Display {
 
 	private static AssignEditorsViewUiBinder uiBinder = GWT

@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.6.21, for Win64 (x86_64)
 --
--- Host: localhost    Database: gwtapp
+-- Host: localhost    Database: gwtapplication
 -- ------------------------------------------------------
 -- Server version	5.1.31-community
 
@@ -25,10 +25,10 @@ DROP TABLE IF EXISTS `beanobjects`;
 CREATE TABLE `beanobjects` (
   `beanId` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `beanName` varchar(45) NOT NULL DEFAULT '',
-  `beanObject` blob NOT NULL,
+  `beanObject` blob,
   `beanType` char(1) NOT NULL DEFAULT '',
   PRIMARY KEY (`beanId`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,8 +37,83 @@ CREATE TABLE `beanobjects` (
 
 LOCK TABLES `beanobjects` WRITE;
 /*!40000 ALTER TABLE `beanobjects` DISABLE KEYS */;
-INSERT INTO `beanobjects` VALUES (9,'com.halcyonpro.gwtapp.shared.dto.DummyBean','¨Ì\0sr\0(com.halcyonpro.gwtapp.shared.dto.DummyBean¢pMõﬁPæ\0I\0idZ\0\rnotificationsL\0addresst\0Ljava/lang/String;L\0genderq\0~\0L\0nameq\0~\0xp\0\0\0t\0Daat\0Mt\0jjh','S');
+INSERT INTO `beanobjects` VALUES (10,'com.mamallan.gwtapp.shared.beans.myb',NULL,'S'),(11,'com.mamallan.gwtapp.shared.beans.bean1',NULL,'S'),(12,'com.mamallan.gwtapp.shared.beans.myb11',NULL,'S'),(13,'com.mamallan.gwtapp.shared.beans.MyFirstBean','¨Ì\0sr\0,com.mamallan.gwtapp.shared.beans.MyFirstBeany@ÊXπz	\0I\0idL\0addresst\0Ljava/lang/String;L\0	myAccountt\03Lcom/mamallan/gwtapp/shared/entity/MyAccountEntity;L\0nameq\0~\0L\0usert\0.Lcom/mamallan/gwtapp/shared/entity/UserEntity;xp\0\0\0t\0Addresspt\0testingsr\0,com.mamallan.gwtapp.shared.entity.UserEntity\0\0\0\0\0\0\0\0Z\0adminI\0statusI\0userIdL\0emailq\0~\0L\0myAccountIdq\0~\0L\0nameq\0~\0L\0passwordq\0~\0L\0tokenq\0~\0L\0tokenGeneratedDatet\0Ljava/util/Date;L\0userFetchStatusq\0~\0L\0userNameq\0~\0xp\0\0\0\0\0\0\0\0psr\01com.mamallan.gwtapp.shared.entity.MyAccountEntityFœËb\\§·\0Z\0monthlyPaymentPlanI\0myAccountIdZ\0quarterlyPaymentPlanZ\0yearlyPaymentPlanL\0\nlastEditedq\0~\0L\0registeredToq\0~\0xp\0\0\0\0p\0\0sr\0java.util.DatehjÅKYt\0\0xpw\0\0Wr*ÛÄxpt\0usert\0passwordpppp','S'),(14,'com.mamallan.gwtapp.shared.beans.com',NULL,'S'),(15,'com.halcyonpro.gwtapp.shared.beans.Test',NULL,'S');
 /*!40000 ALTER TABLE `beanobjects` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `beans`
+--
+
+DROP TABLE IF EXISTS `beans`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `beans` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `beans`
+--
+
+LOCK TABLES `beans` WRITE;
+/*!40000 ALTER TABLE `beans` DISABLE KEYS */;
+/*!40000 ALTER TABLE `beans` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bindings`
+--
+
+DROP TABLE IF EXISTS `bindings`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bindings` (
+  `bindingId` int(11) NOT NULL AUTO_INCREMENT,
+  `bindingName` varchar(255) DEFAULT NULL,
+  `bindingType` varchar(255) DEFAULT NULL,
+  `bindingValue` varchar(255) DEFAULT NULL,
+  `bindingValue_ext` longblob,
+  `type` char(1) DEFAULT NULL,
+  `nameSpaceId` int(11) DEFAULT NULL,
+  `beanId` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`bindingId`),
+  KEY `FK_415ex1rk7xabtms8ec9iq2us4` (`nameSpaceId`)
+) ENGINE=MyISAM AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bindings`
+--
+
+LOCK TABLES `bindings` WRITE;
+/*!40000 ALTER TABLE `bindings` DISABLE KEYS */;
+INSERT INTO `bindings` VALUES (40,'firs','com.mamallan.gwtapp.shared.dto.DummyBean','Oye1',NULL,'B',1,13),(41,'Bind1','int','111',NULL,'S',1,0);
+/*!40000 ALTER TABLE `bindings` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `c3p0`
+--
+
+DROP TABLE IF EXISTS `c3p0`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `c3p0` (
+  `a` char(1) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `c3p0`
+--
+
+LOCK TABLES `c3p0` WRITE;
+/*!40000 ALTER TABLE `c3p0` DISABLE KEYS */;
+/*!40000 ALTER TABLE `c3p0` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -162,8 +237,32 @@ CREATE TABLE `myaccountpreferences` (
 
 LOCK TABLES `myaccountpreferences` WRITE;
 /*!40000 ALTER TABLE `myaccountpreferences` DISABLE KEYS */;
-INSERT INTO `myaccountpreferences` VALUES (1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1);
+INSERT INTO `myaccountpreferences` VALUES (1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1);
 /*!40000 ALTER TABLE `myaccountpreferences` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `namespace`
+--
+
+DROP TABLE IF EXISTS `namespace`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `namespace` (
+  `nameSpaceId` int(11) NOT NULL AUTO_INCREMENT,
+  `nameSpaceName` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`nameSpaceId`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `namespace`
+--
+
+LOCK TABLES `namespace` WRITE;
+/*!40000 ALTER TABLE `namespace` DISABLE KEYS */;
+INSERT INTO `namespace` VALUES (1,'test'),(2,'testname'),(3,'newtest');
+/*!40000 ALTER TABLE `namespace` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -231,4 +330,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-02-19  8:58:53
+-- Dump completed on 2016-09-30 12:16:58

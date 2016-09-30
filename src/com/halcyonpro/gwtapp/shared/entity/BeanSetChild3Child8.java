@@ -31,7 +31,7 @@ import java.util.*;
 import java.io.Serializable;
 public class BeanSetChild3Child8 implements Serializable
 { 
-
+	// This is a generated bean which user creates from Java bean Editor
 public BeanSetChild3Child8() {
 
 }

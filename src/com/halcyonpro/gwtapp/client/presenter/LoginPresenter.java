@@ -31,8 +31,6 @@ package com.halcyonpro.gwtapp.client.presenter;
 import org.fusesource.restygwt.client.Defaults;
 import org.fusesource.restygwt.client.Method;
 import org.fusesource.restygwt.client.MethodCallback;
-import org.glassfish.jersey.client.ClientResponse;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -49,7 +47,6 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.halcyonpro.gwtapp.client.HelloServiceAsync;
 import com.halcyonpro.gwtapp.client.event.MainEvent;
-import com.halcyonpro.gwtapp.client.rest.RestClient;
 import com.halcyonpro.gwtapp.client.rest.SignInClient;
 import com.halcyonpro.gwtapp.client.view.ApplicationConstants;
 import com.halcyonpro.gwtapp.client.view.FooterView;
@@ -57,6 +54,7 @@ import com.halcyonpro.gwtapp.client.view.HeaderView;
 import com.halcyonpro.gwtapp.shared.entity.GlobalPreferencesEntity;
 import com.halcyonpro.gwtapp.shared.entity.UserEntity;
 
+// This class manages the Functionality of a Login Page of this application.
 public class LoginPresenter implements Presenter 
 
 {
@@ -205,9 +203,6 @@ public class LoginPresenter implements Presenter
 				
 			}
 				display.getBtnSubmit().removeStyleName("loading-pulse");
-			
-			
-				
 			}
 			
 			@Override
@@ -217,8 +212,6 @@ public class LoginPresenter implements Presenter
 				
 			}
 		});
-		
-
 	}
 	
 	private void setFooter(GlobalPreferencesEntity globalPreferencesEntity) {
@@ -271,8 +264,6 @@ public class LoginPresenter implements Presenter
 
 			}});
 	}
-
-
 
 	@Override
 	public void setHandlers() {

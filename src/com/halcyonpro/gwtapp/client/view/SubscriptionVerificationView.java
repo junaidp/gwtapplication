@@ -38,6 +38,8 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.halcyonpro.gwtapp.client.presenter.SubscriptionVerificationPresenter.Display;
 
+//This class manages the VIEW for SubscriptionVerification, where system checks if the entered email is 
+//registered in the system
 public class SubscriptionVerificationView extends Composite implements Display {
 
 	private static SubscriptionVerificationViewUiBinder uiBinder = GWT

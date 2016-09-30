@@ -29,6 +29,7 @@ package com.halcyonpro.gwtapp.shared.dto;
 
 import java.io.Serializable;
 
+// This Dto used to store the information for Beans , which also used under Binding
 public class BeanObjectDTO implements Serializable{
 	
 	private int beanId;

@@ -30,6 +30,8 @@ package com.halcyonpro.gwtapp.shared.dto;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+// This is a dto for the bean users is creating ,the information like bean name , package name
+// imports required for the bean etc.. gets saved in this bean and used for creating this bean
 public class AddedBeanDTO implements Serializable {
 	
 	public AddedBeanDTO(){}

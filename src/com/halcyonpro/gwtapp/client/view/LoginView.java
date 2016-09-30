@@ -39,7 +39,8 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.halcyonpro.gwtapp.client.presenter.LoginPresenter.Display;
-  
+ 
+//This class manages the VIEW of a Login Page of this application.
 public class LoginView extends Composite implements Display  {
 
 	private static LoginViewUiBinder uiBinder = GWT

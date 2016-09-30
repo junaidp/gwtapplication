@@ -33,7 +33,7 @@ import java.io.Serializable;
 import com.halcyonpro.gwtapp.shared.entity.MyAccountEntity;
 public class BeanSetChild3 implements Serializable
 { 
-
+// This is a generated bean which user creates from Java bean Editor
 public BeanSetChild3() {
 
 }

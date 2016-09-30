@@ -38,9 +38,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.halcyonpro.gwtapp.database.MyRdbHelper;
 
-
-
-
+//This class used for REST service for VerifySubscription RPC , {the first page of the application where user click Verify to call this rest service} 
 @Path("hellos")
 public class RestResource {
  

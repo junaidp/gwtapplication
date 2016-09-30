@@ -47,6 +47,7 @@ import com.halcyonpro.gwtapp.shared.DynamicCompilation;
 import com.halcyonpro.gwtapp.shared.dto.AddedBeanDTO;
 import com.halcyonpro.gwtapp.shared.dto.BeanExceptionDTO;
 
+// This class creates and writes the bean via reflection in  the project
 public class FilesCreationHelper {
 
 	private String baseBeanName= "";
@@ -57,8 +58,6 @@ public class FilesCreationHelper {
 
 	public String generateBean(AddedBeanDTO addedBeanDTO) throws Exception{
 		try{
-
-			//			if(addedBeanDTO.)
 
 			String dir = System.getProperty("user.dir");
 			int slashIndex = dir.lastIndexOf("\\");

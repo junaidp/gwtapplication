@@ -31,6 +31,7 @@ import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.DecoratedPopupPanel;
 import com.google.gwt.user.client.ui.Label;
 
+// This is a Custom Display which displays for few seconds and goes away.
 public class DisplayAlert {
 	
 	public DisplayAlert(String message){

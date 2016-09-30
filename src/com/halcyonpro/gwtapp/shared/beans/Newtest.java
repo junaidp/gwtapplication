@@ -31,7 +31,7 @@ import java.io.Serializable;
  import java.util.*; 
  
 
-
+//This is a Bean which gets generated at run time from javaBean Editor
 public class Newtest implements Serializable { 
  
 public Newtest() { 

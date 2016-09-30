@@ -46,6 +46,8 @@ import com.halcyonpro.gwtapp.client.view.ApplicationConstants;
 import com.halcyonpro.gwtapp.client.view.widgets.DisplayAlert;
 import com.halcyonpro.gwtapp.shared.entity.UserEntity;
 
+// This class manages the functionality for manageUser where user can view their preferences on User profile.
+//like if the user status is active/inactive and can change the status.
 public class ManageUserPresenter implements Presenter 
 
 {

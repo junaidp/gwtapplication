@@ -31,6 +31,7 @@ import com.google.gwt.user.client.ui.DecoratedPopupPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+//Widget for display loading widget
 public class LoadingPopup {
 	private DecoratedPopupPanel popupLoading;
 

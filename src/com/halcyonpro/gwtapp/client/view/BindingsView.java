@@ -31,7 +31,6 @@ package com.halcyonpro.gwtapp.client.view;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-
 import com.google.gwt.cell.client.CheckboxCell;
 import com.google.gwt.cell.client.TextCell;
 import com.google.gwt.core.client.GWT;
@@ -39,7 +38,6 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
-import com.google.gwt.user.cellview.client.ColumnSortEvent;
 import com.google.gwt.user.cellview.client.SimplePager;
 import com.google.gwt.user.cellview.client.ColumnSortEvent.ListHandler;
 import com.google.gwt.user.client.ui.Button;
@@ -53,7 +51,7 @@ import com.halcyonpro.gwtapp.client.presenter.BindingsPresenter.Display;
 import com.halcyonpro.gwtapp.client.view.widgets.ButtonImageCell;
 import com.halcyonpro.gwtapp.shared.dto.BindingsDTO;
 
-
+//This class manages the VIEW for Binding which is used for Bindings, create/edit/delete binding.
 public class BindingsView extends Composite implements Display{
 
 	private static BindingsViewUiBinder uiBinder = GWT

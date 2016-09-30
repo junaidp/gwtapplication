@@ -35,6 +35,8 @@ import com.halcyonpro.gwtapp.shared.entity.GlobalPreferencesEntity;
 import com.halcyonpro.gwtapp.shared.entity.MyAccountPreferencesEntity;
 import com.halcyonpro.gwtapp.shared.entity.UserEntity;
 
+// This class manages the functionality of view Registration , where user view/edit their registration's details
+// like registered name , date,email etc.
 public class ViewRegistrationPresenter implements Presenter 
 
 {

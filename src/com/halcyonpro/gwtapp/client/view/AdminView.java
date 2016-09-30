@@ -35,6 +35,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import com.halcyonpro.gwtapp.client.presenter.AdminPresenter.Display;
 
+//This class manages the VIEW for Admin Class for managing Admin's page of this application  
 public class AdminView extends Composite implements Display {
 
 	private static AdminViewUiBinder uiBinder = GWT

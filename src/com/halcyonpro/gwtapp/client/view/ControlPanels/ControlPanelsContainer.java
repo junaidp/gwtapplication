@@ -33,6 +33,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
+// This class is a container View for the panels at the left on which user click to display Panels at the right.(Because of the changes structure this is currently not in use)
 public class ControlPanelsContainer extends Composite {
 
 	private static ControlPanelsContainerUiBinder uiBinder = GWT

@@ -30,6 +30,7 @@ package com.halcyonpro.gwtapp.shared.dto;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+// This dto use to store the bean properties 
 public class AddedBeanPropertyDTO implements Serializable{
 	
 	public AddedBeanPropertyDTO(){}

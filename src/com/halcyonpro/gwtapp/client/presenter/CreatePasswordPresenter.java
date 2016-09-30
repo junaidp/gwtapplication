@@ -44,7 +44,7 @@ import com.halcyonpro.gwtapp.client.view.widgets.DisplayAlert;
 import com.halcyonpro.gwtapp.shared.entity.UserEntity;
 import com.halcyonpro.gwtapp.shared.utility.CreatePasswordFieldVerifier;
 
-// this class use to create password for user, user can create/edit their password 
+// This class manages the Functionality for CreatePassword which is use to create password for user, user can create/edit their password 
 public class CreatePasswordPresenter implements Presenter 
 
 {

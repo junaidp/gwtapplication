@@ -34,6 +34,7 @@ import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.halcyonpro.gwtapp.client.view.ApplicationConstants;
 import com.halcyonpro.gwtapp.client.view.widgets.AddBindingWidget;
 
+// This class is a Field Verifier for Bindings , which will check if any field of Bindings have some wrong value
 public class BindingsFieldVerifier  {
 	
 	UIFieldsErrors errors = new UIFieldsErrors();

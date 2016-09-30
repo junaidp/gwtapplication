@@ -47,6 +47,7 @@ import com.halcyonpro.gwtapp.shared.entity.MyAccountEntity;
 import com.halcyonpro.gwtapp.shared.entity.UserEntity;
 import com.halcyonpro.gwtapp.shared.utility.RegistratonFieldVerifier;
 
+// This class manages the functionality for new user registration into this application, it also use captcha.
 public class RegistrationPresenter implements Presenter 
 
 {

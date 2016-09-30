@@ -35,6 +35,7 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
+// This class used to diplay popup
 public class PopupsView {
 	
 	DecoratedPopupPanel popup ;

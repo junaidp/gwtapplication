@@ -38,6 +38,8 @@ import com.halcyonpro.gwtapp.client.presenter.ViewRegistrationPresenter.Display;
 import com.halcyonpro.gwtapp.shared.entity.MyAccountPreferencesEntity;
 import com.halcyonpro.gwtapp.shared.entity.UserEntity;
 
+//This class is View for Registration, Where user can view/edit their Account Preferences 
+//like view plan , view Reg etc.
 public class ViewRegistrationView extends Composite implements Display{
 
 	private static ViewRegistrationViewUiBinder uiBinder = GWT

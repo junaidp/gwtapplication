@@ -43,6 +43,7 @@ import com.google.gwt.user.client.ui.Tree;
 import com.google.gwt.user.client.ui.TreeItem;
 import com.google.gwt.user.client.ui.Widget;
 
+// This class is not in Use currently , May be used as global preferences work goes on
 public class HeaderItemsView extends FlowPanel {
 
 	private static HeaderItemsViewUiBinder uiBinder = GWT

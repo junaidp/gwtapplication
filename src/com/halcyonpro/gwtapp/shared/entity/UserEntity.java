@@ -46,7 +46,7 @@ import javax.persistence.Transient;
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
 
-
+// user entity for saving users of this application
 	@Entity
 
 	@Table(name="user")

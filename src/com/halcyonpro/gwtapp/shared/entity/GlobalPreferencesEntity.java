@@ -39,6 +39,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+// Entity class for Global Preferences
 @Table(name="globalprefrences")
 
 	@Entity

@@ -33,6 +33,8 @@ import com.google.gwt.user.client.ui.Widget;
 import com.halcyonpro.gwtapp.client.view.ApplicationConstants;
 import com.halcyonpro.gwtapp.client.view.CenterPanels.CenterPanelsView;
 
+//This class is View of the Reports Panel Metro Style which displaying in the Main Page Center
+//to display Reports view on click
 public class ReportsView extends CenterPanelsView {
 
 	private static ReportsViewUiBinder uiBinder = GWT

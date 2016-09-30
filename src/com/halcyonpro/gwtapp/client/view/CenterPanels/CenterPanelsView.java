@@ -36,6 +36,7 @@ import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
+// This class is a superclass of All the Panels in the main screen, like accounts panel ,reportView etc.
 public class CenterPanelsView extends FlowPanel {
 
 	private static CenterPanelsViewUiBinder uiBinder = GWT
@@ -53,19 +54,9 @@ public class CenterPanelsView extends FlowPanel {
 	public FocusPanel panel;
 	
 	public CenterPanelsView() {
-//		initWidget(uiBinder.createAndBindUi(this));
 		add(uiBinder.createAndBindUi(this));
 		setHeight("100%");
 		setWidth("100%");
-//		setHeight(Window.getClientHeight()-10+"px");
-//		Window.addResizeHandler(new ResizeHandler() {
-//			
-//			@Override
-//			public void onResize(ResizeEvent event) {
-//				setHeight(Window.getClientHeight()-10+"px");
-//				
-//			}
-//		});
 	}
 	
 	public void setHeading(String text){

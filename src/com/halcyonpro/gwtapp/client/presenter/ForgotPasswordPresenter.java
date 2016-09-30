@@ -41,10 +41,11 @@ import com.google.gwt.user.client.ui.Widget;
 import com.halcyonpro.gwtapp.client.HelloServiceAsync;
 import com.halcyonpro.gwtapp.client.view.ApplicationConstants;
 
+//This class manages the Functionality for forgotpassword , when user of this application forgets his/her password 
+// system will send a password change Url to user's email with which user will create their new password.
 public class ForgotPasswordPresenter implements Presenter 
 
 {
-	
 	private final Display display;
 	private final HelloServiceAsync rpcService;
 	

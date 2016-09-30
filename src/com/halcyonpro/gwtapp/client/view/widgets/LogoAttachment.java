@@ -38,7 +38,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import gwtupload.client.IUploadStatus.Status;
 
-
+// This class used to provide user a display for logo Attachment
 public class LogoAttachment extends VerticalPanel {
 	FormPanel form;
 

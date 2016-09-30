@@ -38,6 +38,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.halcyonpro.gwtapp.client.view.GlobalPreferencesPanels.GlobalPreferencesPanels;
 import com.halcyonpro.gwtapp.shared.entity.GlobalPreferencesEntity;
 
+//This class used to setup GlobalPreferences for ViewPlan View
 public class ViewPlan extends Composite implements GlobalPreferencesPanels {
 
 	private static ViewPlanUiBinder uiBinder = GWT

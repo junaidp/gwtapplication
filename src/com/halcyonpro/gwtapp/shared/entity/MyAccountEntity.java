@@ -39,7 +39,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-
+//Entity class for MyAccountEntity
 	@Entity
 
 	@Table(name="myaccount")

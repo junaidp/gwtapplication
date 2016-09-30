@@ -36,7 +36,7 @@ import org.eclipse.persistence.internal.dynamic.DynamicPropertiesManager;
 
 
 
-
+// Not in use currently
 public class DummyBean /*extends DynamicEntityImpl*/ implements Serializable 
 { 
 

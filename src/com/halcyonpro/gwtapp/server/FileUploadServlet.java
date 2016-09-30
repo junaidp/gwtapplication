@@ -42,7 +42,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.fileupload.FileItem;
 
-
+// This is a upload servlet to upload attachments
 public class FileUploadServlet extends UploadAction {
 
 	  private static final long serialVersionUID = 1L;

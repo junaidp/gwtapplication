@@ -32,6 +32,7 @@ import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.TextBox;
 
+// This class used to Define the Menus for the Views, User can select if the subject module will have multiple menus etc.
 public class AddMenuItem extends HorizontalPanel {
 	
 	TextBox txtMenuName = new TextBox(); 
@@ -40,7 +41,6 @@ public class AddMenuItem extends HorizontalPanel {
 	
 	public AddMenuItem(){
 		
-//		HorizontalPanel hpnl = new HorizontalPanel();
 		add(txtMenuName);
 		add(checkHasSubMenu);
 		add(btnCreate);

@@ -36,7 +36,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
+//Entity class for NameSpaceEntity used for bindings
 	@Table(name="namespace")
 
 	@Entity

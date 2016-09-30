@@ -37,6 +37,8 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.halcyonpro.gwtapp.client.presenter.ForgotUserNamePresenter.Display;
 
+//This class manages the VIEW for forgot password , when user of this application forgets his/her password 
+//system will send a password change Url to user's email with which user will create their new password.
 public class ForgotUserNameView extends Composite implements Display {
 
 	private static ForgotUserNameViewUiBinder uiBinder = GWT

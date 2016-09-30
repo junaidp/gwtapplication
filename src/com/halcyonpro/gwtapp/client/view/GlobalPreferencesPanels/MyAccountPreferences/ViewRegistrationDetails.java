@@ -38,6 +38,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.halcyonpro.gwtapp.client.view.GlobalPreferencesPanels.GlobalPreferencesPanels;
 import com.halcyonpro.gwtapp.shared.entity.GlobalPreferencesEntity;
 
+//This class used to setup GlobalPreferences for ViewRegistration View
 public class ViewRegistrationDetails extends Composite implements GlobalPreferencesPanels{
 
 	private static ViewRegistrationDetailsUiBinder uiBinder = GWT

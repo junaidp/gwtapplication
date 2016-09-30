@@ -32,6 +32,7 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
+// This is a widget to display Errors
 public class ErrorPanelWidget extends VerticalPanel {
 
 	private static ErrorPanelWidgetUiBinder uiBinder = GWT

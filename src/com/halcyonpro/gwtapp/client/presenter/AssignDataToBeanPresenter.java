@@ -53,7 +53,8 @@ import com.halcyonpro.gwtapp.client.view.widgets.ErrorPanelWidget;
 import com.halcyonpro.gwtapp.client.view.widgets.UploadedComponents.UploadedClass;
 import com.smartgwt.client.util.SC;
 
-// This class used to Assign data to the bean we created before.user uploads the ui.xml/java class to get the widget , enters the value to edit the bean 
+// This class manages the Functionality for AssignDataToBean which is used  to Assign data to the bean we created before.
+// user uploads the ui.xml/java class to get the widget , enters the value to edit the bean 
 // This feature not working completely as we couldnt get DynamicBeans to work
 public class AssignDataToBeanPresenter implements Presenter 
 
@@ -62,7 +63,7 @@ public class AssignDataToBeanPresenter implements Presenter
 	private final HandlerManager eventBus;
 	private final Display display;
 	private String selectedBeanName;
-	private Class selectedBean = null;
+//	private Class selectedBean = null;
 	private TreeMap beanPropertiesMap = new TreeMap();
 	private String beanType;
 

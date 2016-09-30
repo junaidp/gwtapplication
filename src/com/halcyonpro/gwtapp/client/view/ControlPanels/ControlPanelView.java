@@ -36,6 +36,7 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
+//This class is a super class of all the clickable panels at the left (Due to structure change , its not is use currently)
 public class ControlPanelView extends Composite {
 
 	private static ControlPanelViewUiBinder uiBinder = GWT

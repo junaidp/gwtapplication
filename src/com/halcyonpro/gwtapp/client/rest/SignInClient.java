@@ -36,6 +36,7 @@ import org.fusesource.restygwt.client.RestService;
 
 import com.halcyonpro.gwtapp.shared.entity.UserEntity;
 
+// This class used for REST service for LOGIN/SIGNIN call to server.
 @Path("/api/signin")
 public interface SignInClient extends RestService {
   

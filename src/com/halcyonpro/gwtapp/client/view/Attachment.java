@@ -51,7 +51,7 @@ import com.halcyonpro.gwtapp.client.view.widgets.LoadingPopup;
 
 import gwtupload.client.IUploadStatus.Status;
 
-
+// This class used for the Attachments , it provides the attachment panel which can be used by any class.
 public class Attachment extends VerticalPanel {
 	VerticalPanel vpnlFileNames = new VerticalPanel();
 	FormPanel form;

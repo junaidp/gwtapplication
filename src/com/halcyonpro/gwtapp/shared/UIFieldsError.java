@@ -27,7 +27,7 @@
  *******************************************************************************/
 package com.halcyonpro.gwtapp.shared;
 
-
+// This class is maintaining the Errors for any provided widget
 public class UIFieldsError {
 	private String errorMessage = "";
 

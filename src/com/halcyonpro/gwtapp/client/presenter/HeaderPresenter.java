@@ -41,6 +41,7 @@ import com.halcyonpro.gwtapp.client.view.ApplicationConstants;
 import com.halcyonpro.gwtapp.shared.entity.GlobalPreferencesEntity;
 import com.halcyonpro.gwtapp.shared.entity.UserEntity;
 
+// This class manages the functionality/logic of Application's header.Currently just HOME option for header been implemented.
 public class HeaderPresenter implements Presenter 
 
 {

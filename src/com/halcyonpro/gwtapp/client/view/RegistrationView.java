@@ -42,6 +42,7 @@ import com.halcyonpro.gwtapp.client.presenter.RegistrationPresenter.Display;
 import com.halcyonpro.gwtapp.shared.entity.GlobalPreferencesEntity;
 import com.halcyonpro.gwtapp.shared.entity.UserEntity;
 
+//This class manages the VIEW for new user registration into this application, it also use captcha.
 public class RegistrationView extends Composite implements Display {
 
 	private static RegistrationViewUiBinder uiBinder = GWT

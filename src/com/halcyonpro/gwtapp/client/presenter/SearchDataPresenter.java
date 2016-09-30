@@ -32,6 +32,8 @@ import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
 import com.halcyonpro.gwtapp.client.HelloServiceAsync;
 
+// This class manages the functionality for search Data, this is currently not doing anything , but just been developed 
+// as per the application's wireframes provide.
 public class SearchDataPresenter implements Presenter 
 
 {

@@ -69,19 +69,21 @@ import com.smartgwt.client.util.SC;
 import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
 import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
 
-// This class used for Bindings, create/edit/delete binding.
+// This class manages the Functionality for Binding which is used for Bindings, create/edit/delete binding.
 public class BindingsPresenter implements Presenter 
 
 {
 
 	private final Display display;
 	private final HelloServiceAsync rpcService;
+	@SuppressWarnings("unused")
 	private final HandlerManager eventBus;
 	private LinkedHashMap<String, String> valueMapBindingsList = new LinkedHashMap<String, String>();
 	private LinkedHashMap<String, String> valueMapNameSpaceList = new LinkedHashMap<String, String>();
 	private BindingsDTO selectedBindingsDTO; // For Editing
 	private ArrayList<Integer> selectedBindings = new ArrayList<Integer>(); // For deletion
 	private ArrayList<BeanObjectDTO> beanObjects = new ArrayList<BeanObjectDTO>();
+	@SuppressWarnings("rawtypes")
 	private TreeMap beanPropertiesMap = new TreeMap();
 	private AddBindingWidget addBindingWidget;
 
@@ -564,7 +566,7 @@ public class BindingsPresenter implements Presenter
 			final PopupPanel popupBinding) {
 		popupBinding.hide();
 		UploadedBindingClass uploadedClass = new UploadedBindingClass();
-		String json = fetchBeansJson(beanId);
+//		String json = fetchBeansJson(beanId);
 		VerticalPanel vpnlPopup = new VerticalPanel();
 		Button btnSave = new Button("Save");
 		btnSave.addStyleName("primary button");
@@ -600,6 +602,7 @@ public class BindingsPresenter implements Presenter
 		});
 	}
 
+	@SuppressWarnings("unchecked")
 	private void editBeanOnPropertyChange(String selectedBeanName,
 			String propertyName, Object object) {
 

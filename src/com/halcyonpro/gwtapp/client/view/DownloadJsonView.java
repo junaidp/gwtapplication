@@ -36,6 +36,7 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.halcyonpro.gwtapp.client.presenter.DownloadJsonPresenter.Display;
 
+//This class manages the VIEW for DownloadJson, which is used for downloading the json of the selected bean
 public class DownloadJsonView extends Composite implements Display {
 
 	private static DownloadJsonViewUiBinder uiBinder = GWT

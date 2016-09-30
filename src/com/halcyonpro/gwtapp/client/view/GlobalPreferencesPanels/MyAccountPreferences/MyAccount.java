@@ -32,6 +32,7 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
+//This class used to setup GlobalPreferences for MyAccount View
 public class MyAccount extends Composite {
 
 	private static MyAccountUiBinder uiBinder = GWT

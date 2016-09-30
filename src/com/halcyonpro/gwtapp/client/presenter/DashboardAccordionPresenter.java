@@ -32,7 +32,7 @@ import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
 import com.halcyonpro.gwtapp.client.HelloServiceAsync;
 
-// this class manages dashboard accordion
+// This class manages the Functionality of dashboard accordion
 public class DashboardAccordionPresenter implements Presenter 
 
 {

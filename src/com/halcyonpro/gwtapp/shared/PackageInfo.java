@@ -31,6 +31,7 @@ import java.util.ArrayList;
 
 import com.halcyonpro.gwtapp.client.view.ApplicationConstants;
 
+// This class gets the packages of the application
 public class PackageInfo {
 	
 	public ArrayList<String> fetchPackages() throws Exception {

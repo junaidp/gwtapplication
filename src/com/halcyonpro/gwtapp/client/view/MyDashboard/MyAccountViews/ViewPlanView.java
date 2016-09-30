@@ -40,6 +40,8 @@ import com.halcyonpro.gwtapp.client.presenter.ViewPlanPresenter.Display;
 import com.halcyonpro.gwtapp.shared.entity.MyAccountEntity;
 import com.halcyonpro.gwtapp.shared.entity.MyAccountPreferencesEntity;
 
+//This class is View for ViewPlan, Where user can view/edit their Plan Preferences 
+//like vplan type, plan payment etc.
 public class ViewPlanView extends Composite implements Display {
 
 	private static ViewPlanViewUiBinder uiBinder = GWT

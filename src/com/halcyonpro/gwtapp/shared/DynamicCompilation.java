@@ -41,6 +41,7 @@ import org.springframework.util.ClassUtils;
 
 import com.halcyonpro.gwtapp.client.view.ApplicationConstants;
 
+// This class creates the Dynamic Beans and wrtie them to file
 public class DynamicCompilation {
 
 	public DynamicCompilation(String className, String reflectedClassName, String action) throws Exception {

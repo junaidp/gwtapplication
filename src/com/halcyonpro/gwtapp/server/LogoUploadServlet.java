@@ -30,20 +30,18 @@ package com.halcyonpro.gwtapp.server;
 import gwtupload.server.UploadAction;
 import gwtupload.server.exceptions.UploadActionException;
 import gwtupload.shared.UConsts;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Hashtable;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
 
 import org.apache.commons.fileupload.FileItem;
 
-
+// This class use to upload attachment for Logo
 public class LogoUploadServlet extends UploadAction {
 
 	  private static final long serialVersionUID = 1L;

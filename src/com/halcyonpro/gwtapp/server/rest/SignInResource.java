@@ -40,7 +40,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.halcyonpro.gwtapp.database.MyRdbHelper;
 import com.halcyonpro.gwtapp.shared.entity.UserEntity;
-
+//This class used for REST service for LOGIN/SIGNIN call from client
 @Path("signin")
 public class SignInResource {
 

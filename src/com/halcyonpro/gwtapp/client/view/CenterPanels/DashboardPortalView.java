@@ -48,7 +48,7 @@ import com.smartgwt.client.widgets.layout.HLayout;
 import com.smartgwt.client.widgets.layout.VLayout;  
 import com.smartgwt.client.widgets.layout.VStack;  
 
-
+//This class is a View for Dashboard Portal on the main screen
 public class DashboardPortalView extends Composite implements Display {
 
 	private static DashboardPortalViewUiBinder uiBinder = GWT

@@ -27,6 +27,7 @@
  *******************************************************************************/
 package com.halcyonpro.gwtapp.client.view.widgets.UploadedComponents;
 import java.util.Date;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -42,6 +43,9 @@ import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
+
+// This class is Dynamically generated class which becomes available here from Download, 
+// which user download for Editing Bean
 public class UploadedBindingClass extends ApplicationBean{
 	private static UploadedBindingClassUiBinder uiBinder = GWT
 			.create(UploadedBindingClassUiBinder.class);
@@ -68,7 +72,7 @@ public class UploadedBindingClass extends ApplicationBean{
 		listIds.addItem("0");
 		listIds.addItem("1");
 		listIds.addItem("2");
-		System.out.println("testt");
+		
 		
 		listIds.addChangeHandler(new ChangeHandler(){
 			@Override

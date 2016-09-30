@@ -35,6 +35,8 @@ import com.google.gwt.user.client.ui.FocusPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.halcyonpro.gwtapp.client.presenter.MyAccountPresenter.Display;
 
+// This class is View for MyAccount, Where user can view/edit their Account Preferences 
+// like view plan , view Reg etc.
 public class MyAccountView extends Composite implements Display {
 
 	private static myAccountViewUiBinder uiBinder = GWT

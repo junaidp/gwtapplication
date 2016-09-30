@@ -39,6 +39,7 @@ import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+// Entity class for BeanObjects table, where beanobjects get saved including BLOB
 @Table(name="beanobjects")
 
 @Entity

@@ -29,6 +29,7 @@ package com.halcyonpro.gwtapp.shared.entity;
 
 import java.io.Serializable;
 
+// Not used currently
 public class RestEntity implements Serializable{
   private final String id;
   private final String name;

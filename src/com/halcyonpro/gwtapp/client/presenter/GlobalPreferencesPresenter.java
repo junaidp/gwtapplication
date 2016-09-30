@@ -51,6 +51,8 @@ import com.halcyonpro.gwtapp.client.view.widgets.DisplayAlert;
 import com.halcyonpro.gwtapp.shared.entity.GlobalPreferencesEntity;
 import com.halcyonpro.gwtapp.shared.entity.MyAccountPreferencesEntity;
 
+//This class manages the Functionality/logic for global preferences , where user can set up their preferences for the whole
+//application, e.g change view/edit plan , view /edit Registration etc , which will then reflect through out the application.
 @SuppressWarnings("deprecation")
 public class GlobalPreferencesPresenter implements Presenter 
 

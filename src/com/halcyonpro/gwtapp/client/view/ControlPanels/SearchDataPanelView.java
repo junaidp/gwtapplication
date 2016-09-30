@@ -27,11 +27,11 @@
  *******************************************************************************/
 package com.halcyonpro.gwtapp.client.view.ControlPanels;
 
+//This class is a  clickable panel at the left to open SearchPanel (Due to structure change , its not is use currently)
 public class SearchDataPanelView extends ControlPanelView {
 	
 	public SearchDataPanelView(){
-//		setHeading("Search");
-//		setImage("images/search.png");
+
 		focusPanel.setStyleName("metro-tile-small");
 		focusPanel.addStyleName("hover");
 	}

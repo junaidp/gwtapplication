@@ -27,6 +27,7 @@
  *******************************************************************************/
 package com.halcyonpro.gwtapp.client.view.ControlPanels;
 
+//This class is a  clickable panel at the left to open DashboardPortalPanel (Due to structure change , its not is use currently)
 public class DashboardPortalPanelView extends ControlPanelView {
 	
 	public DashboardPortalPanelView(){

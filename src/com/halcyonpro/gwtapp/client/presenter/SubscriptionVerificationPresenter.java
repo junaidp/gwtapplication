@@ -28,8 +28,6 @@
 package com.halcyonpro.gwtapp.client.presenter;
 
 
-import java.util.List;
-
 import org.fusesource.restygwt.client.Defaults;
 import org.fusesource.restygwt.client.Method;
 import org.fusesource.restygwt.client.MethodCallback;
@@ -40,27 +38,25 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HasWidgets;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.halcyonpro.gwtapp.client.HelloServiceAsync;
 import com.halcyonpro.gwtapp.client.event.RegistrationEvent;
 import com.halcyonpro.gwtapp.client.rest.RestClient;
 import com.halcyonpro.gwtapp.client.view.ApplicationConstants;
-import com.halcyonpro.gwtapp.shared.entity.RestEntity;
 
+//This class manages the Functionality for SubscriptionVerification, where system checks if the entered email is 
+//registered in the system
 public class SubscriptionVerificationPresenter implements Presenter 
 
 {
 	
 	private final Display display;
+	@SuppressWarnings("unused")
 	private final HelloServiceAsync rpcService;
 	private final HandlerManager eventBus;
 

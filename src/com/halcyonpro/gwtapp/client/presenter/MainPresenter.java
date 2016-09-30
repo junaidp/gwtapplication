@@ -47,6 +47,9 @@ import com.halcyonpro.gwtapp.client.view.ApplicationConstants;
 import com.halcyonpro.gwtapp.client.view.ControlPanels.ControlPanelsContainer;
 import com.halcyonpro.gwtapp.shared.entity.UserEntity;
 
+// This class manages the Functionality of Main Page of this application , where user have the option to switch to different 
+// dashboards and global preferences and also have the option to go to Any of the application's functionality like file uploaded
+// bean creation, download json etc..
 public class MainPresenter implements Presenter 
 
 {

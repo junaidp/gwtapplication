@@ -50,7 +50,7 @@ import com.halcyonpro.gwtapp.client.HelloServiceAsync;
 
 import gwtupload.client.IUploadStatus.Status;
 
-
+// This class used as a widget for Attachment , which user can used to upload attachments 
 public class Attachment extends VerticalPanel {
 	VerticalPanel vpnlFileNames = new VerticalPanel();
 	FormPanel form;

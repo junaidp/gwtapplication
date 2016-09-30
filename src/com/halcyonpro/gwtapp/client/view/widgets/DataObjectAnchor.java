@@ -29,6 +29,7 @@ package com.halcyonpro.gwtapp.client.view.widgets;
 
 import com.google.gwt.user.client.ui.Anchor;
 
+// This class used as a custom based Anchor which stores package name in it
 public class DataObjectAnchor extends Anchor{
 	
 	private String packageName;

@@ -28,8 +28,6 @@
 package com.halcyonpro.gwtapp.client.view;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ChangeEvent;
-import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
@@ -41,6 +39,7 @@ import com.halcyonpro.gwtapp.client.presenter.BeanFieldsEditorPresenter.Display;
 import com.halcyonpro.gwtapp.client.view.widgets.JavaComponentAttachment;
 import com.halcyonpro.gwtapp.client.view.widgets.XmlComponentAttachment;
 
+//This class provides user the display to upload the ui.xml/java class for updating the respective bean
 public class BeanFieldsEditorView extends Composite implements Display {
 
 	private static BeanFieldsEditorViewUiBinder uiBinder = GWT

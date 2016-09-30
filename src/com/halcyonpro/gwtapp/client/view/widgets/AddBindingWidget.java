@@ -28,18 +28,14 @@
 package com.halcyonpro.gwtapp.client.view.widgets;
 
 import java.util.LinkedHashMap;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.BlurHandler;
-import com.google.gwt.event.dom.client.KeyUpEvent;
-import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.TextBox;
@@ -48,6 +44,7 @@ import com.halcyonpro.gwtapp.client.view.ApplicationConstants;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.form.fields.ComboBoxItem;
 
+// This class used as a widget for Binding creation , been used under BindingsView
 public class AddBindingWidget extends Composite {
 
 	private static AddBindingWidgetUiBinder uiBinder = GWT

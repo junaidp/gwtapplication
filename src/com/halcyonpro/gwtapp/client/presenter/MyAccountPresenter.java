@@ -40,6 +40,8 @@ import com.halcyonpro.gwtapp.client.event.ViewPlanEvent;
 import com.halcyonpro.gwtapp.shared.entity.GlobalPreferencesEntity;
 import com.halcyonpro.gwtapp.shared.entity.UserEntity;
 
+//This class manages the functionality for manageAccount where user can view their account.
+//like view/edit registration, view/edit plan.
 public class MyAccountPresenter implements Presenter 
 
 {

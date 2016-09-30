@@ -41,6 +41,8 @@ import com.google.gwt.user.client.ui.TreeItem;
 import com.google.gwt.user.client.ui.Widget;
 import com.halcyonpro.gwtapp.client.presenter.GlobalPreferencesPresenter.Display;
 
+//This class manages the VIEW for global preferences , where user can set up their preferences for the whole
+//application, e.g change view/edit plan , view /edit Registration etc , which will then reflect through out the application.
 @SuppressWarnings("deprecation")
 public class GlobalPreferencesView extends Composite implements Display {
 

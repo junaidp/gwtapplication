@@ -33,6 +33,7 @@ import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.google.gwt.user.client.ui.Image;
 
+// This class used as a widget for Button with image in a celltable
 public class ButtonImageCell extends ButtonCell{
 
     @Override

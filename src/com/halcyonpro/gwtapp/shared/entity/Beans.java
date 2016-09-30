@@ -36,6 +36,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+// Not in use currently
 @Table(name="beans")
 
 @Entity

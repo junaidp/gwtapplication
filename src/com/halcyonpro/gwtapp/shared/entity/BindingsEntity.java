@@ -41,6 +41,7 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+// This class is an entity for Bindings which is saving Bindings 
 @Table(name="bindings")
 
 @Entity

@@ -32,7 +32,7 @@ import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
 import com.halcyonpro.gwtapp.client.HelloServiceAsync;
 
-// This class allows user to upload files
+// This class manages the Functionality for FileUpload which allows user to upload files
 public class FileUploadPresenter implements Presenter 
 
 {

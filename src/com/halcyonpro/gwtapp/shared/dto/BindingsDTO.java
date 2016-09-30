@@ -32,6 +32,7 @@ import java.util.TreeMap;
 
 import com.halcyonpro.gwtapp.shared.entity.NameSpaceEntity;
 
+//This Dto used to store the information for Bindings
 public class BindingsDTO implements Serializable{
 
 	

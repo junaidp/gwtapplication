@@ -33,7 +33,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-
+// This class is a widget to provide Attachments for Java Files , used for Editing Bean
 public class JavaComponentAttachment extends VerticalPanel {
 	private FormPanel form;
 	private TextBox txt = new TextBox();

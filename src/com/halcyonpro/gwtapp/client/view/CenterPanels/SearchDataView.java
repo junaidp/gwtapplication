@@ -33,6 +33,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import com.halcyonpro.gwtapp.client.presenter.SearchDataPresenter.Display;
 
+//This class is a View for SearchData Accordion on the main screen
 public class SearchDataView extends Composite implements Display {
 
 	private static SearchDataViewUiBinder uiBinder = GWT

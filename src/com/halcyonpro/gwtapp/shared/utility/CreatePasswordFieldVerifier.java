@@ -29,7 +29,7 @@ package com.halcyonpro.gwtapp.shared.utility;
 
 import com.halcyonpro.gwtapp.client.presenter.CreatePasswordPresenter.Display;
 import com.halcyonpro.gwtapp.client.view.ApplicationConstants;
-
+// Field verifier for Password
 
 public class CreatePasswordFieldVerifier {
 	private boolean verified = true;

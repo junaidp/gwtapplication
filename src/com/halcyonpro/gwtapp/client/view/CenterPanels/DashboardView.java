@@ -35,6 +35,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.halcyonpro.gwtapp.client.presenter.DashboardPresenter.Display;
 import com.halcyonpro.gwtapp.client.view.MyDashboard.MyAccountPanel;
 
+//This class is a View for Dashboard  on the main screen
 public class DashboardView extends Composite implements Display {
 
 	private static DashboardViewUiBinder uiBinder = GWT

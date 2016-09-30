@@ -32,7 +32,7 @@ import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
 import com.halcyonpro.gwtapp.client.HelloServiceAsync;
 
-// This class manages DashboardPortal
+//This class manages the Functionality of dashboard portlet
 public class DashboardPortalPresenter implements Presenter 
 
 {

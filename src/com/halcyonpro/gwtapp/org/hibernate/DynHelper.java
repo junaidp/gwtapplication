@@ -63,7 +63,8 @@ import com.halcyonpro.gwtapp.client.view.ApplicationConstants;
 import com.halcyonpro.gwtapp.shared.dto.AddedBeanDTO;
 
 
-
+// This class used for Dynanically creating Bean with EclipseLInk, All other classes in this package
+// are EclipseLink provided
 public class DynHelper {
 
 	@PersistenceContext(unitName = "data5PU")

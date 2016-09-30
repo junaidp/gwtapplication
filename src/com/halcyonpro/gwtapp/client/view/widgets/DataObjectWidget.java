@@ -35,6 +35,7 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Widget;
 import com.halcyonpro.gwtapp.shared.dto.AddedBeanPropertyDTO;
 
+// This class used as a widget to use for deletion of BeanProperty, been used under JavaBeanEditor
 public class DataObjectWidget extends Composite {
 
 	private static DataObjectWidgetUiBinder uiBinder = GWT

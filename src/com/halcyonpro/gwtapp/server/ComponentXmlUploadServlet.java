@@ -49,6 +49,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import com.halcyonpro.gwtapp.client.view.ApplicationConstants;
 
+//This class used to upload attachment of xml class for Editing Beans
 public class ComponentXmlUploadServlet  extends UploadAction implements javax.servlet.Servlet {
 
 

@@ -45,7 +45,7 @@ import com.halcyonpro.gwtapp.client.HelloServiceAsync;
 import com.halcyonpro.gwtapp.client.view.ApplicationConstants;
 import com.smartgwt.client.util.SC;
 
-// This class used for downloading the json of the selected bean
+// This class manages the Functionality for DownloadJson, which is used for downloading the json of the selected bean
 public class DownloadJsonPresenter implements Presenter 
 
 {

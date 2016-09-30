@@ -33,6 +33,8 @@ import com.google.gwt.user.client.ui.Widget;
 import com.halcyonpro.gwtapp.client.view.ApplicationConstants;
 import com.halcyonpro.gwtapp.client.view.CenterPanels.CenterPanelsView;
 
+// This class is View of the MyAccount Panel Metro Style which displaying in the Main Page Center
+// to display My Account view on click
 public class MyAccountPanel extends CenterPanelsView {
 
 	private static MyAccountViewUiBinder uiBinder = GWT

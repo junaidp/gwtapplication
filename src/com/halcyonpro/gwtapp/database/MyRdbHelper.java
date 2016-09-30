@@ -109,7 +109,7 @@ import com.halcyonpro.gwtapp.shared.entity.MyAccountEntity;
 import com.halcyonpro.gwtapp.shared.entity.NameSpaceEntity;
 import com.halcyonpro.gwtapp.shared.entity.UserEntity;
 
-
+// This class is a Main class to communicate to database , where we have all the queries in hibernate
 public class MyRdbHelper {
 
 	private SessionFactory sessionFactory;

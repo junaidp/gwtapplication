@@ -33,6 +33,8 @@ import com.google.gwt.user.client.ui.Widget;
 import com.halcyonpro.gwtapp.client.view.ApplicationConstants;
 import com.halcyonpro.gwtapp.client.view.CenterPanels.CenterPanelsView;
 
+//This class is View of the RunTime Panel Metro Style which displaying in the Main Page Center
+//to display My RunTime view on click
 public class RunTimeView extends CenterPanelsView {
 
 	private static RunTimeViewUiBinder uiBinder = GWT

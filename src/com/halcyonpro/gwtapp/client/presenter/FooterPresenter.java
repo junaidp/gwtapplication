@@ -40,7 +40,7 @@ import com.halcyonpro.gwtapp.client.HelloServiceAsync;
 import com.halcyonpro.gwtapp.client.view.ApplicationConstants;
 import com.halcyonpro.gwtapp.shared.entity.GlobalPreferencesEntity;
 
-// This class manages the footer of the application.
+// This class manages the Functionality for footer of the application.
 public class FooterPresenter implements Presenter 
 
 {

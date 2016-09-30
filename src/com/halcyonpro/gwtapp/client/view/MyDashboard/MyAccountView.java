@@ -33,6 +33,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.halcyonpro.gwtapp.client.view.ApplicationConstants;
 import com.halcyonpro.gwtapp.client.view.CenterPanels.CenterPanelsView;
 
+// Not in use currently
 public class MyAccountView extends CenterPanelsView {
 
 	private static MyAccountViewUiBinder uiBinder = GWT

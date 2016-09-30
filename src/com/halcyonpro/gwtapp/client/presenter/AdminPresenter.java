@@ -36,9 +36,9 @@ import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
 import com.halcyonpro.gwtapp.client.HelloServiceAsync;
 import com.halcyonpro.gwtapp.client.event.GlobalPreferencesEvent;
-import com.halcyonpro.gwtapp.client.view.AdminView;
 import com.halcyonpro.gwtapp.client.view.ApplicationConstants;
-// Admin Class for managing Admin of this application  
+
+// This class manages the Functionality for Admin Class for managing Admin's page of this application  
 public class AdminPresenter implements Presenter 
 
 {

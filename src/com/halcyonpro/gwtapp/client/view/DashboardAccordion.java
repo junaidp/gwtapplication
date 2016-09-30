@@ -33,6 +33,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import com.halcyonpro.gwtapp.client.presenter.DashboardAccordionPresenter.Display;
 
+//This class manages the Functionality of dashboard accordion
 public class DashboardAccordion extends Composite implements Display {
 
 	private static DashboardAccordionUiBinder uiBinder = GWT
