@@ -120,7 +120,6 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 
 	private final HelloServiceAsync rpcService; 
 	private HasWidgets container;
-	//	private VerticalPanel center;
 	private UserEntity loggedInUser;
 
 	private GlobalPreferencesEntity globalPreferencesEntity;
