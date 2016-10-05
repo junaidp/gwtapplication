@@ -11,7 +11,7 @@
   <inherits name="gwtupload.GWTUpload"/>
   <inherits name="com.smartgwt.SmartGwt"/> 
   <inherits name="com.googlecode.gwtx.Java"/>
-    <inherits name="org.fusesource.restygwt.RestyGWT"/>
+  <inherits name="org.fusesource.restygwt.RestyGWT"/>
   
   
   

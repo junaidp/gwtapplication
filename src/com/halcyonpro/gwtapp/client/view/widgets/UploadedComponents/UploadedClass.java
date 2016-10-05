@@ -15,9 +15,6 @@ import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
-
-//This class is Dynamically generated class which becomes available here from Download, 
-//which user download for Editing Bean
 public class UploadedClass extends ApplicationBean{
 	private static UploadedClassUiBinder uiBinder = GWT
 			.create(UploadedClassUiBinder.class);

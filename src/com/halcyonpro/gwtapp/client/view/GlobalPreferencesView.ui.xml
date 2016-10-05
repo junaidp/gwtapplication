@@ -15,6 +15,7 @@
 					<g:TreeItem text='View Plan' ui:field="treeItemViewPlan" HTML="View Plan"  />
 					<g:TreeItem text='View Registration' ui:field="treeItemViewRegistration" HTML="View Registration"/>
 					<g:TreeItem text='Edit Registration' ui:field="treeItemEditRegistration" HTML="Edit Registration"/>
+					<g:TreeItem text='Logo' ui:field="treeItemLogo" HTML="Logo"/>
 					<g:TreeItem text='Usage' ui:field="treeItemUsage" HTML="Usage" visible="false"/>
 				</g:TreeItem>
 
