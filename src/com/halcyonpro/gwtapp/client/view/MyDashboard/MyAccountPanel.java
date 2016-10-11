@@ -42,10 +42,16 @@ public class MyAccountPanel extends CenterPanelsView {
 
 	interface MyAccountViewUiBinder extends UiBinder<Widget, MyAccountPanel> {
 	}
-
+	
+	private String name = "MyAccount";
+ 
 	public MyAccountPanel() {
 		container.add(uiBinder.createAndBindUi(this));
 		setHeading(ApplicationConstants.MYACCOUNT_HEADING);
+	}
+
+	public String getName() {
+		return name;
 	}
 
 }

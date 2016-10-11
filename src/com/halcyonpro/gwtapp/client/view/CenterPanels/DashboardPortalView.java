@@ -27,6 +27,8 @@
  *******************************************************************************/
 package com.halcyonpro.gwtapp.client.view.CenterPanels;
 
+import java.util.ArrayList;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -34,6 +36,9 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.halcyonpro.gwtapp.client.presenter.DashboardPortalPresenter.Display;
+import com.halcyonpro.gwtapp.client.view.MyDashboard.MyAccountPanel;
+import com.halcyonpro.gwtapp.client.view.MyDashboard.ReportsView;
+import com.halcyonpro.gwtapp.client.view.MyDashboard.RunTimeView;
 import com.smartgwt.client.types.Alignment;  
 import com.smartgwt.client.types.DragAppearance;  
 import com.smartgwt.client.types.HeaderControls;  
@@ -61,29 +66,42 @@ public class DashboardPortalView extends Composite implements Display {
 	@UiField 
 	VerticalPanel container;
 	
+	private MyAccountPanel myAccount = new MyAccountPanel();
+//	private ConfigurationView configurationView = new ConfigurationView();
+	private RunTimeView runTimtView = new RunTimeView();
+	private ReportsView reportsView = new ReportsView();
+	
+	private ArrayList<CenterPanelsView> centerPanelViews = new ArrayList<CenterPanelsView>();
+	
 	public DashboardPortalView() {
 		initWidget(uiBinder.createAndBindUi(this));
+		
+		centerPanelViews.add(myAccount);
+		centerPanelViews.add(runTimtView);
+		centerPanelViews.add(reportsView);
 		
 		
 		 final PortalLayout portalLayout = new PortalLayout(1);  
 	        portalLayout.setWidth(300);  
-	        portalLayout.setHeight100();  
+	        portalLayout.setHeight(300);  
 	        container.setWidth("1000px");
-	  
+	        
+	        
 	        // create portlets... 
-	        for(int i=0; i<3 ; i++){
+	        
+	        for(int i=0; i<centerPanelViews.size() ; i++){
 	            Portlet portlet = new Portlet();  
-	            portlet.setTitle("Portlet "+i);  
+	            portlet.setTitle("Portlet "+ centerPanelViews.get(i).getHeading().getText());  
 	  
 	            Label label = new Label();  
 	            label.setAlign(Alignment.CENTER);  
 	            label.setLayoutAlign(VerticalAlignment.CENTER);  
-	            label.setContents("Portlet contents for portlet "+i);  
-	            portlet.addItem(label);  
+	            label.setContents("Portlet contents for portlet "+centerPanelViews.get(i).getHeading().getText());  
+	            portlet.addItem(centerPanelViews.get(i));  
 	            portalLayout.addPortlet(portlet);  
 	        }
-	      
-	  
+	        
+
 	        VLayout vLayout = new VLayout(15);  
 	        vLayout.setMargin(10);  
 	  
@@ -225,5 +243,9 @@ public class DashboardPortalView extends Composite implements Display {
 	            fewestPortletsColumn.addMember(portlet);  
 	            return fewestPortletsColumn;  
 	        }  
-	    }  
+	    }
+
+		public MyAccountPanel getMyAccount() {
+			return myAccount;
+		}  
 }

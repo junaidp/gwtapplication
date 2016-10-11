@@ -2,47 +2,27 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 	<ui:style>
-	
+
 	</ui:style>
-	<g:HTMLPanel width="100%">
-
+	<g:HTMLPanel>
 		<head>
-			<link href="Metro-UI-CSS-master/build/css/metro.css" rel="stylesheet" />
-			
-			<script src="jquery.js"></script>
-			<script src="Metro-UI-CSS-master/build/js/metro.js"></script>
+			<meta name="viewport" content="width=device-width, initial-scale=1" />
+			<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css" />
 		</head>
-		<div>
-			<div class="app-bar">
-			<a class="app-bar-element">
-			<g:HTMLPanel>
-						<g:FocusPanel ui:field="back">
-							<g:HTMLPanel>
-								<div style="padding-left:20px; padding-right:20px">
-									Back
 
-								</div>
-							</g:HTMLPanel>
-						</g:FocusPanel>
-					</g:HTMLPanel>
-			</a>
-				<a class="app-bar-element place-right">
-				<span class="app-bar-divider"></span>
-					<g:HTMLPanel>
-						<g:FocusPanel ui:field="logOut">
-							<g:HTMLPanel>
-								<div style="padding-left:20px; padding-right:20px">
-									Log off
-
-								</div>
-							</g:HTMLPanel>
-						</g:FocusPanel>
-					</g:HTMLPanel>
-				</a>
-				<span class="app-bar-divider"></span>
+		<div class="w3-container w3-theme-l1 height:100px">
+				<div style="float:left; padding-left:10px">
+				<g:HTMLPanel styleName="hover" visible="false">
+					<g:HTML ui:field="back" styleName="h2" >Back</g:HTML>
+				</g:HTMLPanel>
 			</div>
+			<div style="float:left">
+				<g:HTMLPanel styleName="hover">
+					<g:HTML ui:field="logOut" styleName="h2">Log Off</g:HTML>
+				</g:HTMLPanel>
+			</div>
+		</div>
 
-	</div>
- 
 	</g:HTMLPanel>
+
 </ui:UiBinder> 

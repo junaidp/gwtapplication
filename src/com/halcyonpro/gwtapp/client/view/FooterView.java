@@ -32,6 +32,7 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FocusPanel;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
 import com.halcyonpro.gwtapp.client.presenter.FooterPresenter.Display;
 
@@ -45,19 +46,19 @@ public class FooterView extends Composite implements Display {
 	}
 	
 	@UiField
-	FocusPanel logOut;
+	HTML logOut;
 	@UiField
-	FocusPanel back;
+	HTML back;
 
 	public FooterView() {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 
-	public FocusPanel getLogOut() {
+	public HTML getLogOut() {
 		return logOut;
 	}
 
-	public FocusPanel getBack() {
+	public HTML getBack() {
 		return back;
 	}
 

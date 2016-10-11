@@ -1,0 +1,28 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	
+	</ui:style>
+	<g:HTMLPanel>
+		<div style="padding-left:40%">
+		<h4 class="text-light blue">Dashboards</h4>
+		
+		
+		</div>
+		<div class="w3-container w3-theme-l5">
+		    <g:RadioButton ui:field="checkDashboard" 
+			ui:name="dashboardGroup">Standard Dashboard View</g:RadioButton> 
+			
+		</div>
+		<div class="w3-container w3-theme-l4">
+			 <g:RadioButton ui:field="checkAccordion" 
+			ui:name="dashboardGroup">Accordion View</g:RadioButton> 
+		</div>
+		<div class="w3-container w3-theme-l3">
+			 <g:RadioButton ui:field="checkPortlet" 
+			ui:name="dashboardGroup">Portlet View</g:RadioButton> 
+		</div>
+		
+	</g:HTMLPanel>
+</ui:UiBinder> 

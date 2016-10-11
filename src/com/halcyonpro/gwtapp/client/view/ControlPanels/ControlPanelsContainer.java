@@ -31,7 +31,10 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.halcyonpro.gwtapp.client.view.ApplicationConstants;
+import com.halcyonpro.gwtapp.shared.entity.GlobalPreferencesEntity;
 
 // This class is a container View for the panels at the left on which user click to display Panels at the right.(Because of the changes structure this is currently not in use)
 public class ControlPanelsContainer extends Composite {
@@ -53,9 +56,28 @@ public class ControlPanelsContainer extends Composite {
 	DashboardAccordionPanelView dashboardAccordionPanel;
 	@UiField
 	DashboardPortalPanelView dashboardPortalPanel;
+	@UiField
+	SimplePanel portalContainer;
+	@UiField
+	SimplePanel dashboardContainer;
+	@UiField
+	SimplePanel intelligenceContainer;
+	@UiField
+	SimplePanel searchContainer;
+	@UiField
+	SimplePanel accordionContainer;
 
 	public ControlPanelsContainer() {
 		initWidget(uiBinder.createAndBindUi(this));
+		portalContainer.setVisible(false);
+		dashboardContainer.setVisible(false);
+		accordionContainer.setVisible(false);
+	}
+	
+	public void setGlobalPreferences(GlobalPreferencesEntity globalPreferencesEntity){
+		dashboardContainer.setVisible(globalPreferencesEntity.isPanelTypeDashboard());
+		accordionContainer.setVisible(globalPreferencesEntity.isPanelTypeAccordion());
+		portalContainer.setVisible(globalPreferencesEntity.isPanelTypePortlet());
 	}
 
 	public DashboardPanelView getDashboardPanel() {

@@ -27,20 +27,39 @@
  *******************************************************************************/
 package com.halcyonpro.gwtapp.client.view.widgets;
 
+import java.util.ArrayList;
+
 import gwtupload.client.IUploader;
+import gwtupload.client.IUploader.UploadedInfo;
 import gwtupload.client.MultiUploader;
 import gwtupload.client.PreloadedImage;
 import gwtupload.client.PreloadedImage.OnLoadPreloadedImageHandler;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.FormPanel;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.VerticalPanel;
+import com.halcyonpro.gwtapp.client.HelloService;
+import com.halcyonpro.gwtapp.client.HelloServiceAsync;
 
 import gwtupload.client.IUploadStatus.Status;
 
-// This class used to provide user a display for logo Attachment
+// This class used as a widget for Attachment , which user can used to upload attachments 
 public class LogoAttachment extends VerticalPanel {
+	VerticalPanel vpnlFileNames = new VerticalPanel();
 	FormPanel form;
+	private String logoUrl ="";
+	
 
 	public LogoAttachment(){
 
@@ -49,8 +68,13 @@ public class LogoAttachment extends VerticalPanel {
 		panel.add(defaultUploader);
 		HorizontalPanel hpnl = new HorizontalPanel();
 		hpnl.add(panel);
+		form = new FormPanel();
 		hpnl.setSpacing(10);
-		add(hpnl);
+		add(form);
+		form.setWidget(hpnl);
+		form.setAction("uploadServlet");
+		vpnlFileNames.clear();
+		displayUploadedFiles();
 		defaultUploader.addOnFinishUploadHandler(onFinishUploaderHandler);
 	  }
 
@@ -61,7 +85,13 @@ public class LogoAttachment extends VerticalPanel {
 	      if (uploader.getStatus() == Status.SUCCESS) {
 
 	        new PreloadedImage(uploader.fileUrl(), showImage);
-	       
+	        UploadedInfo info = uploader.getServerInfo();
+	        System.out.println("File name " + info.name);
+	        System.out.println("File content-type " + info.ctype);
+	        System.out.println("File size " + info.size);
+	        System.out.println("Server message " + info.message);
+	        vpnlFileNames.clear();
+	        displayUploadedFiles();
 	      }
 	    }
 	  };
@@ -79,6 +109,124 @@ public class LogoAttachment extends VerticalPanel {
 
 	public void setForm(FormPanel form) {
 		this.form = form;
+	}
+	
+	public void displayUploadedFiles(){
+		HelloServiceAsync rpcService = GWT.create(HelloService.class);
+		final LoadingPopup loadingPopup = new LoadingPopup();
+		loadingPopup.display();
+		rpcService.readUploadedFiles(new AsyncCallback<ArrayList<String>>() {
+			
+			@Override
+			public void onSuccess(ArrayList<String> result) {
+				if(loadingPopup!=null){
+					loadingPopup.remove();
+				}
+				Label lblFile = new Label("Already Uploaded files");
+	
+				VerticalPanel contentRow = new VerticalPanel();
+				
+				vpnlFileNames.setWidth("100%");
+				vpnlFileNames.setSpacing(50);
+				setWidth("100%");
+				vpnlFileNames.clear();
+				vpnlFileNames.add(lblFile);
+				vpnlFileNames.add(new HTML("&nbsp"));
+				vpnlFileNames.add(contentRow);
+				contentRow.setWidth("100%");
+				contentRow.setSpacing(10);
+				contentRow.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_LEFT);
+				ArrayList<Image> images = new ArrayList<Image>();
+				ArrayList<Label> files = new ArrayList<Label>();
+
+				
+				for (int x = 0; x < result.size(); x++) {
+					if(isTypeImage(result.get(x))){
+						final Image img = new Image();
+						img.setSize("75px", "75px");
+						img.setUrl("fileuploads/"+result.get(x));
+						img.addStyleName("hover");
+						img.setTitle("Click to set as a Logo");
+						images.add(img);
+					
+					}
+					else{
+						final Label lbl = new Label();
+						lbl.setText(result.get(x));
+						lbl.addStyleName("hover");
+						files.add(lbl);
+						
+					}
+				
+				
+				
+			}
+				for(int i=0; i< images.size(); i++){
+					contentRow = addImageThumbNail(images.get(i), contentRow);
+				}
+			
+				
+				add(vpnlFileNames);
+			}
+
+		
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				if(loadingPopup!=null){
+					loadingPopup.remove();
+				}
+				Window.alert("reading uploaded files Failed:"+ caught.getLocalizedMessage());
+			}
+		});
+	}
+	
+	private VerticalPanel addImageThumbNail(final Image image,
+			VerticalPanel contentRow) {
+		
+			contentRow.add(image);
+			
+			if (contentRow.getWidgetCount() > 4) {// displaying not more than 4 images in a row.
+				contentRow = new VerticalPanel();
+				contentRow.setWidth("100%");
+				contentRow.setSpacing(10);
+				vpnlFileNames.add(new HTML("&nbsp"));
+				vpnlFileNames.add(new HTML("&nbsp"));
+				vpnlFileNames.add(contentRow);
+				contentRow.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_LEFT);
+				
+			}
+			
+			image.addClickHandler(new ClickHandler() {
+				
+				@Override
+				public void onClick(ClickEvent event) {
+//					System.out.println(img.getUrl());
+//					Window.open(image.getUrl(), "_blank", null);
+					logoUrl = image.getUrl();
+					new DisplayAlert("logo updated");
+					
+					}
+			});
+		return contentRow;
+	}
+	
+	
+	
+	private boolean isTypeImage(String lowerFileName){
+		if (lowerFileName.endsWith(".jpg") || lowerFileName.endsWith(".gif") || lowerFileName.endsWith(".png") || lowerFileName.endsWith(".jpeg") || lowerFileName.endsWith(".tiff") || lowerFileName.endsWith(".bmp") || lowerFileName.endsWith(".svg")) {
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	public String getLogoUrl() {
+		return logoUrl;
+	}
+
+	public void setLogoUrl(String logoUrl) {
+		this.logoUrl = logoUrl;
 	}
 	
 

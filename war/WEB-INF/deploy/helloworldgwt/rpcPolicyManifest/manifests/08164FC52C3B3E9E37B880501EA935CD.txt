@@ -1,0 +1,2 @@
+serviceClass: com.halcyonpro.gwtapp.client.HelloService
+path: FF252CDF5FAE9CB1779F4BA0692271E6.gwt.rpc

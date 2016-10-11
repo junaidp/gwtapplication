@@ -56,6 +56,28 @@ import javax.persistence.Table;
 		@JoinColumn(name="myAccountPreferencesId")
 		@ManyToOne( fetch = FetchType.LAZY )
 		private MyAccountPreferencesEntity myAccountPreferencesId;
+		
+		@JoinColumn(name="headerpreferencesId")
+		@ManyToOne( fetch = FetchType.LAZY )
+		private HeaderPreferencesEntity headerpreferencesId;
+		
+		@Column(name="panelTypeDashboard")
+		private boolean panelTypeDashboard;
+		
+		@Column(name="panelTypeAccordion")
+		private boolean panelTypeAccordion;
+		
+		@Column(name="panelTypePortlet")
+		private boolean panelTypePortlet;
+		
+		@Column(name="logoUrl")
+		private String logoUrl;
+		
+		@Column(name="logoHeight")
+		private int logoHeight;
+		
+		@Column(name="logoWidth")
+		private int logoWidth;
 
 		public int getGlobalPrefrencesId() {
 			return globalPrefrencesId;
@@ -74,6 +96,62 @@ import javax.persistence.Table;
 			this.myAccountPreferencesId = myAccountPreferencesId;
 		}
 
-	
+		public boolean isPanelTypeDashboard() {
+			return panelTypeDashboard;
+		}
+
+		public void setPanelTypeDashboard(boolean panelTypeDashboard) {
+			this.panelTypeDashboard = panelTypeDashboard;
+		}
+
+		public boolean isPanelTypeAccordion() {
+			return panelTypeAccordion;
+		}
+
+		public void setPanelTypeAccordion(boolean panelTypeAccordion) {
+			this.panelTypeAccordion = panelTypeAccordion;
+		}
+
+		public boolean isPanelTypePortlet() {
+			return panelTypePortlet;
+		}
+
+		public void setPanelTypePortlet(boolean panelTypePortlet) {
+			this.panelTypePortlet = panelTypePortlet;
+		}
+
+		public String getLogoUrl() {
+			return logoUrl;
+		}
+
+		public void setLogoUrl(String logoUrl) {
+			this.logoUrl = logoUrl;
+		}
+
+		public int getLogoHeight() {
+			return logoHeight;
+		}
+
+		public void setLogoHeight(int logoHeight) {
+			this.logoHeight = logoHeight;
+		}
+
+		public int getLogoWidth() {
+			return logoWidth;
+		}
+
+		public void setLogoWidth(int logoWidth) {
+			this.logoWidth = logoWidth;
+		}
+
+//		public HeaderPreferencesEntity getHeaderMenuPreferencesId() {
+//			return headerMenuPreferencesId;
+//		}
+//
+//		public void setHeaderMenuPreferencesId(
+//				HeaderPreferencesEntity headerMenuPreferencesId) {
+//			this.headerMenuPreferencesId = headerMenuPreferencesId;
+//		}
+
 		
 }

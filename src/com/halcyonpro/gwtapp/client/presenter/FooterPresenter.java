@@ -34,6 +34,7 @@ import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.FocusPanel;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
 import com.halcyonpro.gwtapp.client.HelloServiceAsync;
@@ -51,8 +52,8 @@ public class FooterPresenter implements Presenter
 	public interface Display 
 	{
 		Widget asWidget();
-		FocusPanel getLogOut();
-		FocusPanel getBack();
+		HTML getLogOut();
+		HTML getBack();
 	}  
 
 	public FooterPresenter(HelloServiceAsync rpcService, HandlerManager eventBus, Display view, GlobalPreferencesEntity globalPreferencesEntity) 

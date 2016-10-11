@@ -39,17 +39,24 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.HorizontalSplitPanel;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Tree;
 import com.google.gwt.user.client.ui.TreeItem;
 import com.google.gwt.user.client.ui.Widget;
 import com.halcyonpro.gwtapp.client.HelloServiceAsync;
+import com.halcyonpro.gwtapp.client.event.MainEvent;
 import com.halcyonpro.gwtapp.client.view.ApplicationConstants;
+import com.halcyonpro.gwtapp.client.view.HeaderView;
+import com.halcyonpro.gwtapp.client.view.GlobalPreferencesPanels.DashboardPreferences;
+import com.halcyonpro.gwtapp.client.view.GlobalPreferencesPanels.HeaderMenuPreferences;
+import com.halcyonpro.gwtapp.client.view.GlobalPreferencesPanels.LogoPreferences;
 import com.halcyonpro.gwtapp.client.view.GlobalPreferencesPanels.MyAccountPreferences.EditRegistrationDetails;
 import com.halcyonpro.gwtapp.client.view.GlobalPreferencesPanels.MyAccountPreferences.ViewPlan;
 import com.halcyonpro.gwtapp.client.view.GlobalPreferencesPanels.MyAccountPreferences.ViewRegistrationDetails;
 import com.halcyonpro.gwtapp.client.view.widgets.DisplayAlert;
 import com.halcyonpro.gwtapp.shared.entity.GlobalPreferencesEntity;
 import com.halcyonpro.gwtapp.shared.entity.MyAccountPreferencesEntity;
+import com.halcyonpro.gwtapp.shared.entity.UserEntity;
 
 //This class manages the Functionality/logic for global preferences , where user can set up their preferences for the whole
 //application, e.g change view/edit plan , view /edit Registration etc , which will then reflect through out the application.
@@ -62,8 +69,13 @@ public class GlobalPreferencesPresenter implements Presenter
 	private ViewPlan viewPlan;
 	private ViewRegistrationDetails viewRegistration;
 	private EditRegistrationDetails editRegistration;
+	private DashboardPreferences dashboardSelection;
+	private LogoPreferences logoPreferences;
+	private HeaderMenuPreferences headerMenuPreferences;
 	private final HelloServiceAsync rpcService;
 	private GlobalPreferencesEntity alreadySavedGlobalPreferencesEntity;
+	private HandlerManager eventBus;
+	private UserEntity user;
 
 	public interface Display 
 	{
@@ -74,10 +86,12 @@ public class GlobalPreferencesPresenter implements Presenter
 		Button getBtnSave();
 	}  
 
-	public GlobalPreferencesPresenter(HelloServiceAsync rpcService, HandlerManager eventBus, Display view) 
+	public GlobalPreferencesPresenter(HelloServiceAsync rpcService, HandlerManager eventBus, UserEntity loggedInUser, Display view) 
 	{
 		this.display = view;
 		this.rpcService = rpcService;
+		this.eventBus = eventBus;
+		this.user = loggedInUser;
 	}
 
 	public void go(HasWidgets container) 
@@ -148,7 +162,35 @@ public class GlobalPreferencesPresenter implements Presenter
 					}
 					display.getSplitPanel().setRightWidget(editRegistration);
 					break;
+					
+				case ApplicationConstants.DASHBOARD:  
+					if(dashboardSelection == null){
+						dashboardSelection = new DashboardPreferences();
+						dashboardSelection.updateFieldsWithAlreadySavedPreferences(alreadySavedGlobalPreferencesEntity);
+					
+					}
+					display.getSplitPanel().setRightWidget(dashboardSelection);
+					break;
+					
+				case ApplicationConstants.LOGO:  
+					if(logoPreferences == null){
+						logoPreferences = new LogoPreferences();
+						logoPreferences.updateFieldsWithAlreadySavedPreferences(alreadySavedGlobalPreferencesEntity);
+					
+					}
+					display.getSplitPanel().setRightWidget(logoPreferences);
+					break;
+					
+				case ApplicationConstants.MENUS:  
+					if(headerMenuPreferences == null){
+						headerMenuPreferences = new HeaderMenuPreferences();
+						headerMenuPreferences.updateFieldsWithAlreadySavedPreferences(alreadySavedGlobalPreferencesEntity);
+					
+					}
+					display.getSplitPanel().setRightWidget(headerMenuPreferences);
+					break;
 				}	
+				
 			}
 		});
 	}
@@ -168,7 +210,7 @@ public class GlobalPreferencesPresenter implements Presenter
 
 	}
 
-	private void saveGlobalPreferences(GlobalPreferencesEntity globalPreferencesEntity) {
+	private void saveGlobalPreferences(final GlobalPreferencesEntity globalPreferencesEntity) {
 		if(viewPlan!=null){
 			globalPreferencesEntity.getMyAccountPreferencesId().setShowPaymentDetails(viewPlan.getPaymentDetails().isChecked());
 			globalPreferencesEntity.getMyAccountPreferencesId().setViewPaymentTerms(viewPlan.getCheckBoxPaymentPlan().isChecked());
@@ -195,6 +237,21 @@ public class GlobalPreferencesPresenter implements Presenter
 			globalPreferencesEntity.getMyAccountPreferencesId().setEditRegPassword(editRegistration.getCheckPassword().isChecked());
 			globalPreferencesEntity.getMyAccountPreferencesId().setEditRegCloseAccount(editRegistration.getCheckCloseAccount().isChecked());
 			
+		}if(dashboardSelection!=null){
+			globalPreferencesEntity.setPanelTypeAccordion(dashboardSelection.getCheckAccordion().isChecked());
+			globalPreferencesEntity.setPanelTypeDashboard(dashboardSelection.getCheckDashboard().isChecked());	
+			globalPreferencesEntity.setPanelTypePortlet(dashboardSelection.getCheckPortlet().isChecked());	
+		}if(logoPreferences!=null){
+			globalPreferencesEntity.setLogoUrl(logoPreferences.getAttachmentPanel().getLogoUrl());
+			try{
+			globalPreferencesEntity.setLogoHeight(Integer.parseInt(logoPreferences.getTxtHeight().getText()));
+			globalPreferencesEntity.setLogoWidth(Integer.parseInt(logoPreferences.getTxtWidth().getText()));
+			}catch(Exception ex){Window.alert("Logo's Height/width should be a number");}
+		}if(headerMenuPreferences!=null){
+//			globalPreferencesEntity.getHeaderMenuPreferencesId().setAboutUs(headerMenuPreferences.getCheckAboutUs().isChecked());
+//			globalPreferencesEntity.getHeaderMenuPreferencesId().setContactUs(headerMenuPreferences.getCheckContactUs().isChecked());
+//			globalPreferencesEntity.getHeaderMenuPreferencesId().setHome(headerMenuPreferences.getCheckHome().isChecked());
+//			
 		}
 		
 		display.getBtnSave().addStyleName("loading-pulse");
@@ -209,11 +266,20 @@ public class GlobalPreferencesPresenter implements Presenter
 			@Override
 			public void onSuccess(String result) {
 				new DisplayAlert(result);
-				History.back();
 				display.getBtnSave().removeStyleName("loading-pulse");
+				eventBus.fireEvent(new MainEvent(user, globalPreferencesEntity));
+				setHeader(user, globalPreferencesEntity);
 			}
 		});
 
+	}
+	
+	private void setHeader(UserEntity user, GlobalPreferencesEntity globalPreferences) {
+		HeaderView headerView = new HeaderView();
+		HeaderPresenter headerPresenter = new HeaderPresenter(rpcService, eventBus, headerView, user, globalPreferences);
+		HasWidgets container = RootPanel.get("headerContainer");
+		container.clear();
+		headerPresenter.go(container);
 	}
 
 	private void fetchExistingGlobalPreferences() {

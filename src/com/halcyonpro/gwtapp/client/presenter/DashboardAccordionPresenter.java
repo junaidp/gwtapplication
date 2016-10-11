@@ -27,10 +27,14 @@
  *******************************************************************************/
 package com.halcyonpro.gwtapp.client.presenter;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
 import com.halcyonpro.gwtapp.client.HelloServiceAsync;
+import com.halcyonpro.gwtapp.client.event.MyAccountEvent;
+import com.halcyonpro.gwtapp.client.view.MyDashboard.MyAccountPanel;
 
 // This class manages the Functionality of dashboard accordion
 public class DashboardAccordionPresenter implements Presenter 
@@ -38,15 +42,18 @@ public class DashboardAccordionPresenter implements Presenter
 {
 	
 	private final Display display;
+	private final HandlerManager eventBus;
 
 	public interface Display 
 	{
 		Widget asWidget();
+		MyAccountPanel getMyAccount();
 		}  
 
 	public DashboardAccordionPresenter(HelloServiceAsync rpcService, HandlerManager eventBus, Display view) 
 	{
 		this.display = view;
+		this.eventBus = eventBus;
 	}
 
 	public void go(HasWidgets container) 
@@ -65,6 +72,12 @@ public class DashboardAccordionPresenter implements Presenter
 	@Override
 	public void setHandlers() {
 		
+		display.getMyAccount().getPanel().addClickHandler(new ClickHandler(){
+
+			@Override
+			public void onClick(ClickEvent event) {
+				eventBus.fireEvent(new MyAccountEvent());
+			}});
 	}
 	
 }

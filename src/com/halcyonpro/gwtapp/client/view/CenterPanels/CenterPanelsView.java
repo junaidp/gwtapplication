@@ -68,4 +68,8 @@ public class CenterPanelsView extends FlowPanel {
 		return panel;
 	}
 
+	public Label getHeading() {
+		return heading;
+	}
+
 }

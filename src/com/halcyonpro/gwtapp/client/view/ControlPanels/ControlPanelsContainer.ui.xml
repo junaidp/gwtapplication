@@ -11,7 +11,7 @@
 			<table>
 				<tr>
 					<td>
-						<g:SimplePanel>
+						<g:SimplePanel ui:field="dashboardContainer">
 						<g:HTMLPanel>
 						<div class="metro-tile metro-tile-dashboard">
 						<div id="content"></div>	
@@ -23,7 +23,7 @@
 
 					</td>
 					<td>
-					<g:SimplePanel>
+					<g:SimplePanel ui:field="accordionContainer">
 						<g:HTMLPanel>
 						<div class="metro-tile metro-tile-small metro-tile-accordion">
 						<div id="content"></div>	
@@ -41,7 +41,7 @@
 			<table>
 				<tr>
 					<td>
-					<g:SimplePanel>
+					<g:SimplePanel ui:field="portalContainer">
 						<g:HTMLPanel>
 						<div class="metro-tile metro-tile-small metro-tile-portal">
 						<div id="content"></div>
@@ -52,7 +52,7 @@
 						</g:SimplePanel>
 					</td>
 						<td>
-						<g:SimplePanel>
+						<g:SimplePanel ui:field="searchContainer">
 						<g:HTMLPanel>
 						
 						<div class="metro-tile metro-tile-msg">
@@ -64,7 +64,7 @@
 						</g:SimplePanel>
 					</td>
 					<td>
-						<g:SimplePanel>
+						<g:SimplePanel ui:field="intelligenceContainer">
 						<g:HTMLPanel>
 						<div class="metro-tile metro-tile-small metro-tile-dropbox">
 						<div id="content"></div>

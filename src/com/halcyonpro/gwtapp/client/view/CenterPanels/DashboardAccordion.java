@@ -29,9 +29,11 @@ package com.halcyonpro.gwtapp.client.view.CenterPanels;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import com.halcyonpro.gwtapp.client.presenter.DashboardAccordionPresenter.Display;
+import com.halcyonpro.gwtapp.client.view.MyDashboard.MyAccountPanel;
 
 // This class is a View for Dashboard Accordion on the main screen
 public class DashboardAccordion extends Composite implements Display {
@@ -43,6 +45,9 @@ public class DashboardAccordion extends Composite implements Display {
 			UiBinder<Widget, DashboardAccordion> {
 	}
 	
+	@UiField
+	MyAccountPanel myAccount;
+	
 	public DashboardAccordion() {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
@@ -50,6 +55,11 @@ public class DashboardAccordion extends Composite implements Display {
 	
 	public DashboardAccordion(String firstName) {
 		initWidget(uiBinder.createAndBindUi(this));
+	}
+
+
+	public MyAccountPanel getMyAccount() {
+		return myAccount;
 	}
 
 

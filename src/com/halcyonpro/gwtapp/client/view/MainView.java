@@ -71,7 +71,7 @@ public class MainView extends Composite implements Display{
 		initWidget(uiBinder.createAndBindUi(this));
 		this.loggedInUser = loggedInUser;
 		lblWelcome.setText(loggedInUser.getUserName());
-
+		
 	}
 
 	public ControlPanelsContainer getControlPanelContainer() {

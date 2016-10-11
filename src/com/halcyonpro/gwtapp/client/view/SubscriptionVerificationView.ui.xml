@@ -18,7 +18,7 @@
 			<div style="padding:5px; padding-top:5px">
 				<g:TextBox styleName="input-control text" ui:field="email" text="admin@email.com">
 				</g:TextBox>
-				<g:Button ui:field="submit" styleName="button primary">Verify</g:Button>
+				<g:Button ui:field="submit" styleName="w3-btn w3-theme">Verify</g:Button>
 				<div style="padding:25px">
 					<g:Anchor styleName="hover" ui:field="registerAccount">Register new account</g:Anchor>
 

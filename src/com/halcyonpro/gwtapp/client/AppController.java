@@ -70,6 +70,7 @@ import com.halcyonpro.gwtapp.client.presenter.BeanFieldsEditorPresenter;
 import com.halcyonpro.gwtapp.client.presenter.BindingsPresenter;
 import com.halcyonpro.gwtapp.client.presenter.CreatePasswordPresenter;
 import com.halcyonpro.gwtapp.client.presenter.DashboardAccordionPresenter;
+import com.halcyonpro.gwtapp.client.presenter.DashboardPortalPresenter;
 import com.halcyonpro.gwtapp.client.presenter.DashboardPresenter;
 import com.halcyonpro.gwtapp.client.presenter.DownloadJsonPresenter;
 import com.halcyonpro.gwtapp.client.presenter.FileUploadPresenter;
@@ -105,6 +106,7 @@ import com.halcyonpro.gwtapp.client.view.ManageUserView;
 import com.halcyonpro.gwtapp.client.view.RegistrationView;
 import com.halcyonpro.gwtapp.client.view.SubscriptionVerificationView;
 import com.halcyonpro.gwtapp.client.view.CenterPanels.DashboardAccordion;
+import com.halcyonpro.gwtapp.client.view.CenterPanels.DashboardPortalView;
 import com.halcyonpro.gwtapp.client.view.CenterPanels.DashboardView;
 import com.halcyonpro.gwtapp.client.view.CenterPanels.SearchDataView;
 import com.halcyonpro.gwtapp.client.view.MyDashboard.MyAccountViews.MyAccountView;
@@ -289,7 +291,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 			}
 
 			if (token.equals(ApplicationConstants.TOKEN_MAIN)) {
-				presenter = new MainPresenter(rpcService, eventBus, new MainView(loggedInUser));
+				presenter = new MainPresenter(rpcService, eventBus, globalPreferencesEntity, new MainView(loggedInUser));
 
 				if (presenter != null) {
 					presenter.go(container);
@@ -321,14 +323,14 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 				}
 			}
 
-			//			if (token.equals(ApplicationConstants.TOKEN_DASHBOARD_PORTAL)) {
-			//				presenter = new DashboardPortalPresenter(rpcService, eventBus, new DashboardPortalView());
-			//				if (presenter != null) {
-			////					setContainer(center);
-			//					setContainer(container);
-			//					presenter.go(container);
-			//				}
-			//			}
+						if (token.equals(ApplicationConstants.TOKEN_DASHBOARD_PORTAL)) {
+							presenter = new DashboardPortalPresenter(rpcService, eventBus, new DashboardPortalView());
+							if (presenter != null) {
+			//					setContainer(center);
+								setContainer(container);
+								presenter.go(container);
+							}
+						}
 
 			if (token.equals(ApplicationConstants.TOKEN_SEARCHDATA)) {
 				presenter = new SearchDataPresenter(rpcService, eventBus, new SearchDataView());
@@ -356,7 +358,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 			}
 
 			if (token.equals(ApplicationConstants.TOKEN_GLOBAL_PREFERENCES)) {
-				presenter = new GlobalPreferencesPresenter(rpcService, eventBus, new GlobalPreferencesView());
+				presenter = new GlobalPreferencesPresenter(rpcService, eventBus, loggedInUser, new GlobalPreferencesView());
 				//				presenter = new GlobalPreferencesPresenter(rpcService, eventBus, new GlobalPreferencesXmlView());
 
 				if (presenter != null) {

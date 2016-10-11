@@ -15,7 +15,7 @@
 						<g:Label styleName="controlPanelHeadings">My Account</g:Label>
 						
 					</g:customHeader>
-					<M:MyAccountPanel></M:MyAccountPanel>
+					<M:MyAccountPanel ui:field="myAccount"></M:MyAccountPanel>
 				</g:stack>
 				<g:stack>
 					<g:customHeader size='33'>

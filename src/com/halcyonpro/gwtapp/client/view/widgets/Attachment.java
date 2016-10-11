@@ -42,7 +42,10 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.FormPanel;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.halcyonpro.gwtapp.client.HelloService;
@@ -105,6 +108,48 @@ public class Attachment extends VerticalPanel {
 		this.form = form;
 	}
 	
+//	public void displayUploadedFiles(){
+//		HelloServiceAsync rpcService = GWT.create(HelloService.class);
+//		final LoadingPopup loadingPopup = new LoadingPopup();
+//		loadingPopup.display();
+//		rpcService.readUploadedFiles(new AsyncCallback<ArrayList<String>>() {
+//			
+//			@Override
+//			public void onSuccess(ArrayList<String> result) {
+//				if(loadingPopup!=null){
+//					loadingPopup.remove();
+//				}
+//				Label lblFile = new Label("Already Uploaded files");
+//				vpnlFileNames.add(lblFile);
+//				for(int i=0; i< result.size(); i++){
+//					final Anchor lbl = new Anchor();
+//					lbl.setText(result.get(i));
+//					vpnlFileNames.add(lbl);
+//					lbl.addStyleName("hover");
+//					
+//					lbl.addClickHandler(new ClickHandler() {
+//						
+//						@Override
+//						public void onClick(ClickEvent event) {
+//							Window.open(GWT.getHostPageBaseURL() + "fileuploads/"+lbl.getText(), "_blank", null);
+//
+//						}
+//					});
+//				}
+//				
+//				add(vpnlFileNames);
+//			}
+//			
+//			@Override
+//			public void onFailure(Throwable caught) {
+//				if(loadingPopup!=null){
+//					loadingPopup.remove();
+//				}
+//				Window.alert("reading uploaded files Failed:"+ caught.getLocalizedMessage());
+//			}
+//		});
+//	}
+	
 	public void displayUploadedFiles(){
 		HelloServiceAsync rpcService = GWT.create(HelloService.class);
 		final LoadingPopup loadingPopup = new LoadingPopup();
@@ -117,25 +162,62 @@ public class Attachment extends VerticalPanel {
 					loadingPopup.remove();
 				}
 				Label lblFile = new Label("Already Uploaded files");
+	
+				HorizontalPanel contentRow = new HorizontalPanel();
+				
+				vpnlFileNames.setWidth("100%");
+				vpnlFileNames.setSpacing(50);
+				setWidth("100%");
+				vpnlFileNames.clear();
 				vpnlFileNames.add(lblFile);
-				for(int i=0; i< result.size(); i++){
-					final Anchor lbl = new Anchor();
-					lbl.setText(result.get(i));
-					vpnlFileNames.add(lbl);
-					lbl.addStyleName("hover");
-					
-					lbl.addClickHandler(new ClickHandler() {
-						
-						@Override
-						public void onClick(ClickEvent event) {
-							Window.open(GWT.getHostPageBaseURL() + "fileuploads/"+lbl.getText(), "_blank", null);
+				vpnlFileNames.add(new HTML("&nbsp"));
+				vpnlFileNames.add(contentRow);
+				contentRow.setWidth("100%");
+				contentRow.setSpacing(10);
+				contentRow.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_LEFT);
+				ArrayList<Image> images = new ArrayList<Image>();
+				ArrayList<Label> files = new ArrayList<Label>();
 
-						}
-					});
+				
+				for (int x = 0; x < result.size(); x++) {
+					if(isTypeImage(result.get(x))){
+						final Image img = new Image();
+						img.setSize("75px", "75px");
+						img.setUrl("fileuploads/"+result.get(x));
+						img.addStyleName("hover");
+						images.add(img);
+					
+					}
+					else{
+						final Label lbl = new Label();
+						lbl.setText(result.get(x));
+						lbl.addStyleName("hover");
+						files.add(lbl);
+						
+					}
+				
+				
+				
+			}
+				for(int i=0; i< images.size(); i++){
+					contentRow = addImageThumbNail(images.get(i), contentRow);
+				}
+				for(int i=0; i< files.size(); i++){
+					if(i==0){
+					contentRow = new HorizontalPanel();
+					contentRow.setWidth("100%");
+					contentRow.setSpacing(10);
+					contentRow.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_LEFT);
+					vpnlFileNames.add(new HTML("&nbsp"));
+					vpnlFileNames.add(contentRow);
+					}
+					contentRow = addFileName(files.get(i), contentRow);
 				}
 				
 				add(vpnlFileNames);
 			}
+
+		
 			
 			@Override
 			public void onFailure(Throwable caught) {
@@ -146,4 +228,74 @@ public class Attachment extends VerticalPanel {
 			}
 		});
 	}
+	
+	private HorizontalPanel addImageThumbNail(final Image image,
+			HorizontalPanel contentRow) {
+		
+		final String url = image.getUrl();
+		
+			contentRow.add(image);
+			
+			if (contentRow.getWidgetCount() > 4) {// displaying not more than 3 images in a row.
+				contentRow = new HorizontalPanel();
+				contentRow.setWidth("100%");
+				contentRow.setSpacing(10);
+				contentRow.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_LEFT);
+				vpnlFileNames.add(new HTML("&nbsp"));
+				vpnlFileNames.add(contentRow);
+			}
+			
+			image.addClickHandler(new ClickHandler() {
+				
+				@Override
+				public void onClick(ClickEvent event) {
+//					System.out.println(img.getUrl());
+					Window.open(image.getUrl(), "_blank", null);
+				
+					
+
+				}
+			});
+		return contentRow;
+	}
+	
+	private HorizontalPanel addFileName(final Label file,
+			HorizontalPanel contentRow) {
+		
+		
+		
+			contentRow.add(file);
+		
+			if (contentRow.getWidgetCount() > 4) {// displaying not more than 3 images in a row.
+				contentRow = new HorizontalPanel();
+				contentRow.setWidth("100%");
+				contentRow.setSpacing(10);
+				contentRow.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_LEFT);
+				vpnlFileNames.add(new HTML("&nbsp"));
+				vpnlFileNames.add(contentRow);
+			}
+			
+			file.addClickHandler(new ClickHandler() {
+				
+				@Override
+				public void onClick(ClickEvent event) {
+					
+					Window.open(GWT.getHostPageBaseURL() + "fileuploads/"+file.getText(), "_blank", null);
+				
+				}
+			});
+		return contentRow;
+	}
+	
+	
+	
+	private boolean isTypeImage(String lowerFileName){
+		if (lowerFileName.endsWith(".jpg") || lowerFileName.endsWith(".gif") || lowerFileName.endsWith(".png") || lowerFileName.endsWith(".jpeg") || lowerFileName.endsWith(".tiff") || lowerFileName.endsWith(".bmp") || lowerFileName.endsWith(".svg")) {
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+
 }

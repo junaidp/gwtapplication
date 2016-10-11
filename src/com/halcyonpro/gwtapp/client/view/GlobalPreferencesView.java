@@ -65,6 +65,15 @@ public class GlobalPreferencesView extends Composite implements Display {
 	@UiField
 	TreeItem treeItemMyAccount;
 	@UiField
+	TreeItem treeItemLogo;
+	@UiField
+	TreeItem treeItemMain;
+	@UiField
+	TreeItem treeItemDashboard;
+	@UiField
+	TreeItem treeItemMenus;
+	
+	@UiField
 	HorizontalSplitPanel splitPanel;
 	@UiField
 	Button btnCancel;
@@ -79,6 +88,9 @@ public class GlobalPreferencesView extends Composite implements Display {
 		treeItemEditRegistration.setHTML(ApplicationConstants.EDIT_REGISTRATION);
 		treeItemUsage.setHTML(ApplicationConstants.VIEW_USAGE);
 		treeItemMyAccount.setHTML(ApplicationConstants.MY_ACCOUNT);
+		treeItemLogo.setHTML(ApplicationConstants.LOGO);
+		treeItemDashboard.setHTML(ApplicationConstants.DASHBOARD);
+		treeItemMenus.setHTML(ApplicationConstants.MENUS);
 		
 		splitPanel.setHeight(Window.getClientHeight()-150+"px");
 		splitPanel.setSplitPosition("200px");

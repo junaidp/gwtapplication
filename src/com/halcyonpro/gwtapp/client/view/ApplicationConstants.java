@@ -72,9 +72,13 @@ public class ApplicationConstants {
 		public static final String EDIT_REGISTRATION = "Edit Registration";
 		public static final String VIEW_USAGE = "View Usage";
 		public static final String MY_ACCOUNT = "My Account";
+		public static final String LOGO = "Logo";
 		public static final String GLOBALPREFERENCESUPDATED = "Global Preferences Updated";
 		public static final String MY_ACCOUNT_UPDATED = "Account updated";
 		public static final String USERNAME_EMAIL_SENT = "Username sent, please check your email. Thank you";
+		public static final String PANEL_DASHBOARD = "Dashboard";
+		public static final String PANEL_ACCORDION = "Accordion";
+		public static final String PANEL_PORTLET = "Portlet";
 		
 	
 	///FIELD VERIFIERS///
@@ -151,7 +155,10 @@ public class ApplicationConstants {
 	public static final String BEAN_CREATION_FOR_EDITOR = "editor";
 	public static final String UPLOADED_VIEWS__BINDING_NAME = "UploadedBindingClass";
 	public static final String NO_UI_CLASS_FOUND = "No layout available for this bean";
-	
+	public static final String DASHBOARD = "Dashboard";
+	public static final String MENUS = "Menus";
+	public static final String ENTER_WIDTH = "Enter width";
+	public static final String ENTER_HEIGHT = "Enter height";
 	
 	
 	

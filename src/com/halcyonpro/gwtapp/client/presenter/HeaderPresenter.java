@@ -32,6 +32,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.FocusPanel;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Widget;
@@ -55,7 +56,7 @@ public class HeaderPresenter implements Presenter
 	{
 		Widget asWidget();
 		Image getImgLogo();
-		FocusPanel getMenuHome();
+		HTML getMenuHome();
 		
 	}  
 
@@ -78,26 +79,14 @@ public class HeaderPresenter implements Presenter
 
 	public void bind() {
 		
-//		fetchUsersLogo();
-
+		updateLogoPreferences();
 	}
 
-//	private void fetchUsersLogo() {
-//		HelloServiceAsync rpcService = GWT.create(HelloService.class);
-//		rpcService.fetchLogo(new AsyncCallback<String>() {
-//			
-//			@Override
-//			public void onSuccess(String logoUrl) {
-//				display.getImgLogo().setUrl(logoUrl);
-//				
-//			}
-//			
-//			@Override
-//			public void onFailure(Throwable caught) {
-//				Window.alert("Fail fetchUsersLogo"+ caught.getLocalizedMessage());
-//			}
-//		});
-//	}
+	private void updateLogoPreferences() {
+		display.getImgLogo().setUrl(globalPreferencesEntity.getLogoUrl());
+		display.getImgLogo().setWidth(globalPreferencesEntity.getLogoWidth()+"px");
+		display.getImgLogo().setHeight(globalPreferencesEntity.getLogoHeight()+"px");
+	}
 
 	@Override
 	public void setHandlers() {

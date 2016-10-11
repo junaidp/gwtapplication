@@ -32,6 +32,7 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FocusPanel;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Widget;
 import com.halcyonpro.gwtapp.client.presenter.HeaderPresenter.Display;
@@ -48,10 +49,12 @@ public class HeaderView extends Composite implements Display {
 	@UiField
 	Image imgLogo;
 	@UiField
-	FocusPanel menuHome;
+	HTML menuHome;
+	
 	
 	public HeaderView() {
 		initWidget(uiBinder.createAndBindUi(this));
+	
 		
 	}
 	public Image getImgLogo() {
@@ -60,7 +63,7 @@ public class HeaderView extends Composite implements Display {
 		return imgLogo;
 	}
 	
-	public FocusPanel getMenuHome() {
+	public HTML getMenuHome() {
 		return menuHome;
 	}
 	

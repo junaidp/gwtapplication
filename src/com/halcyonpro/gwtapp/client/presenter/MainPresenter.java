@@ -45,6 +45,7 @@ import com.halcyonpro.gwtapp.client.event.JavaBeanEditorEvent;
 import com.halcyonpro.gwtapp.client.event.SearchDataEvent;
 import com.halcyonpro.gwtapp.client.view.ApplicationConstants;
 import com.halcyonpro.gwtapp.client.view.ControlPanels.ControlPanelsContainer;
+import com.halcyonpro.gwtapp.shared.entity.GlobalPreferencesEntity;
 import com.halcyonpro.gwtapp.shared.entity.UserEntity;
 
 // This class manages the Functionality of Main Page of this application , where user have the option to switch to different 
@@ -56,6 +57,7 @@ public class MainPresenter implements Presenter
 	
 	private final Display display;
 	private HandlerManager eventBus;
+	private GlobalPreferencesEntity globalPreferencesEntity;
 
 	public interface Display 
 	{
@@ -73,10 +75,11 @@ public class MainPresenter implements Presenter
 		Anchor getAncBindings();
 	}  
 
-	public MainPresenter(HelloServiceAsync rpcService, HandlerManager eventBus, Display view) 
+	public MainPresenter(HelloServiceAsync rpcService, HandlerManager eventBus, GlobalPreferencesEntity globalPreferencesEntity, Display view) 
 	{
 		this.display = view;
 		this.eventBus= eventBus;
+		this.globalPreferencesEntity = globalPreferencesEntity;
 	}
 
 	public void go(HasWidgets container) 
@@ -89,7 +92,7 @@ public class MainPresenter implements Presenter
 
 	private void bind() {
 		
-		
+		display.getControlPanelContainer().setGlobalPreferences(globalPreferencesEntity);
 	}
 
 	@Override
