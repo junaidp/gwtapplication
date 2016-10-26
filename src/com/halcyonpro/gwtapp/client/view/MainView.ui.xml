@@ -9,7 +9,7 @@
 		<div style="padding-left:90%">
 			
 			
-			<g:DisclosurePanel ui:field="discPanel">
+			<g:DisclosurePanel ui:field="discPanel" visible="false">
 				<g:customHeader>
 				<g:Label ui:field="lblWelcome" styleName="labelStyle hover"></g:Label></g:customHeader>
 				<g:VerticalPanel ui:field="discPanelContainer">

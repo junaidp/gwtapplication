@@ -57,10 +57,6 @@ import javax.persistence.Table;
 		@ManyToOne( fetch = FetchType.LAZY )
 		private MyAccountPreferencesEntity myAccountPreferencesId;
 		
-		@JoinColumn(name="headerpreferencesId")
-		@ManyToOne( fetch = FetchType.LAZY )
-		private HeaderPreferencesEntity headerpreferencesId;
-		
 		@Column(name="panelTypeDashboard")
 		private boolean panelTypeDashboard;
 		

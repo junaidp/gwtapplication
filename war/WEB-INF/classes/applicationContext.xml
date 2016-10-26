@@ -50,7 +50,6 @@ http://www.springframework.org/schema/beans/spring-beans-2.0.xsd"
 				</value>
 				<value>com.halcyonpro.gwtapp.shared.entity.GlobalPreferencesEntity
 				</value>
-				<value>com.halcyonpro.gwtapp.shared.entity.HeaderPreferencesEntity</value>
 				<value>com.halcyonpro.gwtapp.shared.entity.MyAccountEntity</value>
 				<value>com.halcyonpro.gwtapp.shared.entity.BeanObjects</value>
 				<value>com.halcyonpro.gwtapp.shared.entity.BindingsEntity</value>

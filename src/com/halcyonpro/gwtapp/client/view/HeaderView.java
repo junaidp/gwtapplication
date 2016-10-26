@@ -30,9 +30,11 @@ package com.halcyonpro.gwtapp.client.view;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FocusPanel;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Widget;
 import com.halcyonpro.gwtapp.client.presenter.HeaderPresenter.Display;
@@ -49,7 +51,16 @@ public class HeaderView extends Composite implements Display {
 	@UiField
 	Image imgLogo;
 	@UiField
-	HTML menuHome;
+	Anchor menuHome;
+	@UiField Anchor ancFileUpload;
+	@UiField Anchor ancJavaBeanEditor;
+	@UiField Anchor ancGlobalPreferences;
+	@UiField Anchor ancDownloadJson;
+	@UiField Anchor ancBeanData;
+	@UiField Anchor ancDynamicBeanEditor;
+	@UiField Anchor ancDynamicBeanData;
+	@UiField Anchor ancBindings;
+	@UiField Anchor menuUser;
 	
 	
 	public HeaderView() {
@@ -63,8 +74,36 @@ public class HeaderView extends Composite implements Display {
 		return imgLogo;
 	}
 	
-	public HTML getMenuHome() {
+	public Anchor getMenuHome() {
 		return menuHome;
+	}
+	public Anchor getAncJavaBeanEditor() {
+		return ancJavaBeanEditor;
+	}
+	public Anchor getAncGlobalPreferences() {
+		return ancGlobalPreferences;
+	}
+	public Anchor getAncDownloadJson() {
+		return ancDownloadJson;
+	}
+	public Anchor getAncBeanData() {
+		return ancBeanData;
+	}
+	public Anchor getAncDynamicBeanEditor() {
+		return ancDynamicBeanEditor;
+	}
+	public Anchor getAncDynamicBeanData() {
+		return ancDynamicBeanData;
+	}
+	public Anchor getAncBindings() {
+		return ancBindings;
+	}
+	@Override
+	public Anchor getFileUpload() {
+		return ancFileUpload;
+	}
+	public Anchor getMenuUser() {
+		return menuUser;
 	}
 	
 
