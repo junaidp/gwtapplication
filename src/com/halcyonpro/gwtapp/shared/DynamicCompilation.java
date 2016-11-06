@@ -53,7 +53,9 @@ public class DynamicCompilation {
 		int index = dir.lastIndexOf("\\");
 		dir = dir.substring(0, index);
 		String packageDir = myPath.replace(".","\\");
-		dir = dir+"\\src\\"+packageDir+"\\"+reflectedClassName+".java";
+		
+//		dir = dir+"\\src\\"+packageDir+"\\"+reflectedClassName+".java";
+		dir = dir+ApplicationConstants.TOMCAT_PATH+packageDir+"\\"+reflectedClassName+".java";
 		File sourceFile   = new File(dir);
 		FileWriter writer = new FileWriter(sourceFile);
 		Class myClass = Class.forName(className);

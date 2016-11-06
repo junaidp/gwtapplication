@@ -45,6 +45,7 @@ import java.util.Set;
 import java.util.TreeMap;
 
 
+
 // EclipseLink imports
 import org.eclipse.persistence.logging.SessionLog;
 import org.eclipse.persistence.sequencing.NativeSequence;
@@ -57,7 +58,9 @@ import org.eclipse.persistence.jpa.dynamic.JPADynamicHelper;
 import org.eclipse.persistence.dynamic.DynamicClassLoader;
 import org.eclipse.persistence.dynamic.DynamicEntity;
 import org.eclipse.persistence.dynamic.DynamicType;
-import org.json.JSONObject;
+//import org.json.JSONObject;
+
+import org.json.simple.JSONObject;
 
 import com.halcyonpro.gwtapp.client.view.ApplicationConstants;
 import com.halcyonpro.gwtapp.shared.dto.AddedBeanDTO;
@@ -269,11 +272,13 @@ public class DynHelper {
 
 	private void saveJson(JSONObject obj) throws Exception {
 		StringWriter out = new StringWriter();
-		obj.write(out);
+		obj.writeJSONString(out);
 		String jsonText = out.toString();
 		System.out.println("here: !");
 		String dir = System.getProperty("user.dir");
-		dir =dir +"\\src\\main\\java\\";
+//		dir =dir +"\\src\\main\\java\\";
+		dir =dir +ApplicationConstants.TOMCAT_PATH+"main\\java\\";
+		
 		File folder = new File(dir+File.separator+ApplicationConstants.DYNAMIC_BEANS_FOLDER+File.separator+"bean-"+beanName+".json");
 		File fold = new File(dir+File.separator+ApplicationConstants.DYNAMIC_BEANS_FOLDER);
 		fold.mkdir();

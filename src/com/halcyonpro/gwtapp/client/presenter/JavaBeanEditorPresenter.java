@@ -242,7 +242,7 @@ public class JavaBeanEditorPresenter implements Presenter
 					}
 				}
 				display.getListPackages().setValueMap(valueMapPackagesList);
-				display.getListPackages().setDefaultValue("Select Package");
+//				display.getListPackages().setDefaultValue("Select Package");
 
 			}
 		});

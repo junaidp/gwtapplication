@@ -37,7 +37,8 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import org.codehaus.jackson.map.ObjectMapper;
-import org.json.JSONObject;
+import org.json.simple.JSONObject;
+//import org.json.JSONObject;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -63,7 +64,8 @@ public class FilesCreationHelper {
 			int slashIndex = dir.lastIndexOf("\\");
 			dir = dir.substring(0, slashIndex+1);
 			String packageDir = addedBeanDTO.getPackageName().replace(".","\\");
-			dir =dir +"src\\"+ packageDir;
+//			dir =dir +"src\\"+ packageDir;
+			dir =dir +ApplicationConstants.TOMCAT_PATH+ packageDir;
 			File myPackage    = new File(dir);
 			myPackage.mkdir();
 			File sourceFile   = new File(dir+"\\"+addedBeanDTO.getBeanName()+".java");

@@ -21,7 +21,7 @@
 							<g:TextBox ui:field="txtEmail" styleName="input-control text" />
 						</div>
 						<div class="form-actions">
-							<g:Button styleName="button primary" ui:field="btnSubmit"> Submit </g:Button>
+							<g:Button styleName="button primary" ui:field="btnSubmit" width="100px"> Submit </g:Button>
 
 						</div>
 						

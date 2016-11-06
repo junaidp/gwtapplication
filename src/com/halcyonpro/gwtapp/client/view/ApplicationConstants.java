@@ -159,6 +159,7 @@ public class ApplicationConstants {
 	public static final String MENUS = "Menus";
 	public static final String ENTER_WIDTH = "Enter width";
 	public static final String ENTER_HEIGHT = "Enter height";
+	public static final String TOMCAT_PATH = "\\webapps\\gwtapp\\WEB-INF\\classes\\";
 	
 	
 	

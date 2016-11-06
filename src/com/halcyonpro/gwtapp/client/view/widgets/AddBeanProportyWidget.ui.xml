@@ -30,7 +30,7 @@
 					</g:DisclosurePanel>
 				</div>
 				<div style="padding-left:80%">
-					<g:Button styleName="button primary" height="30px"
+					<g:Button styleName="button primary" height="30px" width="80px"
 						ui:field="btnSave">Save</g:Button>
 				</div>
 

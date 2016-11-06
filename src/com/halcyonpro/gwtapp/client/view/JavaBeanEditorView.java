@@ -91,8 +91,8 @@ public class JavaBeanEditorView extends Composite implements Display {
 		panelDynamicForm.add(formPackages);
 		formPackages.setItems(listPackages);
 		listPackages.setShowTitle(false);
-		listPackages.setHeight(20);
-		listPackages.setPickerIconHeight(40);
+//		listPackages.setHeight(20);
+//		listPackages.setPickerIconHeight(40);
 		listPackages.setWidth(200);
 		addAnnotationsWidget.getLblHeading().setText(ApplicationConstants.CLASS_LEVEL_ANNOTATIONS);
 		

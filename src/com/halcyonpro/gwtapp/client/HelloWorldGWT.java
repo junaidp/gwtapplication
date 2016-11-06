@@ -34,7 +34,6 @@ import org.fusesource.restygwt.client.Defaults;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.HandlerManager;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;
 
 
@@ -45,6 +44,7 @@ public class HelloWorldGWT implements EntryPoint {
 
 //	private HelloServiceAsync rpcService;
 
+	@Override
 	public void onModuleLoad() {
 		Defaults.setDateFormat(null);
 		HelloServiceAsync rpcService = GWT.create(HelloService.class);
@@ -72,7 +72,5 @@ public class HelloWorldGWT implements EntryPoint {
 //		});
 
 	}
-
-
 
 }

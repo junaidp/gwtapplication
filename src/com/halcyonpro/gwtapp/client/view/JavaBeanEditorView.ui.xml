@@ -21,7 +21,7 @@
 						</div>
 						<div>
 							<g:Button ui:field="btnCreate" styleName="button primary"
-								height="30px"> Create </g:Button>
+								height="30px" width="100px"> Create </g:Button>
 						</div>
 						
 
@@ -64,7 +64,7 @@
 						</div>
 						<div style="padding-top:5px;padding-left:62%">
 							<g:Button ui:field="btnGenerate" styleName="button primary"
-								height="30px"> Create </g:Button>
+								height="30px" width="100px"> Create </g:Button>
 						</div>
 					</div>
 				</div>

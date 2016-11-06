@@ -1,384 +1,274 @@
 isc.DataSource.create({
-    allowAdvancedCriteria:true,
+    Constructor:"DataSource",
     ID:"DataSource",
     addGlobalId:"false",
-    Constructor:"DataSource",
-    fields:[
-        {
-            xmlAttribute:"true",
+    fields:{
+        ID:{
+            required:"true",
             type:"string",
-            name:"ID"
+            xmlAttribute:"true"
         },
-        {
+        inheritsFrom:{
             title:"Superclass",
-            type:"string",
-            name:"inheritsFrom"
+            type:"string"
         },
-        {
-            type:"boolean",
-            name:"useParentFieldOrder"
+        useParentFieldOrder:{
+            type:"boolean"
         },
-        {
-            type:"boolean",
-            name:"useLocalFieldsOnly"
+        useLocalFieldsOnly:{
+            type:"boolean"
         },
-        {
-            type:"boolean",
-            name:"restrictToParentFields"
+        restrictToParentFields:{
+            type:"boolean"
         },
-        {
-            xmlAttribute:"true",
+        dataFormat:{
             title:"DataFormat",
+            type:"string",
+            xmlAttribute:"true",
             valueMap:{
                 custom:"Custom Binding",
                 iscServer:"ISC Java Server",
                 json:"JSON Web Service",
                 xml:"XML / WSDL Web Service"
-            },
-            type:"string",
-            name:"dataFormat"
+            }
         },
-        {
-            xmlAttribute:"true",
+        noAutoFetch:{
             type:"boolean",
-            name:"useStrictJSON"
+            xmlAttribute:"true"
         },
-        {
-            xmlAttribute:"true",
-            type:"boolean",
-            name:"noAutoFetch"
-        },
-        {
-            xmlAttribute:"true",
+        serverType:{
             title:"Server Type",
+            type:"string",
+            xmlAttribute:"true",
             valueMap:{
                 custom:"Custom Server Binding",
                 sql:"ISC Server SQL Connectors"
-            },
-            type:"string",
-            name:"serverType"
+            }
         },
-        {
-            xmlAttribute:"true",
+        callbackParam:{
             title:"Callback Parameter",
             type:"string",
-            name:"callbackParam"
+            xmlAttribute:"true"
         },
-        {
-            type:"Object",
-            name:"requestProperties"
+        requestProperties:{
+            type:"Object"
         },
-        {
-            propertiesOnly:"true",
+        fields:{
             childTagName:"field",
-            type:"DataSourceField",
             multiple:"true",
-            name:"fields"
+            propertiesOnly:"true",
+            type:"DataSourceField",
+            uniqueProperty:"name"
         },
-        {
+        addGlobalId:{
             title:"Add Global ID",
-            type:"boolean",
-            name:"addGlobalId"
+            type:"boolean"
         },
-        {
-            type:"boolean",
-            name:"showPrompt"
+        showPrompt:{
+            type:"boolean"
         },
-        {
-            xmlAttribute:"true",
+        dataSourceVersion:{
             title:"DataSource Version",
-            visibility:"internal",
             type:"number",
-            name:"dataSourceVersion"
+            visibility:"internal",
+            xmlAttribute:"true"
         },
-        {
-            xmlAttribute:"true",
+        dbName:{
             title:"Database Name",
             type:"string",
-            name:"dbName"
+            xmlAttribute:"true"
         },
-        {
-            xmlAttribute:"true",
+        schema:{
             title:"Schema",
             type:"string",
-            name:"schema"
+            xmlAttribute:"true"
         },
-        {
-            xmlAttribute:"true",
+        tableName:{
             title:"Table Name",
             type:"string",
-            name:"tableName"
+            xmlAttribute:"true"
         },
-        {
-            type:"ServerObject",
-            name:"serverObject"
+        serverObject:{
+            type:"ServerObject"
         },
-        {
-            type:"OperationBinding",
+        operationBindings:{
             multiple:"true",
-            name:"operationBindings"
+            type:"OperationBinding"
         },
-        {
-            xmlAttribute:"true",
+        serviceNamespace:{
             type:"string",
-            name:"serviceNamespace"
+            xmlAttribute:"true"
         },
-        {
-            xmlAttribute:"true",
+        dataURL:{
             type:"string",
-            name:"dataURL"
+            xmlAttribute:"true"
         },
-        {
-            xmlAttribute:"true",
+        dataProtocol:{
             type:"string",
-            name:"dataProtocol"
+            xmlAttribute:"true"
         },
-        {
-            xmlAttribute:"true",
+        dataTransport:{
             type:"string",
-            name:"dataTransport"
+            xmlAttribute:"true"
         },
-        {
-            type:"Object",
-            name:"defaultParams"
+        defaultParams:{
+            type:"Object"
         },
-        {
-            type:"string",
-            name:"soapAction"
+        soapAction:{
+            type:"string"
         },
-        {
-            type:"string",
-            name:"jsonPrefix"
+        jsonPrefix:{
+            type:"string"
         },
-        {
-            type:"string",
-            name:"jsonSuffix"
+        jsonSuffix:{
+            type:"string"
         },
-        {
-            type:"string",
-            name:"messageTemplate"
+        messageTemplate:{
+            type:"string"
         },
-        {
-            visibility:"internal",
+        defaultCriteria:{
             propertiesOnly:"true",
             type:"Object",
-            name:"defaultCriteria"
+            visibility:"internal"
         },
-        {
-            visibility:"xmlBinding",
+        tagName:{
             type:"string",
-            name:"tagName"
+            visibility:"xmlBinding"
         },
-        {
-            type:"XPath",
-            name:"recordXPath"
+        recordXPath:{
+            type:"XPath"
         },
-        {
+        recordName:{
+            type:"string"
+        },
+        xmlNamespaces:{
+            type:"Object"
+        },
+        dropExtraFields:{
+            type:"boolean"
+        },
+        schemaNamespace:{
             type:"string",
-            name:"recordName"
-        },
-        {
-            type:"Object",
-            name:"xmlNamespaces"
-        },
-        {
-            type:"boolean",
-            name:"dropExtraFields"
-        },
-        {
-            xmlAttribute:"true",
             visibility:"internal",
-            type:"string",
-            name:"schemaNamespace"
+            xmlAttribute:"true"
         },
-        {
-            visibility:"internal",
+        mustQualify:{
             type:"boolean",
-            name:"mustQualify"
+            visibility:"internal"
         },
-        {
-            visibility:"internal",
+        xsdSimpleContent:{
             type:"boolean",
-            name:"xsdSimpleContent"
+            visibility:"internal"
         },
-        {
-            visibility:"internal",
+        xsdAnyElement:{
             type:"boolean",
-            name:"xsdAnyElement"
+            visibility:"internal"
         },
-        {
-            visibility:"internal",
+        xsdAbstract:{
             type:"boolean",
-            name:"xsdAbstract"
+            visibility:"internal"
         },
-        {
+        title:{
             title:"Title",
-            type:"string",
-            name:"title"
+            type:"string"
         },
-        {
+        titleField:{
             title:"Title Field",
-            type:"string",
-            name:"titleField"
+            type:"string"
         },
-        {
+        pluralTitle:{
             title:"Plural Title",
-            type:"string",
-            name:"pluralTitle"
+            type:"string"
         },
-        {
-            xmlAttribute:"true",
+        clientOnly:{
             title:"Client Only",
             type:"boolean",
-            name:"clientOnly"
+            xmlAttribute:"true"
         },
-        {
-            xmlAttribute:"true",
+        testFileName:{
             title:"Test File Name",
             type:"URL",
-            name:"testFileName"
+            xmlAttribute:"true"
         },
-        {
-            type:"Object",
+        testData:{
             multiple:"true",
-            name:"testData"
+            type:"Object"
         },
-        {
-            type:"Object",
+        types:{
             multiple:"true",
-            name:"cacheData"
-        },
-        {
-            xmlAttribute:"true",
-            type:"boolean",
-            name:"cacheAllData"
-        },
-        {
-            visibility:"internal",
             propertiesOnly:"true",
             type:"DataSourceField",
-            multiple:"true",
             uniqueProperty:"ID",
-            name:"types"
+            visibility:"internal"
         },
-        {
-            visibility:"internal",
-            type:"string",
+        groups:{
             multiple:"true",
-            name:"groups"
+            type:"string",
+            visibility:"internal"
         },
-        {
-            visibility:"internal",
+        methods:{
+            multiple:"true",
             type:"MethodDeclaration",
-            multiple:"true",
-            name:"methods"
+            visibility:"internal"
         },
-        {
+        showSuperClassActions:{
+            type:"boolean"
+        },
+        createStandalone:{
+            type:"boolean"
+        },
+        useFlatFields:{
+            type:"boolean"
+        },
+        showLocalFieldsOnly:{
             type:"boolean",
-            name:"showSuperClassActions"
+            xmlAttribute:"true"
         },
-        {
+        globalNamespaces:{
+            type:"Object"
+        },
+        autoDeriveSchema:{
             type:"boolean",
-            name:"createStandalone"
+            xmlAttribute:"true"
         },
-        {
+        useLocalValidators:{
+            type:"boolean"
+        },
+        autoDeriveTitles:{
+            type:"boolean"
+        },
+        qualifyColumnNames:{
             type:"boolean",
-            name:"useFlatFields"
+            xmlAttribute:"true"
         },
-        {
-            xmlAttribute:"true",
-            type:"boolean",
-            name:"showLocalFieldsOnly"
+        validateRelatedRecords:{
+            type:"boolean"
         },
-        {
-            type:"Object",
-            name:"globalNamespaces"
+        requiresAuthentication:{
+            type:"boolean"
         },
-        {
-            xmlAttribute:"true",
-            type:"boolean",
-            name:"autoDeriveSchema"
+        requiresRoles:{
+            type:"boolean"
         },
-        {
-            xmlAttribute:"true",
-            type:"boolean",
-            name:"autoDeriveFKs"
+        requires:{
+            type:"string"
         },
-        {
-            type:"boolean",
-            name:"useLocalValidators"
-        },
-        {
-            type:"boolean",
-            name:"autoDeriveTitles"
-        },
-        {
-            xmlAttribute:"true",
-            type:"boolean",
-            name:"qualifyColumnNames"
-        },
-        {
-            type:"boolean",
-            name:"validateRelatedRecords"
-        },
-        {
-            type:"boolean",
-            name:"requiresAuthentication"
-        },
-        {
-            type:"boolean",
-            name:"requiresRoles"
-        },
-        {
+        beanClassName:{
             type:"string",
-            name:"requires"
+            xmlAttribute:"true"
         },
-        {
-            xmlAttribute:"true",
-            type:"string",
-            name:"beanClassName"
-        },
-        {
-            xmlAttribute:"true",
+        autoJoinTransactions:{
             type:"boolean",
-            name:"autoJoinTransactions"
+            xmlAttribute:"true"
         },
-        {
-            type:"boolean",
-            name:"sparseUpdates"
+        sparseUpdates:{
+            type:"boolean"
         },
-        {
-            type:"boolean",
-            name:"noNullUpdates"
+        noNullUpdates:{
+            type:"boolean"
         },
-        {
-            type:"boolean",
-            name:"canExport"
-        },
-        {
-            type:"boolean",
-            name:"progressiveLoading"
-        },
-        {
-            type:"boolean",
-            name:"allowAdvancedCriteria"
-        },
-        {
-            type:"string",
-            name:"scriptImport"
-        },
-        {
-            idAllowed:"true",
-            type:"Object",
-            name:"script"
-        },
-        {
-            type:"string",
-            name:"groupBy"
-        },
-        {
-            type:"FieldFunction",
-            name:"fieldFunctions"
+        canExport:{
+            type:"boolean"
         }
-    ]
+    }
 })

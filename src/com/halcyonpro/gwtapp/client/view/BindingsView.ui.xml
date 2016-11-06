@@ -7,7 +7,7 @@
 	</ui:style>
 	<g:HTMLPanel>
 		<div style="padding-left:45%; padding-top:1%">
-			<g:Button styleName="button primary" ui:field="btnAddBinding">Add Binding</g:Button>
+			<g:Button styleName="button primary" ui:field="btnAddBinding" width="100px">Add Binding</g:Button>
 		</div>
 		<div style="padding-left:28%">
 

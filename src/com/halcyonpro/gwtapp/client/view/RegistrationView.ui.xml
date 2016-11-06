@@ -64,7 +64,7 @@
 
 			<div style="padding-left:350px; padding-top:5px">
 
-				<g:Button styleName="inLine  button primary" ui:field="btnSubmit">
+				<g:Button styleName="inLine  button primary" ui:field="btnSubmit" width="100px">
 					Submit </g:Button>
 			</div>
 

@@ -37,7 +37,7 @@
 		
 
 		<div style="padding:5px">
-		<g:Button styleName="button primary" ui:field="btnUpdate"> update </g:Button>
+		<g:Button styleName="button primary" ui:field="btnUpdate" width="80px"> update </g:Button>
 		</div>
 		</div>
 	</g:HTMLPanel>

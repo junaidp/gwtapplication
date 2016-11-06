@@ -28,6 +28,7 @@
 package com.halcyonpro.gwtapp.client;
 
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerManager;
@@ -134,8 +135,6 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 	public AppController(HelloServiceAsync rpcService, HandlerManager eventBus) {
 		this.eventBus = eventBus;
 		this.rpcService = rpcService;
-
-
 		bind();
 	}
 

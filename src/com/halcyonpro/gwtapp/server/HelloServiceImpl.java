@@ -583,7 +583,9 @@ HelloService {
 		int slashIndex = dir.lastIndexOf("\\");
 		dir = dir.substring(0, slashIndex+1);
 		String packageDir = myPath.replace(".","\\");
-		dir =dir +"src\\"+ packageDir;
+//		dir =dir +"src\\"+ packageDir;
+		dir =dir +ApplicationConstants.TOMCAT_PATH+ packageDir;
+		
 		File myPackage    = new File(dir);
 		return myPackage;
 	}

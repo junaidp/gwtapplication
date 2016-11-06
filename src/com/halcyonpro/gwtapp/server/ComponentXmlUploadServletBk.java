@@ -45,6 +45,8 @@ import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import com.halcyonpro.gwtapp.client.view.ApplicationConstants;
+
 public class ComponentXmlUploadServletBk extends UploadAction {
 	
 	
@@ -198,7 +200,9 @@ public class ComponentXmlUploadServletBk extends UploadAction {
 		int slashIndex = dir.lastIndexOf("\\");
 		dir = dir.substring(0, slashIndex+1);
 		String packageDir = myPath.replace(".","\\");
-		dir =dir +"src\\"+ packageDir;
+//		dir =dir +"src\\"+ packageDir;
+		dir =dir +ApplicationConstants.TOMCAT_PATH+ packageDir;
+		
 		File myPackage    = new File(dir);
 		return myPackage;
 	}

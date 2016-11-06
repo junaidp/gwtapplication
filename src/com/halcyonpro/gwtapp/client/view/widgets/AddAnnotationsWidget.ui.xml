@@ -26,7 +26,7 @@
 			</div>
 
 			<div style="float:left; pdding-left:30%">
-				<g:Button ui:field="btnSaveAnnotation" styleName="button primary"
+				<g:Button ui:field="btnSaveAnnotation" styleName="button primary" width="80px"
 					height="20px">Save</g:Button>
 			</div>
 			<div>

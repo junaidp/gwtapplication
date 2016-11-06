@@ -1,146 +1,71 @@
 isc.DataSource.create({
-    allowAdvancedCriteria:true,
     ID:"Validator",
     addGlobalId:"false",
-    fields:[
-        {
-            type:"string",
-            name:"type"
+    fields:{
+        type:{
+            type:"string"
         },
-        {
-            type:"string",
-            name:"name"
+        stopIfFalse:{
+            type:"boolean"
         },
-        {
-            type:"string",
-            name:"description"
+        clientOnly:{
+            type:"boolean"
         },
-        {
-            type:"boolean",
-            name:"stopIfFalse"
+        errorMessage:{
+            type:"string"
         },
-        {
-            type:"boolean",
-            name:"stopOnError"
+        max:{
+            type:"float"
         },
-        {
-            type:"boolean",
-            name:"validateOnChange"
+        min:{
+            type:"float"
         },
-        {
-            type:"boolean",
-            name:"clientOnly"
+        exclusive:{
+            type:"boolean"
         },
-        {
-            type:"string",
-            name:"errorMessage"
+        mask:{
+            type:"regexp"
         },
-        {
-            type:"float",
-            name:"max"
+        transformTo:{
+            type:"regexp"
         },
-        {
-            type:"float",
-            name:"min"
+        precision:{
+            type:"integer"
         },
-        {
-            type:"boolean",
-            name:"exclusive"
+        expression:{
+            type:"string"
         },
-        {
-            type:"regexp",
-            name:"mask"
+        otherField:{
+            type:"string"
         },
-        {
-            type:"regexp",
-            name:"transformTo"
-        },
-        {
-            type:"integer",
-            name:"precision"
-        },
-        {
-            type:"string",
-            name:"expression"
-        },
-        {
-            type:"string",
-            name:"otherField"
-        },
-        {
-            type:"text",
+        list:{
             multiple:"true",
-            name:"list"
+            type:"text"
         },
-        {
-            type:"ValueMap",
-            name:"valueMap"
+        valueMap:{
+            type:"ValueMap"
         },
-        {
-            type:"text",
-            name:"substring"
+        substring:{
+            type:"text"
         },
-        {
-            type:"text",
-            name:"operator"
+        operator:{
+            type:"text"
         },
-        {
-            type:"integer",
-            name:"count"
+        count:{
+            type:"integer"
         },
-        {
-            type:"AdvancedCriteria",
-            name:"applyWhen"
+        applyWhen:{
+            type:"AdvancedCriteria"
         },
-        {
-            type:"string",
+        dependentFields:{
             multiple:"true",
-            name:"dependentFields"
+            type:"string"
         },
-        {
-            type:"string",
-            name:"scriptImport"
+        serverCondition:{
+            type:"string"
         },
-        {
-            idAllowed:"true",
-            type:"Object",
-            name:"serverCondition"
-        },
-        {
-            type:"ServerObject",
-            name:"serverObject"
-        },
-        {
-            type:"string",
-            name:"fieldName"
-        },
-        {
-            type:"string",
-            name:"triggerEvent"
-        },
-        {
-            type:"string",
-            name:"message"
-        },
-        {
-            type:"string",
-            name:"severity"
-        },
-        {
-            type:"string",
-            name:"displayMode"
-        },
-        {
-            type:"integer",
-            name:"duration"
-        },
-        {
-            type:"string",
-            name:"formula"
-        },
-        {
-            type:"ValueMap",
-            name:"formulaVars"
+        serverObject:{
+            type:"ServerObject"
         }
-    ]
+    }
 })
