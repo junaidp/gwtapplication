@@ -25,7 +25,7 @@
 							</cellview:SimplePager>
 						</div>
 						<div style="padding-left:87%">
-							<g:Button ui:field="btnDeleteBindings" enabled="false" styleName="button danger" height="20px"> Delete </g:Button>
+							<g:Button ui:field="btnDeleteBindings" enabled="false" styleName="button danger" width="100px"> Delete </g:Button>
 						</div>
 					</g:HTMLPanel>
 				</g:VerticalPanel>

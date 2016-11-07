@@ -63,9 +63,11 @@ public class JavaBeanEditorView extends Composite implements Display {
 	@UiField
 	TextBox txtBeanName;
 	@UiField
-	ListBox listBeans;
+	TextBox textPackageName;
 	@UiField
-	HTMLPanel panelDynamicForm;
+	ListBox listBeans;
+//	@UiField
+//	HTMLPanel panelDynamicForm;
 	@UiField
 	AddBeanProportyWidget addBeanPropertyWidget;
 	@UiField
@@ -78,7 +80,7 @@ public class JavaBeanEditorView extends Composite implements Display {
 	Anchor btnAssignEditors;
 	private String beanType;
 	
-	private ComboBoxItem listPackages = new ComboBoxItem();
+//	private ComboBoxItem listPackages = new ComboBoxItem();
 	
 	
 	public JavaBeanEditorView(String beanType) {
@@ -87,13 +89,14 @@ public class JavaBeanEditorView extends Composite implements Display {
 		txtBeanName.getElement().setPropertyString("placeholder", ApplicationConstants.ENTER_BEANNAME);
 		listAddObject.addItem(ApplicationConstants.ADDOBJECT);
 		listBeans.addItem(ApplicationConstants.SELECT_FOR_REFLECTION);
-		DynamicForm formPackages= new DynamicForm();
-		panelDynamicForm.add(formPackages);
-		formPackages.setItems(listPackages);
-		listPackages.setShowTitle(false);
+		textPackageName.setText(ApplicationConstants.DEFAULT_PACKAGE);
+//		DynamicForm formPackages= new DynamicForm();
+//		panelDynamicForm.add(formPackages);
+//		formPackages.setItems(listPackages);
+//		listPackages.setShowTitle(false);
 //		listPackages.setHeight(20);
 //		listPackages.setPickerIconHeight(40);
-		listPackages.setWidth(200);
+//		listPackages.setWidth(200);
 		addAnnotationsWidget.getLblHeading().setText(ApplicationConstants.CLASS_LEVEL_ANNOTATIONS);
 		
 	}
@@ -123,10 +126,6 @@ public class JavaBeanEditorView extends Composite implements Display {
 		return listBeans;
 	}
 
-	public ComboBoxItem getListPackages() {
-		return listPackages;
-	}
-
 	public AddBeanProportyWidget getAddBeanPropertyWidget() {
 		return addBeanPropertyWidget;
 	}
@@ -149,6 +148,10 @@ public class JavaBeanEditorView extends Composite implements Display {
 
 	public String getBeanType() {
 		return beanType;
+	}
+
+	public TextBox getTextPackageName() {
+		return textPackageName;
 	}
 
 	

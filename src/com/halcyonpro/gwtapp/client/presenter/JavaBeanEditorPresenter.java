@@ -87,7 +87,8 @@ public class JavaBeanEditorPresenter implements Presenter
 		Button getBtnAddProperty();
 		Button getBtnCreate();
 		TextBox getTxtBeanName();
-		ComboBoxItem getListPackages();
+//		ComboBoxItem getListPackages();
+		TextBox getTextPackageName();
 		ListBox getListBeans();
 		void clearFields();
 		AddBeanProportyWidget getAddBeanPropertyWidget();
@@ -234,14 +235,14 @@ public class JavaBeanEditorPresenter implements Presenter
 
 			@Override
 			public void onSuccess(ArrayList<String> result) {
-				display.getListPackages().clearValue();
+//				display.getListPackages().clearValue();
 
 				for(int i=0; i< result.size(); i++){
 					if(result.get(i).startsWith(ApplicationConstants.DEFAULT_PACKAGE)){
 						valueMapPackagesList.put(result.get(i), result.get(i));
 					}
 				}
-				display.getListPackages().setValueMap(valueMapPackagesList);
+//				display.getListPackages().setValueMap(valueMapPackagesList);
 //				display.getListPackages().setDefaultValue("Select Package");
 
 			}
@@ -309,22 +310,37 @@ public class JavaBeanEditorPresenter implements Presenter
 			}
 		});
 
-		display.getListPackages().addKeyUpHandler(new KeyUpHandler() {
-
+//		display.getTextPackageName().addKeyUpHandler(new KeyUpHandler() {
+//
+//			@Override
+//			public void onKeyUp(KeyUpEvent event) {
+//
+//				//				if(!display.getListPackages().getDisplayValue().startsWith(ApplicationConstants.DEFAULT_PACKAGE)){
+//				if(!validDefaultPackage(display.getListPackages().getDisplayValue())){
+//					event.cancel();
+//					try{
+//						String previousValue = display.getListPackages().getDisplayValue().substring(0, display.getListPackages().getDisplayValue().length()-1);
+//						display.getListPackages().setValue(previousValue);
+//					}catch(Exception ex){}
+//				}
+//			}
+//		});
+		
+		
+		display.getTextPackageName().addKeyUpHandler(new com.google.gwt.event.dom.client.KeyUpHandler() {
+			
 			@Override
-			public void onKeyUp(KeyUpEvent event) {
-
-				//				if(!display.getListPackages().getDisplayValue().startsWith(ApplicationConstants.DEFAULT_PACKAGE)){
-				if(!validDefaultPackage(display.getListPackages().getDisplayValue())){
-					event.cancel();
+			public void onKeyUp(com.google.gwt.event.dom.client.KeyUpEvent event) {
+				if(!validDefaultPackage(display.getTextPackageName().getText())){
+					event.preventDefault();
 					try{
-						String previousValue = display.getListPackages().getDisplayValue().substring(0, display.getListPackages().getDisplayValue().length()-1);
-						display.getListPackages().setValue(previousValue);
+						String previousValue = display.getTextPackageName().getText().substring(0, display.getTextPackageName().getText().length()-1);
+						display.getTextPackageName().setValue(previousValue);
 					}catch(Exception ex){}
 				}
 			}
 		});
-
+		
 		display.getListAddObject().addChangeHandler(new ChangeHandler() {
 
 			@Override
@@ -354,9 +370,9 @@ public class JavaBeanEditorPresenter implements Presenter
 
 			@Override
 			public void onClick(ClickEvent event) {
-				if(display.getListPackages().getDisplayValue().equals(ApplicationConstants.SELECT_PACKAGE)
-						|| ! display.getListPackages().getDisplayValue().startsWith(ApplicationConstants.DEFAULT_PACKAGE)||
-						!validPackage(display.getListPackages().getDisplayValue())){
+				if(display.getTextPackageName().getText().equals(ApplicationConstants.SELECT_PACKAGE)
+						|| ! display.getTextPackageName().getText().startsWith(ApplicationConstants.DEFAULT_PACKAGE)||
+						!validPackage(display.getTextPackageName().getText())){
 					SC.warn(ApplicationConstants.PACKAGE_NOT_SELECTED);
 				}else if(display.getTxtBeanName().getText().trim().length()<1 ||
 						!validClass(display.getTxtBeanName().getText())){
@@ -795,7 +811,8 @@ public class JavaBeanEditorPresenter implements Presenter
 		AddedBeanDTO addedBeanDTO = new AddedBeanDTO();
 		addedBeanDTO.setListProperties(listAddedBeanPropertyDTO);
 		addedBeanDTO.setBeanName(display.getTxtBeanName().getText());
-		addedBeanDTO.setPackageName(display.getListPackages().getDisplayValue());
+//		addedBeanDTO.setPackageName(display.getListPackages().getDisplayValue());
+		addedBeanDTO.setPackageName(display.getTextPackageName().getText());
 		addedBeanDTO.setListAnnotationsDTO(display.getAddAnnotationsWidget().getListAnnotationsDTOs());
 		addImports();
 		addedBeanDTO.setListImports(listImports);

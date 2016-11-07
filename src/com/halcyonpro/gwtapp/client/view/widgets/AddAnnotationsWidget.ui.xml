@@ -6,7 +6,7 @@
 	</ui:style>
 	<g:HTMLPanel>
 		<div
-			style="border:groove;border-color:white;padding:10px;border-radius:5px; height:115px; width:500px">
+			style="border:groove;border-color:white;padding:10px;border-radius:5px; height:115px; width:480px">
 			<div style="padding-bottom:5px;padding-left:25%">
 				<g:Label styleName="blue" ui:field="lblHeading">
 				</g:Label>

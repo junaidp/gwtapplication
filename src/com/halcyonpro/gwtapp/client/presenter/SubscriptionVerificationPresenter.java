@@ -108,6 +108,7 @@ public class SubscriptionVerificationPresenter implements Presenter
 			public void onClick(ClickEvent event) {
 //				final LoadingPopup loadingPopup = new LoadingPopup();
 //				loadingPopup.display();
+				display.getSubmit().addStyleName("loading-pulse");
 				
 				Defaults.setServiceRoot(GWT.getHostPageBaseURL());
 				RestClient client = GWT.create(RestClient.class);

@@ -17,7 +17,8 @@
 							<g:Label styleName="blue"> Create Bean </g:Label>
 						</div>
 						<div style="float:left;padding-right:23%">
-							<g:HTMLPanel ui:field="panelDynamicForm"></g:HTMLPanel>
+							<!-- <g:HTMLPanel ui:field="panelDynamicForm"></g:HTMLPanel> -->
+							<g:TextBox ui:field="textPackageName" styleName="inLine"></g:TextBox>
 						</div>
 						<div>
 							<g:Button ui:field="btnCreate" styleName="button primary"

@@ -10,7 +10,7 @@
 		<div
 			style="padding:5px;background-color: #E8E8E8;box-shadow: 2px 2px 3px #C8C8C8;margin:10px;border-radius:5px">
 
-			<div style="padding-left:95%">
+			<div style="padding-left:95%; padding-bottom:10px;">
 				<g:Image ui:field="imgClose" url="images/close.jpg"></g:Image>
 			</div>
 			<div
