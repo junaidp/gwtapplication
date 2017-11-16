@@ -27,7 +27,7 @@
  *******************************************************************************/
 package com.halcyonpro.gwtapp.shared.utility;
 
-import com.halcyonpro.gwtapp.client.presenter.RegistrationPresenter.Display;
+import com.halcyonpro.gwtapp.client.registration.RegistrationPresenter.Display;
 import com.halcyonpro.gwtapp.client.view.ApplicationConstants;
 
 // Field verifier for Registration

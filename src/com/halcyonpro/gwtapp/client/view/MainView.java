@@ -36,8 +36,8 @@ import com.google.gwt.user.client.ui.DisclosurePanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.halcyonpro.gwtapp.client.dashboard.ControlPanels.ControlPanelsContainer;
 import com.halcyonpro.gwtapp.client.presenter.MainPresenter.Display;
-import com.halcyonpro.gwtapp.client.view.ControlPanels.ControlPanelsContainer;
 import com.halcyonpro.gwtapp.shared.entity.UserEntity;
 
 //This class manages the VIEW of Main Page of this application , where user have the option to switch to different 

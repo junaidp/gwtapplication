@@ -1,0 +1,46 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:M="urn:import:com.halcyonpro.gwtapp.client.dashboard.MyDashboard">
+	<ui:style>
+	.important {
+		font-weight: bold;
+	}
+	</ui:style>
+	<g:HTMLPanel>
+		<div>
+			<g:StackLayoutPanel unit='PX' width="410px"
+				height="440px">
+				<g:stack>
+					<g:customHeader size='33'>
+						<g:Label styleName="controlPanelHeadings">My Account</g:Label>
+						
+					</g:customHeader>
+					<M:MyAccountPanel ui:field="myAccount"></M:MyAccountPanel>
+				</g:stack>
+				<g:stack>
+					<g:customHeader size='33'>
+						<g:Label styleName="controlPanelHeadings">Configuration </g:Label>
+					</g:customHeader>
+							<M:ConfigurationView></M:ConfigurationView>
+			
+				</g:stack>
+				
+				<g:stack>
+					<g:customHeader size='33'>
+						<g:Label styleName="controlPanelHeadings">Run Time </g:Label>
+					</g:customHeader>
+					<M:RunTimeView></M:RunTimeView>
+				</g:stack>
+				
+				<g:stack>
+					<g:customHeader size='33'>
+						<g:Label styleName="controlPanelHeadings">Reports </g:Label>
+					</g:customHeader>
+					<M:ReportsView></M:ReportsView>
+				</g:stack>
+			</g:StackLayoutPanel>
+		</div>
+		
+		
+	</g:HTMLPanel>
+</ui:UiBinder> 

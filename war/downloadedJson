@@ -1,1 +1,1 @@
-{"id":"(int)","address":"(String)","name":"(String)","myAccount":"(MyAccountEntity)","user":"(UserEntity)"}
+{"id":"(int)","name":"(String)"}

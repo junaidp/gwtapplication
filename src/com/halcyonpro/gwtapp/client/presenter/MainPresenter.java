@@ -36,6 +36,7 @@ import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.halcyonpro.gwtapp.client.HelloServiceAsync;
+import com.halcyonpro.gwtapp.client.dashboard.ControlPanels.ControlPanelsContainer;
 import com.halcyonpro.gwtapp.client.event.DashboardAccordionEvent;
 import com.halcyonpro.gwtapp.client.event.DashboardEvent;
 import com.halcyonpro.gwtapp.client.event.DynamicBeanEditorEvent;
@@ -44,7 +45,6 @@ import com.halcyonpro.gwtapp.client.event.IntelligencePackEvent;
 import com.halcyonpro.gwtapp.client.event.JavaBeanEditorEvent;
 import com.halcyonpro.gwtapp.client.event.SearchDataEvent;
 import com.halcyonpro.gwtapp.client.view.ApplicationConstants;
-import com.halcyonpro.gwtapp.client.view.ControlPanels.ControlPanelsContainer;
 import com.halcyonpro.gwtapp.shared.entity.GlobalPreferencesEntity;
 import com.halcyonpro.gwtapp.shared.entity.UserEntity;
 
