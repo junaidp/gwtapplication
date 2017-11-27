@@ -1,4 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright (c) 2017  * Copyright (c) 2015 Sapient Arrow Technologies.
+    All rights reserved. This program and the accompanying materials
+    * are made available under the terms of the Affero GNU Public License
+    which accompanies this distribution, and is available at
+    https://en.wikipedia.org/wiki/Affero_General_Public_License
+     
+    Copyright:
+       Sapient Arrow Technologies llc
+     
+     This file is part of the Business Suite software of Sapient Arrowpro.net.
+     Copyright (C) 2012-2020 Sapient Arrowpro.net
+   
+     The primary contact email is support@Sapient Arrowpro.net
+   
+     Version: AGPL
+   
+     Sapient Arrow Technologies, Sapient Arrow Information Systems, Sapient Arrow along with their domain names,  
+     etc and the names Acuity, Ingenuity, Derivo, Colander etc are copyright of
+     Sapient Arrow llc and usage of these without prior permission of the owner is strictly prohibited
+      
+    The contents of this file may be used under the terms of
+     the Affero GNU General Public License Version (the "AGPL"),
+     A copy of the AGPL v2.1 can be obtained from https://en.wikipedia.org/wiki/Affero_General_Public_License
+     
+     AGPL, in essence, means that this software requires a commercial license for use in or as a commercial application
+ -->
+
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
               http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
@@ -14,7 +42,7 @@
         <init-param>
             <param-name>jersey.config.server.provider.packages</param-name>
             <param-value>
-               com.halcyonpro.gwtapp.server
+               com.sapientarrow.gwtapp.server
             </param-value>
         </init-param>
         <init-param>
@@ -36,7 +64,7 @@
   
   <servlet>
     <servlet-name>greetServlet</servlet-name>
-    <servlet-class>com.halcyonpro.gwtapp.server.HelloServiceImpl</servlet-class>
+    <servlet-class>com.sapientarrow.gwtapp.server.HelloServiceImpl</servlet-class>
   </servlet>
   
   <servlet-mapping>
@@ -68,17 +96,17 @@
   
    <servlet>
     <servlet-name>uploadServlet</servlet-name>
-    <servlet-class>com.halcyonpro.gwtapp.server.FileUploadServlet</servlet-class>
+    <servlet-class>com.sapientarrow.gwtapp.server.FileUploadServlet</servlet-class>
   </servlet>
   
   <servlet>
     <servlet-name>javaUploadServlet</servlet-name>
-    <servlet-class>com.halcyonpro.gwtapp.server.ComponentJavaUploadServlet</servlet-class>
+    <servlet-class>com.sapientarrow.gwtapp.server.ComponentJavaUploadServlet</servlet-class>
   </servlet>
   
   <servlet>
     <servlet-name>xmlUploadServlet</servlet-name>
-    <servlet-class>com.halcyonpro.gwtapp.server.ComponentXmlUploadServlet</servlet-class>
+    <servlet-class>com.sapientarrow.gwtapp.server.ComponentXmlUploadServlet</servlet-class>
   </servlet>
   
   <servlet-mapping>
@@ -88,7 +116,7 @@
   
    <servlet>
     <servlet-name>logoUploadServlet</servlet-name>
-    <servlet-class>com.halcyonpro.gwtapp.server.LogoUploadServlet</servlet-class>
+    <servlet-class>com.sapientarrow.gwtapp.server.LogoUploadServlet</servlet-class>
   </servlet>
   
   <servlet-mapping>
@@ -106,8 +134,8 @@
     <url-pattern>/xmlUpload</url-pattern>
   </servlet-mapping>
   
-  <!-- <generate-with class="com.halcyonpro.gwtapp.server.ReflectionGenerator">
-      <when-type-assignable class="com.halcyonpro.gwtapp.client.Reflection" />
+  <!-- <generate-with class="com.sapientarrow.gwtapp.server.ReflectionGenerator">
+      <when-type-assignable class="com.sapientarrow.gwtapp.client.Reflection" />
   </generate-with>
   -->
   <!-- Default page to serve -->

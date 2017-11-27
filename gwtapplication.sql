@@ -37,7 +37,7 @@ CREATE TABLE `beanobjects` (
 
 LOCK TABLES `beanobjects` WRITE;
 /*!40000 ALTER TABLE `beanobjects` DISABLE KEYS */;
-INSERT INTO `beanobjects` VALUES (15,'com.halcyonpro.gwtapp.shared.beans.Test','¬í\0sr\0\'com.halcyonpro.gwtapp.shared.beans.Test)²T™ŒxÄ\0I\0idL\0namet\0Ljava/lang/String;xp\0\0\0t\0kkk','S'),(16,'com.halcyonpro.gwtapp.shared.beans.NewBean',NULL,'S'),(17,'com.halcyonpro.gwtapp.shared.beans.NewBean1',NULL,'S');
+INSERT INTO `beanobjects` VALUES (15,'com.sapientarrow.gwtapp.shared.beans.Test','¬í\0sr\0\'com.sapientarrow.gwtapp.shared.beans.Test)²T™ŒxÄ\0I\0idL\0namet\0Ljava/lang/String;xp\0\0\0t\0kkk','S'),(16,'com.sapientarrow.gwtapp.shared.beans.NewBean',NULL,'S'),(17,'com.sapientarrow.gwtapp.shared.beans.NewBean1',NULL,'S');
 /*!40000 ALTER TABLE `beanobjects` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -91,7 +91,7 @@ CREATE TABLE `bindings` (
 
 LOCK TABLES `bindings` WRITE;
 /*!40000 ALTER TABLE `bindings` DISABLE KEYS */;
-INSERT INTO `bindings` VALUES (40,'firs','com.halcyonpro.gwtapp.shared.dto.DummyBean','Oye1',NULL,'B',1,13),(41,'Bind1','int','111',NULL,'S',1,0),(42,'kk','int','222',NULL,'S',1,0);
+INSERT INTO `bindings` VALUES (40,'firs','com.sapientarrow.gwtapp.shared.dto.DummyBean','Oye1',NULL,'B',1,13),(41,'Bind1','int','111',NULL,'S',1,0),(42,'kk','int','222',NULL,'S',1,0);
 /*!40000 ALTER TABLE `bindings` ENABLE KEYS */;
 UNLOCK TABLES;
 
