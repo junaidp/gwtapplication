@@ -32,164 +32,173 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.Anchor;
-import com.google.gwt.user.client.ui.FocusPanel;
-import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Widget;
 import com.sapientarrow.gwtapp.client.HelloServiceAsync;
-import com.sapientarrow.gwtapp.client.event.DashboardAccordionEvent;
-import com.sapientarrow.gwtapp.client.event.DashboardEvent;
 import com.sapientarrow.gwtapp.client.event.DynamicBeanEditorEvent;
 import com.sapientarrow.gwtapp.client.event.GlobalPreferencesEvent;
-import com.sapientarrow.gwtapp.client.event.IntelligencePackEvent;
 import com.sapientarrow.gwtapp.client.event.JavaBeanEditorEvent;
 import com.sapientarrow.gwtapp.client.event.MainEvent;
-import com.sapientarrow.gwtapp.client.event.SearchDataEvent;
 import com.sapientarrow.gwtapp.client.view.ApplicationConstants;
 import com.sapientarrow.gwtapp.shared.entity.GlobalPreferencesEntity;
 import com.sapientarrow.gwtapp.shared.entity.UserEntity;
 
 // This class manages the functionality/logic of Application's header.Currently just HOME option for header been implemented.
-public class HeaderPresenter implements Presenter 
+public class HeaderPresenter implements Presenter
 
 {
-	
-	private final Display display;
-	private UserEntity loggedInUser ;
-	private final HandlerManager eventBus;
-	private GlobalPreferencesEntity globalPreferencesEntity ;
 
-	public interface Display 
-	{
-		Widget asWidget();
-		Image getImgLogo();
-		Anchor getMenuHome();
-		Anchor getFileUpload();
-		Anchor getAncJavaBeanEditor();
-		Anchor getAncGlobalPreferences();
-		Anchor getAncDownloadJson();
-		Anchor getAncBeanData();
-		Anchor getAncDynamicBeanEditor();
-		Anchor getAncDynamicBeanData();
-		Anchor getAncBindings();
-		Anchor getMenuUser();
-		
-	}  
+    private final Display display;
+    private UserEntity loggedInUser;
+    private final HandlerManager eventBus;
+    private GlobalPreferencesEntity globalPreferencesEntity;
 
-	public HeaderPresenter(HelloServiceAsync rpcService, HandlerManager eventBus, Display view, UserEntity user, GlobalPreferencesEntity globalPreferences) 
-	{
-		this.display = view;
-		this.eventBus = eventBus;
-		this.loggedInUser = user;
-		this.globalPreferencesEntity = globalPreferences;
-		display.getMenuUser().setText(user.getName());
-		
-	}
+    public interface Display {
+	Widget asWidget();
 
-	public void go(HasWidgets container) 
-	{
-		container.clear();
-		container.add(display.asWidget());
-		bind();
-		setHandlers();
-	}
+	Image getImgLogo();
 
-	public void bind() {
-		
-		updateLogoPreferences();
-	}
+	Anchor getMenuHome();
 
-	private void updateLogoPreferences() {
-		display.getImgLogo().setUrl(globalPreferencesEntity.getLogoUrl());
-		display.getImgLogo().setWidth(globalPreferencesEntity.getLogoWidth()+"px");
-		display.getImgLogo().setHeight(globalPreferencesEntity.getLogoHeight()+"px");
-	}
+	Anchor getFileUpload();
 
-	@Override
-	public void setHandlers() {
-		
-		display.getMenuHome().addClickHandler(new ClickHandler(){
+	Anchor getAncJavaBeanEditor();
 
-			@Override
-			public void onClick(ClickEvent event) {
-				if(loggedInUser == null){
-					History.newItem(ApplicationConstants.TOKEN_LOGIN);
-				}else{
-					eventBus.fireEvent(new MainEvent(loggedInUser, globalPreferencesEntity));
-					}
-			}});
-	
-		
-		display.getFileUpload().addClickHandler(new ClickHandler(){
+	Anchor getAncGlobalPreferences();
 
-			@Override
-			public void onClick(ClickEvent event) {
-				History.newItem(ApplicationConstants.TOKEN_FILE_UPLOAD);
-			}});
-		
-	
-		display.getAncJavaBeanEditor().addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				eventBus.fireEvent(new JavaBeanEditorEvent());
-			}
-		});
-		
-		display.getAncGlobalPreferences().addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				eventBus.fireEvent(new GlobalPreferencesEvent());
-			}
-		});	
-		
-		display.getAncDownloadJson().addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				History.newItem(ApplicationConstants.TOKEN_DOWNLOAD_JSON);
-			}
-		});	
-		
-		
-		display.getAncBeanData().addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				History.newItem(ApplicationConstants.TOKEN_UPLOAD_COMPONENTS);
-			}
-		});
-		
-		display.getAncDynamicBeanData().addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				History.newItem(ApplicationConstants.TOKEN_UPLOAD_COMPONENTS_DYNAMICBEAN);
-			}
-		});
-		
-		display.getAncDynamicBeanEditor().addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				eventBus.fireEvent(new DynamicBeanEditorEvent());
-			}
-		});
-		
-		display.getAncBindings().addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				History.newItem(ApplicationConstants.TOKEN_BINDINGS);
-			}
-		});
-		
-		
-	}
+	Anchor getAncDownloadJson();
 
-	
-	
+	Anchor getAncBeanData();
+
+	Anchor getAncDynamicBeanEditor();
+
+	Anchor getAncDynamicBeanData();
+
+	Anchor getAncBindings();
+
+	Anchor getMenuUser();
+
+	Anchor getMenuTemplates();
+
+    }
+
+    public HeaderPresenter(HelloServiceAsync rpcService, HandlerManager eventBus, Display view, UserEntity user,
+	    GlobalPreferencesEntity globalPreferences) {
+	this.display = view;
+	this.eventBus = eventBus;
+	this.loggedInUser = user;
+	this.globalPreferencesEntity = globalPreferences;
+	display.getMenuUser().setText(user.getName());
+
+    }
+
+    public void go(HasWidgets container) {
+	container.clear();
+	container.add(display.asWidget());
+	bind();
+	setHandlers();
+    }
+
+    public void bind() {
+
+	updateLogoPreferences();
+    }
+
+    private void updateLogoPreferences() {
+	display.getImgLogo().setUrl(globalPreferencesEntity.getLogoUrl());
+	display.getImgLogo().setWidth(globalPreferencesEntity.getLogoWidth() + "px");
+	display.getImgLogo().setHeight(globalPreferencesEntity.getLogoHeight() + "px");
+    }
+
+    @Override
+    public void setHandlers() {
+
+	display.getMenuHome().addClickHandler(new ClickHandler() {
+
+	    @Override
+	    public void onClick(ClickEvent event) {
+		if (loggedInUser == null) {
+		    History.newItem(ApplicationConstants.TOKEN_LOGIN);
+		} else {
+		    eventBus.fireEvent(new MainEvent(loggedInUser, globalPreferencesEntity));
+		}
+	    }
+	});
+
+	display.getFileUpload().addClickHandler(new ClickHandler() {
+
+	    @Override
+	    public void onClick(ClickEvent event) {
+		History.newItem(ApplicationConstants.TOKEN_FILE_UPLOAD);
+	    }
+	});
+
+	display.getAncJavaBeanEditor().addClickHandler(new ClickHandler() {
+
+	    @Override
+	    public void onClick(ClickEvent event) {
+		eventBus.fireEvent(new JavaBeanEditorEvent());
+	    }
+	});
+
+	display.getAncGlobalPreferences().addClickHandler(new ClickHandler() {
+
+	    @Override
+	    public void onClick(ClickEvent event) {
+		eventBus.fireEvent(new GlobalPreferencesEvent());
+	    }
+	});
+
+	display.getAncDownloadJson().addClickHandler(new ClickHandler() {
+
+	    @Override
+	    public void onClick(ClickEvent event) {
+		History.newItem(ApplicationConstants.TOKEN_DOWNLOAD_JSON);
+	    }
+	});
+
+	display.getAncBeanData().addClickHandler(new ClickHandler() {
+
+	    @Override
+	    public void onClick(ClickEvent event) {
+		History.newItem(ApplicationConstants.TOKEN_UPLOAD_COMPONENTS);
+	    }
+	});
+
+	display.getAncDynamicBeanData().addClickHandler(new ClickHandler() {
+
+	    @Override
+	    public void onClick(ClickEvent event) {
+		History.newItem(ApplicationConstants.TOKEN_UPLOAD_COMPONENTS_DYNAMICBEAN);
+	    }
+	});
+
+	display.getAncDynamicBeanEditor().addClickHandler(new ClickHandler() {
+
+	    @Override
+	    public void onClick(ClickEvent event) {
+		eventBus.fireEvent(new DynamicBeanEditorEvent());
+	    }
+	});
+
+	display.getAncBindings().addClickHandler(new ClickHandler() {
+
+	    @Override
+	    public void onClick(ClickEvent event) {
+		History.newItem(ApplicationConstants.TOKEN_BINDINGS);
+	    }
+	});
+
+	display.getMenuTemplates().addClickHandler(new ClickHandler() {
+
+	    @Override
+	    public void onClick(ClickEvent event) {
+		History.newItem(ApplicationConstants.TOKEN_TEMPLATES);
+
+	    }
+	});
+
+    }
+
 }

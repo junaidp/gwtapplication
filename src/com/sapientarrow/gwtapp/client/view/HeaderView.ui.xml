@@ -60,6 +60,13 @@
 					<g:Anchor styleName="point" ui:field="menuAboutUs">About Us</g:Anchor>
 				</g:HTMLPanel>
 			</li>
+			
+			<li class="w3-dropdown-hover">
+				<g:HTMLPanel >
+					<g:Anchor styleName="point" ui:field="menuTemplates">Templates</g:Anchor>
+				</g:HTMLPanel>
+			</li>
+			
 			<li class="w3-dropdown-hover">
 			<g:HTMLPanel>
 					<g:Anchor styleName="point" ui:field="menuUser"></g:Anchor>

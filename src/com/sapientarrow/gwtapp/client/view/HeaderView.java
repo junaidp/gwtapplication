@@ -49,6 +49,8 @@ public class HeaderView extends Composite implements Display {
     @UiField
     Anchor menuHome;
     @UiField
+    Anchor menuTemplates;
+    @UiField
     Anchor ancFileUpload;
     @UiField
     Anchor ancJavaBeanEditor;
@@ -116,6 +118,10 @@ public class HeaderView extends Composite implements Display {
 
     public Anchor getMenuUser() {
 	return menuUser;
+    }
+
+    public Anchor getMenuTemplates() {
+	return menuTemplates;
     }
 
 }

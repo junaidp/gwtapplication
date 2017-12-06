@@ -108,6 +108,10 @@ import com.sapientarrow.gwtapp.client.registration.RegistrationPresenter;
 import com.sapientarrow.gwtapp.client.registration.RegistrationView;
 import com.sapientarrow.gwtapp.client.subscriptionverification.SubscriptionVerificationPresenter;
 import com.sapientarrow.gwtapp.client.subscriptionverification.SubscriptionVerificationView;
+import com.sapientarrow.gwtapp.client.templates.TemplatesPresenter;
+import com.sapientarrow.gwtapp.client.templates.TemplatesView;
+import com.sapientarrow.gwtapp.client.templates.templateGreen.TemplateGreenPresenter;
+import com.sapientarrow.gwtapp.client.templates.templateGreen.TemplateGreenView;
 import com.sapientarrow.gwtapp.client.view.ApplicationConstants;
 import com.sapientarrow.gwtapp.client.view.MainView;
 import com.sapientarrow.gwtapp.shared.entity.GlobalPreferencesEntity;
@@ -472,6 +476,22 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 
 	    if (token.equals(ApplicationConstants.TOKEN_BINDINGS)) {
 		presenter = new BindingsPresenter(rpcService, eventBus, new BindingsView());
+
+		if (presenter != null) {
+		    presenter.go(container);
+		}
+	    }
+
+	    if (token.equals(ApplicationConstants.TOKEN_TEMPLATES)) {
+		presenter = new TemplatesPresenter(rpcService, eventBus, new TemplatesView(), loggedInUser);
+
+		if (presenter != null) {
+		    presenter.go(container);
+		}
+	    }
+
+	    if (token.equals(ApplicationConstants.TOKEN_TEMPLATE_GREEN)) {
+		presenter = new TemplateGreenPresenter(rpcService, eventBus, new TemplateGreenView(), loggedInUser);
 
 		if (presenter != null) {
 		    presenter.go(container);
