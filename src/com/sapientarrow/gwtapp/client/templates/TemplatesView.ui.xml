@@ -8,13 +8,23 @@
 	}
 	</ui:style>
 	<g:HTMLPanel>
+		
+		<b:Legend ui:field="typeStepMessage">Templates</b:Legend>
+	
 		<b:Row>
-			<b:Legend ui:field="typeStepMessage">Templates</b:Legend>
 			<b:Column size="XS_12,SM_6,MD_6,LG_4">
-				<g:Image ui:field="imgTemplate" url="images/dashboard.png"></g:Image>
-				<g:Button styleName="button primary" width="120px" ui:field="btnSelect" text="Select"></g:Button>
-				
+				<g:Image ui:field="imgTemplate" url="images/CorporateGreen.png"></g:Image>
 			</b:Column>
 		</b:Row>
+		
+		
+		<b:Row>
+			<b:Column size="XS_12,SM_6,MD_6,LG_4">
+			   <g:Label width="100px" ui:field="lblCorporateGreen">Corporate Green</g:Label>
+ 		       <g:Button styleName="button primary" width="50px" ui:field="btnDemo" text="Demo"></g:Button>
+			   <g:Button styleName="button primary" width="50px" ui:field="btnSelect" text="Select"></g:Button>
+			</b:Column>
+		</b:Row>
+	
 	</g:HTMLPanel>
 </ui:UiBinder> 
