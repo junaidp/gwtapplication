@@ -18,6 +18,9 @@ public class TemplatesView extends Composite implements Display {
     @UiField
     Button btnSelect;
 
+    @UiField
+    Button btnSelectMetro;
+
     public TemplatesView() {
 	initWidget(uiBinder.createAndBindUi(this));
     }
@@ -29,6 +32,10 @@ public class TemplatesView extends Composite implements Display {
 
     public Button getBtnSelect() {
 	return btnSelect;
+    }
+
+    public Button getBtnSelectMetro() {
+	return btnSelectMetro;
     }
 
 }

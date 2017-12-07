@@ -108,6 +108,8 @@ import com.sapientarrow.gwtapp.client.registration.RegistrationPresenter;
 import com.sapientarrow.gwtapp.client.registration.RegistrationView;
 import com.sapientarrow.gwtapp.client.subscriptionverification.SubscriptionVerificationPresenter;
 import com.sapientarrow.gwtapp.client.subscriptionverification.SubscriptionVerificationView;
+import com.sapientarrow.gwtapp.client.templateMetro.TemplateMetroPresenter;
+import com.sapientarrow.gwtapp.client.templateMetro.TemplateMetroView;
 import com.sapientarrow.gwtapp.client.templates.TemplatesPresenter;
 import com.sapientarrow.gwtapp.client.templates.TemplatesView;
 import com.sapientarrow.gwtapp.client.templates.templateGreen.TemplateGreenPresenter;
@@ -492,6 +494,14 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 
 	    if (token.equals(ApplicationConstants.TOKEN_TEMPLATE_GREEN)) {
 		presenter = new TemplateGreenPresenter(rpcService, eventBus, new TemplateGreenView(), loggedInUser);
+
+		if (presenter != null) {
+		    presenter.go(container);
+		}
+	    }
+
+	    if (token.equals(ApplicationConstants.TOKEN_TEMPLATE_METRO)) {
+		presenter = new TemplateMetroPresenter(rpcService, eventBus, new TemplateMetroView(), loggedInUser);
 
 		if (presenter != null) {
 		    presenter.go(container);

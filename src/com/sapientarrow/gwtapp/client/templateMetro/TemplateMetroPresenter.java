@@ -25,22 +25,17 @@
  *  
  *  AGPL, in essence, means that this software requires a commercial license for use in or as a commercial application
  *******************************************************************************/
-package com.sapientarrow.gwtapp.client.templates;
+package com.sapientarrow.gwtapp.client.templateMetro;
 
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerManager;
-import com.google.gwt.user.client.History;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
 import com.sapientarrow.gwtapp.client.HelloServiceAsync;
 import com.sapientarrow.gwtapp.client.presenter.Presenter;
-import com.sapientarrow.gwtapp.client.view.ApplicationConstants;
 import com.sapientarrow.gwtapp.shared.entity.UserEntity;
 
-// This class manages the functionality/logic of Application's Templates Page where we see previes f All the templates.
-public class TemplatesPresenter implements Presenter
+// This class manages the functionality/logic of Application's Green Template complete demo page.
+public class TemplateMetroPresenter implements Presenter
 
 {
 
@@ -51,13 +46,10 @@ public class TemplatesPresenter implements Presenter
     public interface Display {
 	Widget asWidget();
 
-	Button getBtnSelect();
-
-	Button getBtnSelectMetro();
-
     }
 
-    public TemplatesPresenter(HelloServiceAsync rpcService, HandlerManager eventBus, Display view, UserEntity user) {
+    public TemplateMetroPresenter(HelloServiceAsync rpcService, HandlerManager eventBus, Display view,
+	    UserEntity user) {
 	this.display = view;
 	this.eventBus = eventBus;
 	this.loggedInUser = user;
@@ -77,24 +69,6 @@ public class TemplatesPresenter implements Presenter
 
     @Override
     public void setHandlers() {
-
-	display.getBtnSelect().addClickHandler(new ClickHandler() {
-
-	    @Override
-	    public void onClick(ClickEvent event) {
-
-		History.newItem(ApplicationConstants.TOKEN_TEMPLATE_GREEN);
-	    }
-	});
-
-	display.getBtnSelectMetro().addClickHandler(new ClickHandler() {
-
-	    @Override
-	    public void onClick(ClickEvent event) {
-
-		History.newItem(ApplicationConstants.TOKEN_TEMPLATE_METRO);
-	    }
-	});
 
     }
 }

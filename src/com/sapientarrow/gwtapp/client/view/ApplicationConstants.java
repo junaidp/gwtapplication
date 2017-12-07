@@ -64,6 +64,7 @@ public class ApplicationConstants {
     public static final String TOKEN_BINDINGS = "bindings";
     public static final String TOKEN_TEMPLATES = "templates";
     public static final String TOKEN_TEMPLATE_GREEN = "templateGreen";
+    public static final String TOKEN_TEMPLATE_METRO = "templateMetro";
 
     // GLOBAL PREFERENCES
     public static final String VIEW_PLAN = "View Plan";

@@ -25,6 +25,14 @@
 			   <g:Button styleName="button primary" width="50px" ui:field="btnSelect" text="Select"></g:Button>
 			</b:Column>
 		</b:Row>
+		
+		<b:Row>
+			<b:Column size="XS_12,SM_6,MD_6,LG_4">
+			   <g:Label width="100px" ui:field="lblMetro">Metro Green</g:Label>
+ 		       <g:Button styleName="button primary" width="50px" ui:field="btnDemoMetro" text="Demo"></g:Button>
+			   <g:Button styleName="button primary" width="50px" ui:field="btnSelectMetro" text="Select"></g:Button>
+			</b:Column>
+		</b:Row>
 	
 	</g:HTMLPanel>
 </ui:UiBinder> 
