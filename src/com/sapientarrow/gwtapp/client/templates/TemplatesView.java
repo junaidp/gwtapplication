@@ -7,6 +7,8 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import com.sapientarrow.gwtapp.client.templates.TemplatesPresenter.Display;
+import com.sapientarrow.gwtapp.client.templates.previews.TemplateGreenPreview;
+import com.sapientarrow.gwtapp.client.templates.previews.TemplateMetroPreview;
 
 public class TemplatesView extends Composite implements Display {
 
@@ -14,28 +16,27 @@ public class TemplatesView extends Composite implements Display {
 
     interface TemplatesViewUiBinder extends UiBinder<Widget, TemplatesView> {
     }
-
+    
     @UiField
-    Button btnSelect;
-
+    TemplateMetroPreview templateMetroPreview;
     @UiField
-    Button btnSelectMetro;
+    TemplateGreenPreview templateGreenPreview;
 
-    public TemplatesView() {
+    public TemplateMetroPreview getTemplateMetroPreview() {
+		return templateMetroPreview;
+	}
+
+	public TemplateGreenPreview getTemplateGreenPreview() {
+		return templateGreenPreview;
+	}
+
+	public TemplatesView() {
 	initWidget(uiBinder.createAndBindUi(this));
     }
 
     public TemplatesView(String firstName) {
 	initWidget(uiBinder.createAndBindUi(this));
 
-    }
-
-    public Button getBtnSelect() {
-	return btnSelect;
-    }
-
-    public Button getBtnSelectMetro() {
-	return btnSelectMetro;
     }
 
 }

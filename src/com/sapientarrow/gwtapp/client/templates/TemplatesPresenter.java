@@ -36,6 +36,8 @@ import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
 import com.sapientarrow.gwtapp.client.HelloServiceAsync;
 import com.sapientarrow.gwtapp.client.presenter.Presenter;
+import com.sapientarrow.gwtapp.client.templates.previews.TemplateGreenPreview;
+import com.sapientarrow.gwtapp.client.templates.previews.TemplateMetroPreview;
 import com.sapientarrow.gwtapp.client.view.ApplicationConstants;
 import com.sapientarrow.gwtapp.shared.entity.UserEntity;
 
@@ -51,9 +53,9 @@ public class TemplatesPresenter implements Presenter
     public interface Display {
 	Widget asWidget();
 
-	Button getBtnSelect();
+	TemplateMetroPreview getTemplateMetroPreview();
 
-	Button getBtnSelectMetro();
+	TemplateGreenPreview getTemplateGreenPreview() ;
 
     }
 
@@ -78,7 +80,7 @@ public class TemplatesPresenter implements Presenter
     @Override
     public void setHandlers() {
 
-	display.getBtnSelect().addClickHandler(new ClickHandler() {
+	display.getTemplateGreenPreview().getBtnSelect().addClickHandler(new ClickHandler() {
 
 	    @Override
 	    public void onClick(ClickEvent event) {
@@ -87,7 +89,7 @@ public class TemplatesPresenter implements Presenter
 	    }
 	});
 
-	display.getBtnSelectMetro().addClickHandler(new ClickHandler() {
+	display.getTemplateMetroPreview().getBtnSelect().addClickHandler(new ClickHandler() {
 
 	    @Override
 	    public void onClick(ClickEvent event) {
