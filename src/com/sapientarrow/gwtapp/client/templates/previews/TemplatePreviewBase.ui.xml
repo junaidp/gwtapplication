@@ -5,22 +5,41 @@
 	xmlns:b.html="urn:import:org.gwtbootstrap3.client.ui.html">
 	<ui:style>
 	
+	.rowData {
+		display: inline-block ;
+	}
+	
+	.rowSpacing{
+ 		margin-top : 20px;
+	}
+
+	.borderStyle{
+ 		
+	}
+	
 	</ui:style>
+	
 	<g:HTMLPanel>
 	    
-	    <b:Row>
-			<b:Column size="XS_12,SM_6,MD_6,LG_4">
-				<g:Image ui:field="imgTemplate" width="200px" height="200px"></g:Image>
-			</b:Column>
-		</b:Row>
+	   
+			
+			<b:Row>
+				<b:Column size="XS_12,SM_6,MD_10,LG_3">
+			    	<g:Image ui:field="imgTemplate" width="300px" height="200px"></g:Image>
+				</b:Column>
+			</b:Row>
+			
+			<b:Row styleName='{style.rowSpacing} {style.borderStyle}'>
+				<b:Column size="XS_12,SM_6,MD_6,LG_3">
+					<g:HorizontalPanel verticalAlignment = "middle" spacing="50" width="330px">
+						<g:Label width="100px" ui:field="lblHeading" ></g:Label>
+ 		       			<g:Button styleName="button lighten " ui:field="btnDemo" text="Demo"></g:Button>
+			   			<g:Button styleName="button lighten " ui:field="btnSelect" text="Select"></g:Button>
+					</g:HorizontalPanel>
+				</b:Column>
+			</b:Row>
+	   	
 		
-		<b:Row>
-			<b:Column size="XS_12,SM_6,MD_6,LG_4">
-			   <g:Label width="100px" ui:field="lblHeading"></g:Label>
- 		       <g:Button styleName="button primary" width="50px" ui:field="btnDemo" text="Demo"></g:Button>
-			   <g:Button styleName="button primary" width="50px" ui:field="btnSelect" text="Select"></g:Button>
-			</b:Column>
-		</b:Row>
-	    
+		 
 	</g:HTMLPanel>
 </ui:UiBinder> 
