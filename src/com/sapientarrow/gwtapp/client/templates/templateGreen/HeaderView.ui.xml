@@ -2,32 +2,33 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:b="urn:import:org.gwtbootstrap3.client.ui" xmlns:b.gwt="urn:import:org.gwtbootstrap3.client.ui.gwt"
 	xmlns:b.html="urn:import:org.gwtbootstrap3.client.ui.html" xmlns:g="urn:import:com.google.gwt.user.client.ui">
-	
+
 	<ui:style>
 	
 	.heading {
 		color: rgb(140, 179, 42);
-		font-size: xx-large;
-		font-family: sans-serif;
-		margin-left: 25px;
+		font-family: 'Open Sans', sans-serif;
+		font-size: 30px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 30px;
+		
 	}
 	
-	.mainPanelMargin{
-	margin-left: 25px;
-	margin-top: 25px;
+	.mainPanelMargin {
+		/* margin-left: 25px; */
+		margin-top: 25px;
 	}
 	
-	.mainPanelColor{
-	
-	background-color: white;
-
+	.mainPanelColor {
+		background-color: white;
 	}
 	</ui:style>
-	
-	<g:HTMLPanel styleName='{style.mainPanelMargin} {style.mainPanelColor}' >
+
+	<g:HTMLPanel styleName='{style.mainPanelMargin} {style.mainPanelColor}'>
 		<b:Navbar>
 			<b:NavbarHeader>
-				<b:NavbarBrand styleName='{style.heading}'>CORPORATE GREEN</b:NavbarBrand>
+				<b:NavbarBrand styleName='{style.heading}'>SAPIENT ARROW GREEN</b:NavbarBrand>
 				<b:NavbarCollapseButton dataTarget="#navbar-collapse" />
 
 				<b:NavbarForm pull="RIGHT">
@@ -36,9 +37,9 @@
 			</b:NavbarHeader>
 
 			<b:NavbarCollapse b:id="navbar-collapse">
-				
+
 				<b:NavbarNav pull="RIGHT">
-					
+
 					<b:AnchorListItem active="true">HOME</b:AnchorListItem>
 					<b:AnchorListItem>SERVICE</b:AnchorListItem>
 					<b:AnchorListItem>BLOG</b:AnchorListItem>

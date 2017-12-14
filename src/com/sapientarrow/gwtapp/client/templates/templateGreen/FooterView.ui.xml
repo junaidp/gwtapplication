@@ -1,116 +1,213 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-			xmlns:b="urn:import:org.gwtbootstrap3.client.ui"
-			xmlns:b.gwt="urn:import:org.gwtbootstrap3.client.ui.gwt"
-			xmlns:b.html="urn:import:org.gwtbootstrap3.client.ui.html" 
-			xmlns:g="urn:import:com.google.gwt.user.client.ui"
-			>
+	xmlns:b="urn:import:org.gwtbootstrap3.client.ui" xmlns:b.gwt="urn:import:org.gwtbootstrap3.client.ui.gwt"
+	xmlns:b.html="urn:import:org.gwtbootstrap3.client.ui.html" xmlns:g="urn:import:com.google.gwt.user.client.ui">
 
-			
+
 	<ui:style>
-
 	.important {
 		font-weight: bold;
 	}
 	
 	.show-grid {
-margin-top: 10px;
-margin-bottom: 20px;
-background-color: white;
-}
-
-.heading {
+		margin-top: 15px;
+		margin-bottom: 20px;
+		margin-left: 25px;
+		margin-right: 25px;
+		/*height: 350px;*/
+		background-color: rgb(255, 255, 255);
+	}
+	
+	.heading {
 		color: rgb(140, 179, 42);
-		}
-	
-	.img{
-	overflow: hidden;
-
 	}
 	
-	.mainPanelMargin{
-	margin-left: 25px;
-	margin-top: 25px;
-	width : 100%;
+	.img {
+		overflow: hidden;
 	}
 	
-	.mainPanelColor{
-	
-	background-color: white;
-
+	.emailImage {
+		margin-left: 25px;
 	}
 	
-	.textInfo{
-	text-align: center !important;
-	color: rgb(140, 179, 42);
-	font-family: 'Open Sans',sans-serif;
-font-size: 18px;
-line-height: 24px;
-margin-bottom: 12px;
-font-weight: 400;
-text-transform: uppercase;
-margin: 0px;
-text-rendering: optimizelegibility;
+	.mainPanelMargin {
+		/* margin-left: 25px; */
+		margin-top: 0px;
+		width: 100%;
 	}
 	
-	.paragraphStyle
-	{
+	.mainPanelColor {
+		background-color: rgb(246, 247, 244);
+	}
+	
+	.textInfo {
+		text-align: center !important;
+		color: rgb(140, 179, 42);
+		font-family: 'Open Sans', sans-serif;
+		font-size: 18px;
+		line-height: 24px;
+		margin-bottom: 12px;
+		font-weight: 400;
+		text-transform: uppercase;
+		margin: 0px;
+		text-rendering: optimizelegibility;
+	}
+	
+	.textInfoDiscount {
+		color: rgb(140, 179, 42);
+		font-family: 'Open Sans', sans-serif;
+		font-size: 24px;
+		font-weight: 400;
+		line-height: 48px;
+		margin-bottom: 12px;
+		margin-left: 0px;
+		margin-right: 0px;
+		margin-top: 0px;
+		text-align: center;
+		text-rendering: optimizelegibility;
+		text-transform: uppercase;
+	}
+	
+	.paragraphStyle {
 		font-family: sans-serif;
-
-
-line-height: 24px;
-color: rgb(94, 94, 94);
+		line-height: 24px;
+		color: rgb(94, 94, 94);
+	}
 	
+	.paragraphStyleSimple {
+		color: rgb(94, 94, 94);
+		font-family: 'Lato', sans-serif;
+		font-size: 16px;
+		font-weight: 400;
+		line-height: 24px;
+		margin-bottom: 12px;
+		margin-left: 0px;
+		margin-right: 0px;
+		margin-top: 0px;
+		text-align: center;
+	}
+	
+	.signupButton {
+		background-attachment: scroll;
+		background-clip: border-box;
+		background-color: rgb(140, 179, 42);
+		background-image: none;
+		background-origin: padding-box;
+		background-position: 0% 0%;
+		background-repeat: repeat;
+		background-size: auto auto;
+		border-bottom-color: rgba(0, 0, 0, 0.25);
+		border-bottom-left-radius: 0px;
+		border-bottom-right-radius: 0px;
+		border-bottom-style: solid;
+		border-bottom-width: 1px;
+		border-image-outset: 0 0 0 0;
+		border-image-repeat: stretch stretch;
+		border-image-slice: 100% 100% 100% 100%;
+		border-image-source: none;
+		border-image-width: 1 1 1 1;
+		border-left-color: rgba(0, 0, 0, 0.1);
+		border-left-style: solid;
+		border-left-width: 1px;
+		border-right-color: rgba(0, 0, 0, 0.1);
+		border-right-style: solid;
+		border-right-width: 1px;
+		border-top-color: rgba(0, 0, 0, 0.1);
+		border-top-left-radius: 0px;
+		border-top-right-radius: 0px;
+		border-top-style: solid;
+		border-top-width: 1px;
+		box-shadow: rgba(255, 255, 255, 0.2) 0px 1px 0px 0px inset,
+			rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+		color: rgb(255, 255, 255);
+		cursor: pointer;
+		display: inline-block;
+		font-family: helvetica;
+		font-size: 16px;
+		font-weight: 400;
+		line-height: 24px;
+		margin-bottom: 0px;
+		outline-color: rgb(0, 0, 0);
+		outline-offset: 0px;
+		outline-style: none;
+		outline-width: 0px;
+		padding-bottom: 4px;
+		padding-left: 12px;
+		margin-left: 35%;
+		padding-right: 12px;
+		padding-top: 4px;
+		text-align: center;
+		text-decoration: none;
+		text-shadow: rgba(0, 0, 0, 0.25) 0px -1px 0px;
+		transition-delay: 0s;
+		transition-duration: 0s;
+		transition-property: all;
+		transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+		vertical-align: middle;
+		-moz-border-bottom-colors: none;
+		-moz-border-left-colors: none;
+		-moz-border-right-colors: none;
+		-moz-border-top-colors: none;
+		-moz-text-blink: none;
+		-moz-text-decoration-color: rgb(255, 255, 255);
+		-moz-text-decoration-line: none;
+		-moz-text-decoration-style: solid;
 	}
 	</ui:style>
-	
+
 	<g:HTMLPanel styleName='{style.mainPanelMargin} {style.mainPanelColor}'>
-		
-		<b:Row addStyleNames="{style.show-grid} {style.img}">		
-					<b:Column size="XS_12,SM_5,MD_5,LG_6">
-								<b.html:Br></b.html:Br>
-								<b:Image url="images/templateGreenMain.jpg" width="330px" height="350px"></b:Image>
-					</b:Column>
-					
-					<b:Column size="XS_12,SM_5,MD_5,LG_6">
-						<b:NavbarBrand styleName='{style.textInfo}'>HUGE DISCOUNTS WHEN YOU</b:NavbarBrand>
-						<b.html:Br/>
-						<b.html:Br/>
-						<b:NavbarBrand styleName='{style.textInfo}'>TRANSFER</b:NavbarBrand>
-						
-						<b.html:Br/>
-						<b.html:Br/>
-						<b.html:Paragraph styleName='{style.paragraphStyle}'>
-								So if you were waiting for the perfect time to seize this <b.html:Br/>
-								           opportunity, the time is now.
-						<b.html:Br/>
-						<b.html:Br/>		           
-										<b>There are no obligations</b>
-						<b.html:Br/>
-						<b.html:Br/>		           
-										<b>Get a taste of SUCCESS!</b>
-						
-						<b.html:Br/>		           
-						<b.html:Br/>
-										<b>So, act now...</b>
-						</b.html:Paragraph>
-						
-						<b:AnchorButton ui:field="btnSignup">Signup Today</b:AnchorButton>
-					</b:Column>
-		</b:Row>
-		
-		<b:Row>
-			<b:Column size="XS_12,SM_12,MD_12,LG_12">
-			
-				<b.html:Paragraph  styleName='{style.paragraphStyle}'>
-						© 2017 corporategreen
-						<b.html:Br/>
-						Awesome free website by 
-						<b:NavbarLink href="http://www.google.com" > ABC.com</b:NavbarLink>
+
+		<b.html:Br />
+		<b.html:Br />
+
+
+
+		<b:Row addStyleNames="{style.img} {style.show-grid}">
+
+			<b:Column size="XS_12,SM_5,MD_5,LG_6">
+				<b.html:Br></b.html:Br>
+				<b:Image url="images/email.jpg" width="250px" height="160px"
+					addStyleNames="{style.emailImage}"></b:Image>
+			</b:Column>
+
+			<b:Column size="XS_12,SM_5,MD_5,LG_6">
+				<g:HTML styleName='{style.textInfoDiscount}'>HUGE DISCOUNTS WHEN YOU</g:HTML>
+				<g:HTML styleName='{style.textInfoDiscount}'>TRANSFER!</g:HTML>
+
+				<b.html:Br />
+				<b.html:Paragraph styleName='{style.paragraphStyleSimple}'>
+					So if you were waiting for the perfect time to seize this
+					<b.html:Br />
+					opportunity, the time is now.
+					<b.html:Br />
+					<b.html:Br />
+					<b>There are no obligations</b>
+					<b.html:Br />
+					<b>Get a taste of SUCCESS!</b>
+					<b.html:Br />
+					<b>So, act now...</b>
+					<b.html:Br />
+
 				</b.html:Paragraph>
-				
+
+				<b:AnchorButton styleName='{style.signupButton}'
+					ui:field="btnSignup">Signup Today</b:AnchorButton>
 			</b:Column>
 		</b:Row>
-		
+
+
+		<b:Row>
+			<b:Column size="XS_12,SM_12,MD_12,LG_12">
+
+				<b.html:Paragraph styleName='{style.paragraphStyle}'>
+					© 2017 corporategreen
+					<b.html:Br />
+					Awesome free website by
+					<b:NavbarLink href="http://www.google.com"> ABC.com</b:NavbarLink>
+				</b.html:Paragraph>
+
+			</b:Column>
+		</b:Row>
+
 	</g:HTMLPanel>
 </ui:UiBinder> 
