@@ -164,13 +164,13 @@
 
 		<b:Row addStyleNames="{style.img} {style.show-grid}">
 
-			<b:Column size="XS_12,SM_5,MD_5,LG_6">
+			<b:Column size="XS_12,SM_5,MD_5,LG_5">
 				<b.html:Br></b.html:Br>
 				<b:Image url="images/email.jpg" width="250px" height="160px"
 					addStyleNames="{style.emailImage}"></b:Image>
 			</b:Column>
 
-			<b:Column size="XS_12,SM_5,MD_5,LG_6">
+			<b:Column size="XS_12,SM_5,MD_5,LG_5">
 				<g:HTML styleName='{style.textInfoDiscount}'>HUGE DISCOUNTS WHEN YOU</g:HTML>
 				<g:HTML styleName='{style.textInfoDiscount}'>TRANSFER!</g:HTML>
 
@@ -200,10 +200,9 @@
 			<b:Column size="XS_12,SM_12,MD_12,LG_12">
 
 				<b.html:Paragraph styleName='{style.paragraphStyle}'>
-					© 2017 corporategreen
+					© 2017 sapientarrowgreen
 					<b.html:Br />
-					Awesome free website by
-					<b:NavbarLink href="http://www.google.com"> ABC.com</b:NavbarLink>
+					<b:NavbarLink href="http://sapientarrow.com/"> sapient arrow</b:NavbarLink>
 				</b.html:Paragraph>
 
 			</b:Column>

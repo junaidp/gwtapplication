@@ -157,7 +157,7 @@
 			styleName='{style.containerPanelColor}'>
 
 			<b:Row>
-				<b:Column size="XS_12,SM_12,MD_11,LG_11">
+				<b:Column size="XS_12,SM_12,MD_11,LG_12">
 					<b:Image url="images/garden2.jpg"></b:Image>
 				</b:Column>
 			</b:Row>
@@ -203,9 +203,9 @@
 				<b.html:Br></b.html:Br>
 				<b.html:Br></b.html:Br>
 			</b:Row>
-
+			<div style="padding-left:20%">
 			<b:Row>
-				<b:Column size="XS_12,SM_6,MD_2,LG_3">
+				<b:Column size="XS_12,SM_6,MD_2,LG_2">
 					<b:Image url="images/TextInfo1.jpg" width="100px" height="100px"></b:Image>
 					<b.html:Br></b.html:Br>
 					<b.html:Paragraph styleName='{style.paragraphStyle}'>
@@ -222,7 +222,7 @@
 					</b:NavbarBrand>
 				</b:Column>
 
-				<b:Column size="XS_12,SM_6,MD_2,LG_3">
+				<b:Column size="XS_12,SM_6,MD_2,LG_2">
 					<b:Image url="images/TextInfo2.jpg" width="100px" height="100px"></b:Image>
 					<b.html:Br></b.html:Br>
 					<b.html:Paragraph styleName='{style.paragraphStyle}'>
@@ -239,7 +239,7 @@
 					</b:NavbarBrand>
 				</b:Column>
 
-				<b:Column size="XS_12,SM_6,MD_2,LG_3">
+				<b:Column size="XS_12,SM_6,MD_2,LG_2">
 					<b:Image url="images/TextInfo3.jpg" width="100px" height="100px"></b:Image>
 					<b.html:Br></b.html:Br>
 					<b.html:Paragraph styleName='{style.paragraphStyle}'>
@@ -256,7 +256,7 @@
 					</b:NavbarBrand>
 				</b:Column>
 
-				<b:Column size="XS_12,SM_6,MD_2,LG_3">
+				<b:Column size="XS_12,SM_6,MD_2,LG_2">
 					<b:Image url="images/TextInfo4.jpg" width="100px" height="100px"></b:Image>
 					<b.html:Br></b.html:Br>
 					<b.html:Paragraph styleName='{style.paragraphStyle}'>
@@ -273,7 +273,7 @@
 					</b:NavbarBrand>
 				</b:Column>
 			</b:Row>
-
+</div>
 		</g:HTMLPanel>
 
 
@@ -288,12 +288,12 @@
 			</b:Row>
 
 			<b:Row addStyleNames="{style.show-grid}">
-				<b:Column size="XS_12,SM_5,MD_5,LG_6">
+				<b:Column size="XS_12,SM_5,MD_5,LG_5">
 					<b.html:Br></b.html:Br>
 					<b:Image url="images/garden7.jpg" width="330px" height="350px"></b:Image>
 				</b:Column>
 
-				<b:Column size="XS_12,SM_5,MD_5,LG_6">
+				<b:Column size="XS_12,SM_5,MD_5,LG_5">
 					<b:Image url="images/recentWork.jpg" width="30px" height="30px"></b:Image>
 					<b:NavbarBrand styleName='{style.textInfo}'>RECENT WORK 1</b:NavbarBrand>
 
@@ -375,8 +375,9 @@
 				<g:HTML styleName='{style.section-header}'>COMPANY DETAILS</g:HTML>
 				<b.html:Br></b.html:Br>
 				<b.html:Br></b.html:Br>
-
-				<b:Column size="XS_12,SM_6,MD_3,LG_4">
+				<g:HTMLPanel>
+				<div style="padding-left:20%">
+				<b:Column size="XS_12,SM_6,MD_3,LG_3">
 					<b:Image url="images/garden4.jpg" width="250px" height="150px"></b:Image>
 					<b.html:Br></b.html:Br>
 					<b.html:Br></b.html:Br>
@@ -395,7 +396,7 @@
 
 				</b:Column>
 
-				<b:Column size="XS_12,SM_6,MD_3,LG_4">
+				<b:Column size="XS_12,SM_6,MD_3,LG_3">
 					<b:Image url="images/garden5.jpg" width="250px" height="150px"></b:Image>
 					<b.html:Br></b.html:Br>
 					<b.html:Br></b.html:Br>
@@ -414,7 +415,7 @@
 
 				</b:Column>
 
-				<b:Column size="XS_12,SM_6,MD_3,LG_4">
+				<b:Column size="XS_12,SM_6,MD_3,LG_3">
 					<b:Image url="images/garden6.jpg" width="250px" height="150px"></b:Image>
 					<b.html:Br></b.html:Br>
 					<b.html:Br></b.html:Br>
@@ -427,6 +428,8 @@
 					<b.html:Br></b.html:Br>
 
 				</b:Column>
+				</div>
+				</g:HTMLPanel>
 			</b:Row>
 		</g:HTMLPanel>
 
