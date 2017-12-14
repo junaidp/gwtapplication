@@ -7,16 +7,23 @@
 	.important {
 		font-weight: bold;
 	}
+	.graycolor {
+		color: gray;
+	}
 	</ui:style>
 	<g:HTMLPanel>
 
-		<b:Legend ui:field="typeStepMessage">Templates</b:Legend>
 		<b:Row>
-			<b:Column size="XS_12,SM_6,MD_5,LG_3">
+		<b:Column size="XS_12,SM_8,MD_9,LG_9">
+		<b:Legend ui:field="typeStepMessage" styleName='{style.graycolor}'>Templates</b:Legend>
+		</b:Column>
+		
+			<b:Column size="XS_12,SM_5,MD_5,LG_5">
+			
 				<p:TemplateGreenPreview ui:field="templateGreenPreview"></p:TemplateGreenPreview>
 			</b:Column>
 			
-			<b:Column size="XS_12,SM_6,MD_5,LG_3">
+			<b:Column size="XS_12,SM_5,MD_5,LG_5">
 				<p:TemplateMetroPreview ui:field="templateMetroPreview"></p:TemplateMetroPreview>
 			</b:Column>
 		</b:Row>

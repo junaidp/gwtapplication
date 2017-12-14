@@ -11,41 +11,41 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class TemplatePreviewBase extends Composite {
 
-	private static TemplatePreviewBaseUiBinder uiBinder = GWT.create(TemplatePreviewBaseUiBinder.class);
+    private static TemplatePreviewBaseUiBinder uiBinder = GWT.create(TemplatePreviewBaseUiBinder.class);
 
-	interface TemplatePreviewBaseUiBinder extends UiBinder<Widget, TemplatePreviewBase> {
-	}
-	
-	@UiField
-	Button btnDemo;
-	
-	@UiField
-	Button btnSelect;
-	
-	@UiField
-	Label lblHeading;
-	
-	@UiField
-	Image imgTemplate;
+    interface TemplatePreviewBaseUiBinder extends UiBinder<Widget, TemplatePreviewBase> {
+    }
 
-	public Label getLblHeading() {
-		return lblHeading;
-	}
+    @UiField
+    Button btnDemo;
 
-	public Image getImgTemplate() {
-		return imgTemplate;
-	}
+    @UiField
+    Button btnSelect;
 
-	public Button getBtnDemo() {
-		return btnDemo;
-	}
+    @UiField
+    Label lblHeading;
 
-	public Button getBtnSelect() {
-		return btnSelect;
-	}
+    @UiField
+    Image imgTemplate;
 
-	public TemplatePreviewBase() {
-		initWidget(uiBinder.createAndBindUi(this));
-	}
+    public Label getLblHeading() {
+	return lblHeading;
+    }
+
+    public Image getImgTemplate() {
+	return imgTemplate;
+    }
+
+    public Button getBtnDemo() {
+	return btnDemo;
+    }
+
+    public Button getBtnSelect() {
+	return btnSelect;
+    }
+
+    public TemplatePreviewBase() {
+	initWidget(uiBinder.createAndBindUi(this));
+    }
 
 }
