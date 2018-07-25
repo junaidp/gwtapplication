@@ -1,0 +1,35 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:b="urn:import:org.gwtbootstrap3.client.ui"
+	xmlns:b.html="urn:import:org.gwtbootstrap3.client.ui.html">
+	<ui:style>
+	.graycolor {
+		color: gray;
+	}
+	
+	</ui:style>
+
+	<g:HTMLPanel>
+	<head>
+	<link href="Metro-UI-CSS-master/build/css/metro.icons" rel="stylesheet" />
+	</head>
+
+		<g:Image ui:field="imgTemplate" width="320px" height="200px"></g:Image>
+
+		<div style="padding-top:10px">
+		<g:HorizontalPanel verticalAlignment="middle"
+			spacing="50" width="350px">
+			<g:HTMLPanel>
+			<span class="mif-earth fg-green"></span>
+			</g:HTMLPanel>
+			<g:Label width="100px" ui:field="lblHeading" styleName='{style.graycolor}' wordWrap="false"></g:Label>
+			<g:Button styleName="button link" ui:field="btnDemo"
+				text="Demo"></g:Button>
+			<g:Button styleName="button link" ui:field="btnSelect"
+				text="Select"></g:Button>
+		</g:HorizontalPanel>
+		</div>
+
+
+	</g:HTMLPanel>
+</ui:UiBinder> 

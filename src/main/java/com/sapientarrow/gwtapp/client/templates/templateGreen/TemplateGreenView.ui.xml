@@ -1,0 +1,440 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:b="urn:import:org.gwtbootstrap3.client.ui" xmlns:b.gwt="urn:import:org.gwtbootstrap3.client.ui.gwt"
+	xmlns:b.html="urn:import:org.gwtbootstrap3.client.ui.html" xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:t="urn:import:com.sapientarrow.gwtapp.client.templates.templateGreen"
+	xmlns:d="urn:import:com.google.gwt.dom.client" xmlns:c="urn:import:antlr.collections"
+	xmlns:constants="urn:import:org.gwtbootstrap3.client.ui.constants">
+
+	<ui:style>
+	.rightAlignInline {
+		text-align: right;
+		style: "display: inline";
+	}
+	
+	.bigFont {
+		font-size: 130%;
+	}
+	
+	.listItemsColor {
+		color: rgb(140, 179, 42);
+	}
+	
+	.heading {
+		color: rgb(140, 179, 42);
+		font-size: xx-large;
+		font-family: sans-serif;
+		/*margin-left: 25px; */
+		font-size: 24px;
+		line-height: 48px;
+	}
+	
+	.show-grid {
+		margin-top: 10px;
+		margin-bottom: 20px;
+		background-color: rgb(239, 239, 237);
+	}
+	
+	.mainPanelMargin {
+		/* margin-left: 25px;  */
+		margin-top: 25px;
+	}
+	
+	.sectionsPanelMargin {
+		/* margin-left: 25px;  */
+		margin-top: 0px;
+	}
+	
+	.outerMainPanelColor {
+		color: white;
+	}
+	
+	.containerPanelColor {
+		color: white;
+	}
+	
+	.innerMainPanelColorWhatWeDo {
+		background-color: rgb(246, 247, 244);
+	}
+	
+	.innerMainPanelColorRecentWork {
+		background-color: rgb(239, 239, 237);
+	}
+	
+	.innerMainPanelColorCompanyDetails {
+		background-color: white;
+	}
+	
+	.paragraphStyle {
+		font-family: 'Lato', sans-serif;
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 24px;
+		color: rgb(94, 94, 94);
+	}
+	
+	.section-header {
+		font-family: 'Open Sans', sans-serif;
+		text-align: center;
+		border-bottom: 0px none;
+		margin-bottom: 0px;
+		color: rgb(140, 179, 42);
+		font-size: 36px;
+		line-height: 48px;
+		font-weight: 400;
+		text-transform: uppercase;
+	}
+	
+	.textInfo {
+		text-align: center !important;
+		color: rgb(140, 179, 42);
+		font-family: 'Open Sans', sans-serif;
+		font-size: 18px;
+		line-height: 24px;
+		margin-bottom: 12px;
+		font-weight: 400;
+		text-transform: uppercase;
+		margin: 0px;
+		text-rendering: optimizelegibility;
+	}
+	
+	.companyDetailsItemsHeadings {
+		color: rgb(140, 179, 42);
+		font-family: 'Open Sans', sans-serif;
+		font-size: 18px;
+		line-height: 24px;
+		margin-bottom: 12px;
+		font-weight: 400;
+		text-transform: uppercase;
+		margin: 0px;
+		text-rendering: optimizelegibility;
+	}
+	
+	.companyDetailsItems {
+		color: rgb(140, 179, 42);
+		font-family: 'Open Sans', sans-serif;
+		font-size: 16px;
+		font-weight: 400;
+		line-height: 24px;
+		margin-bottom: 12px;
+		margin-left: 0px;
+		margin-right: 0px;
+		margin-top: 0px;
+	}
+	
+	.companyDetailsContactUsItems {
+		color: rgb(94, 94, 94);
+		font-family: 'Lato', sans-serif;
+		font-size: 16px;
+		font-weight: 400;
+		line-height: 24px;
+		margin-bottom: 12px;
+		margin-left: 0px;
+		margin-right: 0px;
+		margin-top: 0px;
+	}
+	
+	.readMore {
+		text-align: center !important;
+		color: rgb(140, 179, 42);
+		font-family: 'Open Sans', sans-serif;
+		font-size: 18px;
+		line-height: 24px;
+		margin-bottom: 12px;
+		font-weight: 400;
+		text-transform: uppercase;
+		margin: 0px;
+		text-rendering: optimizelegibility;
+	}
+	</ui:style>
+
+	<g:HTMLPanel>
+
+		<t:HeaderView></t:HeaderView>
+
+
+		<b:Container fluid="true" marginTop="45"
+			styleName='{style.containerPanelColor}'>
+
+			<b:Row>
+				<b:Column size="XS_12,SM_12,MD_11,LG_12">
+					<b:Image url="images/garden2.jpg"></b:Image>
+				</b:Column>
+			</b:Row>
+
+		</b:Container>
+
+		<b:Row>
+			<b.html:Br></b.html:Br>
+			<b.html:Br></b.html:Br>
+			<b:Column size="XS_12,SM_8,MD_9,LG_9">
+				<b:NavbarBrand styleName='{style.heading}'>HOME PAGE TITLE</b:NavbarBrand>
+			</b:Column>
+		</b:Row>
+
+		<b:Row>
+			<b:Column size="XS_12,SM_12,MD_12,LG_12">
+				<b.html:Paragraph styleName='{style.paragraphStyle}'>
+
+					Lorem ipsum dolor sit
+					amet, consectetur adipiscing elit. In in magna
+					augue.
+					Phasellus non
+					ipsum nec nisl volutpat tincidunt. Donec sit amet volutpat
+					odio.
+					Integer dignissim vitae neque at venenatis. Nunc convallis eget
+					risus nec
+					convallis.
+					Quisque nunc tortor, aliquet ut pretium id,
+					ornare id tortor. Nulla
+					facilisi.
+					Maecenas sit amet ante a elit
+					vulputate aliquam in ut quam.
+
+				</b.html:Paragraph>
+			</b:Column>
+		</b:Row>
+
+		<g:HTMLPanel
+			styleName='{style.sectionsPanelMargin} {style.innerMainPanelColorWhatWeDo}'>
+
+			<b:Row>
+				<g:HTML styleName='{style.section-header}'>WHAT WE DO?</g:HTML>
+				<b.html:Br></b.html:Br>
+				<b.html:Br></b.html:Br>
+			</b:Row>
+			<div style="padding-left:20%">
+			<b:Row>
+				<b:Column size="XS_12,SM_6,MD_2,LG_2">
+					<b:Image url="images/TextInfo1.jpg" width="100px" height="100px"></b:Image>
+					<b.html:Br></b.html:Br>
+					<b.html:Paragraph styleName='{style.paragraphStyle}'>
+						Nam vitae ligula eu mi
+						molestie fringilla sed ac
+						assa. Quisque justo
+						metus, commodo eu
+						viverra
+						quis, volutpat et urna.
+					</b.html:Paragraph>
+					<b:NavbarBrand styleName='{style.readMore}'>
+						<b>Read</b>
+						More
+					</b:NavbarBrand>
+				</b:Column>
+
+				<b:Column size="XS_12,SM_6,MD_2,LG_2">
+					<b:Image url="images/TextInfo2.jpg" width="100px" height="100px"></b:Image>
+					<b.html:Br></b.html:Br>
+					<b.html:Paragraph styleName='{style.paragraphStyle}'>
+						Nam vitae ligula eu mi
+						molestie fringilla sed ac
+						assa. Quisque justo
+						metus, commodo eu
+						viverra
+						quis, volutpat et urna.
+					</b.html:Paragraph>
+					<b:NavbarBrand styleName='{style.readMore}'>
+						<b>Read</b>
+						More
+					</b:NavbarBrand>
+				</b:Column>
+
+				<b:Column size="XS_12,SM_6,MD_2,LG_2">
+					<b:Image url="images/TextInfo3.jpg" width="100px" height="100px"></b:Image>
+					<b.html:Br></b.html:Br>
+					<b.html:Paragraph styleName='{style.paragraphStyle}'>
+						Nam vitae ligula eu mi
+						molestie fringilla sed ac
+						assa. Quisque justo
+						metus, commodo eu
+						viverra
+						quis, volutpat et urna.
+					</b.html:Paragraph>
+					<b:NavbarBrand styleName='{style.readMore}'>
+						<b>Read</b>
+						More
+					</b:NavbarBrand>
+				</b:Column>
+
+				<b:Column size="XS_12,SM_6,MD_2,LG_2">
+					<b:Image url="images/TextInfo4.jpg" width="100px" height="100px"></b:Image>
+					<b.html:Br></b.html:Br>
+					<b.html:Paragraph styleName='{style.paragraphStyle}'>
+						Nam vitae ligula eu mi
+						molestie fringilla sed ac
+						assa. Quisque justo
+						metus, commodo eu
+						viverra
+						quis, volutpat et urna.
+					</b.html:Paragraph>
+					<b:NavbarBrand styleName='{style.readMore}'>
+						<b>Read</b>
+						More
+					</b:NavbarBrand>
+				</b:Column>
+			</b:Row>
+</div>
+		</g:HTMLPanel>
+
+
+		<g:HTMLPanel
+			styleName='{style.sectionsPanelMargin} {style.innerMainPanelColorRecentWork}'>
+
+			<b:Row>
+				<b.html:Br></b.html:Br>
+				<b.html:Br></b.html:Br>
+				<g:HTML styleName='{style.section-header}'>RECENT WORK?</g:HTML>
+				<b.html:Br></b.html:Br>
+			</b:Row>
+
+			<b:Row addStyleNames="{style.show-grid}">
+				<b:Column size="XS_12,SM_5,MD_5,LG_5">
+					<b.html:Br></b.html:Br>
+					<b:Image url="images/garden7.jpg" width="330px" height="350px"></b:Image>
+				</b:Column>
+
+				<b:Column size="XS_12,SM_5,MD_5,LG_5">
+					<b:Image url="images/recentWork.jpg" width="30px" height="30px"></b:Image>
+					<b:NavbarBrand styleName='{style.textInfo}'>RECENT WORK 1</b:NavbarBrand>
+
+					<b.html:Paragraph styleName='{style.paragraphStyle}'>
+						Nam vitae ligula eu mi
+						molestie fringilla sed ac
+						assa. Quisque justo
+						metus, commodo eu
+						viverra
+						quis, volutpat et urna.
+					</b.html:Paragraph>
+
+					<b:Image url="images/recentWork.jpg" width="30px" height="30px"></b:Image>
+					<b:NavbarBrand styleName='{style.textInfo}'>RECENT WORK 2</b:NavbarBrand>
+					<b.html:Paragraph styleName='{style.paragraphStyle}'>
+						Nam vitae ligula eu mi
+						molestie fringilla sed ac
+						assa. Quisque justo
+						metus, commodo eu
+						viverra
+						quis, volutpat et urna.
+					</b.html:Paragraph>
+
+					<b:Image url="images/recentWork.jpg" width="30px" height="30px"></b:Image>
+					<b:NavbarBrand styleName='{style.textInfo}'>RECENT WORK 3</b:NavbarBrand>
+					<b.html:Paragraph styleName='{style.paragraphStyle}'>
+						Nam vitae ligula eu mi
+						molestie fringilla sed ac
+						assa. Quisque justo
+						metus, commodo eu
+						viverra
+						quis, volutpat et urna.
+					</b.html:Paragraph>
+
+					<b:Image url="images/recentWork.jpg" width="30px" height="30px"></b:Image>
+					<b:NavbarBrand styleName='{style.textInfo}'>RECENT WORK 4</b:NavbarBrand>
+					<b.html:Paragraph styleName='{style.paragraphStyle}'>
+						Nam vitae ligula eu mi
+						molestie fringilla sed ac
+						assa. Quisque justo
+						metus, commodo eu
+						viverra
+						quis, volutpat et urna.
+					</b.html:Paragraph>
+
+					<b:NavbarBrand styleName='{style.textInfo}'>RECENT WORK 5</b:NavbarBrand>
+					<b.html:Paragraph styleName='{style.paragraphStyle}'>
+						Nam vitae ligula eu mi
+						molestie fringilla sed ac
+						assa. Quisque justo
+						metus, commodo eu
+						viverra
+						quis, volutpat et urna.
+					</b.html:Paragraph>
+
+					<b:NavbarBrand styleName='{style.textInfo}'>RECENT WORK 6</b:NavbarBrand>
+					<b.html:Paragraph styleName='{style.paragraphStyle}'>
+						Nam vitae ligula eu mi
+						molestie fringilla sed ac
+						assa. Quisque justo
+						metus, commodo eu
+						viverra
+						quis, volutpat et urna.
+					</b.html:Paragraph>
+
+				</b:Column>
+			</b:Row>
+
+		</g:HTMLPanel>
+
+
+		<g:HTMLPanel
+			styleName='{style.sectionsPanelMargin} {style.innerMainPanelColorCompanyDetails}'>
+
+			<b:Row>
+
+
+				<b.html:Br></b.html:Br>
+				<g:HTML styleName='{style.section-header}'>COMPANY DETAILS</g:HTML>
+				<b.html:Br></b.html:Br>
+				<b.html:Br></b.html:Br>
+				<g:HTMLPanel>
+				<div style="padding-left:20%">
+				<b:Column size="XS_12,SM_6,MD_3,LG_3">
+					<b:Image url="images/garden4.jpg" width="250px" height="150px"></b:Image>
+					<b.html:Br></b.html:Br>
+					<b.html:Br></b.html:Br>
+					<g:HTML styleName='{style.companyDetailsItemsHeadings}'>OUR LATEST NEWS</g:HTML>
+
+					<b.html:Br></b.html:Br>
+					<b:NavbarBrand styleName='{style.companyDetailsItems}'>News Item 1</b:NavbarBrand>
+
+					<b.html:Br></b.html:Br>
+					<b.html:Br></b.html:Br>
+					<b:NavbarBrand styleName='{style.companyDetailsItems}'>News Item 2</b:NavbarBrand>
+
+					<b.html:Br></b.html:Br>
+					<b.html:Br></b.html:Br>
+					<b:NavbarBrand styleName='{style.companyDetailsItems}'>News Item 3</b:NavbarBrand>
+
+				</b:Column>
+
+				<b:Column size="XS_12,SM_6,MD_3,LG_3">
+					<b:Image url="images/garden5.jpg" width="250px" height="150px"></b:Image>
+					<b.html:Br></b.html:Br>
+					<b.html:Br></b.html:Br>
+					<g:HTML styleName='{style.companyDetailsItemsHeadings}'>LATEST PORDUCTS</g:HTML>
+
+					<b.html:Br></b.html:Br>
+					<b:NavbarBrand styleName='{style.companyDetailsItems}'>Product 1 here</b:NavbarBrand>
+
+					<b.html:Br></b.html:Br>
+					<b.html:Br></b.html:Br>
+					<b:NavbarBrand styleName='{style.companyDetailsItems}'>Product 2 here</b:NavbarBrand>
+
+					<b.html:Br></b.html:Br>
+					<b.html:Br></b.html:Br>
+					<b:NavbarBrand styleName='{style.companyDetailsItems}'>Product 3 here</b:NavbarBrand>
+
+				</b:Column>
+
+				<b:Column size="XS_12,SM_6,MD_3,LG_3">
+					<b:Image url="images/garden6.jpg" width="250px" height="150px"></b:Image>
+					<b.html:Br></b.html:Br>
+					<b.html:Br></b.html:Br>
+					<g:HTML styleName='{style.companyDetailsItemsHeadings}'>CONTACT US</g:HTML>
+					<b.html:Br></b.html:Br>
+					<g:HTML styleName='{style.companyDetailsContactUsItems}'>Head Office</g:HTML>
+					<g:HTML styleName='{style.companyDetailsContactUsItems}'>The Street</g:HTML>
+					<g:HTML styleName='{style.companyDetailsContactUsItems}'>The Town/City</g:HTML>
+					<g:HTML styleName='{style.companyDetailsContactUsItems}'>Country</g:HTML>
+					<b.html:Br></b.html:Br>
+
+				</b:Column>
+				</div>
+				</g:HTMLPanel>
+			</b:Row>
+		</g:HTMLPanel>
+
+		<t:FooterView></t:FooterView>
+
+	</g:HTMLPanel>
+
+</ui:UiBinder>

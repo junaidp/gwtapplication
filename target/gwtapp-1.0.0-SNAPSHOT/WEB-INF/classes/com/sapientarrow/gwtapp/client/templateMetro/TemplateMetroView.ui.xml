@@ -1,0 +1,39 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	.important {
+		font-weight: bold;
+	}
+	</ui:style>
+	<g:HTMLPanel>
+	<head>
+			<link href="Metro-UI-CSS-master/build/css/metro.css" rel="stylesheet" />
+			<link href="Metro-UI-CSS-master/build/css/metro.min.css" rel="stylesheet" />
+			<link href="Metro-UI-CSS-master/build/css/metro.responsive" rel="stylesheet" />
+			<link href="Metro-UI-CSS-master/build/css/metro.schemes" rel="stylesheet" />
+			<link href="Metro-UI-CSS-master/build/css/metro.icons" rel="stylesheet" />
+
+			<script src="jquery.js"></script>
+			<script src="Metro-UI-CSS-master/build/js/metro.js"></script>
+		</head>
+		<body class="metro">
+		<div class="grid">
+			<div class="row">
+				<div class="cell">
+				<g:Label>Cell 1</g:Label>
+				</div>
+				<div class="cell">
+				<g:Label>Cell 2</g:Label>
+				</div>
+				<div class="cell">
+				<g:Label>Cell 3</g:Label>
+				</div>
+				<div class="cell">
+				<g:Label>Cell 4</g:Label>
+				</div>
+			</div>
+		</div>
+		</body>
+	</g:HTMLPanel>
+</ui:UiBinder> 

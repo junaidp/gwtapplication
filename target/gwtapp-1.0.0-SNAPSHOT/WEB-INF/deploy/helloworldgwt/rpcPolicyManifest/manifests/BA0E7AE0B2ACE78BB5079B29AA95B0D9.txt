@@ -1,0 +1,2 @@
+serviceClass: com.sapientarrow.gwtapp.client.HelloService
+path: F45F4A8BF934FAD2BA076E2ABC5C9362.gwt.rpc

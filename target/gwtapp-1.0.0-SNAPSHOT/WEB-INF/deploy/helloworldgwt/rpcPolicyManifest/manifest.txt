@@ -1,0 +1,3 @@
+# Module helloworldgwt
+# RPC service class, partial path of RPC policy file
+com.sapientarrow.gwtapp.client.HelloService, F45F4A8BF934FAD2BA076E2ABC5C9362.gwt.rpc
